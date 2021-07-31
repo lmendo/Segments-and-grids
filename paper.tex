@@ -1,0 +1,761 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage{mathptmx} % this doesn't have \jmath
+%\usepackage{newtxtext, newtxmath} % I can't make this work
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage[colorlinks,citecolor=blue,urlcolor=blue,linkcolor=blue,linktocpage=true]{hyperref}
+%\RequirePackage{hypernat}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[tight]{subfigure}
+\usepackage{authblk}
+
+\addtolength{\textheight}{28mm}
+\addtolength{\voffset}{-17mm}
+\addtolength{\textwidth}{-3mm}
+\addtolength{\hoffset}{1.5mm}
+
+%\arxiv{arXiv: ***}
+
+\newcommand{\mr}{\mathrm}
+\newcommand{\st}{\mid}%{\,|\,}
+\newcommand{\funt}{\tau} % function that gives maximum number of touched tiles for real-valued length
+\newcommand{\funl}{\lambda} % function that gices infimum real-valued length for a given number of touched tiles
+\newcommand{\funti}{T} % function that gives maximum number of touched tiles for integer-valued length
+\newcommand{\funli}{\Lambda} % function that gives minimum integer-valued length for a given number of touched tiles
+\newcommand{\len}{\ell} % length variable, real-valued
+\newcommand{\leni}{\ell} % length variable, integer-valued. Same notation, but I keep the different command just in case
+\newcommand{\tiles}{t} % number of tiles (integer-valued)
+\let\Re\relax % remove the command...
+\DeclareMathOperator{\Re}{Re} % ...to define it differently
+\let\Im\relax
+\DeclareMathOperator{\Im}{Im}
+\newcommand{\isolr}{i^+}
+\newcommand{\jsolr}{j^+}
+\newcommand{\isoli}{i^\ast}
+\newcommand{\jsoli}{j^\ast}
+\newcommand{\mss}{M}
+
+\newtheorem{proposition}{Proposition}%[section]
+\newtheorem{theorem}{Theorem}%[section]
+\newtheorem{corollary}{Corollary}%[section]
+%\newtheorem{lemma}{Lemma}%[section]
+
+\makeatletter
+\renewcommand\theenumi{(\@roman\c@enumi)} % this affects \ref's too
+\renewcommand\labelenumi{\theenumi} % this doesn't affect \ref's
+\makeatother
+
+\graphicspath{{figures/}}
+
+
+% !TeX spellcheck = en_GB
+% This is so that TexStudio sets language automatically
+
+\begin{document}
+
+\title{
+On the maximum number of tiles touched\\
+by a line segment on a rectangular grid
+}
+
+% Authors with different affiliations: from https://tex.stackexchange.com/a/370813/90222
+\author[1]{Luis Mendo}
+\author[2]{**Name**}
+
+\affil[1]{\small Universidad Polit\'ecnica de Madrid. \texttt{luis.mendo@upm.es}}
+%Information Processing and Telecommunications Center, Universidad Polit\'ecnica de Madrid\\
+%Avenida Complutense, 30. 28040 Madrid, Spain.\\
+\affil[2]{\small **Affiliation, e-mail**}
+
+
+%ORCID: Luis Mendo: 0000-0001-5691-714X
+
+\maketitle
+
+\begin{abstract}
+***
+
+\emph{Keywords:} ***.
+
+%\emph{MSC2010:} 65C10, 65C50.
+\end{abstract}
+
+
+\section{Introduction}
+\label{part: intro}
+
+Given $a, b \in \mathbb R^+$, consider a grid on $\mathbb R^2$ formed by rectangular \emph{tiles} of width $a$ and height $b$. A line segment of length $\len \in \mathbb R^+$ is located on the plane with arbitrary position and orientation. The segment is said to \emph{touch} a tile if it intersects its interior.\footnote{
+The definition uses the interior of the tile, excluding the border, to avoid uninteresting results such as a ``zero-length'' segment touching (a vertex of) $4$ tiles.}
+What is the maximum number of tiles that the segment can touch?
+
+As an example, consider $a=1.35$, $b=1$. A segment of unit length can be placed as shown in Figure~\ref{fig: examples} (left) to touch $3$ tiles. In fact, the solution for $\len=1$ is $3$ tiles. The figure also illustrates that the solution for length $2.4$ is $5$ (center), and for $4.7$ it is $8$ (right).
+
+\begin{figure}
+\centering%
+\includegraphics[width=.85\textwidth]{examples_1p35}%
+\caption{Examples for $a=1.35, b=1$; $\len=1$, $\len=2.4$ and $\len=4.7$
+}%
+\label{fig: examples}%
+\end{figure}%
+
+An equivalent formulation of the problem is obtained allowing segments of length $\len$ \emph{or smaller}. The equivalence is clear from the fact that reducing the length cannot increase the number of touched tiles. Either of these formulations will be referred to as the \emph{direct} problem.
+
+The \emph{inverse} problem is, given $\tiles \in \mathbb N$, to determine the infimum length of all segments that touch at least $\tiles$ tiles. For real-valued lengths this infimum is not a minimum, because given a segment that touches $\tiles$ tiles, its length can always be reduced by some non-zero amount without changing the number of touched tiles. This is a consequence of the interior of the each tile being an open set.
+
+% ***Do we need to discuss potential applications of this (if we can find any)? This probably depends on the journal
+% ***Do we need a section with conclusions? Probably not; depends on the journal
+
+These problems are related to \ldots ***maybe a short paragraph here mentioning related problems: Buffon's needle, Buffon-Laplace problem. Some references: ``Buffon's Noodle Problem'', J.F.~Ramaley, 1969. ``On Laplace's Extension of the Buffon Needle Problem'', B.J.~Arnow, 1994. \\
+\url{https://www.jstor.org/stable/2317945} \\
+\url{https://www.jstor.org/stable/2687085}
+
+This paper analyzes both problems for real-valued lengths, and for integer-valued lengths on a unit square grid. Section~\ref{part: fund results} presents fundamental results, from which the characterization is obtained in Section~\ref{part: arbitrary grid, real lengths} for an arbitrary grid with real-valued lengths; in Section~\ref{part: square grid, real lengths} for a square grid with real-valued lengths; and in Section~\ref{part: unit square grid, integer lengths} for a unit square grid with integer-valued lengths.
+
+% The rounding down (floor) and rounding up (ceiling) operations will be denoted as $\lfloor \cdot \rfloor$ and $\lceil \cdot \rceil$. The notation $[\mathsf S]$ will be used for the Iverson function, which equals $1$ if statement $\mathsf S$ is true and $0$ otherwise.
+
+
+\section{Fundamentals}
+\label{part: fund results}
+
+For a grid with horizontal spacing $a$ and vertical spacing $b$, lines of the form $x = ka$ or $y = kb$ with $k \in \mathbb Z$ will be called \emph{grid lines}. A \emph{tile} is delimited by two pairs of consecutive horizontal an vertical grid lines. The intersection points of horizontal and vertical grid lines will be called \emph{grid points}. These correspond to vertices of the tiles.
+
+Every segment has an associated \emph{canonical rectangle}, which is the minimum-size rectangle that is formed by grid lines and contains the segment. More specifically, if the segment has endpoints $(x_1,y_1)$, $(x_2,y_2)$, where $x_1, x_2, y_1, y_2 \in \mathbb R$, its canonical rectangle has lower-left corner and upper-right corner given as
+\begin{align*}
+& (\lfloor\min\{x_1, x_2\}/a\rfloor a, \lfloor\min\{y_1,y_2\}/b\rfloor b), \\
+& (\lceil\max\{x_1, x_2\}/a \rceil a, \lceil\max\{y_1,y_2\}/b \rceil b).
+\end{align*}
+The dimensions of the canonical rectangle, normalized to the tile width and height respectively, are two integer numbers $i$, $j$. Two examples are illustrated in Figure~\ref{fig: canonical rectangle and touched tiles}, both with $i=5$, $j=4$. Clearly, all tiles touched by the segment are contained in the canonical rectangle. Note also that the canonical rectangle can have $i=0$ or $j=0$ if the segment coincides with part of a grid line.
+
+\begin{figure}
+\centering%
+\subfigure[The segment does not pass through any interior grid points]{%
+\label{fig: S_nogridpoints}%
+\includegraphics[width=.49\textwidth]{S_nogridpoints_1p35}%
+}\hfill%
+\subfigure[The segment passes through some interior grid points]{%
+\label{fig: S_gridpoints}%
+\includegraphics[width=.49\textwidth]{S_gridpoints_1p35}%
+}%
+\caption{Canonical rectangle and touched tiles
+}%
+\label{fig: canonical rectangle and touched tiles}%
+\end{figure}%
+
+\begin{proposition}
+\label{prop: i+j-1}
+Consider an arbitrary segment, and let $i, j$ respectively denote the normalized width and height of its canonical rectangle. If $i, j \geq 1$, the number of tiles touched by the segment is at most $i+j-1$. This bound is attained if and only if the segment does not pass through any grid point in the interior of the rectangle.
+\end{proposition}
+
+\begin{proof}
+The segment touches, by definition, two tiles in opposite corners of the canonical rectangle. It can be assumed, without loss of generality, that those tiles are in the lower-left and upper-right corners of the rectangle, as in Figure~\ref{fig: canonical rectangle and touched tiles}. The touched tiles can be thought of as following a path within the canonical rectangle. Starting at the lower-left tile, the next tile can be the one to the left, the one above, or the one above and to the left. The latter case occurs if and only if the segment passes through the grid point between those two tiles.
+
+Since the segment follows a straight line, once it ``leaves'' a row of tiles in its path from the lower-left to the upper-right corner, it can never touch again a tile from that row. The same observation applies for the columns.
+
+This implies that the maximum number of touched tiles is $i+j-1$, which is attained if and only if the segment avoids all grid points in the interior of the canonical rectangle, as in Figure~\ref{fig: S_nogridpoints}. Note that grid points at the corners of the rectangle do not count for this; and that the segment cannot pass through any other grid points on the rectangle border, because that would imply $i=0$ or $j=0$. Figure~\ref{fig: S_gridpoints} illustrates a case where the maximum is not attained.
+\end{proof}
+
+\begin{proposition}
+\label{prop: len ineq i j}
+Consider $a, b, \len \in \mathbb R^+$ and $i, j \in \mathbb N$, $i, j \geq 2$ arbitrary.
+\begin{enumerate}
+\item
+\label{prop: len ineq i j: ineqs}
+The following inequalities hold for any segment with length $\len$ whose canonical rectangle has normalized dimensions $i, j$:
+\begin{align}
+\label{eq: len > sqrt}
+\len &> \sqrt{(i-2)^2 a^2 + (j-2)^2 b^2}, \\
+\label{eq: len leq sqrt}
+\len &\leq \sqrt{i^2 a^2 + j^2 b^2}.
+\end{align}
+\item
+\label{prop: len ineq i j: exist}
+Conversely, if $\len$, $i$, $j$ satisfy \eqref{eq: len > sqrt} and \eqref{eq: len leq sqrt} there exists a segment of length $\len$ whose canonical rectangle has normalized dimensions $i$ and $j$.
+\item
+\label{prop: len ineq i j: ineq, exist}
+There is a segment of length not exceeding $\len$ that has a canonical rectangle with normalized dimensions $i, j$ if and only if \eqref{eq: len > sqrt} holds.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\ref*{prop: len ineq i j: ineqs} The inequalities follow from the fact that the segment endpoints lie in the interiors or on the outer edges of two tiles in opposite corners of the canonical rectangle. This is illustrated in Figures~\ref{fig: len ineq 4 3} and \ref{fig: len ineq 4 2} for two specific $(i,j)$ pairs respectively. For each $(i,j)$, segments are shown with lengths close to either of the two bounds. Note that \eqref{eq: len > sqrt} is valid even for $i=2$, $j=2$, in which case it reduces to $\len>0$.
+
+\ref*{prop: len ineq i j: exist} For $a$, $b$, $\len$, $i$, $j$ satisfying the two inequalities, a segment of length $\len$ can be found that has its endpoints in the interiors or on the outer edges of the two shaded tiles of a rectangle of normalized dimensions $i$ and $j$, as in Figure~\ref{fig: len ineq i j}. Therefore this segment has the given rectangle as canonical.
+\begin{figure}
+\centering%
+\subfigure[$i=4$, $j=3$]{%
+\label{fig: len ineq 4 3}%
+\includegraphics[width=.49\textwidth]{L_ineq_4_3_1p35}%
+}\hfill%
+\subfigure[$i=4$, $j=2$]{%
+\label{fig: len ineq 4 2}%
+\includegraphics[width=.49\textwidth]{L_ineq_4_2_1p35}%
+}%
+\caption{Relationship between segment length $\len$ and dimensions $i$, $j$ of the canonical rectangle
+}%
+\label{fig: len ineq i j}
+\end{figure}%
+
+\ref*{prop: len ineq i j: ineq, exist} ``\eqref{eq: len > sqrt} $\Rightarrow$ there is a segment\ldots''. Assume that \eqref{eq: len > sqrt} holds. It is always possible to choose a length equal to or smaller than $\len$ such that both \eqref{eq: len > sqrt} and \eqref{eq: len leq sqrt} hold. The result follows, for that length, from part~\ref{prop: len ineq i j: exist}.
+
+``There is a segment\ldots $\Rightarrow$ \eqref{eq: len > sqrt} ''. Assume that a segment exists with length not exceeding $\len$ and with a canonical rectangle with normalized dimensions $i$, $j$. From part~\ref{prop: len ineq i j: ineqs}, \eqref{eq: len > sqrt} holds for that segment length, and thus for $\len$.
+\end{proof}
+
+According to Proposition~\ref{prop: i+j-1}, in order to maximize the number of touched tiles for a given length, the position and orientation of the segment should be chosen to obtain $i+j-1$ as large as possible, where $i$ and $j$ are the normalized dimensions of its canonical rectangle. On the other hand, Proposition~\ref{prop: len ineq i j} restricts the $i, j$ values that can be achieved with a given length. A relevant question is: are there any $(i,j)$ pairs that can be disregarded irrespective of the length $\len$? In other words, what is the ``smallest'' subset of $\mathbb N^2$ such that the $(i,j)$ pair that maximizes the number of tiles for any length can always be found within that subset? A subset that contains a maximizing $(i,j)$ for any length will be called a \emph{sufficient} set. Clearly, this set must contain at least one such pair for each possible value of $i+j-1$, so that the set can produce that value as solution (for the corresponding lengths). A sufficient set that contains exactly one pair $(i,j)$ for each value of $i+j-1$ will be termed a \emph{minimal sufficient} set.
+
+For instance, it is intuitively clear from Figure~\ref{fig: examples} that segment orientations near the vertical or horizontal directions (resulting in $i=1$ with large $j$, or $j=1$ with large $i$) will not maximize the number of touched tiles.
+% This is true for any a, b: 2 can achieved instead of 1 without compromising the other dimension.
+The corresponding $(i,j)$ pairs can be left out of the sufficient set. In general, the pairs included in a minimal sufficient set will be different depending on $a$ and $b$. Two specific examples of minimal sufficient sets will be presented later in this section.
+
+Knowing a minimal sufficient set of $(i,j)$ pairs facilitates the solution of both the direct an inverse problems, because it reduces the number of pairs that need to be tried. In order to derive a general method to build a minimal sufficient set, it is insightful to consider two specific cases first, as will be presented in the following. It is also helpful to use the equivalent formulation of the direct problem referred to in Section~\ref{part: intro}, i.e.\ finding the maximum number of tiles touched by segments of length $\len$ \emph{or less}.
+
+Thus each choice of $(i, j)$ implies a maximum of $i+j-1$ touched tiles on one hand; and sets a lower bound on the required length $\len$ on the other hand.
+
+Consider first the case $a=b=1$. This is illustrated in Figure~\ref{fig: ijLS_1}. Note that in this and in the next figures the axes represent $ia$ and $jb$ (not $i$ and $j$). Each dashed diagonal line joins $(i, j)$ pairs with the same $i+j-1$. The radius of each arc represents the lower bound on $\len$ given by \eqref{eq: len > sqrt}, for certain $(i,j)$ pairs, which are marked with filled circles (these pairs form a minimal sufficient set, as will be seen).
+
+\begin{figure}
+\centering%
+\includegraphics[width=.7\textwidth]{ijLS_1}%
+\caption{Relationship between segment length and number of touched tiles with the width and height of the canonical rectangle, for $a=b$
+}%
+\label{fig: ijLS_1}%
+\end{figure}%
+
+For a given $\len \in \mathbb R^+$, the $(i,j)$ pairs that can be achieved with segments of length not exceeding $\len$ are, by Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}, those whose distance from $(2a,2b)$ is less than $\len$, i.e.~those delimited by the corresponding arc. It is clear from the figure that for $i+j-1$ odd, if some point $(i_1,j_1)$ with $|i_1-j_1|>1$ is achievable with the length bound $\len$, then necessarily there is a point $(i_0,i_0)$ with the same number of touched tiles $i+j-1$ (same diagonal line) that is also achievable with the same length restriction (because it has smaller distance to $(2a,2b)$). Similarly, for $i+j-1$ even, if a point $(i_1,j_1)$ with $|i_1-j_1|>1$ is achievable, then there is a point $(i_0,i_0+1)$ in the same diagonal that is also achievable with the same length restriction.
+
+Thus for $a=b=1$, a minimal sufficient set is formed by the pairs $(i,j)$ with $j=i$ or $j=i+1$. Observe that due to symmetry, any point $(i_0,i_0+1)$ could be replaced by $(i_0+1,i_0)$. This illustrates that the minimal sufficient set is not unique in general. 
+
+The pairs in the minimal sufficient set are marked with filled circles in Figure~\ref{fig: ijLS_1}. Given a length, the maximum number of touched tiles will be achieved with one of those pairs, namely that in the diagonal line furthest from $(2a,2b)$ that is within the circle with radius $\len$ centered at that point.
+
+As a second example, consider $a=1.35$, $b=1$. This is depicted in Figure~\ref{fig: ijLS_1p35}. In this case the minimal sufficient set does not follow a rule as simple as in the previous example.
+
+\begin{figure}
+\centering%
+\includegraphics[width=.7\textwidth]{ijLS_1p35}%
+\caption{Relationship between segment length and number of touched tiles with the width and height of the canonical rectangle, for $a=1.35b$
+}%
+\label{fig: ijLS_1p35}%
+\end{figure}%
+
+In general, a systematic way to obtain a minimal sufficient set is to gradually increase $\len$ starting from $0$, which gives an arc of increasing radius in the figure; and to take note of the first $(i,j)$ pair that is reached for each line of constant $i+j-1$. If two such pairs are reached at the same time, any of them can be used. In Figure~\ref{fig: ijLS_1p35} this rule produces the following pairs, in order: $(2,2)$, $(2,3)$, $(3,3)$, $(3,4)$, $(3,5)$, $(4,5)$, \ldots, as indicated by the filled circles.
+
+Based on the above, an explicit procedure that produces a minimal sufficient set can be given. This set will be denoted as $\mss = \{(i_3,j_3), (i_4.j_4), \ldots\}$.
+
+\begin{proposition}
+\label{prop: min suff set}
+Given grid parameters $a, b \in \mathbb R^+$, a minimal sufficient set $\mss$ can be obtained as follows. The chosen pair for $i+j-1=3$ is $(2,2)$. For each $\tiles \in \mathbb N, \tiles \geq 3$, let $(i_\tiles, j_\tiles)$ denote the pair chosen for $i+j-1=\tiles$. Then $(i_{\tiles+1}, j_{\tiles+1})$ is either $(i_\tiles+1, j_\tiles)$ or $(i_\tiles, j_\tiles+1)$, whichever minimizes $(i_{\tiles+1}-2)^2 a^2 + (j_{\tiles+1}-2)^2 b^2$; if both are minimizers $(i_\tiles+1, j_\tiles)$ is taken. Equivalently, $(i_{\tiles+1}, j_{\tiles+1})$ is $(i_\tiles, j_\tiles+1)$ if
+\begin{equation}
+\label{eq: cond for incrementing j}
+j_\tiles < \frac{i_\tiles a^2}{b^2} - \frac{3a^2}{2b^2} + \frac 3 2,
+\end{equation}
+or $(i_\tiles+1, j_\tiles)$ otherwise.
+\end{proposition}
+
+\begin{proof}
+For each $\tiles$, the pair $(i_\tiles,j_\tiles)$ of the minimal sufficient set should be chosen as that on the line $i+j-1=\tiles$ which minimizes $(i-2)^2 a^2 + (j-2)^2 b^2$. This allows maximizing the sum $i+j-1$, and thus the number of touched tiles, for a given length restriction (direct problem); or minimizing the required lengths for a specified number of touched files (inverse problem).
+
+The fact that $(i_t,j_t)$ minimizes $(i-2)^2 a^2 + (j-2)^2 b^2$ among all pairs with $i+j-1=\tiles$ can be expressed as follows: for any $k \in \mathbb N$,
+\begin{align}
+\label{eq: chosen contiguous ineq g, 1}
+(i_\tiles-2)^2 a^2 + (j_\tiles-2)^2 b^2 &\leq (i_\tiles-2-k)^2 a^2 + (j_\tiles-2+k)^2 b^2, \\
+\label{eq: chosen contiguous ineq g, 2}
+(i_\tiles-2)^2 a^2 + (j_\tiles-2)^2 b^2 &\leq (i_\tiles-2+k)^2 a^2 + (j_\tiles-2-k)^2 b^2.
+\end{align}
+To see that $(i_{\tiles+1},j_{\tiles+1})$ is either $(i_\tiles,j_\tiles+1)$ or $(i_\tiles+1,j_\tiles)$ it suffices to prove that, for any $k \in \mathbb N$,
+\begin{align}
+\label{eq: chosen contiguous ineq g+1, 1}
+(i_{\tiles}-2)^2 a^2 + (j_{\tiles}-1)^2 b^2 &\leq (i_{\tiles}-2-k)^2 a^2 + (j_{\tiles}-1+k)^2 b^2, \\
+\label{eq: chosen contiguous ineq g+1, 2}
+(i_{\tiles}-1)^2 a^2 + (j_{\tiles}-2)^2 b^2 &\leq (i_{\tiles}-1+k)^2 a^2 + (j_{\tiles}-2-k)^2 b^2.
+\end{align}
+With reference to Figure~\ref{fig: ijLS_1p35}, consider for instance $(i_7,j_7) = (3,5)$. Graphically it can be seen that $(i_8,j_8)$ could only be $(3,6)$ or $(4,5)$, because for example $(2a,7b)$ is further from $(2a,2b)$ than $(3a,6b)$ is (this corresponds to \eqref{eq: chosen contiguous ineq g+1, 1} with $k=1$), and $(5a,4b)$ is also further from $(2a,2b)$ than $(4a,5b)$ is (this corresponds to \eqref{eq: chosen contiguous ineq g+1, 2} with $k=1$).
+
+The inequality \eqref{eq: chosen contiguous ineq g+1, 1} can be rewritten as
+\begin{equation}
+\label{eq: chosen contiguous ineq g+1, 1b}
+\begin{split}
+& (i_{\tiles}-2)^2 a^2 + (j_{\tiles}-2)^2 b^2 + 2(j_{\tiles}-2)b^2 + b^2 \\
+& \quad \leq (i_{\tiles}-2-k)^2 a^2 + (j_{\tiles}-2+k)^2 b^2 + 2(j_{\tiles}-2+k) b^2 + b^2.
+\end{split}
+\end{equation}
+Clearly,
+\begin{equation}
+\label{eq: chosen contiguous ineq g+1, step}
+2(j_{\tiles+1}-2)b^2 + b^2 < 2(j_{\tiles+1}-2+k) b^2 + b^2.
+\end{equation}
+Adding \eqref{eq: chosen contiguous ineq g, 1} and \eqref{eq: chosen contiguous ineq g+1, step} yields \eqref{eq: chosen contiguous ineq g+1, 1b}. Therefore \eqref{eq: chosen contiguous ineq g+1, 1} holds. A similar procedure can be used to establish \eqref{eq: chosen contiguous ineq g+1, 2}.
+
+The condition for choosing $(i_t,j_t+1)$ over $(i_t+1,j_t)$ is that
+\begin{equation}
+\label{eq: chosen contiguous criterion 1}
+(i_\tiles-2)^2 a^2 + (j_\tiles-1)^2 b^2 < (i_\tiles-1)^2 a^2 + (j_\tiles-2)^2 b^2.
+\end{equation}
+This can be expressed as
+\begin{equation}
+\label{eq: chosen contiguous criterion 2}
+2(j_\tiles-2)b^2 + b^2 < 2(i_\tiles-2)a^2 + a^2.
+\end{equation}
+Rearranging terms, \eqref{eq: chosen contiguous criterion 2} is seen to be the same as \eqref{eq: cond for incrementing j}.
+\end{proof}
+
+The condition \eqref{eq: cond for incrementing j} for incrementing $j_\tiles$ in Proposition~\ref{prop: min suff set} can be expressed in terms of two bounding lines,
+\begin{align}
+\label{eq: upper bound, line}
+j &= \frac{i a^2}{b^2} - \frac{3a^2}{2b^2} + \frac 5 2, \\
+\label{eq: lower bound, line}
+j &= \frac{i a^2}{b^2} - \frac{5a^2}{2b^2} + \frac 3 2.
+\end{align}
+All pairs $(i,j)$ in $\mss$ are strictly below the upper line \eqref{eq: upper bound, line} and above or on the lower line \eqref{eq: lower bound, line}. This is shown in Figure~\ref{fig: pairs_bounds}, using three different pairs of grid parameters $a$, $b$ as examples. Given $(i_\tiles,j_\tiles) \in \mss$, the next pair $(i_{\tiles+1},j_{\tiles+1})$ is obtained by incrementing $j$ if that results in a point below \eqref{eq: upper bound, line}. Else $j$ cannot be increased and $i$ is incremented instead, and the new pair is guaranteed to be above or on \eqref{eq: lower bound, line}.
+
+\begin{figure}
+\centering%
+\subfigure[$a = 1$, $b = 1$]{%
+\label{fig: pairs_bounds_1}%
+\includegraphics[height=.24\textheight]{pairs_bounds_1}% *!*
+}\hfill%
+\subfigure[$a = 1.35$, $b = 1$]{%
+\label{fig: pairs_bounds_1p35}%
+\includegraphics[height=.24\textheight]{pairs_bounds_1p35}% *!*
+}\hfill%
+\subfigure[$a = \sqrt{2}$, $b = 1$]{%
+\label{fig: pairs_bounds_sqrt2}%
+\includegraphics[height=.24\textheight]{pairs_bounds_sqrt2}% *!*
+}%
+\caption{Minimal sufficient set $\mss$ and bounding lines
+}%
+\label{fig: pairs_bounds}%
+\end{figure}%
+
+The construction of $\mss$ in Proposition~\ref{prop: min suff set} computes the pairs $(i_\tiles,i_\tiles)$ \emph{sequentially}: $(i_3,i_3), \ldots, (i_{\tiles-1},i_{\tiles-1})$ need to be previously computed in order to obtain $(i_\tiles,i_\tiles)$. Proposition~\ref{prop: min suff set, form} avoids this by providing a direct formula. Its derivation is based on finding the intersection point of \eqref{eq: lower bound, line} with  $i+j-1=\tiles$ and appropriately rounding to integer coordinates in order to satisfy \eqref{eq: upper bound, line}.
+% The proof method is briefly described here because in a later Theorem it is said (in the text, not in the proof) that the method is similar to this
+
+\begin{proposition}
+\label{prop: min suff set, form}
+Given $a, b \in \mathbb R^+$ and $\tiles \in \mathbb N, \tiles \geq 3$, the pair $(i_\tiles,j_\tiles)$ from the set $\mss$ defined in Proposition~\ref{prop: min suff set} can be computed as
+\begin{align}
+\label{eq: min suff set, form, i}
+i_\tiles &= \left\lfloor \frac {(2\tiles-1)b^2+5a^2}{2(a^2+b^2)} \right\rfloor, \\
+\label{eq: min suff set, form, j}
+j_\tiles &= \left\lceil \frac {2\tiles a^2 + 3(b^2-a^2)}{2(a^2+b^2)} \right\rceil. 
+\end{align}
+\end{proposition}
+
+\begin{proof}
+Let $(\isolr, \jsolr)$ denote the intersection of \eqref{eq: lower bound, line} and the line $i+j-1=\tiles$. This is easily seen to be
+\begin{align}
+\label{eq: min suff set, form, isolr}
+\isolr &= \frac {(2\tiles-1)b^2+5a^2}{2(a^2+b^2)}, \\
+\label{eq: min suff set, form, jsolr}
+\jsolr &= \frac {2\tiles a^2 + 3(b^2-a^2)}{2(a^2+b^2)}. 
+\end{align}
+This point is shown with a square marker in Figure \ref{fig: ijLS_1p35_detail_inverse}, which also shows the elements of $\mss$ as filled circles, as well as the two bounding lines. The line \eqref{eq: upper bound, line} is \eqref{eq: lower bound, line} shifted one step left in $i$ and one step up in $j$, i.e.~it is shifted by a diagonal step. Since all points of $\mss$ are between these two lines or on the lower line, the only possibility for $(i_\tiles,j_\tiles)$, as illustrated in the figure, is to be the point with integer coordinates closest to $(\isolr,\jsolr)$ along the line $i+j-1=\tiles$ in the left, upwards direction. This gives \eqref{eq: min suff set, form, i} and \eqref{eq: min suff set, form, j}.
+
+\begin{figure}%
+\centering%
+\includegraphics[width=.7\textwidth]{ijLS_1p35_detail_inverse}%
+\caption{Obtaining $(\isoli,\jsoli)$ in Proposition~\ref{prop: min suff set, form}. Example with $a=1.35, b=1$.%
+}%
+\label{fig: ijLS_1p35_detail_inverse}%
+\end{figure}%
+\end{proof}
+ 
+For $a^2/b^2$ arbitrary, the number of pairs with the same $i$ coordinate in the set $\mss$ is in general irregular, because the line \eqref{eq: lower bound, line} does not follow a ``natural'' direction of the grid. This happens for instance in Figure~\ref{fig: pairs_bounds_1p35}, where the number of pairs for the first $i$ values equals either $2$ or $3$ without a clear pattern.\footnote{Strictly, there is a periodic pattern whenever $a^2/b^2$ is rational, which is the case in Figure~\ref{fig: pairs_bounds_1p35}. However, this is not easily discernible unless $a^2/b^2$ is a ratio of small numbers.}
+On the other hand, a simple pattern arises for $a^2/b^2 \in \mathbb N$, as seen in Figures~\ref{fig: pairs_bounds_1} and \ref{fig: pairs_bounds_sqrt2}.
+
+A segment whose canonical rectangle has normalized width $i$ and height $j$ is oriented with approximate slope $jb/(ia)$ with respect to the $x$ axis (See Figure~\ref{fig: len ineq i j}); and the approximation becomes better for greater segment lengths. From \eqref{eq: upper bound, line} and \eqref{eq: lower bound, line} it can be seen that the positions of the pairs $(i,j) \in \mss$ have $j/i \approx a^2/b^2$ for large $i, j$. Therefore the optimal slope for long segments is approximately $a/b$. This formalizes the intuition that to maximize the number of touched tiles, the segment should follow a direction along which the perceived ``length'' of the tile is smaller.
+
+
+\section{Arbitrary grid with real-valued lengths}
+\label{part: arbitrary grid, real lengths}
+
+For a grid with parameters $a, b \in \mathbb R^+$, the maximum number $\tiles$ of touched tiles for a given real-valued length $\len$ can be represented by a function $\funt: \mathbb R^+ \to \mathbb N$ such that $\tiles = \funt(\len)$. Similarly, for the inverse problem a function $\funl: \mathbb N \to \mathbb R^+$ can be defined such that $\funl(\tiles)$ gives the infimum length of all segments that touch at least $\tiles$ tiles.
+
+The function $\funt$ can be obtained from $\funl$ by noting that the maximum number of tiles that can be touched by a segment of length $\len$ is the index of the largest term of the sequence $\funl(\tiles)$ that is less than $\len$:
+\begin{equation}
+\label{eq: funt funl}
+\funt(\len) = \max \{\tiles \in \mathbb N \st \funl(\tiles)<\len\}.
+\end{equation}
+Conversely, $\funl$ can be obtained from $\funt$ as
+\begin{equation}
+\label{eq: funl funt}
+\funl(\tiles) = \inf\{\len \in \mathbb R^+ \st \funt(\len) \geq \tiles\}.
+\end{equation}
+
+For arbitrary $a, b \in \mathbb R^+$, the functions $\funt$ and $\funl$ can be computed using an iterative procedure, which exploits the fact that the pairs $(i_3,j_3), (i_4,j_4), \ldots$ of $\mss$ are sorted by increasing $i+j-1$, and also by increasing $(i-2)^2 a^2 + (j-2)^2 b^2$. Namely, for $\funt$ the following procedure yields the solution: generate successive pairs to find the last one, $(i_\tiles,j_\tiles)$, that satisfies \eqref{eq: len > sqrt}; then $\funt(\len) = \tiles$. For $\funl$ the analogous method gives a direct formula. In addition, it is possible to obtain a direct formula also for $\funt$ using an approach similar to that used in Proposition~\ref{prop: min suff set, form}. These formulas are given in Theorems \ref{theo: funt, form} and \ref{theo: funl, form}.
+
+% ***Should i-1, j-2 be used instead of i, j? I don't think so. The formulas would be simplified a little, but their interpretation would be more difficult
+\begin{theorem}
+\label{theo: funt, form}
+For $a, b \in \mathbb R^+$, $a \geq b$ and $\len \in \mathbb R^+$,
+\begin{equation}
+\label{eq: theo: funt, form; funt}
+\funt(\len) = \isoli+\jsoli-1
+\end{equation}
+with
+\begin{align}
+\label{eq: theo: funt, form; i}
+\isoli &= \left\lceil \frac{a + b \Re \sqrt{4\len^2/(a^2+b^2)-1}}{2a} \right\rceil + 1, \\
+\label{eq: theo: funt, form; j}
+\jsoli &= \left\lceil \frac{\sqrt{\len^2-(\isoli-2)^2a^2}}{b} \right\rceil + 1.
+\end{align}
+The function $\funt$ is piecewise constant and left-continuous, with unit-height jumps. A jump occurs at $\len$ if and only if $\len = \funl(\tiles)$ for some $\tiles \in \mathbb N, \tiles \geq 4$; and then $\funt(\len) = \tiles-1$, $\lim_{h \rightarrow 0+} \funt(\len+h) = \tiles$.
+\end{theorem}
+
+\begin{proof}
+The general idea is similar to that used in Proposition~\ref{prop: min suff set, form}: find the intersection $(\isolr, \jsolr)$ of the line \eqref{eq: lower bound, line} and the arc centered at $(2a,2b)$ with radius $\len$ for $i, j \geq 2$, and from that obtain the actual pair $(\isoli, \jsoli)$ of integer numbers which yields the solution.
+
+Specifically, assuming first that \eqref{eq: lower bound, line} holds, the largest $i$ that can be achieved with lengths not exceeding $\len$ is obtained, as given by Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}. This value, $\isoli$, is computed by rounding down $\isolr$. Then, assuming that $i = \isoli$, the largest $j$ allowed by Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}, $\jsoli$, is obtained. As will be seen, in some cases the resulting $(\isoli,\jsoli)$ is in $\mss$, and in other cases it is not. However, in either case $(\isoli,\jsoli)$ has the largest $i+j-1$ sum that can be achieved with segments of length up to $\len$. Thus the desired result is $\isoli+\jsoli-1$.
+
+The two possibilities are illustrated in Figure~\ref{fig: ijLS_1p35_detail} for $a=1.35, b=1$. In each case, the arc displayed in the graph is centered at $(2a,2b)$ and has radius $\len$. The inner region defined by the arc contains all $(i,j)$ pairs that are achievable according to Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}. As in previous figures, filled circles represent $(i,j)$ pairs that are in $\mss$, and empty circles are those that do not belong to $\mss$. The solid line is \eqref{eq: lower bound, line}. The intersection point $(\isolr, \jsolr)$ is displayed with a square marker.
+
+\begin{figure}
+\centering%
+\subfigure[$\len = 3.1$: $(\isoli,\jsoli) \in \mss$]{%
+\label{fig: ijLS_1p35_detail_in}%
+\includegraphics[width=.7\textwidth]{ijLS_1p35_detail_in}%
+}\\%\hfill%
+\subfigure[$\len = 3.7$: $(\isoli,\jsoli) \notin \mss$]{%
+\label{fig: ijLS_1p35_detail_notin}%
+\includegraphics[width=.7\textwidth]{ijLS_1p35_detail_notin}%
+}%
+\caption{Obtaining $(\isoli,\jsoli)$ in Theorem~\ref{theo: funt, form}. Examples with $a=1.35, b=1$.
+}%
+\label{fig: ijLS_1p35_detail}%
+\end{figure}%
+
+The point $(\isolr, \jsolr)$ can be obtained as a solution of the equation system
+\begin{align}
+\label{eq: icont jcont 1}
+(\isolr-2)^2 a^2 + (\jsolr-2)^2 b^2 &= \len^2, \\
+\label{eq: icont jcont 2}
+\jsolr = \frac{\isolr a^2}{b^2} - \frac{5a^2}{2b^2} + \frac 3 2.
+\end{align}
+Substituting \eqref{eq: icont jcont 2} into \eqref{eq: icont jcont 1} yields a quadratic equation for $\isolr$,
+\begin{equation}
+\label{eq: quadratic, i}
+4a^2(\isolr-2)^2 - 4a^2(\isolr-2) + a^2+b^2-\frac{4\len^2 b^2}{a^2+b^2},
+\end{equation}
+which can have zero, one or two real-valued solutions (this respectively means that the line is exterior, tangent or secant to the circle \eqref{eq: icont jcont 1}). Only the solution with $\isolr, \jsolr \geq 2$, if any, is of interest. This solution can only exist as the one with largest $\isolr$ value when there are real-valued solutions, and it is obtained as
+\begin{equation}
+\label{eq: icont jcont 3}
+\isolr = \frac{a + b \sqrt{4\len^2/(a^2+b^2)-1}}{2a} + 2.
+\end{equation}
+
+The case with no real-valued solutions to \eqref{eq: quadratic, i} corresponds to $\len < \sqrt{a^2+b^2}/2$. Since $a \geq b$, this implies that $\len < a$. Thus any achievable $(i,j)$ pair, if any, will have $i=2$. Therefore in this case $\isoli$ should be set to $2$; and then the maximum achievable $\jsoli$ will be obtained from \eqref{eq: icont jcont 2}.
+
+If \eqref{eq: quadratic, i} has two real-valued solutions or one real-valued double solution, which is the case when $\len \geq \sqrt{a^2+b^2}/2$, the largest solution will have $\jsolr < 2$ if $\isolr < (b^2/a^2+5)/2$, as can be seen setting $\jsolr=2$ in \eqref{eq: icont jcont 2}; or equivalently if $\sqrt{a^2+b^2}/2 \leq \len < (a^2+b^2) / (2a)$, as can be seen substituting $\jsolr < 2$ and $\isolr < (b^2/a^2+5)/2$ in \eqref{eq: icont jcont 1}. Since $\isolr < (b^2/a^2+5)/2 < 3$ for $a \geq b$, only pairs with $i=2$ are achievable in this case again, and thus the solution $\isoli$ should also be $2$.
+
+Lastly, for $\len \geq (a^2+b^2) / (2a)$ the expressions \eqref{eq: icont jcont 2} and \eqref{eq: icont jcont 3} give $\isolr, \jsolr \geq 2$, and $\isoli$ should be taken as the greatest integer less than $\isolr$, i.e.~$\lceil \isolr \rceil-1$.
+ 
+The three cases are unified by taking the real part of \eqref{eq: icont jcont 3} and computing $\isoli = \lceil \isolr \rceil-1$, as is easily checked. This gives \eqref{eq: theo: funt, form; i}. Once $\isoli$ is known, $\jsoli$ is computed, according to \eqref{eq: theo: funt, form; j}, as the greatest integer such that $(\isoli,\jsoli)$ is within the arc determined by $\len$. This ensures that $(\isoli,\jsoli)$ is achievable with lengths less than $\len$.
+
+There are two possibilities for the point $(\isoli,\jsoli)$, as stated at the outset. These are illustrated in Figures~\ref{fig: ijLS_1p35_detail_in} and \ref{fig: ijLS_1p35_detail_notin} respectively. The first possibility is that $(\isoli,\jsoli) \in \mss$ (Figure~\ref{fig: ijLS_1p35_detail_in}). Then, by construction  $(\isoli,\jsoli)$ maximizes $i+j-1$ among all achievable pairs of $\mss$, and is therefore optimal.
+
+The second possibility is that $(\isoli,\jsoli) \notin \mss$ (Figure~\ref{fig: ijLS_1p35_detail_notin}). This happens when the point from $\mss$ that has $i = \isoli$ ($(4,5)$ in the figure) is outside the arc, i.e.~it would require a length greater than $\len$. The selected point  $(\isoli,\jsoli)$ ($(4,4)$ in the figure), however, has the same $i+j-1$ sum as the point from $\mss$ that ``should'' be used, which is $(\isoli-1,\jsoli+1)$ ($(3,5)$ in the figure); and therefore gives the same result. This is always the case, because  $(\isoli,\jsoli+1) \in \mss$ (it is above or on the bounding line) and $(\isoli,\jsoli) \notin \mss$ (it is below the line), and due to how $\mss$ has been constructed, this implies that $(\isoli-1,\jsoli+1) \in \mss$ and $(\isoli-1,\jsoli+k) \notin \mss$ for $k =2, 3, \ldots$.  Therefore, $(\isoli,\jsoli)$ is achievable and maximizes $i+j-1$, which implies that $\isoli+\jsoli-1$ is the desired solution.
+
+Therefore, whether $(\isoli,\jsoli) \in \mss$ or $(\isoli,\jsoli) \notin \mss$, equations \eqref{eq: theo: funt, form; i} and \eqref{eq: theo: funt, form; j} give $\isoli+\jsoli-1$ equal to $\funt(\len)$, as claimed.
+
+It should be noted that for the specific case that $a^2/b^2 = 2k-1$, $k \in \mathbb N$ the lower bounding line \eqref{eq: lower bound, line} becomes $j = i(2k-1)-5k+4$, which gives integer $j$ for integer $i$. This means that the bound is actually achieved for all pairs in $\mss$ (see for example Figure~\ref{fig: pairs_bounds_1}), and the case $(\isoli,\jsoli) \notin \mss$ never occurs. Thus, when $a^2/b^2$ is an odd integer the obtained $(\isoli,\jsoli)$ is guaranteed to be in $\mss$, whereas for general $a^2/b^2$ either $(\isoli,\jsoli)$ or $(\isoli-1,\jsoli+1)$ are in in this set.
+% ^ If this is needed outside of the proof, it can be included at the end of the theorem statement
+
+As for the properties of $\funt$, it follows from \eqref{eq: theo: funt, form; funt}--\eqref{eq: theo: funt, form; j} that it is piecewise constant and left-continuous. From the procedure described in the previous paragraphs for obtaining $(\isoli, \jsoli)$ it is clear that $\isoli+\jsoli-1$ increases in steps of $1$ when $\len$ is increased continuously; that is, $\funt$ has jumps of unit value.
+
+Consider an arbitrary $\len$ such that for some $\tiles \in \mathbb N, \tiles \geq 4$
+\begin{equation}
+\label{eq: theo funt, form: prop 1}
+\funl(\tiles)=\len.
+\end{equation}
+To see that $\funt$ has a jump at $\len$, assume for the sake of contradiction that $\funt$ is continuous, therefore constant, at that point. Then there is $\epsilon > 0$ for which $\funt(\len+\epsilon) = \tiles = \funt(\len-\epsilon)$. This means that there exists a segment with length $\len-\epsilon$ that touches $\tiles$ tiles, and thus $\funl(\tiles) \leq \len-\epsilon < \len$, in contradiction with \eqref{eq: theo funt, form: prop 1}. Therefore $\funt$ is discontinuous, from the right, at $\len$. By definition of $\funl$, \eqref{eq: theo funt, form: prop 1} implies that $\funt(\len) < \tiles$, and that there exists $\epsilon > 0$ such that $\funt(\len+h) = \tiles$ for $0 < h < \epsilon$. This means that
+\begin{align}
+\label{eq: theo funt, form: prop 2}
+\funt(\len) &< \tiles, \\
+\label{eq: theo funt, form: prop 3}
+\lim_{h \rightarrow 0+} \funt(\len+h) &= \tiles,
+\end{align}
+that is, $\funt$ has a jump at $\len$. In addition, since the jump has unit height, it follows from \eqref{eq: theo funt, form: prop 2} and \eqref{eq: theo funt, form: prop 3}  that $\funt(\len) = \tiles-1$.
+
+Conversely, assume that \eqref{eq: theo funt, form: prop 2} and \eqref{eq: theo funt, form: prop 3} hold for some $\len \in \mathbb R^+$, $\tiles \in \mathbb N$. From \eqref{eq: theo funt, form: prop 2} it follows that  $\funl(\tiles) \geq \len$. On the other hand, \eqref{eq: theo funt, form: prop 3} implies that $\funl(\tiles) \leq \len$. Thus $\funl(\tiles)=\len$.
+\end{proof}
+
+Although Theorem~\ref{theo: funt, form} is valid for $a \geq b$, the result could also be applied for $a < b$ by simply swapping the values of $a$ and $b$. In other words, \eqref{eq: theo: funt, form; funt}--\eqref{eq: theo: funt, form; j}
+% *!*
+can be used for any grid if $a$, $b$ are interpreted as the largest and smallest sides of a tile, respectively.
+
+\begin{theorem}
+\label{theo: funl, form}
+For $a, b \in \mathbb R^+$ and $\tiles \in \mathbb N$,
+\begin{equation}
+\label{eq: theo: funl, form; funl}
+\funl(\tiles) = \sqrt{(\isoli-2)^2 a^2 + (\jsoli-2)^2 b^2}
+\end{equation}
+with
+\begin{align}
+\label{eq: theo: funl, form; i}
+\isoli &= \max\left\{ \left\lfloor \frac {(2\tiles-1)b^2+5a^2}{2(a^2+b^2)} \right\rfloor, 2 \right\}, \\
+\label{eq: theo: funl, form; j}
+\jsoli &= \max\left\{ \left\lceil \frac {2\tiles a^2 + 3(b^2-a^2)}{2(a^2+b^2)} \right\rceil, 2 \right\}.
+\end{align}
+This function is monotone increasing for $\tiles \geq 3$.
+\end{theorem}
+
+\begin{proof}
+The $(i_\tiles,j_\tiles)$ pair in the minimal sufficient set $\mss$ corresponds to a maximum of $\tiles$ touched tiles. By construction of this set, any segment that touches $\tiles$ tiles must have length greater than $\sqrt{(i_\tiles-2)^2a^2 + (j_\tiles-2)^2b^2}$.
+
+For $\tiles \geq 3$ the expressions \eqref{eq: theo: funl, form; i} and \eqref{eq: theo: funl, form; j} coincide with \eqref{eq: min suff set, form, i} and \eqref{eq: min suff set, form, j}. Therefore \eqref{eq: theo: funl, form; funl} gives the desired result.
+	
+For $\tiles \in \{1, 2\}$ both \eqref{eq: theo: funl, form; i} and \eqref{eq: theo: funl, form; j} equal $2$, and \eqref{eq: theo: funl, form; funl} gives $0$, which is the correct result.
+
+By Theorem~\ref{theo: funt, form}, $\funt$ has unit-height jumps at the values $\funl(\tiles)$, $\tiles \in \mathbb N, \tiles \geq 4$. This implies that $\funl$ is monotone increasing for $\tiles \geq 3$.
+\end{proof}
+
+Theorems~\ref{theo: funt, form} and \ref{theo: funl, form} not only give the solutions $\funt(\len)$ and $\funl(\tiles)$ to the two problems stated in Section~\ref{part: intro}; they also provide a way to actually position a segment of length slightly greater than $\len$ or $\funl(\tiles)$ so that it touches $\tiles$ or $\funt(\len)$ tiles. Namely, the segment should have its endpoints respectively in the interior of two tiles separated $\isoli-1$ steps horizontally and $\jsoli-1$ steps vertically, with its exact position and orientation  adjusted to avoid any grid points.
+
+It is interesting to consider the following particular cases: $\len \gg a,b$; $a \gg b$; and $a=b$. Regarding the first, from \eqref{eq: theo: funt, form; funt}--\eqref{eq: theo: funt, form; j}
+% *!*
+and from \eqref{eq: theo: funl, form; funl}--\eqref{eq: theo: funl, form; j}
+% *!*
+it is seen that for long segments the number of touched tiles and the segment length are approximately proportional, with
+\begin{equation}
+\label{eq: asympt}
+\lim_{\len \rightarrow \infty} \frac{\funt(\len)}{\len}
+= \lim_{\tiles \rightarrow \infty} \frac{\tiles}{\funl(\tiles)}
+= \sqrt{1/a^2 + 1/b^2}.
+\end{equation}
+
+As for $a \gg b$, in this case the optimal canonical rectangle has $\isoli = 2$, and $\jsoli$ as large as allowed by $\len$ (direct problem) or as required by $\tiles$ (inverse problem), corresponding to an almost vertical segment. Obviously, for $a \gg b$ the length of the segment is best invested in increasing the number of tiles traversed vertically (but the segment should be slightly tilted to cross a vertical edge), and the asymptotic value of \eqref{eq: asympt} is approximately $1/b$.
+
+For $a=b$, either from symmetry considerations or particularizing the formulas in this section it stems that the optimal orientation of the segment is close to $45^\circ$. This case will be dealt with in Section~\ref{part: square grid, real lengths}, as it lends itself to somewhat simplified formulas.
+
+Figure~\ref{fig: funt funl examples} shows $\funt$ and $\funl$ for several pairs of grid parameters $a$, $b$. The graphs illustrate some of the observations of the previous paragraphs. Indeed, the asymptotic slope in Figure~\ref{fig: funt examples}, or the inverse of the asymptotic slope in Figure~\ref{fig: funl examples}, is approximately $\sqrt{2}$ for $a, b=1$, and $1/b$ for the case $a=5,b=1$, and even for $a=5,b=1.5$ and $a=10,b=3$. Comparing the latter two cases it is also seen that scaling $a$, $b$ and $\len$ by the same factor does not alter $\funt(\len)$; or scaling $a$, $b$ results in $\funl(\tiles)$ being scaled by the same factor.
+
+\begin{figure}
+\centering%
+\subfigure[Function $\funt$]{%
+\label{fig: funt examples}%
+\includegraphics[width=.49\textwidth]{funt_examples}%
+}\hfill%
+\subfigure[Function $\funl$]{%
+\label{fig: funl examples}%
+\includegraphics[width=.49\textwidth]{funl_examples}%
+}%
+\caption{Functions $\funt$ and $\funl$ for several pairs $a$, $b$
+}%
+\label{fig: funt funl examples}%
+\end{figure}%
+
+
+\section{Square grid with real-valued lengths}
+\label{part: square grid, real lengths}
+
+Particularizing the results in Section~\ref{part: arbitrary grid, real lengths} to a square grid, $a=b$, obviously yields simpler formulas.
+
+\begin{corollary}
+\label{cor: funt, sq, form}
+For a square grid with $a \in \mathbb R^+$, and for $\len \in \mathbb R^+$,
+\begin{equation}
+\label{eq: cor: funt, sq, form}
+\funt(\len) = \isoli+\jsoli-1
+\end{equation}
+with
+\begin{align}
+\label{eq: cor: funt, sq, form; i}
+\isoli &= \left\lceil \frac{1 + \Re \sqrt{2\len^2/a^2-1}}{2} \right\rceil + 1, \\
+\label{eq: cor: funt, sq, form; j}
+\jsoli &= \left\lceil \sqrt{\len^2/a^2-(\isoli-2)^2} \right\rceil + 1,
+\end{align}
+\end{corollary}
+
+\begin{corollary}
+\label{theo: funl, sq, form}
+For a square grid with $a \in \mathbb R^+$, and for $\tiles \in \mathbb N$,
+\begin{equation}
+\label{eq: theo: funt, sq, form; funl}\\
+\frac{\funl(\tiles)}{a} = \begin{cases}
+\displaystyle
+0 & \text{for } \tiles =1, 2 \\[1.4mm]
+\displaystyle
+\frac{\tiles-3}{\sqrt{2}} & \text{for } \tiles \text{ odd, } \tiles \geq 3 \\[4.5mm]
+\displaystyle
+\sqrt{\frac{(\tiles-3)^2+1} {2}} & \text{for } \tiles \text{ even, } \tiles \geq 3.
+\end{cases}
+\end{equation}
+\end{corollary}
+
+Furthermore, an even simpler formula can be obtained for $\funt$. Its derivation uses a variation of the minimal sufficient set $\mss$ which is  more suited to this case.
+
+\begin{theorem}
+\label{theo: funt, sq, form}
+For a square grid with $a \in \mathbb R^+$, and for $\len \in \mathbb R^+$,
+\begin{equation}
+\label{eq: theo: funt, sq, form; funt}
+\funt(\len) = \isoli+\jsoli-1
+\end{equation}
+with
+\begin{align}
+\label{eq: theo: funt, sq, form; i}
+\isoli &= \left\lceil \frac{\len}{a \sqrt{2}} \right\rceil + 1, \\
+\label{eq: theo: funt, sq, form; j}
+\jsoli &= \left\lceil \sqrt{\len^2/a^2-(\isoli-2)^2} \right\rceil + 1.
+\end{align}
+\end{theorem}
+
+\begin{proof}
+For $a=b$ the set $\mss$ from Proposition~\ref{prop: min suff set} consists of points of the form $(i,i)$ and $(i+1,i)$, as is easily seen from Proposition~\ref{prop: min suff set, form}, and as illustrated in Figure~\ref{fig: pairs_bounds_1}. By symmetry, replacing each point $(i+1,i)$ by $(i,i+1)$ gives a set $\mss'$ which is also minimal sufficient. For this new set, the lower bounding line \eqref{eq: lower bound, line} can be replaced by the simpler $j=i$. The same approach used in the proof of Theorem~\ref{theo: funt, form} can be used, but using this line. Thus $(\isolr, \jsolr)$ is obtained from
+\begin{align}
+(\isolr-2)^2 a^2 + (\jsolr-2)^2 a^2 &= \len^2, \\
+\jsolr &= \isoli,
+\end{align}
+which gives
+\begin{equation}
+\label{eq: theo: funt, sq, form; proof 1}
+\isolr = \frac{\len}{a \sqrt{2}} + 2.
+\end{equation}
+The pair $(\isoli,\jsoli)$ resulting from \eqref{eq: theo: funt, sq, form; proof 1} is in $\mss'$, and is given in \eqref{eq: theo: funt, sq, form; i} and \eqref{eq: theo: funt, sq, form; j}.
+\end{proof}
+
+
+\section{Unit square grid with integer lengths}
+\label{part: unit square grid, integer lengths}
+
+A natural variation of the two problems introduced in Section~\ref{part: intro} is to consider $a=b=1$, with the additional restriction that the segment length can only be a positive integer (equivalently, a square grid is considered with step $a$ and the segment length can only be an integer multiple of $a$).
+
+The \emph{direct problem} in this setting corresponds to the restriction of the function $\funt$ to $\mathbb N$. This will be denoted as a function $\funti: \mathbb N \to \mathbb N$ for greater clarity, although obviously $\funti(\leni) = \funt(\leni)$ for all $\leni \in \mathbb N$. The sequence $\funti(\leni)$, $\leni \in \mathbb N$ takes values $3, 5, 7, 8, 9, \ldots$, and is depicted in Figure~\ref{fig: funti}. This is A346232 in the On-Line Encyclopedia of Integer Sequences \cite{OEIS_unitsq_int_dir}. For this sequence, a simpler expression can be obtained than those resulting from Section~\ref{part: square grid, real lengths} with $a=1$, and the following properties hold.
+
+\begin{figure}%
+\centering%
+\subfigure[Sequence $\funti$]{%
+\label{fig: funti}%
+\includegraphics[width=.49\textwidth]{funti}%
+}\hfill%
+\subfigure[Sequence $\funli$]{%
+\label{fig: funli}%
+\includegraphics[width=.49\textwidth]{funli}%
+}%
+\caption{Sequences $\funti$ and $\funli$
+}%
+\label{fig: funti funti}%
+\end{figure}%
+
+\begin{theorem}
+\label{theo: funti}
+For $\leni \in \mathbb N$,
+% $\funti(\leni)$ can be computed as
+\begin{equation}
+\label{eq: funti leni}
+\funti(\leni) = \left\lfloor \sqrt{2\leni^2-2} \right\rfloor + 3.
+\end{equation}
+In addition,
+\begin{enumerate}
+\item
+This sequence is increasing, with $\funti(\leni+1)-\funti(\leni) \in \{1, 2\}$.
+\item
+There can be no more than $2$ consecutive increments equal to $1$.
+\item
+Increments equal to $2$ always appear isolated, except at the initial sequence terms $3, 5, 7$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+***The derivation of \eqref{eq: funti leni} in CGCC can probably be adapted. $i$, $j$ there are $i-2$, $j-2$ here. (It cannot be expressed with $\lceil \cdot \rceil$ instead of $\lfloor \cdot \rfloor$, which would be more ``aesthetically aligned'' with previous expressions, because for example $\len=3$ makes $2\len^2-2$ a square).
+
+%***Otherwise, perhaps we can prove the formula for the inverse problem first (starting from the one for real lenghts), and derive this from that
+
+In order to prove that $\funti(\leni+1)-\funti(\leni) \in \{1,2\}$, consider the function $f(x) = \sqrt{2x^2-2}$ for $x \in \mathbb R$, $x>1$. Its first derivative is
+\begin{equation}
+f'(x) = \frac {\sqrt{2} \, x} {\sqrt{x^2-1}},
+\end{equation}
+and its second derivative is easily seen to be negative. Therefore $f'(x)$ can be bounded for $x \geq 3$ as
+\begin{equation}
+\label{eq: der bounds}
+\lim_{x \rightarrow \infty} f'(x) = \sqrt{2} < f'(x) < f'(3) = 3/2.
+\end{equation}
+For $\leni \geq 2$, by the mean value theorem \cite[section~5.3]{Abbott15}, when $\leni$ is increased to $\leni+1$ the term $\sqrt{2\leni^2-2}$ in \eqref{eq: funti leni} has an increment that equals $f'(x)$ for some $\leni < x < \leni+1$. Therefore
+\begin{equation}
+\label{eq: der bounds 2}
+\sqrt{2} < \sqrt{2(\leni+1)^2-2} - \sqrt{2\leni^2-2} < 3/2.
+\end{equation}
+Since $1 < \sqrt{2}$ and $3/2 < 2$, \eqref{eq: der bounds 2} implies that $\funti(\leni+1)-\funti(\leni)$ can only take the values $1$ or $2$ for $\leni \geq 3$. In addition, $\funti(2)-\funti(1) = \funti(3)-\funti(2) = 2$, and thus the result holds for all $\leni \in \mathbb N$.
+
+Using the first bound in \eqref{eq: der bounds 2} three times,
+\begin{equation}
+3\sqrt{2} < \sqrt{2(\leni+3)^2-2} - \sqrt{2\leni^2-2}.
+\end{equation}
+Considering that $4 < 3\sqrt{2}$, this implies that $\funti(\leni+3)-\funti(\leni) \geq 4$ for $\leni \geq 3$. Therefore at least one of the three increments from $\funti(\leni)$ to $\funti(\leni+3)$ is $2$. Since $\funti(2)-\funti(1) = \funti(3)-\funti(2) = 2$, the result holds for all $\leni \in \mathbb N$.
+
+Similarly, using the second bound in \eqref{eq: der bounds 2} twice,
+\begin{equation}
+\sqrt{2(\leni+2)^2-2} - \sqrt{2\leni^2-2} < 3,
+\end{equation}
+which implies that $\funti(\leni+2)-\funti(\leni) \leq 3$ for $\leni \geq 3$. Therefore the two increments $\funti(\leni+1)-\funti(\leni)$ and $\funti(\leni+2)-\funti(\leni+1)$ cannot both be $2$ for $\leni \geq 3$.
+\end{proof}
+
+The \emph{inverse problem} with integer-length segments can be formulated as follows: given $\tiles \in \mathbb N$, find the \emph{minimum} integer length that allows touching at least $\tiles$ tiles. Observe that in this case, unlike with real-valued lengths, there is indeed a minimum length, because every subset of $\mathbb N$ has a minimum. This can be expressed as a function $\funli: \mathbb N \to \mathbb N$:
+\begin{equation}
+\label{eq: funli funti}
+\funli(\tiles) = \min\{\leni \in \mathbb N \st \funti(\leni) \geq \tiles\},
+\end{equation}
+which is related to the function $\funl$ corresponding to real-valued lengths by
+\begin{equation}
+\label{eq: funli funl}
+\funli(\tiles) = \lfloor\funl(\tiles)\rfloor + 1.
+\end{equation}
+The converse to \eqref{eq: funli funti} is (compare to \eqref{eq: funt funl}):
+\begin{equation}
+\label{eq: funti funli}
+\funti(\leni) = \max \{\tiles \in \mathbb N \st \funli(\tiles) \leq \leni\}.
+\end{equation}
+In view of \eqref{eq: funli funti} and \eqref{eq: funti funli}, $\funti$ and $\funli$ can be considered as ``pseudo-inverse'' sequences of each other.
+% ***Is this a good name? Is there an established name for this relationship?
+
+The sequence $\funli(\tiles)$, $\tiles \in \mathbb N$ can be computed using \eqref{eq: theo: funt, sq, form; funl} and \eqref{eq: funli funl}, and has initial values $1, 1, 1, 2, 2, 3, 3, 4, 5 \ldots$, as shown in Figure~\ref{fig: funli}. This is A**** in the On-Line Encyclopedia of Integer Sequences \cite{***}. However, a simpler expression can be obtained from \eqref{eq: funti leni} and \eqref{eq: funli funti}. This is established by the next theorem, which also states some properties of $\funli$, parallel to those of $\funti$.
+
+\begin{theorem}
+\label{theo: funli}
+For $\tiles \in \mathbb N$,
+% $\funli(\tiles)$ can be computed as
+\begin{equation}
+\label{eq: funli}
+\funli(\tiles) = \begin{cases}
+\displaystyle
+1 & \text{for } \tiles \leq 3 \\[1.3mm]
+\displaystyle
+\left \lceil \sqrt{\frac{(\tiles-3)^2} 2 + 1} \ \right \rceil & \text{for } \tiles \geq 4.
+\end{cases}
+\end{equation}
+In addition,
+\begin{enumerate}
+\item
+This sequence is non-decreasing. Except for the initial run of $3$ equal values, it is formed by runs of $1$ or $2$ equal values, with an increment of $1$ between consecutive runs.
+\item
+There can be no more than $3$ different consecutive terms.
+\item
+A run of $2$ equal values always has $2$ different terms before and $2$ different terms after the run, except for the initial terms $1, 1, 1, 2, 2, 3, 3$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Using \eqref{eq: funti leni}, the inequality $\funti(\leni) \geq \tiles$ in \eqref{eq: funli funti} is written as
+\begin{equation}
+\left\lfloor \sqrt{2\leni^2-2} \right\rfloor + 3 \geq \tiles.
+\end{equation}
+Since the right-hand side is an integer, this is equivalent to
+\begin{equation}
+\label{eq: theo funli ineq}
+\sqrt{2\leni^2-2} \geq \tiles-3.
+\end{equation}
+For $\tiles \geq 4$, taking squares and rearranging gives
+\begin{equation}
+\leni \geq \left \lceil \sqrt{\frac{(\tiles-3)^2} 2 + 1} \ \right \rceil,
+\end{equation}
+which combined with \eqref{eq: funli funti} yields the second part of \eqref{eq: funli}. The first part results from noting that $\tiles-3 \leq 0$ for $\tiles \leq 3$, and thus $\leni=1$ satisfies \eqref{eq: theo funli ineq}.
+
+The stated properties for $\funli$ follow directly from those of $\funti$ established by Theorem~\ref{theo: funti}.
+\end{proof}
+
+
+\bibliographystyle{plain}
+\bibliography{bibliogr/lista_local}
+
+
+\end{document}
