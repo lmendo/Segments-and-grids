@@ -24,6 +24,7 @@
 \newcommand{\funl}{\lambda} % function that gices infimum real-valued length for a given number of touched tiles
 \newcommand{\funti}{T} % function that gives maximum number of touched tiles for integer-valued length
 \newcommand{\funli}{\Lambda} % function that gives minimum integer-valued length for a given number of touched tiles
+\newcommand{\funta}{\varphi} % function that gives average number of touched tiles for real-valued length
 \newcommand{\len}{\ell} % length variable, real-valued
 \newcommand{\leni}{\ell} % length variable, integer-valued. Same notation, but I keep the different command just in case
 \newcommand{\tiles}{t} % number of tiles (integer-valued)
@@ -56,13 +57,13 @@
 \begin{document}
 
 \title{
-On the maximum number of tiles touched\\
-by a line segment on a rectangular grid
+On the number of tiles touched by a\\
+line segment on a rectangular grid
 }
 
 % Authors with different affiliations: from https://tex.stackexchange.com/a/370813/90222
 \author[1]{Luis Mendo}
-\author[2]{**Name**}
+\author[2]{Alex Arkhipov}
 
 \affil[1]{\small Universidad Polit\'ecnica de Madrid. \texttt{luis.mendo@upm.es}}
 %Information Processing and Telecommunications Center, Universidad Polit\'ecnica de Madrid\\
@@ -87,10 +88,14 @@ by a line segment on a rectangular grid
 \label{part: intro}
 
 Given $a, b \in \mathbb R^+$, consider a grid on $\mathbb R^2$ formed by rectangular \emph{tiles} of width $a$ and height $b$. A line segment of length $\len \in \mathbb R^+$ is located on the plane with arbitrary position and orientation. The segment is said to \emph{touch} a tile if it intersects its interior.\footnote{
-The definition uses the interior of the tile, excluding the border, to avoid uninteresting results such as a ``zero-length'' segment touching (a vertex of) $4$ tiles.}
-What is the maximum number of tiles that the segment can touch?
+The definition uses the interior of the tile, excluding the border, to avoid uninteresting results such as a ``zero-length'' segment touching (a vertex of) $4$ tiles.} This paper deals with the following problems:
+\begin{itemize}
+\item What is the maximum number of tiles that the segment can touch?
+\item What length should a segment have to touch a given number of tiles?
+\item What is the average number of tiles touched by a uniformly random segment of a given length?
+\end{itemize}
 
-As an example, consider $a=1.35$, $b=1$. A segment of unit length can be placed as shown in Figure~\ref{fig: examples} (left) to touch $3$ tiles. In fact, the solution for $\len=1$ is $3$ tiles. The figure also illustrates that the solution for length $2.4$ is $5$ (center), and for $4.7$ it is $8$ (right).
+As an example of the first problem, consider $a=1.35$, $b=1$. A segment of unit length can be placed as shown in Figure~\ref{fig: examples} (left) to touch $3$ tiles. In fact, the solution for $\len=1$ is $3$ tiles. The figure also illustrates that the solution for length $2.4$ is $5$ (center), and for $4.7$ it is $8$ (right).
 
 \begin{figure}
 \centering%
@@ -102,16 +107,20 @@ As an example, consider $a=1.35$, $b=1$. A segment of unit length can be placed 
 
 An equivalent formulation of the problem is obtained allowing segments of length $\len$ \emph{or smaller}. The equivalence is clear from the fact that reducing the length cannot increase the number of touched tiles. Either of these formulations will be referred to as the \emph{direct} problem.
 
-The \emph{inverse} problem is, given $\tiles \in \mathbb N$, to determine the infimum length of all segments that touch at least $\tiles$ tiles. For real-valued lengths this infimum is not a minimum, because given a segment that touches $\tiles$ tiles, its length can always be reduced by some non-zero amount without changing the number of touched tiles. This is a consequence of the interior of the each tile being an open set.
+The \emph{inverse} problem is, given $\tiles \in \mathbb N$, to determine the infimum length of all segments that touch at least $\tiles$ tiles. For real-valued lengths this infimum is not a minimum, because given a segment that touches $\tiles$ tiles, its length can always be reduced by some non-zero amount without changing the number of touched tiles. This is a consequence of the interior of each tile being an open set.
+
+The direct and inverse problems are closely related. Namely, if $\len$ is the infimum of all lengths that allow touching at least $\tiles$ tiles (inverse problem), $\tiles$ is the maximum number of tiles that can be touched with lengths slightly greater than $\len$ (direct problem).
+
+The question of determining how many tiles a segment of a given length touches on average will be referred to as the \emph{average-number} problem. As will be seen, solving this also answers the inverse question (segment length to touch a given number of tiles on average), which thus need not be considered separately. By symmetry, one endpoint of the segment can be assumed to lie in a fixed, reference tile. The position of this endpoint will be considered to be \emph{uniformly} distributed on the tile. The segment orientation will be have a \emph{uniform} distribution on the set of all possible directions, and is \emph{independent} of the endpoint position.
 
 % ***Do we need to discuss potential applications of this (if we can find any)? This probably depends on the journal
 % ***Do we need a section with conclusions? Probably not; depends on the journal
 
-These problems are related to \ldots ***maybe a short paragraph here mentioning related problems: Buffon's needle, Buffon-Laplace problem. Some references: ``Buffon's Noodle Problem'', J.F.~Ramaley, 1969. ``On Laplace's Extension of the Buffon Needle Problem'', B.J.~Arnow, 1994. \\
+The problems addressed in this paper are related to \ldots ***maybe a short paragraph here mentioning related problems: Buffon's needle, Buffon-Laplace problem. Some references: ``Buffon's Noodle Problem'', J.F.~Ramaley, 1969. ``On Laplace's Extension of the Buffon Needle Problem'', B.J.~Arnow, 1994. \\
 \url{https://www.jstor.org/stable/2317945} \\
 \url{https://www.jstor.org/stable/2687085}
 
-This paper analyzes both problems for real-valued lengths, and for integer-valued lengths on a unit square grid. Section~\ref{part: fund results} presents fundamental results, from which the characterization is obtained in Section~\ref{part: arbitrary grid, real lengths} for an arbitrary grid with real-valued lengths; in Section~\ref{part: square grid, real lengths} for a square grid with real-valued lengths; and in Section~\ref{part: unit square grid, integer lengths} for a unit square grid with integer-valued lengths.
+The rest of the paper is organized as follows. \S\ref{part: fund results} presents fundamental results, which form the basis of the subsequent analysis. The direct and inverse problems are considered in \S\ref{part: max}, first for real-valued lengths, and then for integer-valued lengths on a unit square grid. The average-number problem is analyzed in \S\ref{part: ave}.
 
 % The rounding down (floor) and rounding up (ceiling) operations will be denoted as $\lfloor \cdot \rfloor$ and $\lceil \cdot \rceil$. The notation $[\mathsf S]$ will be used for the Iverson function, which equals $1$ if statement $\mathsf S$ is true and $0$ otherwise.
 
@@ -208,7 +217,7 @@ For instance, it is intuitively clear from Figure~\ref{fig: examples} that segme
 % This is true for any a, b: 2 can achieved instead of 1 without compromising the other dimension.
 The corresponding $(i,j)$ pairs can be left out of the sufficient set. In general, the pairs included in a minimal sufficient set will be different depending on $a$ and $b$. Two specific examples of minimal sufficient sets will be presented later in this section.
 
-Knowing a minimal sufficient set of $(i,j)$ pairs facilitates the solution of both the direct an inverse problems, because it reduces the number of pairs that need to be tried. In order to derive a general method to build a minimal sufficient set, it is insightful to consider two specific cases first, as will be presented in the following. It is also helpful to use the equivalent formulation of the direct problem referred to in Section~\ref{part: intro}, i.e.\ finding the maximum number of tiles touched by segments of length $\len$ \emph{or less}.
+Knowing a minimal sufficient set of $(i,j)$ pairs facilitates the solution of both the direct an inverse problems, because it reduces the number of pairs that need to be tried. In order to derive a general method to build a minimal sufficient set, it is insightful to consider two specific cases first, as will be presented in the following. It is also helpful to use the equivalent formulation of the direct problem referred to in \S\ref{part: intro}, i.e.\ finding the maximum number of tiles touched by segments of length $\len$ \emph{or less}.
 
 Thus each choice of $(i, j)$ implies a maximum of $i+j-1$ touched tiles on one hand; and sets a lower bound on the required length $\len$ on the other hand.
 
@@ -366,10 +375,18 @@ On the other hand, a simple pattern arises for $a^2/b^2 \in \mathbb N$, as seen 
 A segment whose canonical rectangle has normalized width $i$ and height $j$ is oriented with approximate slope $jb/(ia)$ with respect to the $x$ axis (See Figure~\ref{fig: len ineq i j}); and the approximation becomes better for greater segment lengths. From \eqref{eq: upper bound, line} and \eqref{eq: lower bound, line} it can be seen that the positions of the pairs $(i,j) \in \mss$ have $j/i \approx a^2/b^2$ for large $i, j$. Therefore the optimal slope for long segments is approximately $a/b$. This formalizes the intuition that to maximize the number of touched tiles, the segment should follow a direction along which the perceived ``length'' of the tile is smaller.
 
 
-\section{Arbitrary grid with real-valued lengths}
-\label{part: arbitrary grid, real lengths}
+\section{Maximum number of tiles: direct and inverse problems}
+\label{part: max}
+% ***Is it clear enough that "maximum number of tiles" can refer to the inverse problem too? (because the inverse problem is closely related to the direct one, as discussed in the introduction)
+% If not, an alernative would be a more explicit title like: "Maximum number of tiles fo a given length. Conditions on length for a given number of tiles"
 
-For a grid with parameters $a, b \in \mathbb R^+$, the maximum number $\tiles$ of touched tiles for a given real-valued length $\len$ can be represented by a function $\funt: \mathbb R^+ \to \mathbb N$ such that $\tiles = \funt(\len)$. Similarly, for the inverse problem a function $\funl: \mathbb N \to \mathbb R^+$ can be defined such that $\funl(\tiles)$ gives the infimum length of all segments that touch at least $\tiles$ tiles.
+The direct and inverse problems for the maximum number of tiles are considered in this section. The general case for rectangular grids with real-valued segment lengths is analyzed first, in \S\ref{part: max: arbitrary grid, real lengths}. The particular case of square grids is addressed in \S\ref{part: max: square grid, real lengths}, as it allows a specialized formula for the direct problem. Lastly, the analysis of a unit square grid with integer-valued lengths is given in \S\ref{part: max: unit square grid, integer lengths}.
+
+
+\subsection{Arbitrary grid with real-valued lengths}
+\label{part: max: arbitrary grid, real lengths}
+
+For a grid with parameters $a, b \in \mathbb R^+$, the maximum number $\tiles$ of touched tiles with a given real-valued length $\len$ can be represented by a function $\funt: \mathbb R^+ \to \mathbb N$ such that $\tiles = \funt(\len)$. Similarly, for the inverse problem a function $\funl: \mathbb N \to \mathbb R^+$ can be defined such that $\funl(\tiles)$ gives the infimum length of all segments that touch at least $\tiles$ tiles.
 
 The function $\funt$ can be obtained from $\funl$ by noting that the maximum number of tiles that can be touched by a segment of length $\len$ is the index of the largest term of the sequence $\funl(\tiles)$ that is less than $\len$:
 \begin{equation}
@@ -509,7 +526,7 @@ For $\tiles \in \{1, 2\}$ both \eqref{eq: theo: funl, form; i} and \eqref{eq: th
 By Theorem~\ref{theo: funt, form}, $\funt$ has unit-height jumps at the values $\funl(\tiles)$, $\tiles \in \mathbb N, \tiles \geq 4$. This implies that $\funl$ is monotone increasing for $\tiles \geq 3$.
 \end{proof}
 
-Theorems~\ref{theo: funt, form} and \ref{theo: funl, form} not only give the solutions $\funt(\len)$ and $\funl(\tiles)$ to the two problems stated in Section~\ref{part: intro}; they also provide a way to actually position a segment of length slightly greater than $\len$ or $\funl(\tiles)$ so that it touches $\tiles$ or $\funt(\len)$ tiles. Namely, the segment should have its endpoints respectively in the interior of two tiles separated $\isoli-1$ steps horizontally and $\jsoli-1$ steps vertically, with its exact position and orientation  adjusted to avoid any grid points.
+Theorems~\ref{theo: funt, form} and \ref{theo: funl, form} not only give the solutions $\funt(\len)$ and $\funl(\tiles)$ to the two problems stated in \S\ref{part: intro}; they also provide a way to actually position a segment of length slightly greater than $\len$ or $\funl(\tiles)$ so that it touches $\tiles$ or $\funt(\len)$ tiles. Namely, the segment should have its endpoints respectively in the interior of two tiles separated $\isoli-1$ steps horizontally and $\jsoli-1$ steps vertically, with its exact position and orientation  adjusted to avoid any grid points.
 
 It is interesting to consider the following particular cases: $\len \gg a,b$; $a \gg b$; and $a=b$. Regarding the first, from \eqref{eq: theo: funt, form; funt}--\eqref{eq: theo: funt, form; j}
 % *!*
@@ -525,7 +542,7 @@ it is seen that for long segments the number of touched tiles and the segment le
 
 As for $a \gg b$, in this case the optimal canonical rectangle has $\isoli = 2$, and $\jsoli$ as large as allowed by $\len$ (direct problem) or as required by $\tiles$ (inverse problem), corresponding to an almost vertical segment. Obviously, for $a \gg b$ the length of the segment is best invested in increasing the number of tiles traversed vertically (but the segment should be slightly tilted to cross a vertical edge), and the asymptotic value of \eqref{eq: asympt} is approximately $1/b$.
 
-For $a=b$, either from symmetry considerations or particularizing the formulas in this section it stems that the optimal orientation of the segment is close to $45^\circ$. This case will be dealt with in Section~\ref{part: square grid, real lengths}, as it lends itself to somewhat simplified formulas.
+For $a=b$, either from symmetry considerations or particularizing the formulas in the previous theorems it stems that the optimal orientation of the segment is close to $45^\circ$. This case will be dealt with in \S\ref{part: max: square grid, real lengths}, as it lends itself to somewhat simplified formulas.
 
 Figure~\ref{fig: funt funl examples} shows $\funt$ and $\funl$ for several pairs of grid parameters $a$, $b$. The graphs illustrate some of the observations of the previous paragraphs. Indeed, the asymptotic slope in Figure~\ref{fig: funt examples}, or the inverse of the asymptotic slope in Figure~\ref{fig: funl examples}, is approximately $\sqrt{2}$ for $a, b=1$, and $1/b$ for the case $a=5,b=1$, and even for $a=5,b=1.5$ and $a=10,b=3$. Comparing the latter two cases it is also seen that scaling $a$, $b$ and $\len$ by the same factor does not alter $\funt(\len)$; or scaling $a$, $b$ results in $\funl(\tiles)$ being scaled by the same factor.
 
@@ -545,10 +562,10 @@ Figure~\ref{fig: funt funl examples} shows $\funt$ and $\funl$ for several pairs
 \end{figure}%
 
 
-\section{Square grid with real-valued lengths}
-\label{part: square grid, real lengths}
+\subsection{Square grid with real-valued lengths}
+\label{part: max: square grid, real lengths}
 
-Particularizing the results in Section~\ref{part: arbitrary grid, real lengths} to a square grid, $a=b$, obviously yields simpler formulas.
+Particularizing the results in \S\ref{part: max: arbitrary grid, real lengths} to a square grid, $a=b$, obviously yields simpler formulas.
 
 \begin{corollary}
 \label{cor: funt, sq, form}
@@ -615,12 +632,12 @@ The pair $(\isoli,\jsoli)$ resulting from \eqref{eq: theo: funt, sq, form; proof
 \end{proof}
 
 
-\section{Unit square grid with integer lengths}
-\label{part: unit square grid, integer lengths}
+\subsection{Unit square grid with integer lengths}
+\label{part: max: unit square grid, integer lengths}
 
-A natural variation of the two problems introduced in Section~\ref{part: intro} is to consider $a=b=1$, with the additional restriction that the segment length can only be a positive integer (equivalently, a square grid is considered with step $a$ and the segment length can only be an integer multiple of $a$).
+A natural variation of the two problems introduced in \S\ref{part: intro} is to consider $a=b=1$, with the additional restriction that the segment length can only be a positive integer (equivalently, a square grid is considered with step $a$ and the segment length can only be an integer multiple of $a$).
 
-The \emph{direct problem} in this setting corresponds to the restriction of the function $\funt$ to $\mathbb N$. This will be denoted as a function $\funti: \mathbb N \to \mathbb N$ for greater clarity, although obviously $\funti(\leni) = \funt(\leni)$ for all $\leni \in \mathbb N$. The sequence $\funti(\leni)$, $\leni \in \mathbb N$ takes values $3, 5, 7, 8, 9, \ldots$, and is depicted in Figure~\ref{fig: funti}. This is A346232 in the On-Line Encyclopedia of Integer Sequences \cite{OEIS_unitsq_int_dir}. For this sequence, a simpler expression can be obtained than those resulting from Section~\ref{part: square grid, real lengths} with $a=1$, and the following properties hold.
+The \emph{direct problem} in this setting corresponds to the restriction of the function $\funt$ to $\mathbb N$. This will be denoted as a function $\funti: \mathbb N \to \mathbb N$ for greater clarity, although obviously $\funti(\leni) = \funt(\leni)$ for all $\leni \in \mathbb N$. The sequence $\funti(\leni)$, $\leni \in \mathbb N$ takes values $3, 5, 7, 8, 9, \ldots$, and is depicted in Figure~\ref{fig: funti}. This is A346232 in the On-Line Encyclopedia of Integer Sequences \cite{OEIS_unitsq_int_dir}. For this sequence, a simpler expression can be obtained than those resulting from \S\ref{part: max: square grid, real lengths} with $a=1$, and the following properties hold.
 
 \begin{figure}%
 \centering%
@@ -752,6 +769,37 @@ which combined with \eqref{eq: funli funti} yields the second part of \eqref{eq:
 
 The stated properties for $\funli$ follow directly from those of $\funti$ established by Theorem~\ref{theo: funti}.
 \end{proof}
+
+
+\section{Average number of tiles}
+\label{part: ave}
+
+***A theorem, and maybe one or two propositions. It is interesting to state $\Pr[i \geq i_0]$ (averaged over $x$) in a proposition, as it can be compared with the Buffon experiment.
+
+***Define the average number of tiles touched as a function $\funta: \mathbb R^+ \to \mathbb R^+$.
+
+***The formula for the average number of files is:
+\begin{equation}
+\funta(\len) = \frac{2\len}{\pi}\left(\frac 1 a + \frac 1 b\right) + 1.
+\end{equation}
+
+***Explain that the inverse question is straightforward, because $\funta$ is monotone increasing, thus it has an inverse function (defined on the range of $\funta$). In fact, as will be seen, $\funta$ is an affine function, and therefore it is immediate to obtain its inverse.
+
+***Some mention that there is no need to study square grids or the case of integer-valued lengths separately.
+
+***Relation the the problem of the Buffon needle. On one hand, the formula for b=infinity gives the average number of lines crossed in the Buffon experiment. On the other hand, the intermediate values $\Pr[i \geq i_0]$ (proposition) are a generalization of the probability of crossing at least a line in the Buffon experiment, when the needle endpoint is only allowed to move in a smaller vertical strip.
+
+***Mention particular values: a=b=1 gives...; a=b=4/pi gives len+1. Can we find any ``meaning'' for these particular cases?
+
+***The function is affine, not linear. This is related to the fact that the parts of the segment near the endpoints can touch several tiles
+
+***Maybe a graph comparing maximum and average. Or compute/plot their ratio. The asymptotic slopes are $\sqrt(1/a^2+1/b^2)$ for $\funt$ and $2/\pi(1/a+1/b)$. It may be interesting to consider the ratio of asymptotic slopes. Some quick plot of that ratio suggests it is maximum for $a=b$, and equals $sqrt(8)/pi = 0.9003$.
+
+***The distribution would be interesting, not just the average. But it is more difficult to obtain, because of the statistical relationship between the random variables i and j. This relationship does not affect the \emph{average} of the random variable $i+j-1$ (for a given length), but it does affect the its \emph{distribution}. [I think it is interesting to mention this].
+
+\begin{theorem}
+\label{theo: funta, form}
+\end{theorem}
 
 
 \bibliographystyle{plain}
