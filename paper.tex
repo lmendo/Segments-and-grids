@@ -20,6 +20,13 @@
 
 \newcommand{\mr}{\mathrm}
 \newcommand{\st}{\mid}%{\,|\,}
+\newcommand{\cond}{\,|\,} % less spacing that \mid
+\newcommand{\diff}{\,\mathrm d}
+\let\Re\relax % remove the command...
+\DeclareMathOperator{\Re}{Re} % ...to define it differently
+\let\Im\relax
+\DeclareMathOperator{\Im}{Im}
+\DeclareMathOperator{\E}{E}
 \newcommand{\funt}{\tau} % function that gives maximum number of touched tiles for real-valued length
 \newcommand{\funl}{\lambda} % function that gices infimum real-valued length for a given number of touched tiles
 \newcommand{\funti}{T} % function that gives maximum number of touched tiles for integer-valued length
@@ -28,14 +35,12 @@
 \newcommand{\len}{\ell} % length variable, real-valued
 \newcommand{\leni}{\ell} % length variable, integer-valued. Same notation, but I keep the different command just in case
 \newcommand{\tiles}{t} % number of tiles (integer-valued)
-\let\Re\relax % remove the command...
-\DeclareMathOperator{\Re}{Re} % ...to define it differently
-\let\Im\relax
-\DeclareMathOperator{\Im}{Im}
 \newcommand{\isolr}{i^+}
 \newcommand{\jsolr}{j^+}
 \newcommand{\isoli}{i^\ast}
 \newcommand{\jsoli}{j^\ast}
+\newcommand{\genvar}{r}
+\newcommand{\orient}{\theta}
 \newcommand{\mss}{M}
 
 \newtheorem{proposition}{Proposition}%[section]
@@ -678,16 +683,16 @@ Increments equal to $2$ always appear isolated, except at the initial sequence t
 
 %***Otherwise, perhaps we can prove the formula for the inverse problem first (starting from the one for real lenghts), and derive this from that
 
-In order to prove that $\funti(\leni+1)-\funti(\leni) \in \{1,2\}$, consider the function $f(x) = \sqrt{2x^2-2}$ for $x \in \mathbb R$, $x>1$. Its first derivative is
+In order to prove that $\funti(\leni+1)-\funti(\leni) \in \{1,2\}$, consider the function $f(\genvar) = \sqrt{2\genvar^2-2}$ for $\genvar \in \mathbb R$, $\genvar>1$. Its first derivative is
 \begin{equation}
-f'(x) = \frac {\sqrt{2} \, x} {\sqrt{x^2-1}},
+f'(\genvar) = \frac {\sqrt{2} \, \genvar} {\sqrt{\genvar^2-1}},
 \end{equation}
-and its second derivative is easily seen to be negative. Therefore $f'(x)$ can be bounded for $x \geq 3$ as
+and its second derivative is easily seen to be negative. Therefore $f'(\genvar)$ can be bounded for $\genvar \geq 3$ as
 \begin{equation}
 \label{eq: der bounds}
-\lim_{x \rightarrow \infty} f'(x) = \sqrt{2} < f'(x) < f'(3) = 3/2.
+\lim_{\genvar \rightarrow \infty} f'(\genvar) = \sqrt{2} < f'(\genvar) < f'(3) = 3/2.
 \end{equation}
-For $\leni \geq 2$, by the mean value theorem \cite[section~5.3]{Abbott15}, when $\leni$ is increased to $\leni+1$ the term $\sqrt{2\leni^2-2}$ in \eqref{eq: funti leni} has an increment that equals $f'(x)$ for some $\leni < x < \leni+1$. Therefore
+For $\leni \geq 2$, by the mean value theorem \cite[section~5.3]{Abbott15}, when $\leni$ is increased to $\leni+1$ the term $\sqrt{2\leni^2-2}$ in \eqref{eq: funti leni} has an increment that equals $f'(\genvar)$ for some $\leni < \genvar < \leni+1$. Therefore
 \begin{equation}
 \label{eq: der bounds 2}
 \sqrt{2} < \sqrt{2(\leni+1)^2-2} - \sqrt{2\leni^2-2} < 3/2.
@@ -774,33 +779,106 @@ The stated properties for $\funli$ follow directly from those of $\funti$ establ
 \section{Average number of tiles touched by a random segment}
 \label{part: ave}
 
+Given $\len \in \mathbb R*+$, consider a segment of length $\len$ with random position and orientation. Specifically, the coordinates $x_1$, $y_1$ of the first endpoint are independent random variables uniformly distributed on $(0,a)$ and $(0,b)$ respectively. The orientation $\orient$ of the segment, defined as the angle with respect to the horizontal axis of the vector that goes from the first to the second endpoint, is uniformly distributed on $(0,2\pi)$. The variables $x_1$, $y_1$ and $\theta$ determine the coordinates $x_2$, $y_2$ of the second endpoint. Note that events of probability $0$, such as $x_1=a$ or the segment passing through a grid point, can be disregarded for computing the average number of tiles touched by the segment.
 
-***A theorem, and maybe one or two propositions. It is interesting to state $\Pr[i \geq i_0]$ (averaged over $x$) in a proposition, as it can be compared with the Buffon experiment.
+Let the function $\funta: \mathbb R^+ \to \mathbb R^+$ be defined such that $\funta(\len)$ gives the average number of tiles touched by a random segment of length $\len$, assuming the above distributions.
 
-***Define the average number of tiles touched as a function $\funta: \mathbb R^+ \to \mathbb R^+$.
+Each realization of the random segment gives rise to a canonical rectangle. The normalized dimensions $i$ and $j$ of the canonical rectangle are thus random variables. Except for a set of realizations with zero probability, $i$ and $j$ are at least $1$, and the segment touches $t = i+j-1$ tiles.
 
-***The formula for the average number of files is:
+The random variables $i$ and $j$ are not independent. As a consequence, while the marginal distributions of $i$ and $j$ are easy to compute, that of $i+j$ is difficult. However, the average number of touched tiles can be obtained from the marginal distributions as
 \begin{equation}
+\label{eq: funta E[i] E[j]}
+\funta(\len) = \E[t] = \E[i]+\E[j]+1.
+\end{equation}
+
+For $0 \leq \genvar \leq 1$, let
+\begin{equation}
+\label{eq: g}
+g(\genvar) = \int_0^r \arccos z \diff z = \genvar \arccos \genvar - \sqrt{1-\genvar^2} + 1.
+\end{equation}
+
+\begin{proposition}
+Given $a, b, \len \in \mathbb R^+$, consider a grid with parameters $a, b$ and a uniformly random segment of length $\len$, as defined above. Let the random variables $i$, $j$ represent the normalized dimensions of the canonical rectangle. For $n \in \mathbb N$,
+\begin{equation}
+\label{eq: Pr i geq n}
+\Pr[i \geq n] = \begin{cases}
+\displaystyle
+1 &\text{if\ \ } \displaystyle n =1 \\[1 mm]
+\displaystyle
+\frac{2\len}{\pi a} \left(g\left(\frac{a(n-1)}{\len}\right)-g\left(\frac{a(n-2)}{\len} \right)\right) &\text{if\ \ } \displaystyle 2 \leq n < \frac \len a + 1 \\[4 mm]
+\displaystyle
+\frac{2\len}{\pi a}\,\, \left(1 - g\left(\frac{a(n-2)}{\len}\right)\right) &\text{if\ \ } \displaystyle \frac\len a + 1 \leq n < \frac\len a+2 \\[3 mm]
+\displaystyle
+0 &\text{if\ \ } \displaystyle \frac \len a + 2 \leq  n; \\
+\end{cases}
+\end{equation}
+and $\Pr[j \geq n]$ is obtained from \eqref{eq: Pr i geq n} replacing $a$ by $b$.
+\end{proposition}
+
+\begin{proof}
+Clearly, $\Pr[i \geq 1]=1$. In the following it will be assumed that $n \geq 2$. The basic idea is to compute $\Pr[i \geq n]$ conditioned on $(x_1,y_1)$ (or, as will be seen, only on $y_1$), and then to average over $x_1$ and $y_1$ (actually only over $x_1$).
+
+% **Aq. Prepare and include two subfigures
+Given the coordinates $(x_1, y_1)$ of the first segment endpoint, with $0 \leq x_1 \leq a$, $0 \leq y_1 \leq b$, the second endpoint $(x_2, y_2)$ lies on a circle with radius $\len$ centered at $(x_1,y_1)$, as shown in Figure **ab**. The segment orientation is a random angle $\orient$ uniformly distributed on $[0,2\pi)$. It is easy to see that $i \geq n$ if and only if either $x_2 \geq a(n-1)$ or $x_2 \leq -a(n-2)$. The latter two events are exclusive, and by symmetry have the same probability. Therefore
+\begin{equation}
+\label{eq: Pr i = 2 Pr}
+\Pr[i \geq n] = 2 \Pr[x_2 \geq a(n-1)].
+\end{equation}
+
+Consider the event $x_2 \geq a(n-1)$. There are three possibilities depending on $x_1$, $n$ and $\len$. If $a(n-1) < \len$, the length $\len$ is enough for $x_2$ to exceed $a(n-1)$ for some angles $\orient$, regardless of $x_1$. This is depicted in Figure **a**. If $\len \leq a(n-1) < \len+a$, the length is enough only if $x_1 \geq a(n-1)-\len$, as seen in Figure **b**. Lastly, if $\len+a \leq a(n-1)$ it is impossible that $x_2$ exceeds $a(n-1)$. Note that the value $y_1$ is irrelevant for this.
+
+In the first two cases above, the probability that $x_2 \geq a(n-1)$, conditioned on $x_1$, is the length of the arc to the right of the line $x=a(n-1)$ divided by $2\pi\len$; that is,
+\begin{equation}
+\label{eq: Pr x_2 geq a(n-1) cond}
+\Pr[x_2 \geq a(n-1) \cond x_1] = \frac 1 \pi \arccos \frac{a(n-1)-x_1}{\len}.
+\end{equation}
+In the first case $x_1$ has a uniform distribution on $(0,a)$, and $\Pr[x_2 \geq a(n-1)]$ is easily obtained from \eqref{eq: Pr x_2 geq a(n-1) cond} as follows:
+\begin{equation}
+\Pr[x_2 \geq a(n-1)] = \frac 1 {\pi a} \int_0^a\arccos \frac{a(n-1)-x_1}{\len} \diff x_1. 
+\end{equation}
+Integrating by parts, this is seen to be
+\begin{equation}
+\label{eq: Pr x_2 geq a(n-1), first case}
+\Pr[x_2 \geq a(n-1)] = \frac{\len}{\pi a}\,\, \left( g\left( \frac{a(n-1)}{\len} \right) - g\left( \frac{a(n-2)}{\len} \right) \right),
+\end{equation}
+where the function $g$ is defined in \eqref{eq: g}. Substituting into \eqref{eq: Pr i = 2 Pr} yields the result in \eqref{eq: Pr i geq n}, second line.
+
+The second case is similar, but the integration over $x_1$ is from $a(n-1)-\len$ to $a$. Noting that $g(1)=1$, this gives
+\begin{equation}
+\label{eq: Pr x_2 geq a(n-1), second case}
+\Pr[x_2 \geq a(n-1)] = \frac{\len}{\pi a}\,\, \left( 1 - g\left( \frac{a(n-2)}{\len} \right) \right),
+\end{equation}
+which combined with \eqref{eq: Pr i = 2 Pr} yields the expression in \eqref{eq: Pr i geq n}, third line.
+
+The third case obviously gives $\Pr[i \geq n] = 0$, as in \eqref{eq: Pr i geq n}, fourth line.
+
+The analysis above can be analogously applied to $\Pr[j \geq n]$ if the $x$ and $y$ axes are interchanged. Thus the result is the same with $a$ replaced by $b$.
+\end{proof}
+
+\begin{theorem}
+\label{theo: funta, form}
+Given $a, b, \len \in \mathbb R^+$, consider a grid with parameters $a, b$ and a uniformly random segment of length $\len$, as defined above. The average number of tiles touched by the segment, $\funta(\len)$, is 
+\begin{equation}
+\label{eq: funta, expression}
 \funta(\len) = \frac{2\len}{\pi}\left(\frac 1 a + \frac 1 b\right) + 1.
 \end{equation}
+\end{theorem}
+
+\begin{proof}
+***
+\end{proof}
 
 ***Explain that the inverse question is straightforward, because $\funta$ is monotone increasing, thus it has an inverse function (defined on the range of $\funta$). In fact, as will be seen, $\funta$ is an affine function, and therefore it is immediate to obtain its inverse.
 
 ***Some mention that there is no need to study square grids or the case of integer-valued lengths separately.
 
-***Relation the the problem of the Buffon needle. On one hand, the formula for b=infinity gives the average number of lines crossed in the Buffon experiment. On the other hand, the intermediate values $\Pr[i \geq i_0]$ (proposition) are a generalization of the probability of crossing at least a line in the Buffon experiment, when the needle endpoint is only allowed to move in a smaller vertical strip.
+***Relation the problem of the Buffon needle. On one hand, the formula for b=infinity gives the average number of lines crossed in the Buffon experiment. On the other hand, the intermediate values $\Pr[i \geq i_0]$ (proposition) are a generalization of the probability of crossing at least a line in the Buffon experiment, when the needle endpoint is only allowed to move in a smaller vertical strip.
 
 ***Mention particular values: a=b=1 gives...; a=b=4/pi gives len+1. Can we find any ``meaning'' for these particular cases?
 
 ***The function is affine, not linear. This is related to the fact that the parts of the segment near the endpoints can touch several tiles
 
-***Maybe a graph comparing maximum and average. Or compute/plot their ratio. The asymptotic slopes are $\sqrt(1/a^2+1/b^2)$ for $\funt$ and $2/\pi(1/a+1/b)$. It may be interesting to consider the ratio of asymptotic slopes. Some quick plot of that ratio suggests it is maximum for $a=b$, and equals $sqrt(8)/pi = 0.9003$. The minimum number of tile that can be touched with non-zero probability (corresponding to an n times 1 canonical rectangle if a>=b) can also be plotted.
-
-***The distribution would be interesting, not just the average. But it is more difficult to obtain, because of the statistical relationship between the random variables i and j. This relationship does not affect the \emph{average} of the random variable $i+j-1$ (for a given length), but it does affect the its \emph{distribution}. [I think it is interesting to mention this].
-
-\begin{theorem}
-\label{theo: funta, form}
-\end{theorem}
+***Maybe a graph comparing maximum and average. Or compute/plot their ratio. The asymptotic slopes are $\sqrt(1/a^2+1/b^2)$ for $\funt$ and $2/\pi(1/a+1/b)$. It may be interesting to consider the ratio of asymptotic slopes. Some quick plot of that ratio suggests it is maximum for $a=b$, and equals $sqrt(8)/pi = 0.9003$. The minimum number of tiles that can be touched with non-zero probability (corresponding to an n times 1 canonical rectangle if a>=b) can also be plotted.
 
 
 \bibliographystyle{plain}
