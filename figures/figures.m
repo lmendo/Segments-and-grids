@@ -1274,10 +1274,11 @@ plot(L, 2*L/pi*(1/a+1/b)+1)
 
 clear, clf
 a = 1.35; b = 1;
-x1 = .6*a; y1 = .72*b;
+x1 = .6*a; y1 = .69*b;
 n = 3;
 min_x = -2; max_x = 3; min_y = -3; max_y = 4;
-flag_full = true;
+flag_full = false;
+flag_segment = true;
 if flag_full
     len = 2.1*a;
 else
@@ -1286,6 +1287,9 @@ end
 m = max(0, a*(n-1)-len);
 patch([m a a m m], [0 0 b b 0], .88*[1 1 1], 'edgecolor', 'none')
 hold on
+if ~flag_full
+    plot([m m+1j*b], 'k:')
+end
 patch([0 a a 0 0], [0 0 b b 0], 1*[1 1 1], 'edgecolor', 'k', 'FaceAlpha', 0)
 plot(x1 + 1j*y1, 'k.', 'markersize', 7)
 grid on, axis equal
@@ -1308,14 +1312,79 @@ plot(z, '--', 'linewidth', .75)
 ind = real(z)>=a*(n-1);
 set(gca, 'colororderindex', 1)
 plot(z(ind), '-', 'linewidth', .75)
-ang_quiver = 59.5/180*pi;
-quiver(x1,y1,len*cos(ang_quiver),len*sin(ang_quiver),.99,'k')
+if flag_segment
+    if flag_full
+        ang_segment = 42.5/180*pi;
+    else
+        ang_segment = 19/180*pi;
+    end
+    plot([x1+1j*y1 x1+1j*y1+len*exp(1j*ang_segment)],'k')
+    plot(x1+1j*y1+len*exp(1j*ang_segment), 'k.', 'markersize', 7)
+else
+    ang_quiver = 59.5/180*pi;
+    quiver(x1,y1,len*cos(ang_quiver),len*sin(ang_quiver),.99,'k')
+end
 if flag_full
     text(0.44, 0.43, 'x_1,y_1')
-    text(1.52, 2.63, char(hex2dec('2113')))
+    if flag_segment
+        text(2.0, 2.28, char(hex2dec('2113')))
+        text(3.13, 2.75, 'x_2,y_2')
+    else
+        text(1.52, 2.63, char(hex2dec('2113')))
+    end
 else
-    text(0.52, 0.43, 'x_1,y_1')
-    text(1.43, 2.44, char(hex2dec('2113')))
+    text(0.52, 0.45, 'x_1,y_1')
+    if flag_segment
+        text(1.94, 1.41, char(hex2dec('2113')))
+        text(3.2, 1.73, 'x_2,y_2')
+    else
+        text(1.43, 2.44, char(hex2dec('2113')))
+    end
 end
 text(2.35, -2.56, ['x=a(n' char(8211) '1)'])
 text(-1.87, -2.56, ['x=' char(8211) 'a(n' char(8211) '2)'])
+
+
+%% #54. Plot of average number of tiles
+
+clear
+clf, hold on
+L = .001:.001:35;
+G = 1:35;
+a_all = [ 1.35 ];
+b_all = [ 1  ];
+for k = 1:numel(a_all)
+    a = a_all(k); b = b_all(k);
+    ii = ceil((a + b*real(sqrt(4*L.^2/(a^2+b^2)-1))) / 2/a) + 1;
+    jj = ceil(sqrt( L.^2 - (ii-2).^2*a^2 )/b) + 1;
+    funt = ii+jj-1;
+    ind = funt<=max(G);
+    set(gca, 'colororderindex', k)
+    plot(L(ind), funt(ind), '-')
+    set(gca, 'colororderindex', k)
+    plot(L, 2*L/pi*(1/a+1/b)+1, '-')
+    set(gca, 'colororderindex', k)
+    plot(L, ceil(sqrt(max(L.^2-b^2, 1)))/a, '-')
+end
+xlabel(char(hex2dec('2113'))), ylabel([char(hex2dec('03C4')) '(' char(hex2dec('2113')) ')']), grid on, axis equal, axis([0 max(L) 0 max(G)]) 
+
+
+%% #54. Plot of ratio of average to maximum number of tiles
+
+clear
+clf, hold on
+L = .001:.001:50;
+G = 1:35;
+a_all = [ 1 1.35 ];
+b_all = [ 1 1  ];
+for k = 1:numel(a_all)
+    a = a_all(k); b = b_all(k);
+    ii = ceil((a + b*real(sqrt(4*L.^2/(a^2+b^2)-1))) / 2/a) + 1;
+    jj = ceil(sqrt( L.^2 - (ii-2).^2*a^2 )/b) + 1;
+    funt = ii+jj-1;
+    funta = 2*L/pi*(1/a+1/b)+1;
+    set(gca, 'colororderindex', k)
+    plot(L, funt./funta, '-')
+end
+xlabel(char(hex2dec('2113'))), ylabel([char(hex2dec('03C4')) '(' char(hex2dec('2113')) ')']), grid on
+
