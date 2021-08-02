@@ -1277,7 +1277,7 @@ a = 1.35; b = 1;
 x1 = .6*a; y1 = .72*b;
 n = 3;
 min_x = -2; max_x = 3; min_y = -3; max_y = 4;
-flag_full = false;
+flag_full = true;
 if flag_full
     len = 2.1*a;
 else
@@ -1304,10 +1304,10 @@ theta_range = [-63 65]/180*pi;
 theta = linspace(theta_range(1), theta_range(2), 1000);
 z = x1+1j*y1 + len*exp(1j*theta);
 set(gca, 'colororderindex', 1)
-plot(z)
+plot(z, '--', 'linewidth', .75)
 ind = real(z)>=a*(n-1);
 set(gca, 'colororderindex', 1)
-plot(z(ind), 'linewidth', 1.2)
+plot(z(ind), '-', 'linewidth', .75)
 ang_quiver = 59.5/180*pi;
 quiver(x1,y1,len*cos(ang_quiver),len*sin(ang_quiver),.99,'k')
 if flag_full
