@@ -818,7 +818,7 @@ and $\Pr[j \geq n]$ is obtained from \eqref{eq: Pr i geq n} replacing $a$ by $b$
 \begin{proof}
 Clearly, $\Pr[i \geq 1]=1$. In the following it will be assumed that $n \geq 2$. The basic idea is to compute $\Pr[i \geq n]$ conditioned on $(x_1,y_1)$ (or, as will be seen, only on $y_1$), and then to average over $x_1$ and $y_1$ (actually only over $x_1$).
 
-% **Aq. Prepare and include two subfigures
+% *** Prepare and include two subfigures
 Given the coordinates $(x_1, y_1)$ of the first segment endpoint, with $0 \leq x_1 \leq a$, $0 \leq y_1 \leq b$, the second endpoint $(x_2, y_2)$ lies on a circle with radius $\len$ centered at $(x_1,y_1)$, as shown in Figure **ab**. The segment orientation is a random angle $\orient$ uniformly distributed on $[0,2\pi)$. It is easy to see that $i \geq n$ if and only if either $x_2 \geq a(n-1)$ or $x_2 \leq -a(n-2)$. The latter two events are exclusive, and by symmetry have the same probability. Therefore
 \begin{equation}
 \label{eq: Pr i = 2 Pr}
@@ -859,13 +859,37 @@ The analysis above can be analogously applied to $\Pr[j \geq n]$ if the $x$ and 
 \label{theo: funta, form}
 Given $a, b, \len \in \mathbb R^+$, consider a grid with parameters $a, b$ and a uniformly random segment of length $\len$, as defined above. The average number of tiles touched by the segment, $\funta(\len)$, is 
 \begin{equation}
-\label{eq: funta, expression}
+\label{eq: funta, form}
 \funta(\len) = \frac{2\len}{\pi}\left(\frac 1 a + \frac 1 b\right) + 1.
 \end{equation}
 \end{theorem}
 
 \begin{proof}
-***
+The expected value of $i$ can be obtained as
+\begin{equation}
+\label{eq: theo funta form 1}
+\E[i] = \sum_{n=1}^\infty \Pr[i \geq n].
+\end{equation}
+From \eqref{eq: Pr i geq n}, this sum only has a finite number of non-zero terms: $1$ for $n=1$, plus $\lceil \len/a \rceil-1$ terms given by the second line of \eqref{eq: Pr i geq n}, plus one term given by the third line, corresponding to $n = \lceil \len/a \rceil +1 $:
+\begin{equation}
+\label{eq: theo funta form 2}
+\begin{split}
+\E[i] = 1 +
+\sum_{n=2}^{\lceil \len/a \rceil} \frac{2\len}{\pi a} \left(g\left(\frac{a(n-1)}{\len}\right)-g\left(\frac{a(n-2)}{\len} \right)\right) + \\
+\frac{2\len}{\pi a} \left(1-g\left(\frac{a(\lceil \len/a \rceil - 1)}{\len} \right)\right).
+\end{split}
+\end{equation}
+Most terms involving the function $g$ in \eqref{eq: theo funta form 2} cancel, with the result
+\begin{equation}
+\label{eq: theo funta form 3}
+\E[i] = 1+\frac{2\len}{\pi a} (1-g(0))= 1+\frac{2\len}{\pi a}.
+\end{equation}
+Similarly,
+\begin{equation}
+\label{eq: theo funta form 4}
+\E[j] = 1+\frac{2\len}{\pi b}.
+\end{equation}
+Substituting \eqref{eq: theo funta form 3} and \eqref{eq: theo funta form 4} into \eqref{eq: funta E[i] E[j]} gives \eqref{eq: funta, form}.
 \end{proof}
 
 ***Explain that the inverse question is straightforward, because $\funta$ is monotone increasing, thus it has an inverse function (defined on the range of $\funta$). In fact, as will be seen, $\funta$ is an affine function, and therefore it is immediate to obtain its inverse.
