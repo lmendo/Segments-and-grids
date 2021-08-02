@@ -1270,5 +1270,52 @@ hold on
 plot(L, 2*L/pi*(1/a+1/b)+1)
 
 
+%% #53. Figures for proof of Pr[i>=n]
 
-
+clear, clf
+a = 1.35; b = 1;
+x1 = .6*a; y1 = .72*b;
+n = 3;
+min_x = -2; max_x = 3; min_y = -3; max_y = 4;
+flag_full = false;
+if flag_full
+    len = 2.1*a;
+else
+    len = 1.78*a;
+end
+m = max(0, a*(n-1)-len);
+patch([m a a m m], [0 0 b b 0], .88*[1 1 1], 'edgecolor', 'none')
+hold on
+patch([0 a a 0 0], [0 0 b b 0], 1*[1 1 1], 'edgecolor', 'k', 'FaceAlpha', 0)
+plot(x1 + 1j*y1, 'k.', 'markersize', 7)
+grid on, axis equal
+set(gca, 'GridAlpha', .4)
+xticks((min_x:max_x)*a), yticks((min_y:max_y)*b)
+xticklabels([arrayfun(@(n)[num2str(n) char(8201) repmat('a', 1, n~=0)], min_x:max_x, 'UniformOutput', false)]) % thin space
+yticklabels([arrayfun(@(n)[num2str(n) char(8201) repmat('b', 1, n~=0)], min_y:max_y, 'UniformOutput', false)])
+xlabel x, ylabel y
+axis([min_x*a max_x*a min_y*b max_y*b])
+set(gca, 'layer', 'top')
+plot([min_y*b*1j max_y*b*1j], 'k')
+plot(complex([min_x*a max_x*a]), 'k')
+plot(a*(n-1)+[(min_y*b+.7)*1j max_y*b*1j], 'k--', 'linewidth', .75)
+plot(-a*(n-2)+[(min_y*b+.7)*1j max_y*b*1j], 'k--', 'linewidth', .75)
+theta_range = [-63 65]/180*pi;
+theta = linspace(theta_range(1), theta_range(2), 1000);
+z = x1+1j*y1 + len*exp(1j*theta);
+set(gca, 'colororderindex', 1)
+plot(z)
+ind = real(z)>=a*(n-1);
+set(gca, 'colororderindex', 1)
+plot(z(ind), 'linewidth', 1.2)
+ang_quiver = 59.5/180*pi;
+quiver(x1,y1,len*cos(ang_quiver),len*sin(ang_quiver),.99,'k')
+if flag_full
+    text(0.44, 0.43, 'x_1,y_1')
+    text(1.52, 2.63, char(hex2dec('2113')))
+else
+    text(0.52, 0.43, 'x_1,y_1')
+    text(1.43, 2.44, char(hex2dec('2113')))
+end
+text(2.35, -2.56, ['x=a(n' char(8211) '1)'])
+text(-1.87, -2.56, ['x=' char(8211) 'a(n' char(8211) '2)'])

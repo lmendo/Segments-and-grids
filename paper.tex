@@ -818,14 +818,28 @@ and $\Pr[j \geq n]$ is obtained from \eqref{eq: Pr i geq n} replacing $a$ by $b$
 \begin{proof}
 Clearly, $\Pr[i \geq 1]=1$. In the following it will be assumed that $n \geq 2$. The basic idea is to compute $\Pr[i \geq n]$ conditioned on $(x_1,y_1)$ (or, as will be seen, only on $y_1$), and then to average over $x_1$ and $y_1$ (actually only over $x_1$).
 
-% *** Prepare and include two subfigures
-Given the coordinates $(x_1, y_1)$ of the first segment endpoint, with $0 \leq x_1 \leq a$, $0 \leq y_1 \leq b$, the second endpoint $(x_2, y_2)$ lies on a circle with radius $\len$ centered at $(x_1,y_1)$, as shown in Figure **ab**. The segment orientation is a random angle $\orient$ uniformly distributed on $[0,2\pi)$. It is easy to see that $i \geq n$ if and only if either $x_2 \geq a(n-1)$ or $x_2 \leq -a(n-2)$. The latter two events are exclusive, and by symmetry have the same probability. Therefore
+Given the coordinates $(x_1, y_1)$ of the first segment endpoint, with $0 \leq x_1 \leq a$, $0 \leq y_1 \leq b$, the second endpoint $(x_2, y_2)$ lies on a circle with radius $\len$ centered at $(x_1,y_1)$, as shown in Figure~\ref{fig: Pr_i}. The segment orientation is a random angle $\orient$ uniformly distributed on $[0,2\pi)$. It is clear from the figure that $i \geq n$ if and only if either $x_2 \geq a(n-1)$ or $x_2 \leq -a(n-2)$. The latter two events are exclusive, and by symmetry have the same probability. Therefore
 \begin{equation}
 \label{eq: Pr i = 2 Pr}
 \Pr[i \geq n] = 2 \Pr[x_2 \geq a(n-1)].
 \end{equation}
 
-Consider the event $x_2 \geq a(n-1)$. There are three possibilities depending on $x_1$, $n$ and $\len$. If $a(n-1) < \len$, the length $\len$ is enough for $x_2$ to exceed $a(n-1)$ for some angles $\orient$, regardless of $x_1$. This is depicted in Figure **a**. If $\len \leq a(n-1) < \len+a$, the length is enough only if $x_1 \geq a(n-1)-\len$, as seen in Figure **b**. Lastly, if $\len+a \leq a(n-1)$ it is impossible that $x_2$ exceeds $a(n-1)$. Note that the value $y_1$ is irrelevant for this.
+\begin{figure}
+\centering%
+\subfigure[$i$ can be equal or greater than $n$ for all $x_1$, $0 \leq x_1 \leq a$]{%
+\label{fig: Pr_i_full}%
+\includegraphics[width=.48\textwidth]{Pr_i_full_1p35}%
+}\hfill%
+\subfigure[$i$ can be equal or greater than $n$ only for $a(n-1)-\len \leq x_1 \leq a$]{%
+\label{fig: Pr_i_notfull}%
+\includegraphics[width=.48\textwidth]{Pr_i_notfull_1p35}%
+}%
+\caption{Conditions for the normalized width of the canonical rectangle, $i$, being equal or greater than a given $n$. Example with $a=1.35$, $b=1$
+}%
+\label{fig: Pr_i}
+\end{figure}%
+
+Consider the event $x_2 \geq a(n-1)$. There are three possibilities depending on $x_1$, $n$ and $\len$. If $a(n-1) < \len$, the length $\len$ is enough for $x_2$ to exceed $a(n-1)$ for some angles $\orient$, regardless of $x_1$. This is depicted in Figure~\ref{fig: Pr_i_full}, where the thicker line on the arc represents those angles for which $x_2 > a(n-1)$, for a specific $x_1$. If $\len \leq a(n-1) < \len+a$, the length is enough only if $x_1 \geq a(n-1)-\len$. This can be seen in Figure~\ref{fig: Pr_i_notfull}, where the thicker line again represents the angles for which this happens, for a specific $x_1 \geq a(n-1)-\len$. Lastly, if $\len+a \leq a(n-1)$ it is impossible that $x_2$ exceeds $a(n-1)$. Note that the value $y_1$ is irrelevant for this.
 
 In the first two cases above, the probability that $x_2 \geq a(n-1)$, conditioned on $x_1$, is the length of the arc to the right of the line $x=a(n-1)$ divided by $2\pi\len$; that is,
 \begin{equation}
