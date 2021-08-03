@@ -779,16 +779,16 @@ The stated properties for $\funli$ follow directly from those of $\funti$ establ
 \section{Average number of tiles touched by a random segment}
 \label{part: ave}
 
-Given $\len \in \mathbb R*+$, consider a segment of length $\len$ with random position and orientation. Specifically, the coordinates $x_1$, $y_1$ of the first endpoint are independent random variables uniformly distributed on $(0,a)$ and $(0,b)$ respectively. The orientation $\orient$ of the segment, defined as the angle with respect to the horizontal axis of the vector that goes from the first to the second endpoint, is uniformly distributed on $(0,2\pi)$. The variables $x_1$, $y_1$ and $\theta$ determine the coordinates $x_2$, $y_2$ of the second endpoint. Note that events of probability $0$, such as $x_1=a$ or the segment passing through a grid point, can be disregarded for computing the average number of tiles touched by the segment.
+Given $\len \in \mathbb R^+$, consider a segment of length $\len$ with random position and orientation. Specifically, the coordinates $x_1$, $y_1$ of the first endpoint are independent random variables uniformly distributed on $[0,a)$ and $[0,b)$ respectively. The orientation $\orient$ of the segment, defined as the angle with respect to the horizontal axis of the vector that goes from the first to the second endpoint, is uniformly distributed on $[0,2\pi)$. The variables $x_1$, $y_1$ and $\theta$ determine the coordinates $x_2$, $y_2$ of the second endpoint. Note that events of probability $0$, such as $x_1=a$ or the segment passing through a grid point, can be disregarded for computing the average number of tiles touched by the segment.
 
-Let the function $\funta: \mathbb R^+ \to \mathbb R^+$ be defined such that $\funta(\len)$ gives the average number of tiles touched by a random segment of length $\len$, assuming the above distributions.
+Let $\funta: \mathbb R^+ \to \mathbb R^+$ be defined such that $\funta(\len)$ gives the average number of tiles touched by a random segment of length $\len$, with the above distributions.
 
 Each realization of the random segment gives rise to a canonical rectangle. The normalized dimensions $i$ and $j$ of the canonical rectangle are thus random variables. Except for a set of realizations with zero probability, $i$ and $j$ are at least $1$, and the segment touches $t = i+j-1$ tiles.
 
-The random variables $i$ and $j$ are not independent. As a consequence, while the marginal distributions of $i$ and $j$ are easy to compute, that of $i+j$ is difficult. However, the average number of touched tiles can be obtained from the marginal distributions as
+The random variables $i$ and $j$ are not independent. As a consequence, while the marginal distributions of $i$ and $j$ are easy to compute, the distribution of $i+j$ is difficult. However, knowing the marginal distributions is sufficient to compute the average number of touched tiles:
 \begin{equation}
 \label{eq: funta E[i] E[j]}
-\funta(\len) = \E[t] = \E[i]+\E[j]+1.
+\funta(\len) = \E[t] = \E[i]+\E[j]-1.
 \end{equation}
 
 For $0 \leq \genvar \leq 1$, let
@@ -798,7 +798,7 @@ g(\genvar) = \int_0^r \arccos z \diff z = \genvar \arccos \genvar - \sqrt{1-\gen
 \end{equation}
 
 \begin{proposition}
-\label{eq: prop Pr i}
+\label{prop: Pr i}
 Given $a, b, \len \in \mathbb R^+$, consider a grid with parameters $a, b$ and a uniformly random segment of length $\len$, as defined above. Let the random variables $i$, $j$ represent the normalized dimensions of the canonical rectangle. For $n \in \mathbb N$,
 \begin{equation}
 \label{eq: Pr i geq n}
@@ -813,21 +813,21 @@ Given $a, b, \len \in \mathbb R^+$, consider a grid with parameters $a, b$ and a
 0 &\text{if\ \ } \displaystyle \frac \len a + 2 \leq  n; \\
 \end{cases}
 \end{equation}
-and $\Pr[j \geq n]$ is obtained from \eqref{eq: Pr i geq n} replacing $a$ by $b$.
+and $\Pr[j \geq n]$ is given by the same expressions with $a$ replaced by $b$.
 \end{proposition}
 
 \begin{proof}
-Clearly, $\Pr[i \geq 1]=1$. In the following it will be assumed that $n \geq 2$. The basic idea is to compute $\Pr[i \geq n]$ conditioned on $(x_1,y_1)$ (or, as will be seen, only on $y_1$), and then to average over $x_1$ and $y_1$ (actually only over $x_1$).
+Clearly, $\Pr[i \geq 1]=1$. In the following it will be assumed that $n \geq 2$. The basic idea is to compute $\Pr[i \geq n]$ conditioned on $(x_1,y_1)$ (or, as will be seen, only on $x_1$), and then to average over $x_1$ and $y_1$ (actually only over $x_1$).
 
-Given the coordinates $(x_1, y_1)$ of the first segment endpoint, with $0 \leq x_1 \leq a$, $0 \leq y_1 \leq b$, the second endpoint $(x_2, y_2)$ lies on a circle with radius $\len$ centered at $(x_1,y_1)$, as shown in Figure~\ref{fig: Pr_i}. The segment orientation is a random angle $\orient$ uniformly distributed on $[0,2\pi)$. It is clear from the figure that $i \geq n$ if and only if $x_2 \geq a(n-1)$ or $x_2 \leq -a(n-2)$; and these events are exclusive for $n \geq 2$. Thus
+Given the coordinates $(x_1, y_1)$ of the first endpoint of the segment, with $0 \leq x_1 \leq a$, $0 \leq y_1 \leq b$, the second endpoint $(x_2, y_2)$ lies on a circle with radius $\len$ centered at $(x_1,y_1)$, as shown in Figure~\ref{fig: Pr_i}. The segment orientation is a random angle $\orient$ uniformly distributed on $[0,2\pi)$. It is clear from the figure that $i \geq n$ if and only if $x_2 \geq a(n-1)$ or $x_2 \leq -a(n-2)$; and these events are exclusive for $n \geq 2$. Thus
 \begin{equation}
 \label{eq: Pr i cond}
-\Pr[i \geq n \cond x_1] = \Pr[x_2 \geq a(n-1) \cond x_1] + \Pr[x_2 \leq -a(n-2) \cond x_1].
+\Pr[i \geq n \cond x_1, y_1] = \Pr[x_2 \geq a(n-1) \cond x_1, y_1] + \Pr[x_2 \leq -a(n-2) \cond x_1, y_1].
 \end{equation}
-The two conditional probabilities on the right-hand side of \eqref{eq: Pr i cond} are different in general. However, averaging over $x_1$ gives, by symmetry, $\Pr[x_2 \geq a(n-1)] = \Pr[x_2 \leq -a(n-2)]$; and consequently, for $n \geq 2$,
+The two conditional probabilities on the right-hand side of \eqref{eq: Pr i cond} are different in general. However, averaging over $x_1, y_1$ gives, by symmetry, $\Pr[x_2 \geq a(n-1)] = \Pr[x_2 \leq -a(n-2)]$. In addition, the coordinate $y_1$ does not have any influence on these events, and therefore conditioning on $x_1, y_1$ is the same as conditioning on $x_1$. This implies that, for $n \geq 2$,
 \begin{equation}
 \label{eq: Pr i = 2 Pr}
-\Pr[i \geq n] = 2 \Pr[x_2 \geq a(n-1)].
+\Pr[i \geq n] = 2 \Pr[x_2 \geq a(n-1)] = 2 \E[\Pr[x_2 \geq a(n-1) \cond x_1]].
 \end{equation}
 
 \begin{figure}
@@ -840,26 +840,25 @@ The two conditional probabilities on the right-hand side of \eqref{eq: Pr i cond
 \label{fig: Pr_i_notfull}%
 \includegraphics[width=.58\textwidth]{Pr_i_notfull_1p35}%
 }%
-\caption{Conditions for the normalized width of the canonical rectangle, $i$, being equal or greater than a given $n$. Example with $a=1.35$, $b=1$
+\caption{Conditions for the normalized width of the canonical rectangle, $i$, to be equal or greater than a given $n$. Example with $a=1.35$, $b=1$, $n=3$
 }%
 \label{fig: Pr_i}
 \end{figure}%
 
-Consider the event $x_2 \geq a(n-1)$ conditioned on $x_1$, with $n \geq 2$. There are three possibilities depending on $x_1$, $n$ and $\len$. If $a(n-1) < \len$, regardless of $x_1$ the length $\len$ is enough for $x_2$ to exceed $a(n-1)$ for some angles $\orient$. This is depicted in Figure~\ref{fig: Pr_i_full}, where the section of the arc with solid line represents those angles for which $x_2 > a(n-1)$. If $\len \leq a(n-1) < \len+a$, the length can only be enough provided that $x_1 \geq a(n-1)-\len$, which corresponds to the shaded region in Figure~\ref{fig: Pr_i_notfull}. Lastly, if $\len+a \leq a(n-1)$ it is not possible for $x_2$ to exceed $a(n-1)$. Note that the coordinate $y_1$ is irrelevant to this.
+Consider the event $x_2 \geq a(n-1)$ conditioned on $x_1$, with $n \geq 2$. There are three possibilities depending on $x_1$, $n$ and $\len$. If $a(n-1) < \len$, regardless of $x_1$ the length $\len$ is enough for $x_2$ to exceed $a(n-1)$ for some angles $\orient$. This is depicted in Figure~\ref{fig: Pr_i_full}, where the section of the arc with solid line represents those angles for which $x_2 > a(n-1)$. If $a(n-2) < \len \leq  a(n-1)$, the length will be enough provided that $x_1 \geq a(n-1)-\len$, which corresponds to the shaded region in Figure~\ref{fig: Pr_i_notfull}. Lastly, if $\len \leq  a(n-2)$ it is not possible for $x_2$ to exceed $a(n-1)$. Note that the coordinate $y_1$ is irrelevant to this.
 
 In the first two cases above, the probability that $x_2 \geq a(n-1)$, conditioned on $x_1$, is the length of the arc to the right of the line $x=a(n-1)$ divided by $2\pi\len$, that is,
 \begin{equation}
 \label{eq: Pr x_2 geq a(n-1) cond}
 \Pr[x_2 \geq a(n-1) \cond x_1] = \frac 1 \pi \arccos \frac{a(n-1)-x_1}{\len}.
 \end{equation}
-In the first case $x_1$ has a uniform distribution on $(0,a)$, and $\Pr[x_2 \geq a(n-1)]$ is easily obtained from \eqref{eq: Pr x_2 geq a(n-1) cond} as follows:
-\begin{equation}
-\Pr[x_2 \geq a(n-1)] = \frac 1 {\pi a} \int_0^a\arccos \frac{a(n-1)-x_1}{\len} \diff x_1. 
-\end{equation}
-Integrating by parts,
+In the first case $x_1$ has a uniform distribution on $(0,a)$, and $\Pr[x_2 \geq a(n-1)]$ is easily obtained from \eqref{eq: Pr x_2 geq a(n-1) cond} as
 \begin{equation}
 \label{eq: Pr x_2 geq a(n-1), first case}
-\Pr[x_2 \geq a(n-1)] = \frac{\len}{\pi a}\,\, \left( g\left( \frac{a(n-1)}{\len} \right) - g\left( \frac{a(n-2)}{\len} \right) \right),
+\begin{split}
+\Pr[x_2 \geq a(n-1)] &= \frac 1 {\pi a} \int_0^a\arccos \frac{a(n-1)-x_1}{\len} \diff x_1 \\
+&= \frac{\len}{\pi a}\,\, \left( g\left( \frac{a(n-1)}{\len} \right) - g\left( \frac{a(n-2)}{\len} \right) \right),
+\end{split}
 \end{equation}
 where the function $g$ is defined in \eqref{eq: g}. Substituting into \eqref{eq: Pr i = 2 Pr} yields the result in \eqref{eq: Pr i geq n}, second line.
 
@@ -890,7 +889,7 @@ The expected value of $i$ can be obtained as
 \label{eq: theo funta form 1}
 \E[i] = \sum_{n=1}^\infty \Pr[i \geq n].
 \end{equation}
-From \eqref{eq: Pr i geq n}, this sum only has a finite number of non-zero terms: $1$ for $n=1$, plus $\lceil \len/a \rceil-1$ terms given by the second line of \eqref{eq: Pr i geq n}, plus one term given by the third line, corresponding to $n = \lceil \len/a \rceil +1 $:
+According to \eqref{eq: Pr i geq n}, this sum only has a finite number of non-zero terms: $1$ for $n=1$, plus $\lceil \len/a \rceil-1$ terms given by the second line of \eqref{eq: Pr i geq n}, plus one term given by the third line, corresponding to $n = \lceil \len/a \rceil +1 $:
 \begin{equation}
 \label{eq: theo funta form 2}
 \begin{split}
@@ -912,9 +911,9 @@ Similarly,
 Substituting \eqref{eq: theo funta form 3} and \eqref{eq: theo funta form 4} into \eqref{eq: funta E[i] E[j]} gives \eqref{eq: funta, form}.
 \end{proof}
 
-In view of Theorem~\ref{theo: funta, form}, the average number of touches tiles has a remarkably simple dependence on the segment length, namely an affine function. Conversely, for any $t>1$ it is immediate to compute the length of a random segment that touches $t$ tiles on average, given as $\funta^{-1}(t)$.
+In view of Theorem~\ref{theo: funta, form}, the average number of touched tiles has a remarkably simple dependence on the segment length, namely an affine function. Conversely, for any $t>1$ it is immediate to compute the length of a random segment that touches $t$ tiles on average, given as $\funta^{-1}(t)$.
 
-The results in this section make clear the relationship between the problem considered here (average number of squares touched by a random segment of fixes length) and the Buffon's needle problem (probability that a random segment of fixed length crosses a line of a regular structure of parallel strips) \cite[section 1.1]{Mathai99}. Firstly, since $\pi$ is involved in \eqref{eq: funta, form}, it is possible to design a simple probabilistic experiment to estimate the value of $\pi$, as in Buffon's original experiment. For example, choosing $a=b=\len=1$ gives $\funta(\len) = 1+1/\pi$.
+The results in Proposition~\ref{prop: Pr i} and Theorem~\ref{theo: funta, form} make clear the relationship between the problem considered here and Buffon's needle problem, i.e.~the probability that a random segment of fixed length crosses a line in a regular structure of parallel strips \cite[section 1.1]{Mathai99}. Firstly, since the number $\pi$ is involved in \eqref{eq: funta, form}, it is possible to design a simple probabilistic experiment to estimate the value of $\pi$, as in Buffon's original experiment. For example, choosing $a=b=\len=1$ gives $\funta(\len) = 1+1/\pi$.
 
 Secondly, a grid with $b \rightarrow \infty$ corresponds to Buffon's arrangement of parallel strips with spacing $a$. Thus
 \begin{equation}
@@ -923,7 +922,7 @@ Secondly, a grid with $b \rightarrow \infty$ corresponds to Buffon's arrangement
 \end{equation}
 gives the average number of lines crossed in Buffon's experiment. For $\len \leq a$ the segment can cross at most one line, and \eqref{eq: number of lines crossed, Buffon} coincides with the probability of crossing \cite[section 1.1]{Mathai99}.
 
-Lastly, $\Pr[i \geq n]$ as computed in Proposition~\ref{eq: prop Pr i} for $n \geq 2$ can be seen as a generalization of the probability of crossing at least one line in Buffon's experiment, when a needle endpoint is only allowed to move in a narrower region of width $n-1$ times smaller than the width of the strips (instead of moving across the full strip as in Buffon's setting).
+Lastly, $\Pr[i \geq n]$ as computed in Proposition~\ref{prop: Pr i} for $n \geq 2$ can be seen as a generalization of the probability of crossing at least one line in Buffon's experiment, when a needle endpoint is only allowed to move in a narrower region of width $n-1$ times smaller than the width of the strips (instead of across the full strip as in Buffon's setting).
 
 ***Maybe a graph comparing maximum and average. Or compute/plot their ratio. The asymptotic slopes are $\sqrt(1/a^2+1/b^2)$ for $\funt$ and $2/\pi(1/a+1/b)$. It may be interesting to consider the ratio of asymptotic slopes, as a function of $a/b$. It is maximum for $a=b$, and equals $2\sqrt 2/\pi = 0.9003$. It tends to $2/\pi$ for $a/b \rightarrow \infty$ and for $a/b \rightarrow 0$. The minimum number of tiles that can be touched with non-zero probability (corresponding to an n times 1 canonical rectangle if a>=b) can also be plotted.
 
