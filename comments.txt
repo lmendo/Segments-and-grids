@@ -1,5 +1,3 @@
-(Is "touch" a good word to describe the fact that the segment intersects the interior of the tile? Would "meet" be better? "Touch" seems to me more graphical)
-
 Some directions in which generalizations could be attempted:
 
 |- Rectangular grid instead of square. Is this an interesting generalization? I think Proposition 1 remains as in the square case. In Proposition 2, the first two conditions would carry over replacing i by i*a and j by j*b. For Proposition 3, its figure should again have axes i,j replaced by axes i*a,j*b. That way the distance condition on length based on i, j (Psoposition 2) is still a circle in the figure. How does the sequence of chosen (i,j) pairs change? It looks like there may not a pattern as simple as in the square case (whic is: i,i, then (i+1),i, then increase i and repeat). The order of the grid points (i,j) by increasing distance to (2,2) is more arbitrary. But a pattern can be found
