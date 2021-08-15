@@ -1388,3 +1388,25 @@ for k = 1:numel(a_all)
 end
 xlabel(char(hex2dec('2113'))), ylabel([char(hex2dec('03C4')) '(' char(hex2dec('2113')) ')']), grid on
 
+
+%% #55. Like #49 but for arbitrary number of dimensions: average number of visited cells, experimentally
+
+clear, clc
+L = .1:.1:9;
+a = [1.35 1 .8];
+N = 1e5;
+ndim = numel(a);
+result = NaN(size(L));
+for iter_L = 1:numel(L)
+    dir = 2*rand(N, ndim)-1;
+    ind = sum(dir.^2, 2) <= 1;
+    dir = dir(ind,:);
+    dir = dir./sqrt(sum(dir.^2, 2));
+    %plot3(dir(:,1), dir(:,2), dir(:,3), '.', 'markersize', 2), axis equal
+    z0 = rand(size(dir)).*a(:).';
+    z1 = z0 + L(iter_L)*dir;
+    ii = ceil(abs(z1./a)) + (z1<0); % add 1 for negative
+    result(iter_L) = mean(sum(ii, 2)) - ndim + 1;
+end
+plot(L, result, '.-'), grid on, axis equal
+
