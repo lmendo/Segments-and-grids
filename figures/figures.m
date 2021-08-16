@@ -1408,16 +1408,16 @@ for iter_L = 1:numel(L)
     ii = ceil(abs(z1./a)) + (z1<0); % add 1 for negative
     result(iter_L) = mean(sum(ii, 2)) - ndim + 1;
 end
-plot(L, result, '.-'), grid on, axis equal
+plot(L, result, 'o'), grid on, axis equal
 
 
 %% #56. Like #55 but cells are counted using deterministic uniform sampling along the segment
 % Checked: gives simular results as #55
 
 clear, clc
-L = .1:.1:5;
+L = .1:.3:5;
 a = [1.35 1 .8];
-N = 1e4;
+N = 3e3;
 n_points_along = 1000;
 ndim = numel(a);
 t = linspace(0, 1, n_points_along);
@@ -1428,14 +1428,22 @@ for iter_L = 1:numel(L)
     dir = dir(ind,:);
     dir = dir./sqrt(sum(dir.^2, 2));
     %plot3(dir(:,1), dir(:,2), dir(:,3), '.', 'markersize', 2), axis equal
-    z0 = rand(size(dir)).*a(:).';
+    z0 = rand(size(dir)).*a;
     z1 = z0 + L(iter_L)*dir;
     size_unique  = 0;
     for n = 1:size(z0,1)
         size_unique = size_unique + ...
-            size(unique(floor(z0(n,:).*(1-t(:)) + z1(n,:).*t(:)), 'rows'), 1);
+            size(unique(floor((z0(n,:).*(1-t(:)) + z1(n,:).*t(:))./a), 'rows'), 1);
     end
     result(iter_L) = size_unique/size(z0,1);
 end
-plot(L, result, '.-'), grid on, axis equal
+plot(L, result, '.'), grid on, axis equal, hold on
+switch ndim
+case 2
+    plot(L, 1+2*L/pi*sum(1./a), '-')
+case 3
+    plot(L, 1+L/2*sum(1./a), '-')
+end
+
+
 
