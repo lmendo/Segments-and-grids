@@ -1444,6 +1444,157 @@ case 2
 case 3
     plot(L, 1+L/2*sum(1./a), '-')
 end
+% There's a general formula for the coefficient (Jacuwes, 18; found by Alex)
 
+
+%% #57. Probability of visiting the maximum number of tiles, experimentally. Based on #47 and #49
+
+clear, clc
+L = 3.8:.1:4.2; %3.8:.1:4.2;%3:.1:3.5;
+N = 1e7;
+ii = ceil(L/sqrt(2)) + 1;
+jj = ceil(sqrt(L.^2 - (ii-2).^2 )) + 1;
+funt_real = ii+jj-1 % formula valid for real-valued lengths
+z0 = rand(N, numel(L)) + 1j*rand(N, numel(L));
+z1 = z0 + L.*exp(1j*2*pi*rand(N, numel(L)));
+ii = ceil(abs(real(z1))) + (real(z1)<0); % add 1 for negative
+jj = ceil(abs(imag(z1))) + (imag(z1)<0); % add 1 for negative
+result = mean(ii+jj-1 == funt_real , 1)
+
+
+%% #58. Computation for #57, for odd values of the maximum number of tiles. Page 21. 
+% This should be run after #57. funt_real must contain odd values
+% Checked with #57
+
+clc
+result_computed = NaN(size(result));
+for n = 1:numel(L)
+    k = funt_real(n)-1;
+    assert(mod(k,2)==0)
+    %alpha = acos((k/2-1)/L(n))-pi/4;
+    %result_computed(n) = (alpha*(k/2-1)^2 - L(n)^2/4*(cos(2*(pi/4+alpha))-cos(2*pi/4)) - L(n)*(k/2-1)*(-cos(pi/4+alpha)+sin(pi/4+alpha)+cos(pi/4)-sin(pi/4))) * 4/pi;
+    %result_computed(n) = integral(@(theta) (1-k/2+L(n)*sin(theta)).*(1-k/2+L(n)*cos(theta)), pi/4, pi/4+alpha) * 4/pi;
+    alphap = acos((k/2-1)/L(n));
+    %result_computed(n) = ((alphap-pi/4)*(k/2-1)^2 - L(n)^2/4*cos(2*alphap) + L(n)*(k/2-1)*(cos(alphap)-sin(alphap))) * 4/pi;
+    %result_computed(n) = ((alphap-pi/4)*(k/2-1)^2 - L(n)^2/4*(2*((k-2)/2/L(n))^2-1) + L(n)*(k-2)/2*((k-2)/2/L(n)-sqrt(1-((k-2)/2/L(n))^2))) * 4/pi;
+    %result_computed(n) = ((alphap-pi/4)*(k-2)^2/4 - ((k-2)^2-2*L(n)^2)/8 + (k-2)/4*(k-2-sqrt(4*L(n)^2-(k-2)^2))) * 4/pi;
+    result_computed(n) = ((alphap-pi/4)*(k-2)^2/4 + (k-2)^2/8 + L(n)^2/4 - (k-2)/4*sqrt(4*L(n)^2-(k-2)^2)) * 4/pi;
+    if L(n)^2 > (k/2-2)^2+(k/2)^2 % add neighbours
+        %result_computed(n) = result_computed(n) + integral(@(theta) (2-k/2+L(n)*sin(theta)).*(-k/2+L(n)*cos(theta)),  asin((k/2-2)/L(n)), acos(k/2/L(n))) * 4/pi;
+        alphap = acos(k/2/L(n)); betap =  asin((k/2-2)/L(n));
+        %result_computed(n) = result_computed(n) + ( (alphap-betap)*k*(k-4)/4 - L(n)^2/4*( 2*(k/2/L(n))^2 - 2 + 2*((k-4)/2/L(n))^2) + L(n)*k/2*(k/2/L(n)-sqrt(1-((k-4)/2/L(n))^2)) - L(n)*(k-4)/2*(sqrt(1-(k/2/L(n))^2)-(k-4)/2/L(n)) ) * 4/pi;
+        %result_computed(n) = result_computed(n) + ( (alphap-betap)*k*(k-4)/4 - (k^2+(k-4)^2-4*L(n)^2)/8 + k/4*(k-sqrt(4*L(n)^2-(k-4)^2)) +(k-4)/4*(k-4-sqrt(4*L(n)^2-k^2)) ) * 4/pi;
+        result_computed(n) = result_computed(n) + ( (alphap-betap)*k*(k-4)/4 + k^2/8 + (k-4)^2/8 + L(n)^2/2 - k/4*sqrt(4*L(n)^2-(k-4)^2) - (k-4)/4*sqrt(4*L(n)^2-k^2) ) * 4/pi;
+    end
+end
+[result; result_computed].'
+
+
+%% #59. Computation for #57, for even values of the maximum number of tiles. Page 23. 
+% This should be run after #57. funt_real must contain even values
+
+result_computed = NaN(size(result));
+for n = 1:numel(L)
+    k = funt_real(n)-1;
+    assert(mod(k,2)==1)
+    alphap = acos((k/2-1/2)/L(n));
+    betap =  asin((k/2-3/2)/L(n));
+    %result_computed(n) = ((alphap-betap)*(k-1)*(k-3)/4 - L(n)^2/4*(cos(2*alphap)-cos(2*betap)) + L(n)*(k-1)/2*(cos(alphap)-cos(betap)) - L(n)*(k-3)/2*(sin(alphap)-sin(betap)) ) * 4/pi;
+    result_computed(n) = ( (alphap-betap)*(k-1)*(k-3)/4 + (k-1)^2/8 + (k-3)^2/8 + L(n)^2/2 - (k-1)/4*sqrt(4*L(n)^2-(k-3)^2) - (k-3)/4*sqrt(4*L(n)^2-(k-1)^2) ) *4/pi;
+    if L(n)^2 > (k/2-5/2)^2+(k/2+1/2)^2 % add neighbours
+        alphap = acos((k+1)/2/L(n)); betap =  asin((k-5)/2/L(n));
+        result_computed(n) = result_computed(n) + ( (alphap-betap)*(k+1)*(k-5)/4 + (k+1)^2/8 + (k-5)^2/8 + L(n)^2/2 - (k+1)/4*sqrt(4*L(n)^2-(k-5)^2) - (k-5)/4*sqrt(4*L(n)^2-(k+1)^2) ) * 4/pi;
+    end
+end
+[result; result_computed].'
+
+
+%% #60. All together now
+
+clear, clc
+L = .1:.1:10; %3.8:.1:4.2;%3:.1:3.5;
+N = 1e6;
+ii = ceil(L/sqrt(2)) + 1;
+jj = ceil(sqrt(L.^2 - (ii-2).^2 )) + 1;
+funt = ii+jj-1 % formula valid for real-valued lengths
+z0 = rand(N, numel(L)) + 1j*rand(N, numel(L));
+z1 = z0 + L.*exp(1j*2*pi*rand(N, numel(L)));
+ii = ceil(abs(real(z1))) + (real(z1)<0); % add 1 for negative
+jj = ceil(abs(imag(z1))) + (imag(z1)<0); % add 1 for negative
+result = mean(ii+jj-1 == funt , 1);
+plot(L, result, 'o', 'markersize', 4), hold on, grid on
+
+L_fine = linspace(.01,10,1e4);
+ii = ceil(L_fine/sqrt(2)) + 1;
+jj = ceil(sqrt(L_fine.^2 - (ii-2).^2 )) + 1;
+funt_fine = ii+jj-1; % formula valid for real-valued lengths
+result_computed = NaN(size(funt_fine));
+ind_odd = mod(funt_fine,2)==1; % odd maximum number of squares
+ind_odd2 = ind_odd & (2*L_fine.^2>funt_fine.^2-6*funt_fine+13);
+alpha_odd = acos((funt_fine(ind_odd)-3)/2./L_fine(ind_odd));
+alphap_odd2 = acos((funt_fine(ind_odd2)-1)/2./L_fine(ind_odd2));
+betap_odd2 = asin((funt_fine(ind_odd2)-5)/2./L_fine(ind_odd2));
+result_computed(ind_odd) = ( (alpha_odd-pi/4).*(funt_fine(ind_odd)-3).^2 + (funt_fine(ind_odd)-3).^2/2 + ...
+    L_fine(ind_odd).^2 - (funt_fine(ind_odd)-3).*sqrt(4*L_fine(ind_odd).^2-(funt_fine(ind_odd)-3).^2) ) /pi;
+result_computed(ind_odd2) = result_computed(ind_odd2) + ...
+    ( (alphap_odd2-betap_odd2).*(funt_fine(ind_odd2)-1).*(funt_fine(ind_odd2)-5) + (funt_fine(ind_odd2)-1).^2/2 + (funt_fine(ind_odd2)-5).^2/2 + ...
+    2*L_fine(ind_odd2).^2 - (funt_fine(ind_odd2)-1).*sqrt(4*L_fine(ind_odd2).^2 - (funt_fine(ind_odd2)-5).^2) - (funt_fine(ind_odd2)-5).*sqrt(4*L_fine(ind_odd2).^2 - (funt_fine(ind_odd2)-1).^2) ) / pi;
+ind_even = mod(funt_fine,2)==0; % even maximum number of squares
+ind_even2 = ind_even & (2*L_fine.^2>funt_fine.^2-6*funt_fine+18);
+alpha_even = acos((funt_fine(ind_even)-2)/2./L_fine(ind_even));
+beta_even = asin((funt_fine(ind_even)-4)/2./L_fine(ind_even));
+alphap_even2 = acos(funt_fine(ind_even2)/2./L_fine(ind_even2));
+betap_even2 = asin((funt_fine(ind_even2)-6)/2./L_fine(ind_even2));
+result_computed(ind_even) = ( (alpha_even-beta_even).*(funt_fine(ind_even)-2).*(funt_fine(ind_even)-4) + (funt_fine(ind_even)-2).^2/2 + (funt_fine(ind_even)-4).^2/2 + ...
+    2*L_fine(ind_even).^2 - (funt_fine(ind_even)-2).*sqrt(4*L_fine(ind_even).^2 - (funt_fine(ind_even)-4).^2) - (funt_fine(ind_even)-4).*sqrt(4*L_fine(ind_even).^2 - (funt_fine(ind_even)-2).^2) ) / pi;
+result_computed(ind_even2) = result_computed(ind_even2) + ...
+    ( (alphap_even2-betap_even2).*funt_fine(ind_even2).*(funt_fine(ind_even2)-6) + funt_fine(ind_even2).^2/2 + (funt_fine(ind_even2)-6).^2/2 + ...
+    2*L_fine(ind_even2).^2 - funt_fine(ind_even2).*sqrt(4*L_fine(ind_even2).^2 - (funt_fine(ind_even2)-6).^2) - (funt_fine(ind_even2)-6).*sqrt(4*L_fine(ind_even2).^2 - funt_fine(ind_even2).^2) ) / pi;
+%plot(L_fine(ind_odd), result_computed(ind_odd), '.', 'markersize', 3), hold on, grid on
+%plot(L_fine(ind_even), result_computed(ind_even), '.', 'markersize', 3)
+plot(L_fine.*ind_odd./ind_odd, result_computed.*ind_odd./ind_odd, '-', 'linewidth', .7), hold on, grid on
+plot(L_fine.*ind_even./ind_even, result_computed.*ind_even./ind_even, '-', 'linewidth', .7)
+legend({'Simulated' 'Computed, odd max number of squares' 'Computed, even max number of squares'})
+
+
+%% #61. Probabilities at the end of the intervals with odd maximum number of segments
+
+t = 3:2:7001; L_fine = sqrt((t.^2-4*t+5)/2)-1e-10;
+ii = ceil(L_fine/sqrt(2)) + 1;
+jj = ceil(sqrt(L_fine.^2 - (ii-2).^2 )) + 1;
+funt_fine = ii+jj-1; % formula valid for real-valued lengths
+result_computed = NaN(size(funt_fine));
+ind_odd = mod(funt_fine,2)==1; % odd maximum number of squares
+ind_odd2 = ind_odd & (2*L_fine.^2>funt_fine.^2-6*funt_fine+13);
+alpha_odd = acos((funt_fine(ind_odd)-3)/2./L_fine(ind_odd));
+alphap_odd2 = acos((funt_fine(ind_odd2)-1)/2./L_fine(ind_odd2));
+betap_odd2 = asin((funt_fine(ind_odd2)-5)/2./L_fine(ind_odd2));
+result_computed(ind_odd) = ( (alpha_odd-pi/4).*(funt_fine(ind_odd)-3).^2 + (funt_fine(ind_odd)-3).^2/2 + ...
+    L_fine(ind_odd).^2 - (funt_fine(ind_odd)-3).*sqrt(4*L_fine(ind_odd).^2-(funt_fine(ind_odd)-3).^2) ) /pi;
+result_computed(ind_odd2) = result_computed(ind_odd2) + ...
+    ( (alphap_odd2-betap_odd2).*(funt_fine(ind_odd2)-1).*(funt_fine(ind_odd2)-5) + (funt_fine(ind_odd2)-1).^2/2 + (funt_fine(ind_odd2)-5).^2/2 + ...
+    2*L_fine(ind_odd2).^2 - (funt_fine(ind_odd2)-1).*sqrt(4*L_fine(ind_odd2).^2 - (funt_fine(ind_odd2)-5).^2) - (funt_fine(ind_odd2)-5).*sqrt(4*L_fine(ind_odd2).^2 - (funt_fine(ind_odd2)-1).^2) ) / pi;
+plot(L_fine, result_computed.*L_fine), grid on
+
+
+%% #61. Probabilities at the end of the intervals with even maximum number of segments
+
+t = 4:2:7002; L_fine = (t-2)/sqrt(2)-1e-10;
+ii = ceil(L_fine/sqrt(2)) + 1;
+jj = ceil(sqrt(L_fine.^2 - (ii-2).^2 )) + 1;
+funt_fine = ii+jj-1; % formula valid for real-valued lengths
+result_computed = NaN(size(funt_fine));
+ind_even = mod(funt_fine,2)==0; % even maximum number of squares
+ind_even2 = ind_even & (2*L_fine.^2>funt_fine.^2-6*funt_fine+18);
+alpha_even = acos((funt_fine(ind_even)-2)/2./L_fine(ind_even));
+beta_even = asin((funt_fine(ind_even)-4)/2./L_fine(ind_even));
+alphap_even2 = acos(funt_fine(ind_even2)/2./L_fine(ind_even2));
+betap_even2 = asin((funt_fine(ind_even2)-6)/2./L_fine(ind_even2));
+result_computed(ind_even) = ( (alpha_even-beta_even).*(funt_fine(ind_even)-2).*(funt_fine(ind_even)-4) + (funt_fine(ind_even)-2).^2/2 + (funt_fine(ind_even)-4).^2/2 + ...
+    2*L_fine(ind_even).^2 - (funt_fine(ind_even)-2).*sqrt(4*L_fine(ind_even).^2 - (funt_fine(ind_even)-4).^2) - (funt_fine(ind_even)-4).*sqrt(4*L_fine(ind_even).^2 - (funt_fine(ind_even)-2).^2) ) / pi;
+result_computed(ind_even2) = result_computed(ind_even2) + ...
+    ( (alphap_even2-betap_even2).*funt_fine(ind_even2).*(funt_fine(ind_even2)-6) + funt_fine(ind_even2).^2/2 + (funt_fine(ind_even2)-6).^2/2 + ...
+    2*L_fine(ind_even2).^2 - funt_fine(ind_even2).*sqrt(4*L_fine(ind_even2).^2 - (funt_fine(ind_even2)-6).^2) - (funt_fine(ind_even2)-6).*sqrt(4*L_fine(ind_even2).^2 - funt_fine(ind_even2).^2) ) / pi;
+plot(L_fine, result_computed.*L_fine), grid on
 
 
