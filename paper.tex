@@ -40,7 +40,6 @@
 \newcommand{\isoli}{i^\ast}
 \newcommand{\jsoli}{j^\ast}
 \newcommand{\genvar}{r}
-\newcommand{\orient}{\theta}
 \newcommand{\mss}{M}
 \newcommand{\touch}{visit}
 \newcommand{\touches}{visits}
@@ -638,7 +637,16 @@ which gives
 The pair $(\isoli,\jsoli)$ resulting from \eqref{eq: theo: funt, sq, form; proof 1} is in $\mss'$, and is given in \eqref{eq: theo: funt, sq, form; i} and \eqref{eq: theo: funt, sq, form; j}.
 \end{proof}
 
-From Theorem~\ref{theo: funt, sq, form} it is easily seen that odd values of $\funt(\len)$ correspond to $\isoli = \jsoli$, whereas even values are achieved with $\jsoli = \isoli+1$. Given $\tiles \geq 3$ with $t$ odd, $\funt(\len) = \tiles$ if and only if $\len \in ((\tiles-3)/\sqrt{2}, \sqrt{(\tiles^2-4\tiles+5)/2}]$. For $t$ even, $\funt(\len) = \tiles$ if and only if $\len \in (\sqrt{(\tiles^2-6\tiles+10)/2}, (\tiles-2)/\sqrt{2}]$.
+From Theorem~\ref{theo: funt, sq, form} it is easily seen that odd values of $\funt(\len)$ correspond to $\isoli = \jsoli$, whereas even values are achieved with $\jsoli = \isoli+1$. Given $\tiles \geq 3$ with $t$ odd, $\funt(\len) = \tiles$ if and only
+\begin{equation}
+\label{eq: square, odd max tiles, lengths}
+\frac \len a \in \left( \frac{\tiles-3}{\sqrt{2}}, \frac{ \sqrt{(\tiles^2-2)^2+1}}{\sqrt{2}} \right].
+\end{equation}
+For $\tiles \geq 3$, $t$ even, $\funt(\len) = \tiles$ if and only if
+\begin{equation}
+\label{eq: square, even max tiles, lengths}
+\frac \len a \in \left(\frac{ \sqrt{(\tiles^2-3)^2+1}}{\sqrt{2}}, \frac{\tiles-2}{\sqrt{2}} \right].
+\end{equation}
 
 
 \subsection{Unit square grid with integer lengths}
@@ -783,7 +791,7 @@ The stated properties for $\funli$ follow directly from those of $\funti$ establ
 \section{Average number of tiles \touched{} by a random segment}
 \label{part: ave}
 
-Given $\len \in \mathbb R^+$, consider a segment of length $\len$ with random position and orientation. Specifically, the coordinates $x_1$, $y_1$ of the first endpoint are independent random variables uniformly distributed on $[0,a)$ and $[0,b)$ respectively. The orientation $\orient$ of the segment, defined as the angle with respect to the horizontal axis of the vector that goes from the first to the second endpoint, is uniformly distributed on $[0,2\pi)$. The variables $x_1$, $y_1$ and $\theta$ determine the coordinates $x_2$, $y_2$ of the second endpoint. Note that events of probability $0$, such as $x_1=a$ or the segment passing through a grid point, can be disregarded for computing the average number of tiles \touched{} by the segment.
+Given $\len \in \mathbb R^+$, consider a segment of length $\len$ with random position and orientation. Specifically, the coordinates $x_1$, $y_1$ of the first endpoint are independent random variables uniformly distributed on $[0,a)$ and $[0,b)$ respectively. The orientation $\theta$ of the segment, defined as the angle with respect to the horizontal axis of the vector that goes from the first to the second endpoint, is uniformly distributed on $[0,2\pi)$. The variables $x_1$, $y_1$ and $\theta$ determine the coordinates $x_2$, $y_2$ of the second endpoint. Note that events of probability $0$, such as $x_1=a$ or the segment passing through a grid point, can be disregarded for computing the average number of tiles \touched{} by the segment.
 
 Let $\funta: \mathbb R^+ \to \mathbb R^+$ be defined such that $\funta(\len)$ gives the average number of tiles \touched{} by a random segment of length $\len$, with the above distributions.
 
@@ -823,7 +831,7 @@ and $\Pr[j \geq n]$ is given by the same expressions with $a$ replaced by $b$.
 \begin{proof}
 Clearly, $\Pr[i \geq 1]=1$. In the following it will be assumed that $n \geq 2$. The basic idea is to compute $\Pr[i \geq n]$ conditioned on $(x_1,y_1)$ (or, as will be seen, only on $x_1$), and then to average over $x_1$ and $y_1$ (actually only over $x_1$).
 
-Given the coordinates $(x_1, y_1)$ of the first endpoint of the segment, with $0 \leq x_1 \leq a$, $0 \leq y_1 \leq b$, the second endpoint $(x_2, y_2)$ lies on a circle with radius $\len$ centered at $(x_1,y_1)$, as shown in Figure~\ref{fig: Pr_i}. The segment orientation is a random angle $\orient$ uniformly distributed on $[0,2\pi)$. It is clear from the figure that $i \geq n$ if and only if $x_2 \geq a(n-1)$ or $x_2 \leq -a(n-2)$; and these events are exclusive for $n \geq 2$. Thus
+Given the coordinates $(x_1, y_1)$ of the first endpoint of the segment, with $0 \leq x_1 \leq a$, $0 \leq y_1 \leq b$, the second endpoint $(x_2, y_2)$ lies on a circle with radius $\len$ centered at $(x_1,y_1)$, as shown in Figure~\ref{fig: Pr_i}. The segment orientation is a random angle $\theta$ uniformly distributed on $[0,2\pi)$. It is clear from the figure that $i \geq n$ if and only if $x_2 \geq a(n-1)$ or $x_2 \leq -a(n-2)$; and these events are exclusive for $n \geq 2$. Thus
 \begin{equation}
 \label{eq: Pr i cond}
 \Pr[i \geq n \cond x_1, y_1] = \Pr[x_2 \geq a(n-1) \cond x_1, y_1] + \Pr[x_2 \leq -a(n-2) \cond x_1, y_1].
@@ -849,7 +857,7 @@ The two conditional probabilities on the right-hand side of \eqref{eq: Pr i cond
 \label{fig: Pr_i}
 \end{figure}%
 
-Consider the event $x_2 \geq a(n-1)$ conditioned on $x_1$, with $n \geq 2$. There are three possibilities depending on $x_1$, $n$ and $\len$. If $a(n-1) < \len$, regardless of $x_1$ the length $\len$ is enough for $x_2$ to exceed $a(n-1)$ for some angles $\orient$. This is depicted in Figure~\ref{fig: Pr_i_full}, where the section of the arc with solid line represents those angles for which $x_2 > a(n-1)$. If $a(n-2) < \len \leq  a(n-1)$, the length will be enough provided that $x_1 \geq a(n-1)-\len$, which corresponds to the shaded region in Figure~\ref{fig: Pr_i_notfull}. Lastly, if $\len \leq  a(n-2)$ it is not possible for $x_2$ to exceed $a(n-1)$. Note that the coordinate $y_1$ is irrelevant to this.
+Consider the event $x_2 \geq a(n-1)$ conditioned on $x_1$, with $n \geq 2$. There are three possibilities depending on $x_1$, $n$ and $\len$. If $a(n-1) < \len$, regardless of $x_1$ the length $\len$ is enough for $x_2$ to exceed $a(n-1)$ for some angles $\theta$. This is depicted in Figure~\ref{fig: Pr_i_full}, where the section of the arc with solid line represents those angles for which $x_2 > a(n-1)$. If $a(n-2) < \len \leq  a(n-1)$, the length will be enough provided that $x_1 \geq a(n-1)-\len$, which corresponds to the shaded region in Figure~\ref{fig: Pr_i_notfull}. Lastly, if $\len \leq  a(n-2)$ it is not possible for $x_2$ to exceed $a(n-1)$. Note that the coordinate $y_1$ is irrelevant to this.
 
 In the first two cases above, the probability that $x_2 \geq a(n-1)$, conditioned on $x_1$, is the length of the arc to the right of the line $x=a(n-1)$ divided by $2\pi\len$, that is,
 \begin{equation}
