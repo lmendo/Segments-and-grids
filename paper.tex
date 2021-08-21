@@ -39,6 +39,7 @@
 \newcommand{\jsolr}{j^+}
 \newcommand{\isoli}{i^\ast}
 \newcommand{\jsoli}{j^\ast}
+\newcommand{\genfun}{u}
 \newcommand{\genvar}{r}
 \newcommand{\mss}{M}
 \newcommand{\touch}{visit}
@@ -695,16 +696,16 @@ Increments equal to $2$ always appear isolated, except at the initial sequence t
 
 %***Otherwise, perhaps we can prove the formula for the inverse problem first (starting from the one for real lenghts), and derive this from that
 
-In order to prove that $\funti(\leni+1)-\funti(\leni) \in \{1,2\}$, consider the function $f(\genvar) = \sqrt{2\genvar^2-2}$ for $\genvar \in \mathbb R$, $\genvar>1$. Its first derivative is
+In order to prove that $\funti(\leni+1)-\funti(\leni) \in \{1,2\}$, consider the function $\genfun(\genvar) = \sqrt{2\genvar^2-2}$ for $\genvar \in \mathbb R$, $\genvar>1$. Its first derivative is
 \begin{equation}
-f'(\genvar) = \frac {\sqrt{2} \, \genvar} {\sqrt{\genvar^2-1}},
+\genfun'(\genvar) = \frac {\sqrt{2} \, \genvar} {\sqrt{\genvar^2-1}},
 \end{equation}
-and its second derivative is easily seen to be negative. Therefore $f'(\genvar)$ can be bounded for $\genvar \geq 3$ as
+and its second derivative is easily seen to be negative. Therefore $\genfun'(\genvar)$ can be bounded for $\genvar \geq 3$ as
 \begin{equation}
 \label{eq: der bounds}
-\lim_{\genvar \rightarrow \infty} f'(\genvar) = \sqrt{2} < f'(\genvar) < f'(3) = 3/2.
+\lim_{\genvar \rightarrow \infty} \genfun'(\genvar) = \sqrt{2} < \genfun'(\genvar) < \genfun'(3) = 3/2.
 \end{equation}
-For $\leni \geq 2$, by the mean value theorem \cite[section~5.3]{Abbott15}, when $\leni$ is increased to $\leni+1$ the term $\sqrt{2\leni^2-2}$ in \eqref{eq: funti leni} has an increment that equals $f'(\genvar)$ for some $\leni < \genvar < \leni+1$. Therefore
+For $\leni \geq 2$, by the mean value theorem \cite[section~5.3]{Abbott15}, when $\leni$ is increased to $\leni+1$ the term $\sqrt{2\leni^2-2}$ in \eqref{eq: funti leni} has an increment that equals $\genfun'(\genvar)$ for some $\leni < \genvar < \leni+1$. Therefore
 \begin{equation}
 \label{eq: der bounds 2}
 \sqrt{2} < \sqrt{2(\leni+1)^2-2} - \sqrt{2\leni^2-2} < 3/2.
@@ -805,8 +806,8 @@ The random variables $i$ and $j$ are not independent. As a consequence, while th
 
 For $0 \leq \genvar \leq 1$, let
 \begin{equation}
-\label{eq: g}
-g(\genvar) = \int_0^r \arccos z \diff z = \genvar \arccos \genvar - \sqrt{1-\genvar^2} + 1.
+\label{eq: f}
+f(\genvar) = \int_0^r \arccos z \diff z = \genvar \arccos \genvar - \sqrt{1-\genvar^2} + 1.
 \end{equation}
 
 \begin{proposition}
@@ -818,9 +819,9 @@ Given $a, b, \len \in \mathbb R^+$, consider a grid with parameters $a, b$ and a
 \displaystyle
 1 &\text{if\ \ } \displaystyle n =1 \\[1 mm]
 \displaystyle
-\frac{2\len}{\pi a} \left(g\left(\frac{a(n-1)}{\len}\right)-g\left(\frac{a(n-2)}{\len} \right)\right) &\text{if\ \ } \displaystyle 2 \leq n < \frac \len a + 1 \\[4 mm]
+\frac{2\len}{\pi a} \left(f\left(\frac{a(n-1)}{\len}\right)-f\left(\frac{a(n-2)}{\len} \right)\right) &\text{if\ \ } \displaystyle 2 \leq n < \frac \len a + 1 \\[4 mm]
 \displaystyle
-\frac{2\len}{\pi a}\,\, \left(1 - g\left(\frac{a(n-2)}{\len}\right)\right) &\text{if\ \ } \displaystyle \frac\len a + 1 \leq n < \frac\len a+2 \\[3 mm]
+\frac{2\len}{\pi a}\,\, \left(1 - f\left(\frac{a(n-2)}{\len}\right)\right) &\text{if\ \ } \displaystyle \frac\len a + 1 \leq n < \frac\len a+2 \\[3 mm]
 \displaystyle
 0 &\text{if\ \ } \displaystyle \frac \len a + 2 \leq  n; \\
 \end{cases}
@@ -869,15 +870,15 @@ In the first case $x_1$ has a uniform distribution on $(0,a)$, and $\Pr[x_2 \geq
 \label{eq: Pr x_2 geq a(n-1), first case}
 \begin{split}
 \Pr[x_2 \geq a(n-1)] &= \frac 1 {\pi a} \int_0^a\arccos \frac{a(n-1)-x_1}{\len} \diff x_1 \\
-&= \frac{\len}{\pi a}\,\, \left( g\left( \frac{a(n-1)}{\len} \right) - g\left( \frac{a(n-2)}{\len} \right) \right),
+&= \frac{\len}{\pi a}\,\, \left( f\left( \frac{a(n-1)}{\len} \right) - f\left( \frac{a(n-2)}{\len} \right) \right),
 \end{split}
 \end{equation}
-where the function $g$ is defined in \eqref{eq: g}. Substituting into \eqref{eq: Pr i = 2 Pr} yields the result in \eqref{eq: Pr i geq n}, second line.
+where the function $f$ is defined in \eqref{eq: f}. Substituting into \eqref{eq: Pr i = 2 Pr} yields the result in \eqref{eq: Pr i geq n}, second line.
 
-The second case is similar, but the integration over $x_1$ is from $a(n-1)-\len$ to $a$. Noting that $g(1)=1$, this gives
+The second case is similar, but the integration over $x_1$ is from $a(n-1)-\len$ to $a$. Noting that $f(1)=1$, this gives
 \begin{equation}
 \label{eq: Pr x_2 geq a(n-1), second case}
-\Pr[x_2 \geq a(n-1)] = \frac{\len}{\pi a}\,\, \left( 1 - g\left( \frac{a(n-2)}{\len} \right) \right),
+\Pr[x_2 \geq a(n-1)] = \frac{\len}{\pi a}\,\, \left( 1 - f\left( \frac{a(n-2)}{\len} \right) \right),
 \end{equation}
 which combined with \eqref{eq: Pr i = 2 Pr} yields the expression in \eqref{eq: Pr i geq n}, third line.
 
@@ -906,14 +907,14 @@ According to \eqref{eq: Pr i geq n}, this sum only has a finite number of non-ze
 \label{eq: theo funta form 2}
 \begin{split}
 \E[i] = 1 +
-\sum_{n=2}^{\lceil \len/a \rceil} \frac{2\len}{\pi a} \left(g\left(\frac{a(n-1)}{\len}\right)-g\left(\frac{a(n-2)}{\len} \right)\right) + \\
-\frac{2\len}{\pi a} \left(1-g\left(\frac{a(\lceil \len/a \rceil - 1)}{\len} \right)\right).
+\sum_{n=2}^{\lceil \len/a \rceil} \frac{2\len}{\pi a} \left(f\left(\frac{a(n-1)}{\len}\right)-f\left(\frac{a(n-2)}{\len} \right)\right) + \\
+\frac{2\len}{\pi a} \left(1-f\left(\frac{a(\lceil \len/a \rceil - 1)}{\len} \right)\right).
 \end{split}
 \end{equation}
-Most terms involving the function $g$ in \eqref{eq: theo funta form 2} cancel, with the result
+Most terms involving the function $f$ in \eqref{eq: theo funta form 2} cancel, with the result
 \begin{equation}
 \label{eq: theo funta form 3}
-\E[i] = 1+\frac{2\len}{\pi a} (1-g(0))= 1+\frac{2\len}{\pi a}.
+\E[i] = 1+\frac{2\len}{\pi a} (1-f(0))= 1+\frac{2\len}{\pi a}.
 \end{equation}
 Similarly,
 \begin{equation}
