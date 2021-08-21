@@ -1622,21 +1622,21 @@ for k = [0 1+3j 2+2j 3+1j 1-3j 2-2j 3-1j -3+1j -2+2j -1+3j -3-1j -2-2j -1-3j]
 end
 
 
-%% #62. Figure for proof of probmax: funt odd
+%% #63. Figure for proof of probmax: funt odd, diagonal
 clf
 hold on
 set(gca, 'layer', 'top')
 axis equal
 grid on
-plot([-.4 4.6], [0 0], 'k')
-plot([-.4j 4.6j], 'k')
+plot([-.4 5.55], [0 0], 'k')
+plot([-.4j 5.55j], 'k')
 set(gca, 'GridAlpha', .4)
-xticks(-1:4), yticks(-1:4)
+xticks(-1:5), yticks(-1:5)
 xticklabels({'' '0' '1' '' ['(t' char(hex2dec('2212')) '1)/2'] '' ''})
 yticklabels({'' '0' '1' '' ['(t' char(hex2dec('2212')) '1)/2'] '' ''})
 xlabel x 
 ylabel y
-axis([-1 5 -1 5])
+axis([-1 6 -1 6])
 L = 3.37;
 theta_0 = asin(2/L);
 theta = 3*pi/2 - linspace(30*pi/180,theta_0,50);
@@ -1649,8 +1649,8 @@ theta = 3*pi/2 - linspace(theta_0,theta_1,50);
 set(gca, 'colororderindex', 1)
 plot(3+3j + L*exp(1j*theta), '-', 'linewidth', .75)
 plot([3+3j], 'k.', 'markersize', 7)
-theta = theta_0 + (theta_1-theta_0)*.67;
-endpoint = 3+3j + L*exp(1j*(3*pi/2 - theta));
+theta_example = theta_0 + (theta_1-theta_0)*.67;
+endpoint = 3+3j + L*exp(1j*(3*pi/2 - theta_example));
 plot(endpoint, 'k.', 'markersize', 7)
 plot([endpoint real(endpoint)+1j], 'k:')
 plot([endpoint 1+1j*imag(endpoint)], 'k:')
@@ -1663,7 +1663,56 @@ for k = [0 3+3j]
         plot(real(k)+[0 1 1 0 0], imag(k)+[0 0 1 1 0], 'k--', 'linewidth', .75)
     end
 end
-text(1.69, 2.17, char(hex2dec('2113')))
+text(1.65, 2.27, char(hex2dec('2113')))
+plot([3+3j 3+2.45j], 'k:')
+theta = 3*pi/2 - linspace(0,theta_example);
+plot(3+3j + .35*exp(1j*theta), 'k-')
+text(2.75, 2.51, char(hex2dec('03B8')))
 
 
-
+%% #64. Figure for proof of probmax: funt odd, off-diagonal
+clf
+hold on
+set(gca, 'layer', 'top')
+axis equal
+grid on
+plot([-.4 5.55], [0 0], 'k')
+plot([-.4j 5.55j], 'k')
+set(gca, 'GridAlpha', .4)
+xticks(-1:5), yticks(-1:5)
+xticklabels({'' '0' '1' ['(t' char(hex2dec('2212')) '3)/2'] '' '' ''})
+yticklabels({'' '0' '1' '' '' ['(t' '+' '1)/2'] ''})
+xlabel x 
+ylabel y
+axis([-1 6 -1 6])
+L = 3.5;
+theta_0 = asin(1/L);
+theta = 3*pi/2 - linspace(10*pi/180,theta_0,50);
+plot(2+4j + L*exp(1j*theta), '--', 'linewidth', .75)
+theta_1 = acos(3/L);
+theta = 3*pi/2 - linspace(theta_1,39*pi/180,50);
+set(gca, 'colororderindex', 1)
+plot(2+4j + L*exp(1j*theta), '--', 'linewidth', .75)
+theta = 3*pi/2 - linspace(theta_0,theta_1,50);
+set(gca, 'colororderindex', 1)
+plot(2+4j + L*exp(1j*theta), '-', 'linewidth', .75)
+plot([2+4j], 'k.', 'markersize', 7)
+theta_example = theta_0 + (theta_1-theta_0)*.55;
+endpoint = 2+4j + L*exp(1j*(3*pi/2 - theta_example));
+plot(endpoint, 'k.', 'markersize', 7)
+plot([endpoint real(endpoint)+1j], 'k:')
+plot([endpoint 1+1j*imag(endpoint)], 'k:')
+patch([real(endpoint) 1 1 real(endpoint) real(endpoint)], [imag(endpoint) imag(endpoint) 1 1 imag(endpoint)], .88*[1 1 1], 'edgecolor', 'none')
+plot([2+4j endpoint], 'k')
+for k = [0 2+4j]
+    if k==0
+        plot(real(k)+[0 1 1 0 0], imag(k)+[0 0 1 1 0], 'k-', 'linewidth', .75)
+    else
+        plot(real(k)+[0 1 1 0 0], imag(k)+[0 0 1 1 0], 'k--', 'linewidth', .75)
+    end
+end
+text(1.09, 2.77, char(hex2dec('2113')))
+plot([2+4j 2+3.45j], 'k:')
+theta = 3*pi/2 - linspace(0,theta_example);
+plot(2+4j + .35*exp(1j*theta), 'k-')
+text(1.81, 3.45, char(hex2dec('03B8')))
