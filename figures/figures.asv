@@ -1632,10 +1632,10 @@ plot([-.4 4.6], [0 0], 'k')
 plot([-.4j 4.6j], 'k')
 set(gca, 'GridAlpha', .4)
 xticks(-1:4), yticks(-1:4)
-xticklabels({'' '0' '1' '' ['(t' char(hex2dec('2212')) '1)/2'] '' ''})
-yticklabels({'' '0' '1' '' ['(t' char(hex2dec('2212')) '1)/2'] '' ''})
+xticklabels([{'0'}  arrayfun(@(n)[num2str(n) char(8201) 'a'], 1:5, 'UniformOutput', false)]) % thin space
+yticklabels([{'0'}  arrayfun(@(n)[num2str(n) char(8201) 'a'], 1:5, 'UniformOutput', false)]) % thin space
 xlabel x 
-ylabel y
+xlabel y
 axis([-1 5 -1 5])
 L = 3.37;
 theta_0 = asin(2/L);
@@ -1663,7 +1663,7 @@ for k = [0 3+3j]
         plot(real(k)+[0 1 1 0 0], imag(k)+[0 0 1 1 0], 'k--', 'linewidth', .75)
     end
 end
-text(1.69, 2.17, char(hex2dec('2113')))
+    
 
 
 
