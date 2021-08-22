@@ -1574,7 +1574,7 @@ result_computed(ind_odd) = ( (alpha_odd-pi/4).*(funt_fine(ind_odd)-3).^2 + (funt
 result_computed(ind_odd2) = result_computed(ind_odd2) + ...
     ( (alphap_odd2-betap_odd2).*(funt_fine(ind_odd2)-1).*(funt_fine(ind_odd2)-5) + (funt_fine(ind_odd2)-1).^2/2 + (funt_fine(ind_odd2)-5).^2/2 + ...
     2*L_fine(ind_odd2).^2 - (funt_fine(ind_odd2)-1).*sqrt(4*L_fine(ind_odd2).^2 - (funt_fine(ind_odd2)-5).^2) - (funt_fine(ind_odd2)-5).*sqrt(4*L_fine(ind_odd2).^2 - (funt_fine(ind_odd2)-1).^2) ) / pi;
-plot(L_fine, result_computed.*L_fine), grid on
+plot(L_fine, result_computed.*funt_fine), grid on
 
 
 %% #61. Probabilities at the end of the intervals with even maximum number of segments
@@ -1628,15 +1628,15 @@ hold on
 set(gca, 'layer', 'top')
 axis equal
 grid on
-plot([-.4 5.55], [0 0], 'k')
-plot([-.4j 5.55j], 'k')
+plot([-.4 5], [0 0], 'k')
+plot([-.4j 5j], 'k')
 set(gca, 'GridAlpha', .4)
 xticks(-1:5), yticks(-1:5)
 xticklabels({'' '0' '1' '' ['(t' char(hex2dec('2212')) '1)/2'] '' ''})
 yticklabels({'' '0' '1' '' ['(t' char(hex2dec('2212')) '1)/2'] '' ''})
 xlabel x 
 ylabel y
-axis([-1 6 -1 6])
+axis([-1 5 -1 5])
 L = 3.37;
 theta_0 = asin(2/L);
 theta = 3*pi/2 - linspace(30*pi/180,theta_0,50);
@@ -1676,15 +1676,15 @@ hold on
 set(gca, 'layer', 'top')
 axis equal
 grid on
-plot([-.4 5.55], [0 0], 'k')
-plot([-.4j 5.55j], 'k')
+plot([-.4 5], [0 0], 'k')
+plot([-.4j 5j], 'k')
 set(gca, 'GridAlpha', .4)
 xticks(-1:5), yticks(-1:5)
 xticklabels({'' '0' '1' ['(t' char(hex2dec('2212')) '3)/2'] '' '' ''})
 yticklabels({'' '0' '1' '' '' ['(t' '+' '1)/2'] ''})
 xlabel x 
 ylabel y
-axis([-1 6 -1 6])
+axis([-1 5 -1 5])
 L = 3.5;
 theta_0 = asin(1/L);
 theta = 3*pi/2 - linspace(10*pi/180,theta_0,50);
@@ -1752,5 +1752,15 @@ result_computed(ind_even2) = 2*g(L_fine(ind_even2)/a, funt_fine(ind_even2)-4, fu
 plot(L_fine.*(ind_odd|ind_odd2)./(ind_odd|ind_odd2), result_computed.*(ind_odd|ind_odd2)./(ind_odd|ind_odd2), '-', 'linewidth', .7), hold on, grid on
 plot(L_fine.*(ind_even|ind_even2)./(ind_even|ind_even2), result_computed.*(ind_even|ind_even2)./(ind_even|ind_even2), '-', 'linewidth', .7), hold on, grid on
 legend({'Simulated' 'Computed, odd max number of squares' 'Computed, even max number of squares'})
+
+
+%% # 66. Tests, symbolic
+
+syms t
+L = sqrt((t-3).^2+(t-1).^2)/2;
+G = (acos((t-3)/2./sqrt((t-3).^2+(t-1).^2)/2)-asin((t-3)/2./sqrt((t-3).^2+(t-1).^2)/2)).*(t-3).*(t-3) + ((t-3).^2+(t-1).^2)/2 + (t-3).^2/2 + (t-3).^2/2 - (t-3).*sqrt((t-3).^2+(t-1).^2-(t-3).^2) - (t-3).*sqrt((t-3).^2+(t-1).^2-(t-3).^2);
+G = (acos((t-3)/2/sqrt((t-3)^2+(t-1)^2)/2)-asin((t-3)/2/sqrt((t-3)^2+(t-1)^2)/2))*(t-3)*(t-3) + ((t-3)^2+(t-1)^2)/2 + (t-3)^2/2 + (t-3)^2/2 - (t-3)*sqrt((t-3)^2+(t-1)^2-(t-3)^2) - (t-3)*sqrt((t-3)^2+(t-1)^2-(t-3)^2);
+limit(G*t, t, inf)
+syms t, assume(t, 'real'), pretty(simplify(diff((acos((t-3)/hypot(t-3, t-1)) - asin((t-3)/hypot(t-1, t-3))), t)))
 
 
