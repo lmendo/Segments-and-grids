@@ -43,10 +43,6 @@
 \newcommand{\genfun}{q}
 \newcommand{\genvar}{r}
 \newcommand{\mss}{M}
-\newcommand{\touch}{visit}
-\newcommand{\touches}{visits}
-\newcommand{\touched}{visited}
-\newcommand{\touching}{visiting}
 
 \newtheorem{proposition}{Proposition}%[section]
 \newtheorem{theorem}{Theorem}%[section]
@@ -67,7 +63,7 @@
 \begin{document}
 
 \title{
-On the number of tiles \touched{} by a\\
+On the number of tiles visited by a\\
 line segment on a rectangular grid
 }
 
@@ -97,15 +93,15 @@ line segment on a rectangular grid
 \section{Introduction}
 \label{part: intro}
 
-Given $a, b \in \mathbb R^+$, consider a grid on $\mathbb R^2$ formed by rectangular \emph{tiles} of width $a$ and height $b$. A line segment of length $\len \in \mathbb R^+$ is located on the plane with arbitrary position and orientation. The segment is said to \emph{\touch} a tile if it intersects its interior.\footnote{
-The definition uses the interior of the tile, excluding the border, to avoid uninteresting results such as a ``zero-length'' segment \touching{} (a vertex of) $4$ tiles.} This paper deals with the following problems:
+Given $a, b \in \mathbb R^+$, consider a grid on $\mathbb R^2$ formed by rectangular \emph{tiles} of width $a$ and height $b$. A line segment of length $\len \in \mathbb R^+$ is located on the plane with arbitrary position and orientation. The segment is said to \emph{visit} a tile if it intersects its interior.\footnote{
+The definition uses the interior of the tile, excluding the border, to avoid uninteresting results such as a ``zero-length'' segment visiting (a vertex of) $4$ tiles.} This paper deals with the following problems:
 \begin{itemize}
-\item What is the maximum number of tiles that the segment can \touch?
-\item What length should a segment have to \touch{} a given number of tiles?
-\item What is the average number of tiles \touched{} by a uniformly random segment of a given length?
+\item What is the maximum number of tiles that the segment can visit?
+\item What length should a segment have to visit a given number of tiles?
+\item What is the average number of tiles visited by a uniformly random segment of a given length?
 \end{itemize}
 
-As an example of the first problem, consider $a=1.35$, $b=1$. A segment of unit length can be placed as shown in Figure~\ref{fig: examples} (left) to make it \touch{} $3$ tiles. In fact, the solution for $\len=1$ is $3$ tiles. The figure also illustrates that the solution for length $2.4$ is $5$ (center), and for $4.7$ it is $8$ (right).
+As an example of the first problem, consider $a=1.35$, $b=1$. A segment of unit length can be placed as shown in Figure~\ref{fig: examples} (left) to make it visit $3$ tiles. In fact, the solution for $\len=1$ is $3$ tiles. The figure also illustrates that the solution for length $2.4$ is $5$ (center), and for $4.7$ it is $8$ (right).
 
 \begin{figure}
 \centering%
@@ -115,13 +111,13 @@ As an example of the first problem, consider $a=1.35$, $b=1$. A segment of unit 
 \label{fig: examples}%
 \end{figure}%
 
-An equivalent formulation of the problem is obtained allowing segments of length $\len$ \emph{or smaller}. The equivalence is clear from the fact that reducing the length cannot increase the number of \touched{} tiles. Either of these formulations will be referred to as the \emph{direct} problem.
+An equivalent formulation of the problem is obtained allowing segments of length $\len$ \emph{or smaller}. The equivalence is clear from the fact that reducing the length cannot increase the number of visited tiles. Either of these formulations will be referred to as the \emph{direct} problem.
 
-The \emph{inverse} problem is, given $\tiles \in \mathbb N$, to determine the infimum length of all segments that \touch{} at least $\tiles$ tiles. For real-valued lengths this infimum is not a minimum, because given a segment that \touches{} $\tiles$ tiles, its length can always be reduced by some non-zero amount without changing the number of \touched{} tiles. This is a consequence of the interior of each tile being an open set.
+The \emph{inverse} problem is, given $\tiles \in \mathbb N$, to determine the infimum length of all segments that visit at least $\tiles$ tiles. For real-valued lengths this infimum is not a minimum, because given a segment that visits $\tiles$ tiles, its length can always be reduced by some non-zero amount without changing the number of visited tiles. This is a consequence of the interior of each tile being an open set.
 
-The direct and inverse problems are closely related. Namely, if $\len$ is the infimum of all lengths that allow \touching{} at least $\tiles$ tiles (inverse problem), $\tiles$ is the maximum number of tiles that can be \touched{} with lengths slightly greater than $\len$ (direct problem).
+The direct and inverse problems are closely related. Namely, if $\len$ is the infimum of all lengths that allow visiting at least $\tiles$ tiles (inverse problem), $\tiles$ is the maximum number of tiles that can be visited with lengths slightly greater than $\len$ (direct problem).
 
-The problem of how many tiles a \emph{random} segment of a given length \touches{} on average is precisely defined as follows. By symmetry, one endpoint of the segment can be assumed to lie in a fixed, reference tile. The position of this endpoint is \emph{uniformly} distributed on the tile. The segment orientation has a \emph{uniform} distribution on the set of all possible directions, and is \emph{independent} of the endpoint position. As will be seen, solving this problem also answers the inverse question (segment length to \touch{} a given number of tiles on average), which thus need not be considered separately. 
+The problem of how many tiles a \emph{random} segment of a given length visits on average is precisely defined as follows. By symmetry, one endpoint of the segment can be assumed to lie in a fixed, reference tile. The position of this endpoint is \emph{uniformly} distributed on the tile. The segment orientation has a \emph{uniform} distribution on the set of all possible directions, and is \emph{independent} of the endpoint position. As will be seen, solving this problem also answers the inverse question (segment length to visit a given number of tiles on average), which thus need not be considered separately. 
 
 % ***Do we need to discuss potential applications of this (if we can find any)? This probably depends on the journal
 % ***Do we need a section with conclusions? Probably not; depends on the journal
@@ -130,7 +126,7 @@ The problems studied in this paper are related to \ldots ***maybe a short paragr
 \url{https://www.jstor.org/stable/2317945} \\
 \url{https://www.jstor.org/stable/2687085}
 
-The rest of the paper is organized as follows. Fundamental results are presented in \S\ref{part: fund results}, which form the basis of the subsequent analysis. The direct and inverse problems for a deterministic segment are considered in \S\ref{part: max}, first for real-valued lengths, and then for integer-valued lengths on a unit square grid. The problem of computing the average number of tiles \touched{} by a random segment is analyzed in \S\ref{part: ave}.
+The rest of the paper is organized as follows. Fundamental results are presented in \S\ref{part: fund results}, which form the basis of the subsequent analysis. The direct and inverse problems for a deterministic segment are considered in \S\ref{part: max}, first for real-valued lengths, and then for integer-valued lengths on a unit square grid. The problem of computing the average number of tiles visited by a random segment is analyzed in \S\ref{part: ave}.
 
 % The rounding down (floor) and rounding up (ceiling) operations will be denoted as $\lfloor \cdot \rfloor$ and $\lceil \cdot \rceil$. The notation $[\mathsf S]$ will be used for the Iverson function, which equals $1$ if statement $\mathsf S$ is true and $0$ otherwise.
 
@@ -145,7 +141,7 @@ Every segment has an associated \emph{canonical rectangle}, which is the minimum
 & (\lfloor\min\{x_1, x_2\}/a\rfloor a, \lfloor\min\{y_1,y_2\}/b\rfloor b), \\
 & (\lceil\max\{x_1, x_2\}/a \rceil a, \lceil\max\{y_1,y_2\}/b \rceil b).
 \end{align*}
-The dimensions of the canonical rectangle, normalized to the tile width and height respectively, are two integer numbers $i$, $j$. Two examples are illustrated in Figure~\ref{fig: canonical rectangle and touched tiles}, both with $i=5$, $j=4$. Clearly, all tiles \touched{} by the segment are contained in the canonical rectangle. Note also that the canonical rectangle can have $i=0$ or $j=0$ if the segment coincides with part of a grid line.
+The dimensions of the canonical rectangle, normalized to the tile width and height respectively, are two integer numbers $i$, $j$. Two examples are illustrated in Figure~\ref{fig: canonical rectangle and touched tiles}, both with $i=5$, $j=4$. Clearly, all tiles visited by the segment are contained in the canonical rectangle. Note also that the canonical rectangle can have $i=0$ or $j=0$ if the segment coincides with part of a grid line.
 
 \begin{figure}
 \centering%
@@ -157,22 +153,22 @@ The dimensions of the canonical rectangle, normalized to the tile width and heig
 \label{fig: S_gridpoints}%
 \includegraphics[width=.49\textwidth]{S_gridpoints_1p35}%
 }%
-\caption{Canonical rectangle and \touched{} tiles
+\caption{Canonical rectangle and visited tiles
 }%
 \label{fig: canonical rectangle and touched tiles}%
 \end{figure}%
 
 \begin{proposition}
 \label{prop: i+j-1}
-Consider an arbitrary segment, and let $i, j$ respectively denote the normalized width and height of its canonical rectangle. If $i, j \geq 1$, the number of tiles \touched{} by the segment is at most $i+j-1$. This bound is attained if and only if the segment does not pass through any grid point in the interior of the rectangle.
+Consider an arbitrary segment, and let $i, j$ respectively denote the normalized width and height of its canonical rectangle. If $i, j \geq 1$, the number of tiles visited by the segment is at most $i+j-1$. This bound is attained if and only if the segment does not pass through any grid point in the interior of the rectangle.
 \end{proposition}
 
 \begin{proof}
-The segment \touches{}, by definition, two tiles in opposite corners of the canonical rectangle. It can be assumed, without loss of generality, that those tiles are in the lower-left and upper-right corners of the rectangle, as in Figure~\ref{fig: canonical rectangle and touched tiles}. The \touched{} tiles can be thought of as following a path within the canonical rectangle. Starting at the lower-left tile, the next tile can be the one to the left, the one above, or the one above and to the left. The latter case occurs if and only if the segment passes through the grid point between those two tiles.
+The segment visits, by definition, two tiles in opposite corners of the canonical rectangle. It can be assumed, without loss of generality, that those tiles are in the lower-left and upper-right corners of the rectangle, as in Figure~\ref{fig: canonical rectangle and touched tiles}. The visited tiles can be thought of as following a path within the canonical rectangle. Starting at the lower-left tile, the next tile can be the one to the left, the one above, or the one above and to the left. The latter case occurs if and only if the segment passes through the grid point between those two tiles.
 
-Since the segment follows a straight line, once it ``leaves'' a row of tiles in its path from the lower-left to the upper-right corner, it can never \touch{} any more tiles from that row. The same observation applies for the columns.
+Since the segment follows a straight line, once it ``leaves'' a row of tiles in its path from the lower-left to the upper-right corner, it can never visit any more tiles from that row. The same observation applies for the columns.
 
-This implies that the maximum number of \touched{} tiles is $i+j-1$, which is attained if and only if the segment avoids all grid points in the interior of the canonical rectangle, as in Figure~\ref{fig: S_nogridpoints}. Note that grid points at the corners of the rectangle do not count for this; and that the segment cannot pass through any other grid points on the rectangle border, because that would imply $i=0$ or $j=0$. Figure~\ref{fig: S_gridpoints} illustrates a case where the maximum is not attained.
+This implies that the maximum number of visited tiles is $i+j-1$, which is attained if and only if the segment avoids all grid points in the interior of the canonical rectangle, as in Figure~\ref{fig: S_nogridpoints}. Note that grid points at the corners of the rectangle do not count for this; and that the segment cannot pass through any other grid points on the rectangle border, because that would imply $i=0$ or $j=0$. Figure~\ref{fig: S_gridpoints} illustrates a case where the maximum is not attained.
 \end{proof}
 
 \begin{proposition}
@@ -221,38 +217,38 @@ There is a segment of length not exceeding $\len$ that has a canonical rectangle
 ``There is a segment\ldots $\Rightarrow$ \eqref{eq: len > sqrt} ''. Assume that a segment exists with length not exceeding $\len$ and with a canonical rectangle with normalized dimensions $i$, $j$. From part~\ref{prop: len ineq i j: ineqs}, \eqref{eq: len > sqrt} holds for that segment length, and thus for $\len$.
 \end{proof}
 
-According to Proposition~\ref{prop: i+j-1}, in order to maximize the number of \touched{} tiles for a given length, the position and orientation of the segment should be chosen to obtain $i+j-1$ as large as possible, where $i$ and $j$ are the normalized dimensions of its canonical rectangle. On the other hand, Proposition~\ref{prop: len ineq i j} restricts the $i, j$ values that can be achieved with a given length. A relevant question is: are there any $(i,j)$ pairs that can be disregarded irrespective of the length $\len$? In other words, what is the ``smallest'' subset of $\mathbb N^2$ such that the $(i,j)$ pair that maximizes the number of tiles for any length can always be found within that subset? A subset that contains a maximizing $(i,j)$ for any length will be called a \emph{sufficient} set. Clearly, this set must contain at least one such pair for each possible value of $i+j-1$, so that the set can produce that value as solution (for the corresponding lengths). A sufficient set that contains exactly one pair $(i,j)$ for each value of $i+j-1$ will be termed a \emph{minimal sufficient} set.
+According to Proposition~\ref{prop: i+j-1}, in order to maximize the number of visited tiles for a given length, the position and orientation of the segment should be chosen to obtain $i+j-1$ as large as possible, where $i$ and $j$ are the normalized dimensions of its canonical rectangle. On the other hand, Proposition~\ref{prop: len ineq i j} restricts the $i, j$ values that can be achieved with a given length. A relevant question is: are there any $(i,j)$ pairs that can be disregarded irrespective of the length $\len$? In other words, what is the ``smallest'' subset of $\mathbb N^2$ such that the $(i,j)$ pair that maximizes the number of tiles for any length can always be found within that subset? A subset that contains a maximizing $(i,j)$ for any length will be called a \emph{sufficient} set. Clearly, this set must contain at least one such pair for each possible value of $i+j-1$, so that the set can produce that value as solution (for the corresponding lengths). A sufficient set that contains exactly one pair $(i,j)$ for each value of $i+j-1$ will be termed a \emph{minimal sufficient} set.
 
-For instance, it is intuitively clear from Figure~\ref{fig: examples} that segment orientations near the vertical or horizontal directions (resulting in $i=1$ with large $j$, or $j=1$ with large $i$) will not maximize the number of \touched{} tiles.
+For instance, it is intuitively clear from Figure~\ref{fig: examples} that segment orientations near the vertical or horizontal directions (resulting in $i=1$ with large $j$, or $j=1$ with large $i$) will not maximize the number of visited tiles.
 % This is true for any a, b: 2 can achieved instead of 1 without compromising the other dimension.
 The corresponding $(i,j)$ pairs can be left out of the sufficient set. In general, the pairs included in a minimal sufficient set will be different depending on $a$ and $b$. Two specific examples of minimal sufficient sets will be presented later in this section.
 
-Knowing a minimal sufficient set of $(i,j)$ pairs facilitates the solution of both the direct an inverse problems, because it reduces the number of pairs that need to be tried. In order to derive a general method to build a minimal sufficient set, it is insightful to consider two specific cases first, as will be presented in the following. It is also helpful to use the equivalent formulation of the direct problem referred to in \S\ref{part: intro}, i.e.\ finding the maximum number of tiles \touched{} by segments of length $\len$ \emph{or less}.
+Knowing a minimal sufficient set of $(i,j)$ pairs facilitates the solution of both the direct an inverse problems, because it reduces the number of pairs that need to be tried. In order to derive a general method to build a minimal sufficient set, it is insightful to consider two specific cases first, as will be presented in the following. It is also helpful to use the equivalent formulation of the direct problem referred to in \S\ref{part: intro}, i.e.\ finding the maximum number of tiles visited by segments of length $\len$ \emph{or less}.
 
-Thus each choice of $(i, j)$ implies a maximum of $i+j-1$ \touched{} tiles on one hand; and sets a lower bound on the required length $\len$ on the other hand.
+Thus each choice of $(i, j)$ implies a maximum of $i+j-1$ visited tiles on one hand; and sets a lower bound on the required length $\len$ on the other hand.
 
 Consider first the case $a=b=1$. This is illustrated in Figure~\ref{fig: ijLS_1}. Note that in this and in the next figures the axes represent $ia$ and $jb$ (not $i$ and $j$). Each dashed diagonal line joins $(i, j)$ pairs with the same $i+j-1$. The radius of each arc represents the lower bound on $\len$ given by \eqref{eq: len > sqrt}, for certain $(i,j)$ pairs, which are marked with filled circles (these pairs form a minimal sufficient set, as will be seen).
 
 \begin{figure}
 \centering%
 \includegraphics[width=.7\textwidth]{ijLS_1}%
-\caption{Relationship between segment length and number of \touched{} tiles with the width and height of the canonical rectangle, for $a=b$
+\caption{Relationship between segment length and number of visited tiles with the width and height of the canonical rectangle, for $a=b$
 }%
 \label{fig: ijLS_1}%
 \end{figure}%
 
-For a given $\len \in \mathbb R^+$, the $(i,j)$ pairs that can be achieved with segments of length not exceeding $\len$ are, by Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}, those whose distance from $(2a,2b)$ is less than $\len$, i.e.~those delimited by the corresponding arc. It is clear from the figure that for $i+j-1$ odd, if some point $(i_1,j_1)$ with $|i_1-j_1|>1$ is achievable with the length bound $\len$, then necessarily there is a point $(i_0,i_0)$ with the same number of \touched{} tiles $i+j-1$ (same diagonal line) that is also achievable with the same length restriction (because it has smaller distance to $(2a,2b)$). Similarly, for $i+j-1$ even, if a point $(i_1,j_1)$ with $|i_1-j_1|>1$ is achievable, then there is a point $(i_0,i_0+1)$ in the same diagonal that is also achievable with the same length restriction.
+For a given $\len \in \mathbb R^+$, the $(i,j)$ pairs that can be achieved with segments of length not exceeding $\len$ are, by Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}, those whose distance from $(2a,2b)$ is less than $\len$, i.e.~those delimited by the corresponding arc. It is clear from the figure that for $i+j-1$ odd, if some point $(i_1,j_1)$ with $|i_1-j_1|>1$ is achievable with the length bound $\len$, then necessarily there is a point $(i_0,i_0)$ with the same number of visited tiles $i+j-1$ (same diagonal line) that is also achievable with the same length restriction (because it has smaller distance to $(2a,2b)$). Similarly, for $i+j-1$ even, if a point $(i_1,j_1)$ with $|i_1-j_1|>1$ is achievable, then there is a point $(i_0,i_0+1)$ in the same diagonal that is also achievable with the same length restriction.
 
 Thus for $a=b=1$, a minimal sufficient set is formed by the pairs $(i,j)$ with $j=i$ or $j=i+1$. Observe that due to symmetry, any point $(i_0,i_0+1)$ could be replaced by $(i_0+1,i_0)$. This illustrates that the minimal sufficient set is not unique in general. 
 
-The pairs in the minimal sufficient set are marked with filled circles in Figure~\ref{fig: ijLS_1}. Given a length, the maximum number of \touched{} tiles will be achieved with one of those pairs, namely that in the diagonal line furthest from $(2a,2b)$ that is within the circle with radius $\len$ centered at that point.
+The pairs in the minimal sufficient set are marked with filled circles in Figure~\ref{fig: ijLS_1}. Given a length, the maximum number of visited tiles will be achieved with one of those pairs, namely that in the diagonal line furthest from $(2a,2b)$ that is within the circle with radius $\len$ centered at that point.
 
 As a second example, consider $a=1.35$, $b=1$. This is depicted in Figure~\ref{fig: ijLS_1p35}. In this case the minimal sufficient set does not follow a rule as simple as in the previous example.
 
 \begin{figure}
 \centering%
 \includegraphics[width=.7\textwidth]{ijLS_1p35}%
-\caption{Relationship between segment length and number of \touched{} tiles with the width and height of the canonical rectangle, for $a=1.35b$
+\caption{Relationship between segment length and number of visited tiles with the width and height of the canonical rectangle, for $a=1.35b$
 }%
 \label{fig: ijLS_1p35}%
 \end{figure}%
@@ -272,7 +268,7 @@ or $(i_\tiles+1, j_\tiles)$ otherwise.
 \end{proposition}
 
 \begin{proof}
-For each $\tiles$, the pair $(i_\tiles,j_\tiles)$ of the minimal sufficient set should be chosen as that on the line $i+j-1=\tiles$ which minimizes $(i-2)^2 a^2 + (j-2)^2 b^2$. This allows maximizing the sum $i+j-1$, and thus the number of \touched{} tiles, for a given length restriction (direct problem); or minimizing the required lengths for a specified number of \touched{} files (inverse problem).
+For each $\tiles$, the pair $(i_\tiles,j_\tiles)$ of the minimal sufficient set should be chosen as that on the line $i+j-1=\tiles$ which minimizes $(i-2)^2 a^2 + (j-2)^2 b^2$. This allows maximizing the sum $i+j-1$, and thus the number of visited tiles, for a given length restriction (direct problem); or minimizing the required lengths for a specified number of visited files (inverse problem).
 
 The fact that $(i_t,j_t)$ minimizes $(i-2)^2 a^2 + (j-2)^2 b^2$ among all pairs with $i+j-1=\tiles$ can be expressed as follows: for any $k \in \mathbb N$,
 \begin{align}
@@ -382,7 +378,7 @@ This point is shown with a square marker in Figure \ref{fig: ijLS_1p35_detail_in
 For $a^2/b^2$ arbitrary, the number of pairs with the same $i$ coordinate in the set $\mss$ is in general irregular, because the line \eqref{eq: lower bound, line} does not follow a ``natural'' direction of the grid. This happens for instance in Figure~\ref{fig: pairs_bounds_1p35}, where the number of pairs for the first $i$ values equals either $2$ or $3$ without a clear pattern.\footnote{Strictly, there is a periodic pattern whenever $a^2/b^2$ is rational, which is the case in Figure~\ref{fig: pairs_bounds_1p35}. However, this is not easily discernible unless $a^2/b^2$ is a ratio of small numbers.}
 On the other hand, a simple pattern arises for $a^2/b^2 \in \mathbb N$, as seen in Figures~\ref{fig: pairs_bounds_1} and \ref{fig: pairs_bounds_sqrt2}.
 
-A segment whose canonical rectangle has normalized width $i$ and height $j$ is oriented with approximate slope $jb/(ia)$ with respect to the $x$ axis (See Figure~\ref{fig: len ineq i j}); and the approximation becomes better for greater segment lengths. From \eqref{eq: upper bound, line} and \eqref{eq: lower bound, line} it can be seen that the positions of the pairs $(i,j) \in \mss$ have $j/i \approx a^2/b^2$ for large $i, j$. Therefore the optimal slope for long segments is approximately $a/b$. This formalizes the intuition that to maximize the number of \touched{} tiles, the segment should follow a direction along which the perceived ``length'' of the tile is smaller.
+A segment whose canonical rectangle has normalized width $i$ and height $j$ is oriented with approximate slope $jb/(ia)$ with respect to the $x$ axis (See Figure~\ref{fig: len ineq i j}); and the approximation becomes better for greater segment lengths. From \eqref{eq: upper bound, line} and \eqref{eq: lower bound, line} it can be seen that the positions of the pairs $(i,j) \in \mss$ have $j/i \approx a^2/b^2$ for large $i, j$. Therefore the optimal slope for long segments is approximately $a/b$. This formalizes the intuition that to maximize the number of visited tiles, the segment should follow a direction along which the perceived ``length'' of the tile is smaller.
 
 
 \section{Direct and inverse problems for a deterministic segment}
@@ -394,9 +390,9 @@ The direct and inverse problems defined in \S\ref{part: intro}, considering the 
 \subsection{Arbitrary grid with real-valued lengths}
 \label{part: max: arbitrary grid, real lengths}
 
-For a grid with parameters $a, b \in \mathbb R^+$, the maximum number $\tiles$ of \touched{} tiles with a given real-valued length $\len$ can be represented by a function $\funt: \mathbb R^+ \to \mathbb N$ such that $\tiles = \funt(\len)$. Similarly, for the inverse problem a function $\funl: \mathbb N \to \mathbb R^+$ can be defined such that $\funl(\tiles)$ gives the infimum length of all segments that \touch{} at least $\tiles$ tiles.
+For a grid with parameters $a, b \in \mathbb R^+$, the maximum number $\tiles$ of visited tiles with a given real-valued length $\len$ can be represented by a function $\funt: \mathbb R^+ \to \mathbb N$ such that $\tiles = \funt(\len)$. Similarly, for the inverse problem a function $\funl: \mathbb N \to \mathbb R^+$ can be defined such that $\funl(\tiles)$ gives the infimum length of all segments that visit at least $\tiles$ tiles.
 
-The function $\funt$ can be obtained from $\funl$ by noting that the maximum number of tiles that can be \touched{} by a segment of length $\len$ is the index of the largest term of the sequence $\funl(\tiles)$ that is less than $\len$:
+The function $\funt$ can be obtained from $\funl$ by noting that the maximum number of tiles that can be visited by a segment of length $\len$ is the index of the largest term of the sequence $\funl(\tiles)$ that is less than $\len$:
 \begin{equation}
 \label{eq: funt funl}
 \funt(\len) = \max \{\tiles \in \mathbb N \st \funl(\tiles)<\len\}.
@@ -491,7 +487,7 @@ Consider an arbitrary $\len$ such that for some $\tiles \in \mathbb N, \tiles \g
 \label{eq: theo funt, form: prop 1}
 \funl(\tiles)=\len.
 \end{equation}
-To see that $\funt$ has a jump at $\len$, assume for the sake of contradiction that $\funt$ is continuous, therefore constant, at that point. Then there is $\epsilon > 0$ for which $\funt(\len+\epsilon) = \tiles = \funt(\len-\epsilon)$. This means that there exists a segment with length $\len-\epsilon$ that \touches{} $\tiles$ tiles, and thus $\funl(\tiles) \leq \len-\epsilon < \len$, in contradiction with \eqref{eq: theo funt, form: prop 1}. Therefore $\funt$ is discontinuous, from the right, at $\len$. By definition of $\funl$, \eqref{eq: theo funt, form: prop 1} implies that $\funt(\len) < \tiles$, and that there exists $\epsilon > 0$ such that $\funt(\len+h) = \tiles$ for $0 < h < \epsilon$. This means that
+To see that $\funt$ has a jump at $\len$, assume for the sake of contradiction that $\funt$ is continuous, therefore constant, at that point. Then there is $\epsilon > 0$ for which $\funt(\len+\epsilon) = \tiles = \funt(\len-\epsilon)$. This means that there exists a segment with length $\len-\epsilon$ that visits $\tiles$ tiles, and thus $\funl(\tiles) \leq \len-\epsilon < \len$, in contradiction with \eqref{eq: theo funt, form: prop 1}. Therefore $\funt$ is discontinuous, from the right, at $\len$. By definition of $\funl$, \eqref{eq: theo funt, form: prop 1} implies that $\funt(\len) < \tiles$, and that there exists $\epsilon > 0$ such that $\funt(\len+h) = \tiles$ for $0 < h < \epsilon$. This means that
 \begin{align}
 \label{eq: theo funt, form: prop 2}
 \funt(\len) &< \tiles, \\
@@ -525,7 +521,7 @@ This function is monotone increasing for $\tiles \geq 3$.
 \end{theorem}
 
 \begin{proof}
-The $(i_\tiles,j_\tiles)$ pair in the minimal sufficient set $\mss$ corresponds to a maximum of $\tiles$ \touched{} tiles. By construction of this set, any segment that \touches{} $\tiles$ tiles must have length greater than $\sqrt{(i_\tiles-2)^2a^2 + (j_\tiles-2)^2b^2}$.
+The $(i_\tiles,j_\tiles)$ pair in the minimal sufficient set $\mss$ corresponds to a maximum of $\tiles$ visited tiles. By construction of this set, any segment that visits $\tiles$ tiles must have length greater than $\sqrt{(i_\tiles-2)^2a^2 + (j_\tiles-2)^2b^2}$.
 
 For $\tiles \geq 3$ the expressions \eqref{eq: theo: funl, form; i} and \eqref{eq: theo: funl, form; j} coincide with \eqref{eq: min suff set, form, i} and \eqref{eq: min suff set, form, j}. Therefore \eqref{eq: theo: funl, form; funl} gives the desired result.
 	
@@ -534,13 +530,13 @@ For $\tiles \in \{1, 2\}$ both \eqref{eq: theo: funl, form; i} and \eqref{eq: th
 By Theorem~\ref{theo: funt, form}, $\funt$ has unit-height jumps at the values $\funl(\tiles)$, $\tiles \in \mathbb N, \tiles \geq 4$. This implies that $\funl$ is monotone increasing for $\tiles \geq 3$.
 \end{proof}
 
-Theorems~\ref{theo: funt, form} and \ref{theo: funl, form} not only give the solutions $\funt(\len)$ and $\funl(\tiles)$ to the two problems stated in \S\ref{part: intro}; they also provide a way to actually position a segment of length slightly greater than $\len$ or $\funl(\tiles)$ so that it \touches{} $\tiles$ or $\funt(\len)$ tiles. Namely, the segment should have its endpoints respectively in the interior of two tiles separated $\isoli-1$ steps horizontally and $\jsoli-1$ steps vertically, with its exact position and orientation  adjusted to avoid any grid points.
+Theorems~\ref{theo: funt, form} and \ref{theo: funl, form} not only give the solutions $\funt(\len)$ and $\funl(\tiles)$ to the two problems stated in \S\ref{part: intro}; they also provide a way to actually position a segment of length slightly greater than $\len$ or $\funl(\tiles)$ so that it visits $\tiles$ or $\funt(\len)$ tiles. Namely, the segment should have its endpoints respectively in the interior of two tiles separated $\isoli-1$ steps horizontally and $\jsoli-1$ steps vertically, with its exact position and orientation  adjusted to avoid any grid points.
 
 It is interesting to consider the following particular cases: $\len \gg a,b$; $a \gg b$; and $a=b$. Regarding the first, from \eqref{eq: theo: funt, form; funt}--\eqref{eq: theo: funt, form; j}
 % *!*
 and from \eqref{eq: theo: funl, form; funl}--\eqref{eq: theo: funl, form; j}
 % *!*
-it is seen that for long segments the number of \touched{} tiles and the segment length are approximately proportional, with
+it is seen that for long segments the number of visited tiles and the segment length are approximately proportional, with
 \begin{equation}
 \label{eq: asympt}
 \lim_{\len \rightarrow \infty} \frac{\funt(\len)}{\len}
@@ -726,7 +722,7 @@ Similarly, using the second bound in \eqref{eq: der bounds 2} twice,
 which implies that $\funti(\leni+2)-\funti(\leni) \leq 3$ for $\leni \geq 3$. Therefore the two increments $\funti(\leni+1)-\funti(\leni)$ and $\funti(\leni+2)-\funti(\leni+1)$ cannot both be $2$ for $\leni \geq 3$.
 \end{proof}
 
-The \emph{inverse problem} with integer-length segments can be formulated as follows: given $\tiles \in \mathbb N$, find the \emph{minimum} integer length that allows \touching{} at least $\tiles$ tiles. Observe that in this case, unlike with real-valued lengths, there is indeed a minimum length, because every subset of $\mathbb N$ has a minimum. This can be expressed as a function $\funli: \mathbb N \to \mathbb N$:
+The \emph{inverse problem} with integer-length segments can be formulated as follows: given $\tiles \in \mathbb N$, find the \emph{minimum} integer length that allows visiting at least $\tiles$ tiles. Observe that in this case, unlike with real-valued lengths, there is indeed a minimum length, because every subset of $\mathbb N$ has a minimum. This can be expressed as a function $\funli: \mathbb N \to \mathbb N$:
 \begin{equation}
 \label{eq: funli funti}
 \funli(\tiles) = \min\{\leni \in \mathbb N \st \funti(\leni) \geq \tiles\},
@@ -742,7 +738,6 @@ The converse to \eqref{eq: funli funti} is (compare to \eqref{eq: funt funl}):
 \funti(\leni) = \max \{\tiles \in \mathbb N \st \funli(\tiles) \leq \leni\}.
 \end{equation}
 In view of \eqref{eq: funli funti} and \eqref{eq: funti funli}, $\funti$ and $\funli$ can be considered as ``pseudo-inverse'' sequences of each other.
-% ***Is this a good name? Is there an established name for this relationship?
 
 The sequence $\funli(\tiles)$, $\tiles \in \mathbb N$ can be computed using \eqref{eq: theo: funt, sq, form; funl} and \eqref{eq: funli funl}, and has initial values $1, 1, 1, 2, 2, 3, 3, 4, 5 \ldots$, as shown in Figure~\ref{fig: funli}. This is A**** in the On-Line Encyclopedia of Integer Sequences \cite{***}. However, a simpler expression can be obtained from \eqref{eq: funti leni} and \eqref{eq: funli funti}. This is established by the next theorem, which also states some properties of $\funli$, parallel to those of $\funti$.
 
@@ -790,16 +785,16 @@ The stated properties for $\funli$ follow directly from those of $\funti$ establ
 \end{proof}
 
 
-\section{Average number of tiles \touched{} by a random segment}
+\section{Average number of tiles visited by a random segment}
 \label{part: ave}
 
-Given $\len \in \mathbb R^+$, consider a segment of length $\len$ with random position and orientation. Specifically, the coordinates $x_1$, $y_1$ of the first endpoint are independent random variables uniformly distributed on $[0,a)$ and $[0,b)$ respectively. The orientation $\theta$ of the segment is uniformly distributed on $[0,2\pi)$. The variables $x_1$, $y_1$ and $\theta$ determine the coordinates $x_2$, $y_2$ of the second endpoint. Note that events of probability $0$, such as $x_1=a$ or the segment passing through a grid point, can be disregarded for computing the average number of tiles \touched{} by the segment.
+Given $\len \in \mathbb R^+$, consider a segment of length $\len$ with random position and orientation. Specifically, the coordinates $x_1$, $y_1$ of the first endpoint are independent random variables uniformly distributed on $[0,a)$ and $[0,b)$ respectively. The orientation $\theta$ of the segment is uniformly distributed on $[0,2\pi)$. The variables $x_1$, $y_1$ and $\theta$ determine the coordinates $x_2$, $y_2$ of the second endpoint. Note that events of probability $0$, such as $x_1=a$ or the segment passing through a grid point, can be disregarded for computing the average number of tiles visited by the segment.
 
-Let $\funta: \mathbb R^+ \to \mathbb R^+$ be defined such that $\funta(\len)$ gives the average number of tiles \touched{} by a random segment of length $\len$, with the above distributions.
+Let $\funta: \mathbb R^+ \to \mathbb R^+$ be defined such that $\funta(\len)$ gives the average number of tiles visited by a random segment of length $\len$, with the above distributions.
 
-Each realization of the random segment gives rise to a canonical rectangle. The normalized dimensions $i$ and $j$ of the canonical rectangle are thus random variables. Except for a set of realizations with zero probability, $i$ and $j$ are at least $1$, and the segment \touches{} $t = i+j-1$ tiles.
+Each realization of the random segment gives rise to a canonical rectangle. The normalized dimensions $i$ and $j$ of the canonical rectangle are thus random variables. Except for a set of realizations with zero probability, $i$ and $j$ are at least $1$, and the segment visits $t = i+j-1$ tiles.
 
-The random variables $i$ and $j$ are not independent. As a consequence, while the marginal distributions of $i$ and $j$ are easy to compute, the distribution of $i+j$ is difficult. However, knowing the marginal distributions is sufficient to compute the average number of \touched{} tiles:
+The random variables $i$ and $j$ are not independent. As a consequence, while the marginal distributions of $i$ and $j$ are easy to compute, the distribution of $i+j$ is difficult. However, knowing the marginal distributions is sufficient to compute the average number of visited tiles:
 \begin{equation}
 \label{eq: funta E[i] E[j]}
 \funta(\len) = \E[t] = \E[i]+\E[j]-1.
@@ -890,7 +885,7 @@ The analysis above can be analogously applied to $\Pr[j \geq n]$ if the $x$ and 
 
 \begin{theorem}
 \label{theo: funta, form}
-Given $a, b, \len \in \mathbb R^+$, consider a grid with parameters $a, b$ and a uniformly random segment of length $\len$, as defined above. The average number of tiles \touched{} by the segment, $\funta(\len)$, is 
+Given $a, b, \len \in \mathbb R^+$, consider a grid with parameters $a, b$ and a uniformly random segment of length $\len$, as defined above. The average number of tiles visited by the segment, $\funta(\len)$, is 
 \begin{equation}
 \label{eq: funta, form}
 \funta(\len) = \frac{2\len}{\pi}\left(\frac 1 a + \frac 1 b\right) + 1.
@@ -925,7 +920,7 @@ Similarly,
 Substituting \eqref{eq: theo funta form 3} and \eqref{eq: theo funta form 4} into \eqref{eq: funta E[i] E[j]} gives \eqref{eq: funta, form}.
 \end{proof}
 
-In view of Theorem~\ref{theo: funta, form}, the average number of \touched{} tiles has a remarkably simple dependence on the segment length, namely an affine function. Conversely, for any $t>1$ it is immediate to compute the length of a random segment that \touches{} $t$ tiles on average, given as $\funta^{-1}(t)$.
+In view of Theorem~\ref{theo: funta, form}, the average number of visited tiles has a remarkably simple dependence on the segment length, namely an affine function. Conversely, for any $t>1$ it is immediate to compute the length of a random segment that visits $t$ tiles on average, given as $\funta^{-1}(t)$.
 
 The results in Proposition~\ref{prop: Pr i} and Theorem~\ref{theo: funta, form} make clear the relationship between the problem considered here and Buffon's needle problem, i.e.~the probability that a random segment of fixed length crosses a line in a regular structure of parallel strips \cite[section 1.1]{Mathai99}. Firstly, since the number $\pi$ is involved in \eqref{eq: funta, form}, it is possible to design a simple probabilistic experiment to estimate the value of $\pi$, as in Buffon's original experiment. For example, choosing $a=b=\len=1$ gives $\funta(\len) = 1+1/\pi$.
 
@@ -938,7 +933,7 @@ gives the average number of lines crossed in Buffon's experiment. For $\len \leq
 
 Lastly, $\Pr[i \geq n]$ as computed in Proposition~\ref{prop: Pr i} for $n \geq 2$ can be seen as a generalization of the probability of crossing at least one line in Buffon's experiment, when a needle endpoint is only allowed to move in a narrower region of width $n-1$ times smaller than the width of the strips (instead of across the full strip as in Buffon's setting).
 
-***Maybe a graph comparing maximum and average. Or compute/plot their ratio. The asymptotic slopes are $\sqrt(1/a^2+1/b^2)$ for $\funt$ and $2/\pi(1/a+1/b)$. It may be interesting to consider the ratio of asymptotic slopes, as a function of $a/b$. It is maximum for $a=b$, and equals $2\sqrt 2/\pi = 0.9003$. It tends to $2/\pi$ for $a/b \rightarrow \infty$ and for $a/b \rightarrow 0$. The minimum number of tiles that can be \touched{} with non-zero probability (corresponding to an n times 1 canonical rectangle if a>=b) can also be plotted.
+***Maybe a graph comparing maximum and average. Or compute/plot their ratio. The asymptotic slopes are $\sqrt(1/a^2+1/b^2)$ for $\funt$ and $2/\pi(1/a+1/b)$. It may be interesting to consider the ratio of asymptotic slopes, as a function of $a/b$. It is maximum for $a=b$, and equals $2\sqrt 2/\pi = 0.9003$. It tends to $2/\pi$ for $a/b \rightarrow \infty$ and for $a/b \rightarrow 0$. The minimum number of tiles that can be visited with non-zero probability (corresponding to an n times 1 canonical rectangle if a>=b) can also be plotted.
 
 
 \bibliographystyle{plain}
