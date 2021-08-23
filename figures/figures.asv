@@ -1764,7 +1764,7 @@ limit(G*t, t, inf)
 syms t, assume(t, 'real'), pretty(simplify(diff((acos((t-3)/hypot(t-3, t-1)) - asin((t-3)/hypot(t-1, t-3))), t)))
 
 
-%% #67. Figure
+%% #67
 
 clear, clc
 a = 1;
@@ -1793,7 +1793,7 @@ xlabel([char(hex2dec('2113')) '/a']), ylabel([char(hex2dec('03C1')) '(' char(hex
 
 %% #68. Like #61 but including "a" (grid spacing)
 
-a = 2;
+a = 1;
 t = 4:2:7002; L_fine = a*(t-2)/sqrt(2)-1e-10;
 ii = ceil(L_fine/sqrt(2)/a) + 1;
 jj = ceil(sqrt(L_fine.^2/a^2 - (ii-2).^2 )) + 1;
@@ -1810,5 +1810,5 @@ result_computed(ind_even) = ( (alpha_even-beta_even).*(funt_fine(ind_even)-2).*(
 result_computed(ind_even2) = result_computed(ind_even2) + ...
     ( (alphap_even2-betap_even2).*funt_fine(ind_even2).*(funt_fine(ind_even2)-6) + funt_fine(ind_even2).^2/2 + (funt_fine(ind_even2)-6).^2/2 + ...
     2*L_fine(ind_even2).^2/a^2 - funt_fine(ind_even2).*sqrt(4*L_fine(ind_even2).^2/a^2 - (funt_fine(ind_even2)-6).^2) - (funt_fine(ind_even2)-6).*sqrt(4*L_fine(ind_even2).^2/a^2 - funt_fine(ind_even2).^2) ) / pi;
-plot(L_fine, result_computed.*L_fine), grid on
+plot(L_fine, result_computed.*funt_fine), grid on
 
