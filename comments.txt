@@ -1,21 +1,9 @@
-Some directions in which generalizations could be attempted:
+- Buffon and Buffon-Laplace problems (https://www.ias.ac.in/article/fulltext/reso/003/09/0070-0073)
 
-|- Rectangular grid instead of square. Is this an interesting generalization? I think Proposition 1 remains as in the square case. In Proposition 2, the first two conditions would carry over replacing i by i*a and j by j*b. For Proposition 3, its figure should again have axes i,j replaced by axes i*a,j*b. That way the distance condition on length based on i, j (Psoposition 2) is still a circle in the figure. How does the sequence of chosen (i,j) pairs change? It looks like there may not a pattern as simple as in the square case (whic is: i,i, then (i+1),i, then increase i and repeat). The order of the grid points (i,j) by increasing distance to (2,2) is more arbitrary. But a pattern can be found
+- Is "canonical rectangle" a good name? "Canonical" is close to what I wanted, but perhaps a better word can be found for "smallest and wih sides following grid lines"
 
-- Compute the average number of squares touched, when the segment is dropped randomly with a uniform distribution of positions and orientations. I think this is interesting, as it is similar to the Buffon and Buffon-Laplace problems (https://www.ias.ac.in/article/fulltext/reso/003/09/0070-0073). One segment endpoint would have a uniform distribution on a fixed square, and the direction would have a uniform distribution on [0,2*pi), or [0,pi/2), or even [0,pi/4) would suffice, I think. Also, the interval can be open, any value has probability zero. Likewise, events like the segment passing through a grid point can be disregarded. Anyway, this seems to be difficult problem. A starting point could be: given endpoint (or midpoint) coordinates x, y, a segment length, and a grid square: draw a circle with that endpoint (midpont) as center and the segment length (or half that) as radius, and determine what fraction of the circle touches the square (then, averaging over a uniform distribution for x, y seems easy). It seems several cases need to be distinguised, regarding the relative position and distance between the endpoint/midpoint and the square. /. Done! It was easy indeed
-
-Do we need to discuss potential applications of this (if we can find any)? This probably depends on the journal
-
-Do we need a section with conclusions? Probably not; depends on the journal
-
-Is "canonical rectangle" a good name? "Canonical" is close to what I wanted, but perhaps a better word can be found for "smallest and wih sides following grid lines"
-
-Are "sufficient" and "minimal sufficient" good names? They are used in statistics: analogously?
-
-"Pseudo-inverse" sequences: is there an established name for the relationship between the two sequences?
+- Are "sufficient" and "minimal sufficient" good names? They are used in statistics: analogously?
 
 (Include a,b as subscripts of the functions? I don't think so; it would make notation heavier and it's usually clear what the valuees of a and b are)
 
-Is the square case with a neq 1 y and integer lengths interesting? (I don't think so). And, would it be possible to generalizar results from a=1, integer length to that case? Alex's formula maybe? That "2" multiplying L^2 looks moderately promising. From that the inverse formular could be derived. The properties about increments would change. Probably not very interesting
-
-Parts that are incomplete or need to be worked on are marked with two or three asteriscs (two are like C's /*...*/ for a comment; three are like C's //... for a line comment
+Is the square case with a neq 1 y and integer lengths interesting? (I don't think so). And, would it be possible to generalize results from a=1, integer length to that case? Alex's formula maybe? That "2" multiplying L^2 looks moderately promising. From that the inverse formular could be derived. The properties about increments would change. Probably not very interesting
