@@ -96,8 +96,7 @@ line segment on a rectangular grid
 Given $a, b \in \mathbb R^+$, consider a grid on $\mathbb R^2$ formed by rectangular \emph{tiles} of width $a$ and height $b$. A line segment of length $\len \in \mathbb R^+$ is located on the plane with arbitrary position and orientation. The segment is said to \emph{visit} a tile if it intersects its interior.\footnote{
 The definition uses the interior of the tile, excluding the border, to avoid uninteresting results such as a ``zero-length'' segment visiting (a vertex of) $4$ tiles.} This paper deals with the following problems:
 \begin{itemize}
-\item What is the maximum number of tiles that the segment can visit?
-\item What length should a segment have to visit a given number of tiles?
+\item What is the maximum number of tiles that the segment can visit? Conversely, what length should a segment have to visit a given number of tiles?
 \item What is the average number of tiles visited by a uniformly random segment of a given length? How often does the random segment visit the maximum number of tiles?
 \end{itemize}
 
@@ -117,7 +116,7 @@ The \emph{inverse} problem is, given $\tiles \in \mathbb N$, to determine the in
 
 The direct and inverse problems are closely related. Namely, if $\len$ is the infimum of all lengths that allow visiting at least $\tiles$ tiles (inverse problem), $\tiles$ is the maximum number of tiles that can be visited with lengths slightly greater than $\len$ (direct problem).
 
-The problem of how many tiles a \emph{random} segment of a given length visits is precisely defined as follows. By symmetry, one endpoint of the segment can be assumed to lie in a fixed, reference tile. The position of this endpoint is \emph{uniformly} distributed on the tile. The segment orientation has a \emph{uniform} distribution on the set of all possible directions, and is \emph{independent} of the endpoint position. As will be seen, solving the problem of how many tiles the segment visits on average also answers the inverse question (segment length to visit a given number of tiles on average). In addition, it is interesting to know the probability that the segment visits the maximum number of tiles. 
+The notion of a \emph{random} segment of a given length is precisely defined as follows. By symmetry, one endpoint of the segment can be assumed to lie in a fixed, reference tile. The position of this endpoint is \emph{uniformly} distributed on the tile. The segment orientation has a \emph{uniform} distribution on the set of all possible directions, and is \emph{independent} of the endpoint position. Solving the problem of how many tiles the segment visits on average, as will be seen, also answers the inverse question (segment length to visit a given number of tiles on average). In addition, a natural question is with that probability the segment visits the maximum number of tiles. 
 
 % ***Do we need to discuss potential applications of this (if we can find any)? This probably depends on the journal
 % ***Do we need a section with conclusions? Probably not; depends on the journal
