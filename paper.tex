@@ -634,12 +634,12 @@ which gives
 The pair $(\isoli,\jsoli)$ resulting from \eqref{eq: theo: funt, sq, form; proof 1} is in $\mss'$, and is given in \eqref{eq: theo: funt, sq, form; i} and \eqref{eq: theo: funt, sq, form; j}.
 \end{proof}
 
-From Theorem~\ref{theo: funt, sq, form} it is easily seen that odd values of $\funt(\len)$ correspond to $\isoli = \jsoli$, whereas even values are achieved with $\jsoli = \isoli+1$. Given $\tiles \geq 3$ with $t$ odd, $\funt(\len) = \tiles$ if and only
+From Theorem~\ref{theo: funt, sq, form} it is easily seen that odd values of $\funt(\len)$ correspond to $\isoli = \jsoli$, whereas even values are achieved with $\jsoli = \isoli+1$. Given $\tiles \geq 3$ with $\tiles$ odd, $\funt(\len) = \tiles$ if and only
 \begin{equation}
 \label{eq: square, odd max tiles, lengths}
 \frac \len a \in \left( \frac{\tiles-3}{\sqrt{2}}, \frac{ \sqrt{(\tiles-1)^2+(\tiles-3)^2}}{2} \right].
 \end{equation}
-For $\tiles \geq 4$, $t$ even, $\funt(\len) = \tiles$ if and only if
+For $\tiles \geq 4$, $\tiles$ even, $\funt(\len) = \tiles$ if and only if
 \begin{equation}
 \label{eq: square, even max tiles, lengths}
 \frac \len a \in \left(\frac{ \sqrt{(\tiles-2)^2+(\tiles-4)^2}}{2}, \frac{\tiles-2}{\sqrt{2}} \right].
@@ -789,17 +789,17 @@ The stated properties for $\funli$ follow directly from those of $\funti$ establ
 
 Given $\len \in \mathbb R^+$, consider a segment of length $\len$ with random position and orientation. Specifically, the coordinates $x_1$, $y_1$ of the first endpoint are independent random variables uniformly distributed on $[0,a)$ and $[0,b)$ respectively. The orientation $\theta$ of the segment is uniformly distributed on $[0,2\pi)$. The variables $x_1$, $y_1$ and $\theta$ determine the coordinates $x_2$, $y_2$ of the second endpoint. Note that events of probability $0$, such as $x_1=a$ or the segment passing through a grid point, can be disregarded for computing the average number of tiles visited by the segment.
 
+Each realization of the random segment gives rise to a canonical rectangle, whose normalized dimensions $i$ and $j$ are thus random variables. Except for a set of realizations with zero probability, $i$ and $j$ are at least $1$, and the segment visits $i+j-1$ tiles. Note that $i$ and $j$ are not statistically independent. 
 
-\section{Arbitrary grid with real-valued lengths}
+
+\subsection{Arbitrary grid with real-valued lengths}
 
 Let $\funta: \mathbb R^+ \to \mathbb R^+$ be defined such that $\funta(\len)$ gives the average number of tiles visited by a random segment of length $\len$, with the distributions specified in \S\ref{part: rand}.
 
-Each realization of the random segment gives rise to a canonical rectangle. The normalized dimensions $i$ and $j$ of the canonical rectangle are thus random variables. Except for a set of realizations with zero probability, $i$ and $j$ are at least $1$, and the segment visits $t = i+j-1$ tiles.
-
-The random variables $i$ and $j$ are not independent. As a consequence, while the marginal distributions of $i$ and $j$ are easy to compute, the distribution of $i+j$ is difficult. However, knowing the marginal distributions is sufficient to compute the average number of visited tiles:
+Although the random variables $i$ and $j$ are dependent, their marginal distributions can be obtained easily, and are sufficient to compute the average number of visited tiles:
 \begin{equation}
 \label{eq: funta E[i] E[j]}
-\funta(\len) = \E[t] = \E[i]+\E[j]-1.
+\funta(\len) = \E[\tiles] = \E[i]+\E[j]-1.
 \end{equation}
 
 For $0 \leq \genvar \leq 1$, let
@@ -923,7 +923,7 @@ Similarly,
 Substituting \eqref{eq: theo funta form 3} and \eqref{eq: theo funta form 4} into \eqref{eq: funta E[i] E[j]} gives \eqref{eq: funta, form}.
 \end{proof}
 
-In view of Theorem~\ref{theo: funta, form}, the average number of visited tiles has a remarkably simple dependence on the segment length, namely an affine function. Conversely, for any $t>1$ it is immediate to compute the length of a random segment that visits $t$ tiles on average, given as $\funta^{-1}(t)$.
+In view of Theorem~\ref{theo: funta, form}, the average number of visited tiles has a remarkably simple dependence on the segment length, namely an affine function. Conversely, for any $\tiles>1$ it is immediate to compute the length of a random segment that visits $\tiles$ tiles on average, given as $\funta^{-1}(\tiles)$.
 
 The results in Proposition~\ref{prop: Pr i} and Theorem~\ref{theo: funta, form} make clear the relationship between the problem considered here and Buffon's needle problem, i.e.~the probability that a random segment of fixed length crosses a line in a regular structure of parallel strips \cite[section 1.1]{Mathai99}. Firstly, since the number $\pi$ is involved in \eqref{eq: funta, form}, it is possible to design a simple probabilistic experiment to estimate the value of $\pi$, as in Buffon's original experiment. For example, choosing $a=b=\len=1$ gives $\funta(\len) = 1+1/\pi$.
 
@@ -938,7 +938,7 @@ Lastly, $\Pr[i \geq n]$ as computed in Proposition~\ref{prop: Pr i} for $n \geq 
 
 ***Maybe a graph comparing maximum and average. Or compute/plot their ratio. The asymptotic slopes are $\sqrt(1/a^2+1/b^2)$ for $\funt$ and $2/\pi(1/a+1/b)$. It may be interesting to consider the ratio of asymptotic slopes, as a function of $a/b$. It is maximum for $a=b$, and equals $2\sqrt 2/\pi = 0.9003$. It tends to $2/\pi$ for $a/b \rightarrow \infty$ and for $a/b \rightarrow 0$. The minimum number of tiles that can be visited with non-zero probability (corresponding to an n times 1 canonical rectangle if a>=b) can also be plotted.
 
-***Clarify here that computing the probability of visiting the maximum number of tiles in the general case is a difficult problem, and it will be dealt with in the square-grid case only
+The probability of visiting the maximum number of tiles for a rectangular grid is difficult to compute, due to the irregularity of the minimal sufficient set (discussed in \S\ref{part: fund results}). In the square case, however, the simplicity of this set makes the problem tractable. 
 
 
 \subsection{Square grid with real-valued lengths}
@@ -967,12 +967,12 @@ Given $a, \len \in \mathbb R^+$, consider a square grid with spacing $a$ and a u
 \label{eq: probmax}
 \begin{split}
 \probmax(\len) & = g\left(\frac{\len} a, 
-\tiles-3, \tiles-3 \right) \quad\ \text{for } t \text{ odd, } \textstyle \frac \len a \in \left( \frac{\tiles-3}{\sqrt{2}}, \frac{\sqrt{(\tiles-5)^2+(\tiles-1)^2}} 2 \right]; \\
+\tiles-3, \tiles-3 \right) \quad\ \text{for } \tiles \text{ odd, } \textstyle \frac \len a \in \left( \frac{\tiles-3}{\sqrt{2}}, \frac{\sqrt{(\tiles-5)^2+(\tiles-1)^2}} 2 \right]; \\
 \probmax(\len) & = g\left(\frac{\len} a, \tiles-3, \tiles-3 \right) + 2 g\left(\frac{\len} a, \tiles-5, \tiles-1 \right) \\
-& \text{for } t \text{ odd, } \textstyle \frac \len a \in \left (\frac{\sqrt{(\tiles-5)^2+(\tiles-1)^2}} 2,  \frac{\sqrt{(\tiles-3)^2+(\tiles-1)^2}} 2 \right]; \\
-\probmax(\len) & = 2 g\left(\frac{\len} a, \tiles-4, \tiles-2 \right) \quad \text{for } t \text{ even, } \textstyle \frac \len a \in \left( \frac{\sqrt{(\tiles-4)^2+(\tiles-2)^2}} 2, \frac{\sqrt{(\tiles-6)^2+\tiles^2}} 2 \right]; \\
+& \text{for } \tiles \text{ odd, } \textstyle \frac \len a \in \left (\frac{\sqrt{(\tiles-5)^2+(\tiles-1)^2}} 2,  \frac{\sqrt{(\tiles-3)^2+(\tiles-1)^2}} 2 \right]; \\
+\probmax(\len) & = 2 g\left(\frac{\len} a, \tiles-4, \tiles-2 \right) \quad \text{for } \tiles \text{ even, } \textstyle \frac \len a \in \left( \frac{\sqrt{(\tiles-4)^2+(\tiles-2)^2}} 2, \frac{\sqrt{(\tiles-6)^2+\tiles^2}} 2 \right]; \\
 \probmax(\len) & = 2 g\left(\frac{\len} a, \tiles-4, \tiles-2 \right) + 2 g\left(\frac{\len} a, \tiles-6, \tiles \right) \\
-& \text{for } t \text{ even, } \textstyle \frac \len a \in \left( \frac{\sqrt{(\tiles-6)^2+\tiles^2}} 2, \frac{\tiles-2}{\sqrt{2}} \right].
+& \text{for } \tiles \text{ even, } \textstyle \frac \len a \in \left( \frac{\sqrt{(\tiles-6)^2+\tiles^2}} 2, \frac{\tiles-2}{\sqrt{2}} \right].
 \end{split}
 \end{equation}
 \end{theorem}
@@ -995,11 +995,11 @@ For any $i,j$ with $i+j-1=\tiles$ and for a given orientation $\theta$, the segm
 
 \begin{figure}
 \centering%
-\subfigure[The second endpoint is in the tile with lower-left corner $((t-1)/2,(t-1)/2)$]{%
+\subfigure[The second endpoint is in the tile with lower-left corner $((\tiles-1)/2,(\tiles-1)/2)$]{%
 \label{fig: probmax_funt_odd_diag}%
 \includegraphics[width=.56\textwidth]{probmax_funt_odd_diag}%
 }\\%\hfill%
-\subfigure[The second endpoint is in the tile with lower-left corner $((t-3)/2,(t+1)/2)$]{%
+\subfigure[The second endpoint is in the tile with lower-left corner $((\tiles-3)/2,(\tiles+1)/2)$]{%
 \label{fig: probmax_funt_odd_offdiag}%
 \includegraphics[width=.56\textwidth]{probmax_funt_odd_offdiag}%
 }%
@@ -1010,14 +1010,14 @@ For any $i,j$ with $i+j-1=\tiles$ and for a given orientation $\theta$, the segm
 
 There is a range of possible values of $\theta$ for which the above condition is satisfied. This range corresponds to the part of the arc with solid line in Figure~\ref{fig: probmax_funt_odd}. For convenience, the angle $\theta$ is defined clockwise from the downward direction, as seen in the figure. For each $\theta$ in the allowed range, the valid positions for the first endpoint of the (shifted) segment are in the shaded rectangle, whose dimensions depend on $\theta$. The fraction of the reference tile occupied by this rectangle is the probability $\probmax_{i-1,j-1}(\len,\theta)$ that the segment goes from the reference tile to that with lower-left corner $(i-1,j-1)$ conditioned on $\theta$. The desired probability, $\probmax(\len)$, is obtained by averaging $\probmax_{i-1,j-1}(\len, \theta)$ over $\theta$ and summing over all $i-1,j-1$ that can be reached from the reference tile.
 
-The situation is different depending on whether $\tiles$ is odd or even. Consider $\tiles$ odd first. Under this assumption, the range of lengths corresponding to $\tiles$ is given by \eqref{eq: square, odd max tiles, lengths}. For any length in this interval, there are some positions within the reference file from which the tile with lower-left coordinate $((t-1)/2, (t-1)/2)$ can be reached. Equivalently, the shifted segment with one endpoint at $((t-1)/2, (t-1)/2)$ can reach the reference tile. This is illustrated in Figure~\ref{fig: probmax_funt_odd_diag}. In addition, if 
+The situation is different depending on whether $\tiles$ is odd or even. Consider $\tiles$ odd first. Under this assumption, the range of lengths corresponding to $\tiles$ is given by \eqref{eq: square, odd max tiles, lengths}. For any length in this interval, there are some positions within the reference file from which the tile with lower-left coordinate $((\tiles-1)/2, (\tiles-1)/2)$ can be reached. Equivalently, the shifted segment with one endpoint at $((\tiles-1)/2, (\tiles-1)/2)$ can reach the reference tile. This is illustrated in Figure~\ref{fig: probmax_funt_odd_diag}. In addition, if 
 \begin{equation}
 \label{eq: probmax len odd2}
 \len > \frac{\sqrt{(\tiles-5)^2 + (\tiles-1)^2}}{2}
 \end{equation}
-the two tiles with lower-left coordinates $((t-3)/2, (t+1)/2)$ and $((t+1)/2, (t-3)/2)$ are also reachable from the reference tile; or equivalently the shifted segment can reach the reference tile, as shown in Figure~\ref{fig: probmax_funt_odd_offdiag}. This can only happen for $\tiles \geq 5$ (for $\tiles=3$ the inequality \eqref{eq: probmax len odd2} cannot be satisfied for lengths in the range given by \eqref{eq: square, odd max tiles, lengths}). In this case, by symmetry, each of those two tiles contributes the same probability. Other tiles corresponding to the same $\tiles$ need not be considered, because they cannot be reached with lengths satisfying \eqref{eq: square, odd max tiles, lengths}.
+the two tiles with lower-left coordinates $((\tiles-3)/2, (\tiles+1)/2)$ and $((\tiles+1)/2, (\tiles-3)/2)$ are also reachable from the reference tile; or equivalently the shifted segment can reach the reference tile, as shown in Figure~\ref{fig: probmax_funt_odd_offdiag}. This can only happen for $\tiles \geq 5$ (for $\tiles=3$ the inequality \eqref{eq: probmax len odd2} cannot be satisfied for lengths in the range given by \eqref{eq: square, odd max tiles, lengths}). In this case, by symmetry, each of those two tiles contributes the same probability. Other tiles corresponding to the same $\tiles$ need not be considered, because they cannot be reached with lengths satisfying \eqref{eq: square, odd max tiles, lengths}.
 
-For $\tiles$ even, which corresponds to lengths in the interval \eqref{eq: square, even max tiles, lengths}, the two tiles with lower-left coordinates $(t/2-1, t/2)$ and $(t/2, t/2-1)$ can always be reached from some positions within the reference tile. In addition, if
+For $\tiles$ even, which corresponds to lengths in the interval \eqref{eq: square, even max tiles, lengths}, the two tiles with lower-left coordinates $(\tiles/2-1, \tiles/2)$ and $(\tiles/2, \tiles/2-1)$ can always be reached from some positions within the reference tile. In addition, if
 \begin{equation}
 \label{eq: probmax len even2}
 \len > \frac{\sqrt{((\tiles-6)^2 + \tiles^2}}{2}
@@ -1026,10 +1026,10 @@ the two tiles with lower-left coordinates $(\tiles/2-2, \tiles/2+1)$ and $(\tile
 
 Therefore, two cases need to be distinguished for $\tiles$ odd, depending on whether \eqref{eq: probmax len odd2} is satisfied or not; and similarly two cases exist for $\tiles$ even, depending on whether \eqref{eq: probmax len even2} holds or not. These are, respectively, the four cases in \eqref{eq: probmax}.
 
-In the first case, as has been argued, only the tile with lower-left coordinates $((t-1)/2, (t-1)/2)$ is reachable. For a given $\theta$, the conditional probability $\probmax_{(t-1)/2, (t-1)/2}(\len, \theta)$ is the area of the shaded rectangle in Figure~\ref{fig: probmax_funt_odd_diag} divided by $a^2$. The horizontal and vertical sides of this rectangle are $\len\sin\theta - a(\tiles-3)/2$ and $\len\cos\theta - a(\tiles-3)/2$ respectively, and thus
+In the first case, as has been argued, only the tile with lower-left coordinates $((\tiles-1)/2, (\tiles-1)/2)$ is reachable. For a given $\theta$, the conditional probability $\probmax_{(\tiles-1)/2, (\tiles-1)/2}(\len, \theta)$ is the area of the shaded rectangle in Figure~\ref{fig: probmax_funt_odd_diag} divided by $a^2$. The horizontal and vertical sides of this rectangle are $\len\sin\theta - a(\tiles-3)/2$ and $\len\cos\theta - a(\tiles-3)/2$ respectively, and thus
 \begin{equation}
 \label{eq: probmax: probmax theta odd}
-\probmax_{(t-1)/2, (t-1)/2}(\len, \theta) = \frac{(\len\sin\theta - a(\tiles-3)/2) (\len\cos\theta - a(\tiles-3)/2)} {a^2}
+\probmax_{(\tiles-1)/2, (\tiles-1)/2}(\len, \theta) = \frac{(\len\sin\theta - a(\tiles-3)/2) (\len\cos\theta - a(\tiles-3)/2)} {a^2}
 \end{equation}
 The range of allowed values for $\theta$, as can be seen from Figure~\ref{fig: probmax_funt_odd_diag}, is $(\theta_0, \theta_1)$ with
 \begin{align}
@@ -1042,17 +1042,17 @@ Computing the average of \eqref{eq: probmax: probmax theta odd} over $\theta$, m
 \begin{equation}
 \label{eq: probmax: probmax odd}
 \begin{split}
-\probmax(\len) & = 4 \int_{\theta_0}^{\theta_1} \frac{\probmax_{(t-1)/2, (t-1)/2}(\len, \theta)}{2\pi} \diff \theta \\
+\probmax(\len) & = 4 \int_{\theta_0}^{\theta_1} \frac{\probmax_{(\tiles-1)/2, (\tiles-1)/2}(\len, \theta)}{2\pi} \diff \theta \\
 & = \frac 2 \pi \int_{\arcsin\frac{a(\tiles-3)}{2\len}}^{\arccos\frac{a(\tiles-3)}{2\len}} \left( \frac{\len\sin\theta}a - \frac{\tiles-3} 2 \right)  \left( \frac{\len\cos\theta}a - \frac{\tiles-3} 2 \right) \diff \theta \\
-& = g\left( \frac \len a, t-3, t-3 \right ),
+& = g\left( \frac \len a, \tiles-3, \tiles-3 \right ),
 \end{split}
 \end{equation}
 in accordance with \eqref{eq: probmax}.
 
-For the second case in \eqref{eq: probmax}, $\probmax(\len)$ is obtained as in the preceding paragraph plus an additional term corresponding to the contribution of the tile with lower-left corner $((t-3)/2, (t+1)/2)$, multiplied by $2$ to account for its symmetrical tile $((t+1)/2, (t-3)/2)$ and by $4$ to include all quadrants. The sides of the shaded rectangle in Figure~\ref{fig: probmax_funt_odd_offdiag} are $\len\sin\theta - a(\tiles-5)/2$ and $\len\cos\theta - a(\tiles-1)/2$, and therefore
+For the second case in \eqref{eq: probmax}, $\probmax(\len)$ is obtained as in the preceding paragraph plus an additional term corresponding to the contribution of the tile with lower-left corner $((\tiles-3)/2, (\tiles+1)/2)$, multiplied by $2$ to account for its symmetrical tile $((\tiles+1)/2, (\tiles-3)/2)$ and by $4$ to include all quadrants. The sides of the shaded rectangle in Figure~\ref{fig: probmax_funt_odd_offdiag} are $\len\sin\theta - a(\tiles-5)/2$ and $\len\cos\theta - a(\tiles-1)/2$, and therefore
 \begin{equation}
 \label{eq: probmax: probmax theta odd2}
-\probmax_{(t-3)/2, (t+1)/2}(\len, \theta) = \frac{(\len\sin\theta - a(\tiles-5)/2) (\len\cos\theta - a(\tiles-1)/2)} {a^2}.
+\probmax_{(\tiles-3)/2, (\tiles+1)/2}(\len, \theta) = \frac{(\len\sin\theta - a(\tiles-5)/2) (\len\cos\theta - a(\tiles-1)/2)} {a^2}.
 \end{equation}
 The integration interval $(\theta_0, \theta_1)$ is in this case
 \begin{align}
@@ -1061,13 +1061,15 @@ The integration interval $(\theta_0, \theta_1)$ is in this case
 \end{align}
 The additional contribution to $\probmax(\len)$, given by
 \begin{multline}
-8 \int_{\theta_0}^{\theta_1} \frac{\probmax_{(t-3)/2, (t+1)/2}(\len, \theta)}{2\pi} \diff \theta \\
+8 \int_{\theta_0}^{\theta_1} \frac{\probmax_{(\tiles-3)/2, (\tiles+1)/2}(\len, \theta)}{2\pi} \diff \theta \\
 = \frac 4 \pi \int_{\arcsin\frac{a(\tiles-5)}{2\len}}^{\arccos\frac{a(\tiles-1)}{2\len}} \left( \frac{\len\sin\theta}a - \frac{\tiles-5} 2 \right)  \left( \frac{\len\cos\theta}a - \frac{\tiles-1} 2 \right) \diff \theta,
 \end{multline}
 is recognized to be $2 g(\len/a, \tiles-5, \tiles-1)$. This proves the second equality in \eqref{eq: probmax}.
 
 The expressions for the third and fourth cases in \eqref{eq: probmax}, corresponding to $\tiles$ even, are established analogously.
 \end{proof}
+
+It should be noted that the technique used in the proof of Theorem~\ref{theo: probmax, sq} could in principle be used for obtaining the probability that the number of tiles visited by the segment equals or exceeds any given value $t \funt(\len)$. The resulting expressions, however, are cumbersome, because more cases (more subintervals for the length) need to be distinguished depending on how many tiles with $i+j-1=t$ can be reached from the reference tile.
 
 Figure~\ref{fig: probmax_len} shows the probability $\probmax(\len)$ of visiting the maximum number of tiles on a square grid with spacing $a$, as given by \eqref{eq: probmax}. As $\len$ grows, $\probmax(\len)$ has a jump when the maximum number of tiles that can be visited increases by $1$. This happens when $\len$ equals the right endpoint of the interval \eqref{eq: square, odd max tiles, lengths} for $\tiles$ odd or of \eqref{eq: square, even max tiles, lengths} for $\tiles$ even. Let these length values be denoted as $\len_\tiles$:
 \begin{equation}
