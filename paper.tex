@@ -98,7 +98,7 @@ The definition uses the interior of the tile, excluding the border, to avoid uni
 \begin{itemize}
 \item What is the maximum number of tiles that the segment can visit?
 \item What length should a segment have to visit a given number of tiles?
-\item What is the average number of tiles visited by a uniformly random segment of a given length?
+\item What is the average number of tiles visited by a uniformly random segment of a given length? How often does the random segment visit the maximum number of tiles?
 \end{itemize}
 
 As an example of the first problem, consider $a=1.35$, $b=1$. A segment of unit length can be placed as shown in Figure~\ref{fig: examples} (left) to make it visit $3$ tiles. In fact, the solution for $\len=1$ is $3$ tiles. The figure also illustrates that the solution for length $2.4$ is $5$ (center), and for $4.7$ it is $8$ (right).
@@ -117,7 +117,7 @@ The \emph{inverse} problem is, given $\tiles \in \mathbb N$, to determine the in
 
 The direct and inverse problems are closely related. Namely, if $\len$ is the infimum of all lengths that allow visiting at least $\tiles$ tiles (inverse problem), $\tiles$ is the maximum number of tiles that can be visited with lengths slightly greater than $\len$ (direct problem).
 
-The problem of how many tiles a \emph{random} segment of a given length visits on average is precisely defined as follows. By symmetry, one endpoint of the segment can be assumed to lie in a fixed, reference tile. The position of this endpoint is \emph{uniformly} distributed on the tile. The segment orientation has a \emph{uniform} distribution on the set of all possible directions, and is \emph{independent} of the endpoint position. As will be seen, solving this problem also answers the inverse question (segment length to visit a given number of tiles on average), which thus need not be considered separately. 
+The problem of how many tiles a \emph{random} segment of a given length visits is precisely defined as follows. By symmetry, one endpoint of the segment can be assumed to lie in a fixed, reference tile. The position of this endpoint is \emph{uniformly} distributed on the tile. The segment orientation has a \emph{uniform} distribution on the set of all possible directions, and is \emph{independent} of the endpoint position. As will be seen, solving the problem of how many tiles the segment visits on average also answers the inverse question (segment length to visit a given number of tiles on average). In addition, it is interesting to know the probability that the segment visits the maximum number of tiles. 
 
 % ***Do we need to discuss potential applications of this (if we can find any)? This probably depends on the journal
 % ***Do we need a section with conclusions? Probably not; depends on the journal
@@ -126,7 +126,7 @@ The problems studied in this paper are related to \ldots ***maybe a short paragr
 \url{https://www.jstor.org/stable/2317945} \\
 \url{https://www.jstor.org/stable/2687085}
 
-The rest of the paper is organized as follows. Fundamental results are presented in \S\ref{part: fund results}, which form the basis of the subsequent analysis. The direct and inverse problems for a deterministic segment are considered in \S\ref{part: max}, first for real-valued lengths, and then for integer-valued lengths on a unit square grid. The problem of computing the average number of tiles visited by a random segment is analyzed in \S\ref{part: ave}.
+The rest of the paper is organized as follows. Fundamental results are presented in \S\ref{part: fund results}, which form the basis of the subsequent analysis. The direct and inverse problems for a deterministic segment are considered in \S\ref{part: max}, first for real-valued lengths, and then for integer-valued lengths on a unit square grid. The analysis for the random segment is carried out in \S\ref{part: rand}. The average number of tiles is computed in general, and the probability that the segment visits the maximum number of tiles is obtained for a square grid.
 
 % The rounding down (floor) and rounding up (ceiling) operations will be denoted as $\lfloor \cdot \rfloor$ and $\lceil \cdot \rceil$. The notation $[\mathsf S]$ will be used for the Iverson function, which equals $1$ if statement $\mathsf S$ is true and $0$ otherwise.
 
@@ -785,12 +785,15 @@ The stated properties for $\funli$ follow directly from those of $\funti$ establ
 \end{proof}
 
 
-\section{Average number of tiles visited by a random segment}
-\label{part: ave}
+\section{Probabilistic characterization for a random segment}
+\label{part: rand}
 
 Given $\len \in \mathbb R^+$, consider a segment of length $\len$ with random position and orientation. Specifically, the coordinates $x_1$, $y_1$ of the first endpoint are independent random variables uniformly distributed on $[0,a)$ and $[0,b)$ respectively. The orientation $\theta$ of the segment is uniformly distributed on $[0,2\pi)$. The variables $x_1$, $y_1$ and $\theta$ determine the coordinates $x_2$, $y_2$ of the second endpoint. Note that events of probability $0$, such as $x_1=a$ or the segment passing through a grid point, can be disregarded for computing the average number of tiles visited by the segment.
 
-Let $\funta: \mathbb R^+ \to \mathbb R^+$ be defined such that $\funta(\len)$ gives the average number of tiles visited by a random segment of length $\len$, with the above distributions.
+
+\section{Arbitrary grid with real-valued lengths}
+
+Let $\funta: \mathbb R^+ \to \mathbb R^+$ be defined such that $\funta(\len)$ gives the average number of tiles visited by a random segment of length $\len$, with the distributions specified in \S\ref{part: rand}.
 
 Each realization of the random segment gives rise to a canonical rectangle. The normalized dimensions $i$ and $j$ of the canonical rectangle are thus random variables. Except for a set of realizations with zero probability, $i$ and $j$ are at least $1$, and the segment visits $t = i+j-1$ tiles.
 
@@ -806,6 +809,7 @@ For $0 \leq \genvar \leq 1$, let
 f(\genvar) = \int_0^r \arccos z \diff z = \genvar \arccos \genvar - \sqrt{1-\genvar^2} + 1.
 \end{equation}
 
+% ***This will go after Theorem~\ref{theo: funta, form}
 \begin{proposition}
 \label{prop: Pr i}
 Given $a, b, \len \in \mathbb R^+$, consider a grid with parameters $a, b$ and a uniformly random segment of length $\len$, as defined above. Let the random variables $i$, $j$ represent the normalized dimensions of the canonical rectangle. For $n \in \mathbb N$,
@@ -934,6 +938,13 @@ gives the average number of lines crossed in Buffon's experiment. For $\len \leq
 Lastly, $\Pr[i \geq n]$ as computed in Proposition~\ref{prop: Pr i} for $n \geq 2$ can be seen as a generalization of the probability of crossing at least one line in Buffon's experiment, when a needle endpoint is only allowed to move in a narrower region of width $n-1$ times smaller than the width of the strips (instead of across the full strip as in Buffon's setting).
 
 ***Maybe a graph comparing maximum and average. Or compute/plot their ratio. The asymptotic slopes are $\sqrt(1/a^2+1/b^2)$ for $\funt$ and $2/\pi(1/a+1/b)$. It may be interesting to consider the ratio of asymptotic slopes, as a function of $a/b$. It is maximum for $a=b$, and equals $2\sqrt 2/\pi = 0.9003$. It tends to $2/\pi$ for $a/b \rightarrow \infty$ and for $a/b \rightarrow 0$. The minimum number of tiles that can be visited with non-zero probability (corresponding to an n times 1 canonical rectangle if a>=b) can also be plotted.
+
+***Clarify here that computing the probability of visiting the maximum number of tiles in the general case is a difficult problem, and it will be dealt with in the square-grid case only
+
+
+\section{Square grid with real-valued lengths}
+
+***
 
 
 \bibliographystyle{plain}
