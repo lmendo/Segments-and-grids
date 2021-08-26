@@ -4,6 +4,11 @@
 
 - Are "sufficient" and "minimal sufficient" good names? They are used in statistics: analogously?
 
-(Include a,b as subscripts of the functions? I don't think so; it would make notation heavier and it's usually clear what the valuees of a and b are)
+- (Include a,b as subscripts of the functions? I don't think so; it would make notation heavier and it's usually clear what the valuees of a and b are)
 
-Is the square case with a neq 1 y and integer lengths interesting? (I don't think so). And, would it be possible to generalize results from a=1, integer length to that case? Alex's formula maybe? That "2" multiplying L^2 looks moderately promising. From that the inverse formular could be derived. The properties about increments would change. Probably not very interesting
+Things to do:
+- Alex: write the proof for the square, integer length formula
+- Alex: write the new proof for the average number of tiles
+- Luis: fill in some intermediate steps in the proof of the asymptotic analysis of probmax
+- Alex/Luis: come up with a simpler approach for the proof of Pr[max] = O(1/length), or else fill in some intermediate steps in the proof. It's tedious by hand, but Maple can help
+- Luis: apply the two sets of structural changes (message by Luis, 26vii21), if Alex agrees
