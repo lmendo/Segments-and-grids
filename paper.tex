@@ -222,7 +222,7 @@ For instance, it is intuitively clear from Figure~\ref{fig: examples} that segme
 % This is true for any a, b: 2 can achieved instead of 1 without compromising the other dimension.
 The corresponding $(i,j)$ pairs can be left out of the sufficient set. In general, the pairs included in a minimal sufficient set will be different depending on $a$ and $b$. Two specific examples of minimal sufficient sets will be presented later in this section.
 
-Knowing a minimal sufficient set of $(i,j)$ pairs facilitates the solution of both the direct an inverse problems, because it reduces the number of pairs that need to be tried. In order to derive a general method to build a minimal sufficient set, it is insightful to consider two specific cases first, as will be presented in the following. It is also helpful to use the equivalent formulation of the direct problem referred to in \S\ref{part: intro}, i.e.\ finding the maximum number of tiles visited by segments of length $\len$ \emph{or less}.
+Knowing a minimal sufficient set of $(i,j)$ pairs facilitates the solution of both the direct an inverse problems, because it reduces the number of pairs that need to be tried. In order to derive a general method to build a minimal sufficient set, it is insightful to consider two specific cases first, as will be presented in the following. It is also helpful to use the equivalent formulation of the direct problem referred to in \S\ref{part: intro}, i.e.~finding the maximum number of tiles visited by segments of length $\len$ \emph{or less}.
 
 Thus each choice of $(i, j)$ implies a maximum of $i+j-1$ visited tiles on one hand; and sets a lower bound on the required length $\len$ on the other hand.
 
@@ -565,14 +565,16 @@ Figure~\ref{fig: funt funl examples} shows $\funt$ and $\funl$ for several pairs
 \end{figure}%
 
 
-\subsection{Square grid with real-valued lengths}
+\subsection{Unit square grid with real-valued lengths}
 \label{part: max: square grid, real lengths}
 
-Particularizing the results in \S\ref{part: max: arbitrary grid, real lengths} to a square grid, $a=b$, obviously yields simpler formulas.
+A square grid has $a=b$. If the segment lengths are real-valued it can be further assumed that $a=1$. For $a \neq 1$ the results to be obtained apply with $\len$ replaced by $\len/a$.
+
+Particularizing the results in \S\ref{part: max: arbitrary grid, real lengths} to $a=b=1$ obviously yields simpler formulas.
 
 \begin{corollary}
 \label{cor: funt, sq, form}
-For a square grid with $a \in \mathbb R^+$, and for $\len \in \mathbb R^+$,
+For a unit square grid with $\len \in \mathbb R^+$,
 \begin{equation}
 \label{eq: cor: funt, sq, form}
 \funt(\len) = \isoli+\jsoli-1
@@ -580,24 +582,24 @@ For a square grid with $a \in \mathbb R^+$, and for $\len \in \mathbb R^+$,
 with
 \begin{align}
 \label{eq: cor: funt, sq, form; i}
-\isoli &= \left\lceil \frac{1 + \Re \sqrt{2\len^2/a^2-1}}{2} \right\rceil + 1, \\
+\isoli &= \left\lceil \frac{1 + \Re \sqrt{2\len^2-1}}{2} \right\rceil + 1, \\
 \label{eq: cor: funt, sq, form; j}
-\jsoli &= \left\lceil \sqrt{\len^2/a^2-(\isoli-2)^2} \right\rceil + 1,
+\jsoli &= \left\lceil \sqrt{\len^2-(\isoli-2)^2} \right\rceil + 1,
 \end{align}
 \end{corollary}
 
 \begin{corollary}
 \label{theo: funl, sq, form}
-For a square grid with $a \in \mathbb R^+$, and for $\tiles \in \mathbb N$,
+For a unit square grid, and for $\tiles \in \mathbb N$,
 \begin{equation}
 \label{eq: theo: funt, sq, form; funl}\\
-\frac{\funl(\tiles)}{a} = \begin{cases}
+\funl(\tiles) = \begin{cases}
 \displaystyle
 0 & \text{for } \tiles =1, 2 \\[1.4mm]
 \displaystyle
 \frac{\tiles-3}{\sqrt{2}} & \text{for } \tiles \text{ odd, } \tiles \geq 3 \\[4.5mm]
 \displaystyle
-\sqrt{\frac{(\tiles-3)^2+1} {2}} & \text{for } \tiles \text{ even, } \tiles \geq 3.
+\sqrt{\frac{(\tiles-3)^2+1} {2}} & \text{for } \tiles \text{ even, } \tiles \geq 4.
 \end{cases}
 \end{equation}
 \end{corollary}
@@ -606,7 +608,7 @@ Furthermore, an even simpler formula can be obtained for $\funt$. Its derivation
 
 \begin{theorem}
 \label{theo: funt, sq, form}
-For a square grid with $a \in \mathbb R^+$, and for $\len \in \mathbb R^+$,
+For a unit square grid with $\len \in \mathbb R^+$,
 \begin{equation}
 \label{eq: theo: funt, sq, form; funt}
 \funt(\len) = \isoli+\jsoli-1
@@ -614,22 +616,22 @@ For a square grid with $a \in \mathbb R^+$, and for $\len \in \mathbb R^+$,
 with
 \begin{align}
 \label{eq: theo: funt, sq, form; i}
-\isoli &= \left\lceil \frac{\len}{a \sqrt{2}} \right\rceil + 1, \\
+\isoli &= \left\lceil \frac{\len}{\sqrt{2}} \right\rceil + 1, \\
 \label{eq: theo: funt, sq, form; j}
-\jsoli &= \left\lceil \sqrt{\len^2/a^2-(\isoli-2)^2} \right\rceil + 1.
+\jsoli &= \left\lceil \sqrt{\len^2-(\isoli-2)^2} \right\rceil + 1.
 \end{align}
 \end{theorem}
 
 \begin{proof}
-For $a=b$ the set $\mss$ from Proposition~\ref{prop: min suff set} consists of points of the form $(i,i)$ and $(i+1,i)$, as is easily seen from Proposition~\ref{prop: min suff set, form}, and as illustrated in Figure~\ref{fig: pairs_bounds_1}. By symmetry, replacing each point $(i+1,i)$ by $(i,i+1)$ gives a set $\mss'$ which is also minimal sufficient. For this new set, the lower bounding line \eqref{eq: lower bound, line} can be replaced by the simpler $j=i$. The same approach used in the proof of Theorem~\ref{theo: funt, form} can be used, but using this line. Thus $(\isolr, \jsolr)$ is obtained from
+For $a=b=1$ the set $\mss$ from Proposition~\ref{prop: min suff set} consists of points of the form $(i,i)$ and $(i+1,i)$, as is easily seen from Proposition~\ref{prop: min suff set, form}, and as illustrated in Figure~\ref{fig: pairs_bounds_1}. By symmetry, replacing each point $(i+1,i)$ by $(i,i+1)$ gives a set $\mss'$ which is also minimal sufficient. For this new set, the lower bounding line \eqref{eq: lower bound, line} can be replaced by the simpler $j=i$. The same approach used in the proof of Theorem~\ref{theo: funt, form} can be followed, but using this line. Thus $(\isolr, \jsolr)$ is obtained from
 \begin{align}
-(\isolr-2)^2 a^2 + (\jsolr-2)^2 a^2 &= \len^2, \\
+(\isolr-2)^2 + (\jsolr-2)^2  &= \len^2, \\
 \jsolr &= \isoli,
 \end{align}
 which gives
 \begin{equation}
 \label{eq: theo: funt, sq, form; proof 1}
-\isolr = \frac{\len}{a \sqrt{2}} + 2.
+\isolr = \len/\sqrt{2} + 2.
 \end{equation}
 The pair $(\isoli,\jsoli)$ resulting from \eqref{eq: theo: funt, sq, form; proof 1} is in $\mss'$, and is given in \eqref{eq: theo: funt, sq, form; i} and \eqref{eq: theo: funt, sq, form; j}.
 \end{proof}
@@ -637,19 +639,19 @@ The pair $(\isoli,\jsoli)$ resulting from \eqref{eq: theo: funt, sq, form; proof
 From Theorem~\ref{theo: funt, sq, form} it is easily seen that odd values of $\funt(\len)$ correspond to $\isoli = \jsoli$, whereas even values are achieved with $\jsoli = \isoli+1$. Given $\tiles \geq 3$ with $\tiles$ odd, $\funt(\len) = \tiles$ if and only
 \begin{equation}
 \label{eq: square, odd max tiles, lengths}
-\frac \len a \in \left( \frac{\tiles-3}{\sqrt{2}}, \frac{ \sqrt{(\tiles-1)^2+(\tiles-3)^2}}{2} \right].
+\len \in \left( \frac{\tiles-3}{\sqrt{2}}, \frac{ \sqrt{(\tiles-1)^2+(\tiles-3)^2}}{2} \right].
 \end{equation}
 For $\tiles \geq 4$, $\tiles$ even, $\funt(\len) = \tiles$ if and only if
 \begin{equation}
 \label{eq: square, even max tiles, lengths}
-\frac \len a \in \left(\frac{ \sqrt{(\tiles-2)^2+(\tiles-4)^2}}{2}, \frac{\tiles-2}{\sqrt{2}} \right].
+\len \in \left(\frac{ \sqrt{(\tiles-2)^2+(\tiles-4)^2}}{2}, \frac{\tiles-2}{\sqrt{2}} \right].
 \end{equation}
 
 
 \subsection{Unit square grid with integer lengths}
 \label{part: max: unit square grid, integer lengths}
 
-A natural variation of the two problems introduced in \S\ref{part: intro} is to consider $a=b=1$, with the additional restriction that the segment length can only be a positive integer (equivalently, a square grid is considered with step $a$ and the segment length can only be an integer multiple of $a$).
+A natural variation of the first two problems introduced in \S\ref{part: intro} is to consider $a=b=1$, with the additional restriction that the segment length can only be a positive integer (equivalently, a square grid is considered with step $a$ and the segment length can only be an integer multiple of $a$).
 
 The \emph{direct problem} in this setting corresponds to the restriction of the function $\funt$ to $\mathbb N$. This will be denoted as a function $\funti: \mathbb N \to \mathbb N$ for greater clarity, although obviously $\funti(\leni) = \funt(\leni)$ for all $\leni \in \mathbb N$. The sequence $\funti(\leni)$, $\leni \in \mathbb N$ takes values $3, 5, 7, 8, 9, \ldots$, and is depicted in Figure~\ref{fig: funti}. This is A346232 in the On-Line Encyclopedia of Integer Sequences \cite{OEIS_unitsq_int_dir}. For this sequence, a simpler expression can be obtained than those resulting from \S\ref{part: max: square grid, real lengths} with $a=1$, and the following properties hold.
 
