@@ -10,5 +10,12 @@ Things to do:
 - Alex: write the proof for the square, integer length formula
 - Alex: write the new proof for the average number of tiles
 - Luis: fill in some intermediate steps in the proof of the asymptotic analysis of probmax
-- Alex/Luis: come up with a simpler approach for the proof of Pr[max] = O(1/length), or else fill in some intermediate steps in the proof. It's tedious by hand, but Maple can help
-- Luis: apply the two sets of structural changes (message by Luis, 26vii21), if Alex agrees
+- Alex/Luis: come up, if possible, with a simpler approach for the proof of Pr[max] = O(1/length); or else fill in some intermediate steps in the current proof. It's tedious by hand, but Maple can help
+- Luis: apply the structural changes (message by Luis, 26vii21), if Alex agrees:
+ - Theorem 3 will be replaced by your formula, and its derivation, for real-valued lengths. (I don't think it's worth keeping the current formulas in Theorem 3, is it?).
+ - Corollary 2 should include the expression that unifies the odd and even cases with your ceiling function idea.
+ - The formula in Theorem 4 will now be the same as in new Theorem 3, just without the ceiling function. The actual content of the theorem will be the properties of the sequence T.
+ - Similarly, the expression in Theorem 5 will the same as in (modified) Corollary 2, just without the ceiling. The main part of the theorem will be the properties of the sequence Λ. Since the properties of Λ are a direct consequence of those of T, perhaps Theorems 4 and 5 should be merged.
+ - Proposition 3 disappears
+ - The text after Proposition 3 should be maintained (reworded), or incorporated into Proposition 4. The bounding lines are used in subsequent proofs. We should make sure that (12) is exclusive and (13) is inclusive, because that is also used later.
+ - Current Proposition 4 will have the same statement, I think, but with Alex's proof
