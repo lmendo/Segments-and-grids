@@ -943,9 +943,11 @@ Lastly, $\Pr[i \geq n]$ as computed in Proposition~\ref{prop: Pr i} for $n \geq 
 The probability of visiting the maximum number of tiles for a rectangular grid is difficult to compute, due to the irregularity of the minimal sufficient set (discussed in \S\ref{part: fund results}). In the square case, however, the simplicity of this set makes the problem tractable. 
 
 
-\subsection{Square grid with real-valued lengths}
+\subsection{Unit square grid with real-valued lengths}
 
-Consider a square grid with spacing $a \in \mathbb R^+$. For a random segment with length $\len \in \mathbb R^+$, let the function $\probmax: \mathbb R^+ \to [0,1]$ be defined such that $\probmax(\len)$ gives the probability that the segment visits the maximum possible number of tiles, $\funt(\len)$. This function is characterized by the next theorem.
+Consider a square grid with unit spacing, $a=b=1$. Again, the results to follow can be applied to a square grid with spacing $a \neq 1$ if $\len$ is replaced by $\len/a$.
+
+For a random segment with length $\len \in \mathbb R^+$ on a unit square grid, let the function $\probmax: \mathbb R^+ \to [0,1]$ be defined such that $\probmax(\len)$ gives the probability that the segment visits the maximum possible number of tiles, $\funt(\len)$. This function is characterized by the next theorem.
 
 For $u, v \in \mathbb N$, $\genvar \in \mathbb R^+$, let
 \begin{equation}
@@ -964,17 +966,17 @@ g(\genvar, u, v) &= \frac 1 {2\pi} \biggl(
 
 \begin{theorem}
 \label{theo: probmax, sq}
-Given $a, \len \in \mathbb R^+$, consider a square grid with spacing $a$ and a uniformly random segment of length $\len$, as previously defined. The probability $\probmax(\len)$ that the segment visits the maximum number of tiles $\funt(\len)$ is
+Given $\len \in \mathbb R^+$, consider a unit square grid and a uniformly random segment of length $\len$, as previously defined. The probability $\probmax(\len)$ that the segment visits the maximum number of tiles $\funt(\len)$ is
 \begin{equation}
 \label{eq: probmax}
 \begin{split}
-\probmax(\len) & = g\left(\frac{\len} a, 
-\tiles-3, \tiles-3 \right) \quad\ \text{for } \tiles \text{ odd, } \textstyle \frac \len a \in \left( \frac{\tiles-3}{\sqrt{2}}, \frac{\sqrt{(\tiles-5)^2+(\tiles-1)^2}} 2 \right]; \\
-\probmax(\len) & = g\left(\frac{\len} a, \tiles-3, \tiles-3 \right) + 2 g\left(\frac{\len} a, \tiles-5, \tiles-1 \right) \\
-& \text{for } \tiles \text{ odd, } \textstyle \frac \len a \in \left (\frac{\sqrt{(\tiles-5)^2+(\tiles-1)^2}} 2,  \frac{\sqrt{(\tiles-3)^2+(\tiles-1)^2}} 2 \right]; \\
-\probmax(\len) & = 2 g\left(\frac{\len} a, \tiles-4, \tiles-2 \right) \quad \text{for } \tiles \text{ even, } \textstyle \frac \len a \in \left( \frac{\sqrt{(\tiles-4)^2+(\tiles-2)^2}} 2, \frac{\sqrt{(\tiles-6)^2+\tiles^2}} 2 \right]; \\
-\probmax(\len) & = 2 g\left(\frac{\len} a, \tiles-4, \tiles-2 \right) + 2 g\left(\frac{\len} a, \tiles-6, \tiles \right) \\
-& \text{for } \tiles \text{ even, } \textstyle \frac \len a \in \left( \frac{\sqrt{(\tiles-6)^2+\tiles^2}} 2, \frac{\tiles-2}{\sqrt{2}} \right].
+\probmax(\len) & = g\left(\len, 
+\tiles-3, \tiles-3 \right) \quad\ \text{for } \tiles \text{ odd, } \textstyle \len \in \left( \frac{\tiles-3}{\sqrt{2}}, \frac{\sqrt{(\tiles-5)^2+(\tiles-1)^2}} 2 \right]; \\
+\probmax(\len) & = g\left(\len, \tiles-3, \tiles-3 \right) + 2 g\left(\len, \tiles-5, \tiles-1 \right) \\
+& \text{for } \tiles \text{ odd, } \textstyle \len \in \left (\frac{\sqrt{(\tiles-5)^2+(\tiles-1)^2}} 2,  \frac{\sqrt{(\tiles-3)^2+(\tiles-1)^2}} 2 \right]; \\
+\probmax(\len) & = 2 g\left(\len, \tiles-4, \tiles-2 \right) \quad \text{for } \tiles \text{ even, } \textstyle \len \in \left( \frac{\sqrt{(\tiles-4)^2+(\tiles-2)^2}} 2, \frac{\sqrt{(\tiles-6)^2+\tiles^2}} 2 \right]; \\
+\probmax(\len) & = 2 g\left(\len, \tiles-4, \tiles-2 \right) + 2 g\left(\len, \tiles-6, \tiles \right) \\
+& \text{for } \tiles \text{ even, } \textstyle \len \in \left( \frac{\sqrt{(\tiles-6)^2+\tiles^2}} 2, \frac{\tiles-2}{\sqrt{2}} \right].
 \end{split}
 \end{equation}
 \end{theorem}
@@ -1010,7 +1012,7 @@ For any $i,j$ with $i+j-1=\tiles$ and for a given orientation $\theta$, the segm
 \label{fig: probmax_funt_odd}%
 \end{figure}%
 
-There is a range of possible values of $\theta$ for which the above condition is satisfied. This range corresponds to the part of the arc with solid line in Figure~\ref{fig: probmax_funt_odd}. For convenience, the angle $\theta$ is defined clockwise from the downward direction, as seen in the figure. For each $\theta$ in the allowed range, the valid positions for the first endpoint of the (shifted) segment are in the shaded rectangle, whose dimensions depend on $\theta$. The fraction of the reference tile occupied by this rectangle is the probability $\probmax_{i-1,j-1}(\len,\theta)$ that the segment goes from the reference tile to that with lower-left corner $(i-1,j-1)$ conditioned on $\theta$. The desired probability, $\probmax(\len)$, is obtained by averaging $\probmax_{i-1,j-1}(\len, \theta)$ over $\theta$ and summing over all $i-1,j-1$ that can be reached from the reference tile.
+There is a range of possible values of $\theta$ for which the above condition is satisfied. This range corresponds to the part of the arc with solid line in Figure~\ref{fig: probmax_funt_odd}. For convenience, the angle $\theta$ is defined clockwise from the downward direction, as seen in the figure. For each $\theta$ in the allowed range, the valid positions for the first endpoint of the (shifted) segment are in the shaded rectangle, whose dimensions depend on $\theta$. The area occupied by this rectangle is the probability $\probmax_{i-1,j-1}(\len,\theta)$ that the segment goes from the reference tile to that with lower-left corner $(i-1,j-1)$ conditioned on $\theta$. The desired probability, $\probmax(\len)$, is obtained by averaging $\probmax_{i-1,j-1}(\len, \theta)$ over $\theta$ and summing over all $i-1,j-1$ that can be reached from the reference tile.
 
 The situation is different depending on whether $\tiles$ is odd or even. Consider $\tiles$ odd first. Under this assumption, the range of lengths corresponding to $\tiles$ is given by \eqref{eq: square, odd max tiles, lengths}. For any length in this interval, there are some positions within the reference file from which the tile with lower-left coordinate $((\tiles-1)/2, (\tiles-1)/2)$ can be reached. Equivalently, the shifted segment with one endpoint at $((\tiles-1)/2, (\tiles-1)/2)$ can reach the reference tile. This is illustrated in Figure~\ref{fig: probmax_funt_odd_diag}. In addition, if 
 \begin{equation}
@@ -1028,61 +1030,61 @@ the two tiles with lower-left coordinates $(\tiles/2-2, \tiles/2+1)$ and $(\tile
 
 Therefore, two cases need to be distinguished for $\tiles$ odd, depending on whether \eqref{eq: probmax len odd2} is satisfied or not; and similarly two cases exist for $\tiles$ even, depending on whether \eqref{eq: probmax len even2} holds or not. These are, respectively, the four cases in \eqref{eq: probmax}.
 
-In the first case, as has been argued, only the tile with lower-left coordinates $((\tiles-1)/2, (\tiles-1)/2)$ is reachable. For a given $\theta$, the conditional probability $\probmax_{(\tiles-1)/2, (\tiles-1)/2}(\len, \theta)$ is the area of the shaded rectangle in Figure~\ref{fig: probmax_funt_odd_diag} divided by $a^2$. The horizontal and vertical sides of this rectangle are $\len\sin\theta - a(\tiles-3)/2$ and $\len\cos\theta - a(\tiles-3)/2$ respectively, and thus
+In the first case, as has been argued, only the tile with lower-left coordinates $((\tiles-1)/2, (\tiles-1)/2)$ is reachable. For a given $\theta$, the conditional probability $\probmax_{(\tiles-1)/2, (\tiles-1)/2}(\len, \theta)$ is the area of the shaded rectangle in Figure~\ref{fig: probmax_funt_odd_diag}:
 \begin{equation}
 \label{eq: probmax: probmax theta odd}
-\probmax_{(\tiles-1)/2, (\tiles-1)/2}(\len, \theta) = \frac{(\len\sin\theta - a(\tiles-3)/2) (\len\cos\theta - a(\tiles-3)/2)} {a^2}
+\probmax_{(\tiles-1)/2, (\tiles-1)/2}(\len, \theta) = \left(\len\sin\theta - \frac{\tiles-3}2\right) \left(\len\cos\theta - \frac{\tiles-3}2\right).
 \end{equation}
 The range of allowed values for $\theta$, as can be seen from Figure~\ref{fig: probmax_funt_odd_diag}, is $(\theta_0, \theta_1)$ with
 \begin{align}
 \label{eq: odd theta 0}
-\theta_0 & = \arcsin\frac{a(\tiles-3)}{2\len}, \\
+\theta_0 & = \arcsin\frac{\tiles-3}{2\len}, \\
 \label{eq: odd theta 1}
-\theta_1 & = \arccos\frac{a(\tiles-3)}{2\len}.
+\theta_1 & = \arccos\frac{\tiles-3}{2\len}.
 \end{align}
 Computing the average of \eqref{eq: probmax: probmax theta odd} over $\theta$, multiplying by $4$ to include all quadrants and comparing with \eqref{eq: g def} gives $\probmax(\len)$ as
 \begin{equation}
 \label{eq: probmax: probmax odd}
 \begin{split}
 \probmax(\len) & = 4 \int_{\theta_0}^{\theta_1} \frac{\probmax_{(\tiles-1)/2, (\tiles-1)/2}(\len, \theta)}{2\pi} \diff \theta \\
-& = \frac 2 \pi \int_{\arcsin\frac{a(\tiles-3)}{2\len}}^{\arccos\frac{a(\tiles-3)}{2\len}} \left( \frac{\len\sin\theta}a - \frac{\tiles-3} 2 \right)  \left( \frac{\len\cos\theta}a - \frac{\tiles-3} 2 \right) \diff \theta \\
-& = g\left( \frac \len a, \tiles-3, \tiles-3 \right ),
+& = \frac 2 \pi \int_{\arcsin\frac{\tiles-3}{2\len}}^{\arccos\frac{\tiles-3}{2\len}} \left( \len\sin\theta - \frac{\tiles-3} 2 \right)  \left( \len\cos\theta - \frac{\tiles-3} 2 \right) \diff \theta \\
+& = g\left( \len, \tiles-3, \tiles-3 \right ),
 \end{split}
 \end{equation}
 in accordance with \eqref{eq: probmax}.
 
-For the second case in \eqref{eq: probmax}, $\probmax(\len)$ is obtained as in the preceding paragraph plus an additional term corresponding to the contribution of the tile with lower-left corner $((\tiles-3)/2, (\tiles+1)/2)$, multiplied by $2$ to account for its symmetrical tile $((\tiles+1)/2, (\tiles-3)/2)$ and by $4$ to include all quadrants. The sides of the shaded rectangle in Figure~\ref{fig: probmax_funt_odd_offdiag} are $\len\sin\theta - a(\tiles-5)/2$ and $\len\cos\theta - a(\tiles-1)/2$, and therefore
+For the second case in \eqref{eq: probmax}, $\probmax(\len)$ is obtained as in the preceding paragraph plus an additional term corresponding to the contribution of the tile with lower-left corner $((\tiles-3)/2, (\tiles+1)/2)$, multiplied by $2$ to account for its symmetrical tile $((\tiles+1)/2, (\tiles-3)/2)$ and by $4$ to include all quadrants. Observing the shaded rectangle in Figure~\ref{fig: probmax_funt_odd_offdiag},
 \begin{equation}
 \label{eq: probmax: probmax theta odd2}
-\probmax_{(\tiles-3)/2, (\tiles+1)/2}(\len, \theta) = \frac{(\len\sin\theta - a(\tiles-5)/2) (\len\cos\theta - a(\tiles-1)/2)} {a^2}.
+\probmax_{(\tiles-3)/2, (\tiles+1)/2}(\len, \theta) = \left(\len\sin\theta - \frac{\tiles-5}2\right) \left(\len\cos\theta - \frac{\tiles-1}2\right).
 \end{equation}
 The integration interval $(\theta_0, \theta_1)$ is in this case
 \begin{align}
-\theta_0 & = \arcsin\frac{a(\tiles-5)}{2\len}, \\
-\theta_1 & = \arccos\frac{a(\tiles-1)}{2\len}.
+\theta_0 & = \arcsin\frac{\tiles-5}{2\len}, \\
+\theta_1 & = \arccos\frac{\tiles-1}{2\len}.
 \end{align}
 The additional contribution to $\probmax(\len)$, given by
 \begin{multline}
 8 \int_{\theta_0}^{\theta_1} \frac{\probmax_{(\tiles-3)/2, (\tiles+1)/2}(\len, \theta)}{2\pi} \diff \theta \\
-= \frac 4 \pi \int_{\arcsin\frac{a(\tiles-5)}{2\len}}^{\arccos\frac{a(\tiles-1)}{2\len}} \left( \frac{\len\sin\theta}a - \frac{\tiles-5} 2 \right)  \left( \frac{\len\cos\theta}a - \frac{\tiles-1} 2 \right) \diff \theta,
+= \frac 4 \pi \int_{\arcsin\frac{\tiles-5}{2\len}}^{\arccos\frac{\tiles-1}{2\len}} \left( \len\sin\theta - \frac{\tiles-5} 2 \right)  \left( \len\cos\theta - \frac{\tiles-1} 2 \right) \diff \theta,
 \end{multline}
-is recognized to be $2 g(\len/a, \tiles-5, \tiles-1)$. This proves the second equality in \eqref{eq: probmax}.
+is recognized to be $2 g(\len, \tiles-5, \tiles-1)$. This proves the second equality in \eqref{eq: probmax}.
 
 The expressions for the third and fourth cases in \eqref{eq: probmax}, corresponding to $\tiles$ even, are established analogously.
 \end{proof}
 
-It should be noted that the technique used in the proof of Theorem~\ref{theo: probmax, sq} could in principle be used for obtaining the probability that the number of tiles visited by the segment equals or exceeds any given value $t \funt(\len)$. The resulting expressions, however, are cumbersome, because more cases (more subintervals for the length) need to be distinguished depending on how many tiles with $i+j-1=t$ can be reached from the reference tile.
+It should be noted that the technique used in the proof of Theorem~\ref{theo: probmax, sq} could in principle be used for obtaining the probability that the number of tiles visited by the segment equals or exceeds any given value $t < \funt(\len)$. The resulting expressions, however, are cumbersome, because more cases (more subintervals for the length) need to be distinguished depending on how many tiles with $i+j-1=t$ can be reached from the reference tile.
 
-Figure~\ref{fig: probmax_len} shows the probability $\probmax(\len)$ of visiting the maximum number of tiles on a square grid with spacing $a$, as given by \eqref{eq: probmax}. As $\len$ grows, $\probmax(\len)$ has a jump when the maximum number of tiles that can be visited increases by $1$. This happens when $\len$ equals the right endpoint of the interval \eqref{eq: square, odd max tiles, lengths} for $\tiles$ odd or of \eqref{eq: square, even max tiles, lengths} for $\tiles$ even. Let these length values be denoted as $\len_\tiles$:
+Figure~\ref{fig: probmax_len} shows the probability $\probmax(\len)$ of visiting the maximum number of tiles on a unit square grid, as given by \eqref{eq: probmax}. As $\len$ grows, $\probmax(\len)$ has a jump when the maximum number of tiles that can be visited increases by $1$. This happens when $\len$ equals the right endpoint of the interval \eqref{eq: square, odd max tiles, lengths} for $\tiles$ odd or of \eqref{eq: square, even max tiles, lengths} for $\tiles$ even. Let these length values be denoted as $\len_\tiles$:
 \begin{equation}
 \len_\tiles = \begin{cases}
 \displaystyle
-\frac{a \sqrt{(\tiles-3)^2 + (\tiles-1)^2}} {2} & \text{ for $\tiles$ odd, $\tiles \geq 3$} \\
+\frac{\sqrt{(\tiles-3)^2 + (\tiles-1)^2}} {2} & \text{ for $\tiles$ odd, $\tiles \geq 3$} \\
 \displaystyle
-\frac{a (\tiles-2)}{\sqrt{2}} & \text{ for $\tiles$ odd, $\tiles \geq 4$}.
+\frac{\tiles-2}{\sqrt{2}} & \text{ for $\tiles$ odd, $\tiles \geq 4$}.
 \end{cases}
 \end{equation}
-For example, the first continuous section seen in the figure corresponds to a maximum number of tiles $\tiles=3$, for lengths in the interval $(0, \len_3]$, with $\len_3= a$. The second corresponds to $\tiles=4$, for lengths in $(\len_3, \len_4]$, with $\len_4= a\sqrt{2}$. Within each continuous section the probability monotonically increases from $0$ to a maximum value. The heights of the maxima follow a different trend*** for odd and even $\tiles$, as seen in the figure; but in each case they are asymptotically proportional to $1/\len_\tiles$, as the next result establishes.
+For example, the first continuous section seen in the figure corresponds to a maximum number of tiles $\tiles=3$, for lengths in the interval $(0, \len_3]$, with $\len_3= 1$. The second corresponds to $\tiles=4$, for lengths in $(\len_3, \len_4]$, with $\len_4= \sqrt{2}$. Within each continuous section the probability monotonically increases from $0$ to a maximum value. The heights of the maxima follow a different trend**better word?** for odd and even $\tiles$, as seen in the figure; but in each case they are asymptotically proportional to $1/\len_\tiles$, as the next result establishes.
 
 \begin{figure}%
 \centering%
@@ -1103,7 +1105,7 @@ The function $\probmax$ has the following asymptotic behaviour:
 \label{eq: probmax lim even}
 \lim_{\substack{\tiles \rightarrow \infty \\ \tiles \ \mathrm{even}}}\, \tiles \probmax(\len_\tiles) & = \frac 8 {3\pi} \\
 \label{eq: probmax limsup}
-\limsup_{\len \rightarrow \infty}\, \len \probmax(\len) & = \frac {4\sqrt{2} a}{3\pi}.
+\limsup_{\len \rightarrow \infty}\, \len \probmax(\len) & = \frac {4\sqrt{2}}{3\pi}.
 \end{align}
 \end{proposition}
 
@@ -1132,7 +1134,7 @@ Similarly,
 \end{align}
 and combining with the fourth equality in \eqref{eq: probmax} gives \eqref{eq: probmax lim even}.
 
-For large $\tiles$, $\len_\tiles$ asymptotically approaches $a\tiles/\sqrt{2}$. Using this into \eqref{eq: probmax lim even}, which is greater than \eqref{eq: probmax lim odd}, establishes \eqref{eq: probmax limsup}.
+For large $\tiles$, $\len_\tiles$ asymptotically approaches $\tiles/\sqrt{2}$. Using this into \eqref{eq: probmax lim even}, which is greater than \eqref{eq: probmax lim odd}, establishes \eqref{eq: probmax limsup}.
 \end{proof}
 
 

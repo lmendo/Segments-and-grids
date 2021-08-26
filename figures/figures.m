@@ -1788,7 +1788,7 @@ set(gca, 'colororderindex', 1)
 plot(L_fine.*(ind_even|ind_even2)./(ind_even|ind_even2), result_computed.*(ind_even|ind_even2)./(ind_even|ind_even2), '-')
 %plot(L_fine, result_computed, '-')
 legend({'Odd maximum number of squares' 'Even maximum number of squares'})
-xlabel([char(hex2dec('2113')) '/a']), ylabel([char(hex2dec('03C1')) '(' char(hex2dec('2113')) ')'])
+xlabel(char(hex2dec('2113'))), ylabel([char(hex2dec('03C1')) '(' char(hex2dec('2113')) ')'])
 
 
 %% #68. Like #61 but including "a" (grid spacing)
