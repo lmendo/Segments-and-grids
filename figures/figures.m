@@ -1812,3 +1812,28 @@ result_computed(ind_even2) = result_computed(ind_even2) + ...
     2*L_fine(ind_even2).^2/a^2 - funt_fine(ind_even2).*sqrt(4*L_fine(ind_even2).^2/a^2 - (funt_fine(ind_even2)-6).^2) - (funt_fine(ind_even2)-6).*sqrt(4*L_fine(ind_even2).^2/a^2 - funt_fine(ind_even2).^2) ) / pi;
 plot(L_fine, result_computed.*L_fine), grid on
 
+
+%% #69. Like the first part of #46 (that is, funt) but including formula found by Alex for funt in the square case with real-valued lengths (e-mail 26viii21)
+
+clear
+clc
+L = .001:.001:300;
+G = 1:35;
+a = 1.5754;
+b = a;
+
+ii = ceil((a + b*real(sqrt(4*L.^2/(a^2+b^2)-1))) / 2/a) + 1;
+jj = ceil(sqrt( L.^2 - (ii-2).^2*a^2 )/b) + 1;
+funt_rect = ii+jj-1;
+
+ii = ceil((1 + real(sqrt(2*L.^2/a^2-1)))/2) + 1;
+jj = ceil(sqrt(L.^2/a^2 - (ii-2).^2 )) + 1;
+funt_sq = ii+jj-1;
+
+ii = ceil(L/a/sqrt(2)) + 1;
+jj = ceil(sqrt(L.^2/a^2 - (ii-2).^2 )) + 1;
+funt_sq_2 = ii+jj-1;
+
+funt_sq_3 = floor(sqrt(2*ceil(L.^2/a^2) - 2)) + 3; % formula found by Alex
+isequal(funt_rect, funt_sq, funt_sq_2, funt_sq_3)
+
