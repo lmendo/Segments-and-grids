@@ -7,7 +7,6 @@
 Things to do:
 - Alex: write the proof for the square, integer length formula
 - Alex: write the new proof for the average number of tiles
-- Luis: fill in some intermediate steps in the proof of the asymptotic analysis of probmax
 - Alex/Luis: come up, if possible, with a simpler approach for the proof of Pr[max] = O(1/length); or else fill in some intermediate steps in the current proof. It's tedious by hand, but Maple can help
 - Luis: apply the structural changes (message by Luis, 26vii21), if Alex agrees:
  - Theorem 3 will be replaced by your formula, and its derivation, for real-valued lengths. (I don't think it's worth keeping the current formulas in Theorem 3, is it?).
