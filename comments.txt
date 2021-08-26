@@ -4,8 +4,6 @@
 
 - Are "sufficient" and "minimal sufficient" good names? They are used in statistics: analogously?
 
-- (Include a,b as subscripts of the functions? I don't think so; it would make notation heavier and it's usually clear what the valuees of a and b are)
-
 Things to do:
 - Alex: write the proof for the square, integer length formula
 - Alex: write the new proof for the average number of tiles
