@@ -1,5 +1,3 @@
-- Buffon and Buffon-Laplace problems (https://www.ias.ac.in/article/fulltext/reso/003/09/0070-0073)
-
 - Is "canonical rectangle" a good name? "Canonical" is close to what I wanted, but perhaps a better word can be found for "smallest and wih sides following grid lines"
 
 - Are "sufficient" and "minimal sufficient" good names? They are used in statistics: analogously?
@@ -8,11 +6,17 @@ Things to do:
 - Alex: write the proof for the square, integer length formula
 - Alex: write the new proof for the average number of tiles
 - Alex/Luis: come up, if possible, with a simpler approach for the proof of Pr[max] = O(1/length); or else fill in some intermediate steps in the current proof. It's tedious by hand, but Maple can help
-- Luis: apply the structural changes (message by Luis, 26vii21), if Alex agrees:
- - Theorem 3 will be replaced by your formula, and its derivation, for real-valued lengths. (I don't think it's worth keeping the current formulas in Theorem 3, is it?).
- - Corollary 2 should include the expression that unifies the odd and even cases with your ceiling function idea.
- - The formula in Theorem 4 will now be the same as in new Theorem 3, just without the ceiling function. The actual content of the theorem will be the properties of the sequence T.
- - Similarly, the expression in Theorem 5 will the same as in (modified) Corollary 2, just without the ceiling. The main part of the theorem will be the properties of the sequence Λ. Since the properties of Λ are a direct consequence of those of T, perhaps Theorems 4 and 5 should be merged.
- - Proposition 3 disappears
- - The text after Proposition 3 should be maintained (reworded), or incorporated into Proposition 4. The bounding lines are used in subsequent proofs. We should make sure that (12) is exclusive and (13) is inclusive, because that is also used later.
- - Current Proposition 4 will have the same statement, I think, but with Alex's proof
+- Alex/Luis: see if the new formula for λ (arbitrary a,b) can be turned into one for τ (maybe via the "inverse" relationship between λ and τ) which is simpler than the current formula in Theorem 1.
+- Luis: figure for the new proof of Proposition 4. The figure will illustrate the continuous i,j, as intersection of two lines
+- Luis: apply the structural changes (message by Luis, 26vii21:
+ |- Theorem 3 will be replaced by your formula, and its derivation, for real-valued lengths. I don't think it's worth keeping the current formulas in Theorem 3, is it?. It turns out that it is, because i*, j* are used later.
+ |- Corollary 2 should include the expression that unifies the odd and even cases with your ceiling function idea.
+ |- The formula in Theorem 4 will now be the same as in new Theorem 3, just without the ceiling function. The actual content of the theorem will be the properties of the sequence T.
+ |~ - Similarly, the expression in Theorem 5 will the same as in (modified) Corollary 2, just without the ceiling. Actually no, there's a "+1" due to the different definition (minimum instead of infimum) The main part of the theorem will be the properties of the sequence Λ. Since the properties of Λ are a direct consequence of those of T, perhaps Theorems 4 and 5 should be merged.
+ |- Proposition 3 disappears
+ |- The text after Proposition 3 should be maintained (reworded), or incorporated into Proposition 4. The bounding lines are used in subsequent proofs. We should make sure that (12) is exclusive and (13) is inclusive, because that is also used later.
+ |- Current Proposition 4 will have the same statement, but with a proof based on Alex's finding for continuous i and j: starting from i = b^2/(a^2+b^2)*k, j = a^2/(a^2+b^2)*k, Proposition 4 is obtained by adjusting for the "-2" offset (i.e. add 2 to each expression and replace k by t-3) and then applying floor(...+1/2) to i and ceiling(...-1/2) to j. These rounding operations are equivalent to rounding to nearest, giving precedence to the pair with higher i in case of a tie
+ |~ - The only new content in Section 3.3 is now the properties of the sequences (the formulas are now the same as those in Section 3.2). So perhaps Section 3.3 can be merged with Section 3.2
+ |- Theorem 2 will now have a simpler formula. The current one should be kept because i*, j* are used later. The theorem will contain both formulas; they are actually related.
+ |~ - Do the same for Theorem 1, if we can find a simple formula for τ based on that for λ (arbitrary a,b)
+ |- Proposition 5 (Pr[i>=n]) will go after Theorem 5 (average number of tiles)
