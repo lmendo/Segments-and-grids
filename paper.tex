@@ -100,7 +100,7 @@ The definition uses the interior of the tile, excluding the border, to avoid uni
 \item What is the average number of tiles visited by a uniformly random segment of a given length? How often does the random segment visit the maximum number of tiles?
 \end{itemize}
 
-As an example of the first problem, consider $a=1.35$, $b=1$. A segment of unit length can be placed as shown in Figure~\ref{fig: examples} (left) to make it visit $3$ tiles. In fact, the solution for $\len=1$ is $3$ tiles. The figure also illustrates that the solution for length $2.4$ is $5$ (center), and for $4.7$ it is $8$ (right).
+As an example of the first question, consider $a=1.35$, $b=1$. A segment of unit length can be placed as shown in Figure~\ref{fig: examples} (left) to make it visit $3$ tiles. In fact, this is the maximum number for $\len=1$. The figure also illustrates that the solution for length $2.4$ is $5$ (center), and for $4.7$ it is $8$ (right).
 
 \begin{figure}
 \centering%
@@ -116,7 +116,7 @@ The \emph{inverse} problem is, given $\tiles \in \mathbb N$, to determine the in
 
 The direct and inverse problems are closely related. Namely, if $\len$ is the infimum of all lengths that allow visiting at least $\tiles$ tiles (inverse problem), $\tiles$ is the maximum number of tiles that can be visited with lengths slightly greater than $\len$ (direct problem).
 
-The notion of a \emph{random} segment of a given length is precisely defined as follows. By symmetry, one endpoint of the segment can be assumed to lie in a fixed, reference tile. The position of this endpoint is \emph{uniformly} distributed on the tile. The segment orientation has a \emph{uniform} distribution on the set of all possible directions, and is \emph{independent} of the endpoint position. Solving the problem of how many tiles the segment visits on average, as will be seen, also answers the inverse question (segment length to visit a given number of tiles on average). In addition, a natural question is with that probability the segment visits the maximum number of tiles. 
+The notion of a \emph{random} segment of a given length is precisely defined as follows. By symmetry, one endpoint of the segment can be assumed to lie in a fixed, reference tile. The position of this endpoint is \emph{uniformly} distributed on the tile. The segment orientation has a \emph{uniform} distribution on the set of all possible directions, and is \emph{independent} of the endpoint position. Solving the problem of how many tiles the segment visits on average, as will be seen, also answers the inverse question (segment length to visit a given number of tiles on average). A natural, related question is with that probability the segment visits the maximum number of tiles. 
 
 % ***Do we need to discuss potential applications of this (if we can find any)? This probably depends on the journal
 % ***Do we need a section with conclusions? Probably not; depends on the journal
@@ -133,7 +133,7 @@ The rest of the paper is organized as follows. Fundamental results are presented
 \section{Fundamentals}
 \label{part: fund results}
 
-For a grid with horizontal spacing $a$ and vertical spacing $b$, lines of the form $x = ka$ or $y = kb$ with $k \in \mathbb Z$ will be called \emph{grid lines}. A \emph{tile} is delimited by two pairs of consecutive horizontal an vertical grid lines. The intersection points of horizontal and vertical grid lines will be called \emph{grid points}. These correspond to vertices of the tiles.
+For a grid with horizontal spacing $a$ and vertical spacing $b$, lines of the form $x = ka$ or $y = kb$ with $k \in \mathbb Z$ will be called \emph{grid lines}. A \emph{tile} is delimited by two pairs of consecutive horizontal and vertical grid lines. The intersection points of horizontal and vertical grid lines will be called \emph{grid points}. These correspond to vertices of the tiles.
 
 Every segment has an associated \emph{canonical rectangle}, which is the minimum-size rectangle that is formed by grid lines and contains the segment. More specifically, if the segment has endpoints $(x_1,y_1)$, $(x_2,y_2)$, where $x_1, x_2, y_1, y_2 \in \mathbb R$, its canonical rectangle has lower-left corner and upper-right corner given as
 \begin{align*}
@@ -165,7 +165,7 @@ Consider an arbitrary segment, and let $i, j$ respectively denote the normalized
 \begin{proof}
 The segment visits, by definition, two tiles in opposite corners of the canonical rectangle. It can be assumed, without loss of generality, that those tiles are in the lower-left and upper-right corners of the rectangle, as in Figure~\ref{fig: canonical rectangle and touched tiles}. The visited tiles can be thought of as following a path within the canonical rectangle. Starting at the lower-left tile, the next tile can be the one to the left, the one above, or the one above and to the left. The latter case occurs if and only if the segment passes through the grid point between those two tiles.
 
-Since the segment follows a straight line, once it ``leaves'' a row of tiles in its path from the lower-left to the upper-right corner, it can never visit any more tiles from that row. The same observation applies for the columns.
+Since the segment follows a straight line, once it ``leaves'' a row of tiles in its path from the lower-left to the upper-right corner, it can never visit any more tiles from that row. The same observation applies to the columns.
 
 This implies that the maximum number of visited tiles is $i+j-1$, which is attained if and only if the segment avoids all grid points in the interior of the canonical rectangle, as in Figure~\ref{fig: S_nogridpoints}. Note that grid points at the corners of the rectangle do not count for this; and that the segment cannot pass through any other grid points on the rectangle border, because that would imply $i=0$ or $j=0$. Figure~\ref{fig: S_gridpoints} illustrates a case where the maximum is not attained.
 \end{proof}
@@ -211,22 +211,22 @@ There is a segment of length not exceeding $\len$ that has a canonical rectangle
 \label{fig: len ineq i j}
 \end{figure}%
 
-\ref*{prop: len ineq i j: ineq, exist} ``\eqref{eq: len > sqrt} $\Rightarrow$ there is a segment\ldots''. Assume that \eqref{eq: len > sqrt} holds. It is always possible to choose a length equal to or smaller than $\len$ such that both \eqref{eq: len > sqrt} and \eqref{eq: len leq sqrt} hold. The result follows, for that length, from part~\ref{prop: len ineq i j: exist}.
+\ref*{prop: len ineq i j: ineq, exist} ``\eqref{eq: len > sqrt} $\Rightarrow$ there is a segment\ldots'': Assume that \eqref{eq: len > sqrt} holds. It is always possible to choose a length equal to or smaller than $\len$ such that both \eqref{eq: len > sqrt} and \eqref{eq: len leq sqrt} hold. The result follows, for that length, from part~\ref{prop: len ineq i j: exist}.
 
-``There is a segment\ldots $\Rightarrow$ \eqref{eq: len > sqrt} ''. Assume that a segment exists with length not exceeding $\len$ and with a canonical rectangle with normalized dimensions $i$, $j$. From part~\ref{prop: len ineq i j: ineqs}, \eqref{eq: len > sqrt} holds for that segment length, and thus for $\len$.
+``There is a segment\ldots $\Rightarrow$ \eqref{eq: len > sqrt} '': Assume that a segment exists with length not exceeding $\len$ and with a canonical rectangle with normalized dimensions $i$, $j$. From part~\ref{prop: len ineq i j: ineqs}, inequality \eqref{eq: len > sqrt} holds for that segment length, and thus for $\len$.
 \end{proof}
 
-According to Proposition~\ref{prop: i+j-1}, in order to maximize the number of visited tiles for a given length, the position and orientation of the segment should be chosen to obtain $i+j-1$ as large as possible, where $i$ and $j$ are the normalized dimensions of its canonical rectangle. On the other hand, Proposition~\ref{prop: len ineq i j} restricts the $i, j$ values that can be achieved with a given length. A relevant question is: are there any $(i,j)$ pairs that can be disregarded irrespective of the length $\len$? In other words, what is the ``smallest'' subset of $\mathbb N^2$ such that the $(i,j)$ pair that maximizes the number of tiles for any length can always be found within that subset? A subset that contains a maximizing $(i,j)$ for any length will be called a \emph{sufficient} set. Clearly, this set must contain at least one such pair for each possible value of $i+j-1$, so that the set can produce that value as solution (for the corresponding lengths). A sufficient set that contains exactly one pair $(i,j)$ for each value of $i+j-1$ will be termed a \emph{minimal sufficient} set.
+According to Proposition~\ref{prop: i+j-1}, in order to maximize the number of visited tiles for a given length, the position and orientation of the segment should be chosen to obtain $i+j-1$ as large as possible, where $i$ and $j$ are the normalized dimensions of its canonical rectangle. On the other hand, Proposition~\ref{prop: len ineq i j} restricts the $i, j$ values that can be achieved with a given length. A relevant question is: are there any $(i,j)$ pairs that can be disregarded irrespective of the length $\len$? In other words, what is the ``smallest'' subset of $\mathbb N^2$ such that the $(i,j)$ pair that maximizes the number of tiles for any given length can always be found within that subset? A subset that contains a maximizing $(i,j)$ for any length will be called a \emph{sufficient} set. Clearly, this set must contain at least one such pair for each possible value of $i+j-1$, so that the set can produce that value as solution (for certain lengths). A sufficient set that contains exactly one pair $(i,j)$ for each value of $i+j-1$ will be called a \emph{minimal sufficient} set.
 
 For instance, it is intuitively clear from Figure~\ref{fig: examples} that segment orientations near the vertical or horizontal directions (resulting in $i=1$ with large $j$, or $j=1$ with large $i$) will not maximize the number of visited tiles.
 % This is true for any a, b: 2 can achieved instead of 1 without compromising the other dimension.
 The corresponding $(i,j)$ pairs can be left out of the sufficient set. In general, the pairs included in a minimal sufficient set will be different depending on $a$ and $b$. Two specific examples of minimal sufficient sets will be presented later in this section.
 
-Knowing a minimal sufficient set of $(i,j)$ pairs facilitates the solution of both the direct an inverse problems, because it reduces the number of pairs that need to be tried. In order to derive a general method to build a minimal sufficient set, it is insightful to consider two specific cases first, as will be presented in the following. It is also helpful to use the equivalent formulation of the direct problem referred to in \S\ref{part: intro}, i.e.~finding the maximum number of tiles visited by segments of length $\len$ \emph{or less}.
+Knowing a minimal sufficient set of $(i,j)$ pairs facilitates the solution of both the direct an inverse problems, because it reduces the number of pairs that need to be tried. In order to derive a general method to build a minimal sufficient set, it is insightful to consider two specific cases first. It is also convenient to use the equivalent formulation of the direct problem referred to in \S\ref{part: intro}, i.e.~finding the maximum number of tiles visited by segments of length $\len$ \emph{or less}.
 
-Thus each choice of $(i, j)$ implies a maximum of $i+j-1$ visited tiles on one hand; and sets a lower bound on the required length $\len$ on the other hand.
+% Thus each choice of $(i, j)$ implies a maximum of $i+j-1$ visited tiles on one hand; and sets a lower bound on the required length $\len$ on the other hand.
 
-Consider first the case $a=b=1$. This is illustrated in Figure~\ref{fig: ijLS_1}. Note that in this and in the next figures the axes represent $ia$ and $jb$ (not $i$ and $j$). Each dashed diagonal line joins $(i, j)$ pairs with the same $i+j-1$. The radius of each arc represents the lower bound on $\len$ given by \eqref{eq: len > sqrt}, for certain $(i,j)$ pairs, which are marked with filled circles (these pairs form a minimal sufficient set, as will be seen).
+Consider first $a=b=1$. This is illustrated in Figure~\ref{fig: ijLS_1}. Note that in this and in the next figures the axes represent $ia$ and $jb$ (not $i$ and $j$). Each dashed diagonal line joins $(i, j)$ pairs with the same $i+j-1$. The radius of each arc represents the lower bound on $\len$ given by \eqref{eq: len > sqrt}, for certain $(i,j)$ pairs, which are marked with filled circles (these pairs form a minimal sufficient set, as will be seen).
 
 \begin{figure}
 \centering%
@@ -238,11 +238,11 @@ Consider first the case $a=b=1$. This is illustrated in Figure~\ref{fig: ijLS_1}
 % ***Maybe combine this figure and the next into one figure with two subfigures (stacked vertically, size similar to now). Not sure. It has been done in others
 % ***Are these figures necessary? They were created with the aim of helping understand the first of the two propositions on $\mss$. Now that proposition has been removed. They are probably still useful, but maybe the text about these figures needs to be rewritten.
 
-For a given $\len \in \mathbb R^+$, the $(i,j)$ pairs that can be achieved with segments of length not exceeding $\len$ are, by Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}, those whose distance from $(2a,2b)$ is less than $\len$, i.e.~those delimited by the corresponding arc. It is clear from the figure that for $i+j-1$ odd, if some point $(i_1,j_1)$ with $|i_1-j_1|>1$ is achievable with the length bound $\len$, then necessarily there is a point $(i_0,i_0)$ with the same number of visited tiles $i+j-1$ (same diagonal line) that is also achievable with the same length restriction (because it has smaller distance to $(2a,2b)$). Similarly, for $i+j-1$ even, if a point $(i_1,j_1)$ with $|i_1-j_1|>1$ is achievable, then there is a point $(i_0,i_0+1)$ in the same diagonal that is also achievable with the same length restriction.
+For a given $\len \in \mathbb R^+$, the $(i,j)$ pairs that can be achieved with segments of length not exceeding $\len$ are, by Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}, those whose distance from $(2a,2b)$ is less than $\len$, i.e.~those delimited by the corresponding arc. It is clear from the figure that for $i+j-1$ odd, if some point $(i',j')$ with $|i'-j'|>1$ is achievable with the length bound $\len$, then necessarily there is a point $(i'',i'')$ with the same number of visited tiles $i+j-1$ (same diagonal line) that is also achievable with the same length restriction (because it has smaller distance to $(2a,2b)$). Similarly, for $i+j-1$ even, if a point $(i',j')$ with $|i'-j'|>1$ is achievable, then there is a point $(i'',i''-1)$ in the same diagonal that is also achievable with the same length restriction.
 
-Thus for $a=b=1$, a minimal sufficient set is formed by the pairs $(i,j)$ with $j=i$ or $j=i+1$. Observe that due to symmetry, any point $(i_0,i_0+1)$ could be replaced by $(i_0+1,i_0)$. This illustrates that the minimal sufficient set is not unique in general. 
+Thus for $a=b=1$, a minimal sufficient set is formed by the pairs $(i,j)$ with $j=i$ or $j=i+1$. Observe that due to symmetry, any point $(i'',i''-1)$ could be replaced by $(i''-1,i'')$. This illustrates that the minimal sufficient set is not unique in general. 
 
-The pairs in the minimal sufficient set are marked with filled circles in Figure~\ref{fig: ijLS_1}. Given a length, the maximum number of visited tiles will be achieved with one of those pairs, namely that in the diagonal line furthest from $(2a,2b)$ that is within the circle with radius $\len$ centered at that point.
+The pairs in the minimal sufficient set are marked with filled circles in Figure~\ref{fig: ijLS_1}. Given a length $\len$, the maximum number of visited tiles will be achieved with one of those pairs, namely that in the diagonal line furthest from $(2a,2b)$ that is within the circle with radius $\len$ centered at that point.
 
 As a second example, consider $a=1.35$, $b=1$. This is depicted in Figure~\ref{fig: ijLS_1p35}. In this case the minimal sufficient set does not follow a rule as simple as in the previous example.
 
@@ -278,7 +278,7 @@ j = \frac{i a^2}{b^2} - \frac{5a^2}{2b^2} + \frac 3 2.
 \end{proposition}
 
 \begin{proof}
-***New proof based on treating i,j as continuous along the line i+j=constant, then quantizing to the nearest allowed point along that line. I think we should the notation $\isolr$, $\jsolr$ for the continuous coordinates, similarly to other proofs that use continuous coordinates.
+***New proof based on treating i,j as continuous along the line i+j=constant, then quantizing to the nearest allowed point along that line. We should the notation $\isolr$, $\jsolr$ for the continuous coordinates, in conformity to other proofs that use continuous coordinates.
 % ***The continuous argument gives something like $i-2 = b^2/(a^2+b^2)*(t-3)$, $j = a^2/(a^2+b^2)*(t-3)$. We then compute how much the distance from $(i,j)$ to $(2,2)$ is increased by quantizing along the i+j line, to argue that the nearest quantized point should be chosen. To ensue that in case of a tie we choose the point with larger $i$, we apply floor(...+1/2) to i and ceiling(...-1/2) to j.
 
 ***The bounding lines are a direct consequence of how $i_\tiles$ and $j_\tiles$ are obtained.
@@ -292,7 +292,7 @@ j = \frac{i a^2}{b^2} - \frac{5a^2}{2b^2} + \frac 3 2.
 %\end{figure}%
 \end{proof}
 
-The bounding lines in Proposition~\ref{prop: min suff set, form} are shown in Figure~\ref{fig: pairs_bounds}, using three different pairs of grid parameters $a$, $b$ as examples. Given $(i_\tiles,j_\tiles) \in \mss$, the next pair $(i_{\tiles+1},j_{\tiles+1})$ is obtained by incrementing $j$ if that results in a point below \eqref{eq: upper bound, line}. Else $j$ cannot be increased and $i$ is incremented instead, and the new pair is guaranteed to be above or on \eqref{eq: lower bound, line}.
+The bounding lines in Proposition~\ref{prop: min suff set, form} are shown in Figure~\ref{fig: pairs_bounds}, using three different pairs of grid parameters $a$, $b$ as examples. Given $(i_\tiles,j_\tiles) \in \mss$, the next pair $(i_{\tiles+1},j_{\tiles+1})$ is obtained by incrementing $j$ if that results in a point below \eqref{eq: upper bound, line}. Else $i$ is incremented instead, and the new pair is guaranteed to be above or on \eqref{eq: lower bound, line}.
 
 \begin{figure}
 \centering%
@@ -313,18 +313,19 @@ The bounding lines in Proposition~\ref{prop: min suff set, form} are shown in Fi
 \label{fig: pairs_bounds}%
 \end{figure}%
  
-For $a^2/b^2$ arbitrary, the number of pairs with the same $i$ coordinate in the set $\mss$ is in general irregular, because the line \eqref{eq: lower bound, line} does not follow a ``natural''
+For $a^2/b^2$ arbitrary, the number of pairs with the same $i$ coordinate, or with the same $j$, in the set $\mss$ is in general irregular, because the lines \eqref{eq: upper bound, line} and \eqref{eq: lower bound, line} do not follow a ``natural''
 % ***it may be better to say ``simple'' instead of ``natural'', specially if we rename ``canonical`'' to ``natural'' or ``natural bounding''
 direction of the grid. This happens for instance in Figure~\ref{fig: pairs_bounds_1p35}, where the number of pairs for the first $i$ values equals either $2$ or $3$ without a clear pattern.\footnote{Strictly, there is a periodic pattern whenever $a^2/b^2$ is rational, which is the case in Figure~\ref{fig: pairs_bounds_1p35}. However, this is not easily discernible unless $a^2/b^2$ is a ratio of small numbers.}
-On the other hand, a simple pattern arises for $a^2/b^2 \in \mathbb N$, as seen in Figures~\ref{fig: pairs_bounds_1} and \ref{fig: pairs_bounds_sqrt2}.
+On the other hand, a simple pattern arises when $a^2/b^2$ or $b^2/a^2$ is a natural number, as seen in Figures~\ref{fig: pairs_bounds_1} and \ref{fig: pairs_bounds_sqrt2}.
 
 A segment whose canonical rectangle has normalized width $i$ and height $j$ is oriented with approximate slope $jb/(ia)$ with respect to the $x$ axis (see Figure~\ref{fig: len ineq i j}); and the approximation becomes better for greater segment lengths. From \eqref{eq: upper bound, line} and \eqref{eq: lower bound, line} it can be seen that the positions of the pairs $(i,j) \in \mss$ have $j/i \approx a^2/b^2$ for large $i, j$. Therefore the optimal slope for long segments is approximately $a/b$. This formalizes the intuition that to maximize the number of visited tiles, the segment should follow a direction along which the perceived ``length'' of the tile is smaller.
+% but not ``smallest'', if that were the case it would always be either vertical or horizontal
 
 
 \section{Direct and inverse problems for a deterministic segment}
 \label{part: max}
 
-The direct and inverse problems defined in \S\ref{part: intro}, considering the segment position and orientation as deterministic, are addressed in this section. The general case for rectangular grids with real-valued segment lengths is analyzed first, in \S\ref{part: max: arbitrary grid, real lengths}. The particular case of square grids is addressed in \S\ref{part: max: unit square grid, real lengths}, as it allows a specialized formula for the direct problem. Lastly, the analysis of a unit square grid with integer-valued lengths is given in \S\ref{part: max: unit square grid, integer lengths}.
+The direct and inverse problems defined in \S\ref{part: intro}, considering the segment position and orientation as deterministic, are addressed in this section. The general case for rectangular grids with real-valued segment lengths is analyzed first, in \S\ref{part: max: arbitrary grid, real lengths}. The particular case of square grids is addressed in \S\ref{part: max: unit square grid, real lengths}, as it allows a specialized formula for the direct problem. Lastly, the analysis of a unit square grid with integer-valued lengths is presented in \S\ref{part: max: unit square grid, integer lengths}.
 
 
 \subsection{Arbitrary grid with real-valued lengths}
@@ -343,9 +344,7 @@ Conversely, $\funl$ can be obtained from $\funt$ as
 \funl(\tiles) = \inf\{\len \in \mathbb R^+ \st \funt(\len) \geq \tiles\}.
 \end{equation}
 
-For arbitrary $a, b \in \mathbb R^+$, the functions $\funt$ and $\funl$ can be computed using an iterative procedure, which exploits the fact that the pairs $(i_3,j_3), (i_4,j_4), \ldots$ of $\mss$ are sorted by increasing $i+j-1$, and also by increasing $(i-2)^2 a^2 + (j-2)^2 b^2$. Namely, for $\funt$ the following procedure yields the solution: generate successive pairs to find the last one, $(i_\tiles,j_\tiles)$, that satisfies \eqref{eq: len > sqrt}; then $\funt(\len) = \tiles$. For $\funl$ the analogous method gives a direct formula. In addition, it is possible to obtain a direct formula also for $\funt$ using an approach similar to that used in Proposition~\ref{prop: min suff set, form}.
-% **this approach will change. Remove the above comment about the approach begin similar, and briefly describe the approach at the beginning of the proof here. Well, that's more or less done already**
-These formulas are given in Theorems \ref{theo: funt, form} and \ref{theo: funl, form}.
+For arbitrary $a, b \in \mathbb R^+$, the functions $\funt$ and $\funl$ can be computed using an iterative procedure, which exploits the fact that the pairs $(i_3,j_3), (i_4,j_4), \ldots$ of $\mss$ are sorted by increasing $i+j-1$, and also by increasing $(i-2)^2 a^2 + (j-2)^2 b^2$. Namely, for $\funt$ the following procedure yields the solution: generate successive pairs to find the last one, $(i_\tiles,j_\tiles)$, that satisfies \eqref{eq: len > sqrt}; then $\funt(\len) = \tiles$. For $\funl$ the analogous method gives a direct formula. In addition, it is possible to obtain a direct formula also for $\funt$ using a different approach. These formulas are given in Theorems \ref{theo: funt, form} and \ref{theo: funl, form}.
 
 \begin{theorem}
 \label{theo: funt, form}
@@ -365,7 +364,9 @@ The function $\funt$ is piecewise constant and left-continuous, with unit-height
 \end{theorem}
 
 \begin{proof}
-The general idea is similar to that used in Proposition~\ref{prop: min suff set, form}**this may have changed**: find the intersection $(\isolr, \jsolr)$ of the line \eqref{eq: lower bound, line} and the arc centered at $(2a,2b)$ with radius $\len$ for $i, j \geq 2$, and from that obtain the actual pair $(\isoli, \jsoli)$ of integer numbers which yields the solution.
+The idea of the proof is loosely similar to that used in Proposition~\ref{prop: min suff set, form}:
+% ***is it appropriate to say that it is loosely similar? Both are based on a continuous approximation which is then quantized. Does ``loosely'' have a negative connotation?
+find the intersection $(\isolr, \jsolr)$ of the line \eqref{eq: lower bound, line} and the arc centered at $(2a,2b)$ with radius $\len$ for $i, j \geq 2$, and from that obtain the actual pair $(\isoli, \jsoli)$ of integer numbers that yields the solution.
 
 Specifically, assuming first that \eqref{eq: lower bound, line} holds, the largest $i$ that can be achieved with lengths not exceeding $\len$ is obtained, as given by Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}. This value, $\isoli$, is computed by rounding down $\isolr$. Then, assuming that $i = \isoli$, the largest $j$ allowed by Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}, $\jsoli$, is obtained. As will be seen, in some cases the resulting $(\isoli,\jsoli)$ is in $\mss$, and in other cases it is not. However, in either case $(\isoli,\jsoli)$ has the largest $i+j-1$ sum that can be achieved with segments of length up to $\len$. Thus the desired result is $\isoli+\jsoli-1$.
 
@@ -440,7 +441,7 @@ that is, $\funt$ has a jump at $\len$. In addition, since the jump has unit heig
 Conversely, assume that \eqref{eq: theo funt, form: prop 2} and \eqref{eq: theo funt, form: prop 3} hold for some $\len \in \mathbb R^+$, $\tiles \in \mathbb N$. From \eqref{eq: theo funt, form: prop 2} it follows that  $\funl(\tiles) \geq \len$. On the other hand, \eqref{eq: theo funt, form: prop 3} implies that $\funl(\tiles) \leq \len$. Thus $\funl(\tiles)=\len$.
 \end{proof}
 
-Although Theorem~\ref{theo: funt, form} is valid for $a \geq b$, the result could also be applied for $a < b$ by simply swapping the values of $a$ and $b$. In other words, \eqref{eq: theo: funt, form; funt}--\eqref{eq: theo: funt, form; j}
+Although Theorem~\ref{theo: funt, form} is valid for $a \geq b$, the result could be applied for $a < b$ by simply swapping the values of $a$ and $b$. In other words, \eqref{eq: theo: funt, form; funt}--\eqref{eq: theo: funt, form; j}
 % *!*
 can be used for any grid if $a$, $b$ are interpreted as the largest and smallest sides of a tile, respectively.
 
@@ -460,7 +461,7 @@ with
 \end{align}
 Equivalently,
 \begin{equation}
-\text{***new formula by Alex; unless we can unify with the above}
+\text{***new formula found by Alex; unless we can unify with the above}
 \end{equation}
 This function is monotone increasing for $\tiles \geq 3$.
 \end{theorem}
@@ -477,7 +478,7 @@ For $\tiles \in \{1, 2\}$ both \eqref{eq: theo: funl, form; i} and \eqref{eq: th
 By Theorem~\ref{theo: funt, form}, $\funt$ has unit-height jumps at the values $\funl(\tiles)$, $\tiles \in \mathbb N, \tiles \geq 4$. This implies that $\funl$ is monotone increasing for $\tiles \geq 3$.
 \end{proof}
 
-***Comment about how the new formula has two terms with definite meanings: The first term is the distance-squared to the closest point on the diagonal, The second term is additional distance-squared incurred from rounding (i,j) to integers
+***Comment on how the new formula has two terms with definite meanings: The first term is the distance-squared to the closest point on the diagonal, The second term is additional distance-squared incurred from rounding (i,j) to integers
 
 Theorems~\ref{theo: funt, form} and \ref{theo: funl, form} not only give the solutions $\funt(\len)$ and $\funl(\tiles)$ to the two problems stated in \S\ref{part: intro}; they also provide a way to actually position a segment of length slightly greater than $\len$ or $\funl(\tiles)$ so that it visits $\tiles$ or $\funt(\len)$ tiles. Namely, the segment should have its endpoints respectively in the interior of two tiles separated $\isoli-1$ steps horizontally and $\jsoli-1$ steps vertically, with its exact position and orientation  adjusted to avoid any grid points.
 
@@ -497,7 +498,7 @@ As for $a \gg b$, in this case the optimal canonical rectangle has $\isoli = 2$,
 
 For $a=b$, either from symmetry considerations or particularizing the formulas in the previous theorems it stems that the optimal orientation of the segment is close to $45^\circ$. This case will be dealt with in \S\ref{part: max: unit square grid, real lengths}, as it lends itself to simplified formulas.
 
-Figure~\ref{fig: funt funl examples} shows $\funt$ and $\funl$ for several pairs of grid parameters $a$, $b$. The graphs illustrate some of the observations of the previous paragraphs. Indeed, the asymptotic slope in Figure~\ref{fig: funt examples}, or the inverse of the asymptotic slope in Figure~\ref{fig: funl examples}, is approximately $\sqrt{2}$ for $a, b=1$, and $1/b$ for the case $a=5,b=1$, and even for $a=5,b=1.5$ and $a=10,b=3$. Comparing the latter two cases it is also seen that scaling $a$, $b$ and $\len$ by the same factor does not alter $\funt(\len)$; or scaling $a$, $b$ results in $\funl(\tiles)$ being scaled by the same factor.
+Figure~\ref{fig: funt funl examples} shows $\funt$ and $\funl$ for several pairs of grid parameters $a$, $b$. The graphs illustrate some of the observations of the previous paragraphs. Indeed, the asymptotic slope in Figure~\ref{fig: funt examples}, or the inverse of the asymptotic slope in Figure~\ref{fig: funl examples}, is approximately $\sqrt{2}$ for $a, b=1$; and it is $1/b$ for the case $a=5,b=1$, or even for $a=5,b=1.5$ or $a=10,b=3$. Comparing the latter two cases it is also seen that scaling $a$, $b$ and $\len$ by the same factor does not alter $\funt(\len)$, and results in $\funl(\tiles)$ being scaled by that factor.
 
 \begin{figure}
 \centering%
@@ -518,7 +519,7 @@ Figure~\ref{fig: funt funl examples} shows $\funt$ and $\funl$ for several pairs
 \subsection{Unit square grid with real-valued lengths}
 \label{part: max: unit square grid, real lengths}
 
-A square grid has $a=b$. If the segment lengths are real-valued it can be further assumed that $a=1$. For $a \neq 1$ the results to be obtained apply with $\len$ replaced by $\len/a$.
+A square grid has $a=b$. For real-values segment lengths it can be further assumed that $a=1$. For $a \neq 1$ the results to be obtained apply with $\len$ replaced by $\len/a$.
 
 Particularizing the results in \S\ref{part: max: arbitrary grid, real lengths} to $a=b=1$ obviously yields simpler formulas.
 
@@ -561,8 +562,6 @@ or equivalently
 \sqrt{\left\lceil \frac{(\tiles-3)^2} {2} \right\rceil} & \text{for } \tiles \geq 3.
 \end{cases}
 \end{equation}
-
-
 \end{corollary}
 
 Furthermore, an even simpler formula can be obtained for $\funt$, as the next theorem shows.
@@ -589,9 +588,10 @@ Equivalently,
 \end{theorem}
 
 \begin{proof}
-The proof of \eqref{eq: theo: funt, sq, form; funt, with i, j} uses a variation of the minimal sufficient set $\mss$ which is more suited to this situation.
+The proof of \eqref{eq: theo: funt, sq, form; funt, with i, j} uses a variation of the minimal sufficient set $\mss$ defined in Proposition~\ref{prop: min suff set, form} that is more suited to this situation.
+% ***``situation'' or ``case''?
 
-For $a=b=1$ the set $\mss$ consists of points of the form $(i,i)$ and $(i+1,i)$, as is easily seen from Proposition~\ref{prop: min suff set, form}, and as illustrated in Figure~\ref{fig: pairs_bounds_1}. By symmetry, replacing each point $(i+1,i)$ by $(i,i+1)$ gives a set $\mss'$ which is also minimal sufficient. For this new set, the lower bounding line \eqref{eq: lower bound, line} can be replaced by the simpler $j=i$. The same approach used in the proof of Theorem~\ref{theo: funt, form} can be followed, but using this line. Thus $(\isolr, \jsolr)$ is obtained from
+For $a=b=1$ the set $\mss$ consists of points of the form $(i,i)$ and $(i,i-1)$, as is easily seen from Proposition~\ref{prop: min suff set, form}, and as illustrated in Figure~\ref{fig: pairs_bounds_1}. By symmetry, replacing each point $(i,i-1)$ by $(i-1,i)$ gives a set $\mss'$ which is also minimal sufficient. For this new set, the lower bounding line \eqref{eq: lower bound, line} can be replaced by the simpler $j=i$. The same approach used in the proof of Theorem~\ref{theo: funt, form} can be followed, but using this line. Thus $(\isolr, \jsolr)$ is obtained from
 \begin{align}
 (\isolr-2)^2 + (\jsolr-2)^2  &= \len^2, \\
 \jsolr &= \isoli,
@@ -619,7 +619,7 @@ For $\tiles \geq 4$, $\tiles$ even, $\funt(\len) = \tiles$ if and only if
 \len \in \left(\frac{ \sqrt{(\tiles-2)^2+(\tiles-4)^2}}{2}, \frac{\tiles-2}{\sqrt{2}} \right].
 \end{equation}
 
-
+% ***Aq
 \subsection{Unit square grid with integer lengths}
 \label{part: max: unit square grid, integer lengths}
 
