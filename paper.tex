@@ -125,7 +125,7 @@ The problems studied in this paper are related to \ldots ***maybe a short paragr
 \url{https://www.jstor.org/stable/2317945} \\
 \url{https://www.jstor.org/stable/2687085}
 
-The rest of the paper is organized as follows. Fundamental results are presented in \S\ref{part: fund results}, which form the basis of the subsequent analysis. The direct and inverse problems for a deterministic segment are considered in \S\ref{part: max}, first for real-valued lengths, and then for integer-valued lengths on a unit square grid. The analysis for the random segment is carried out in \S\ref{part: rand}. The average number of tiles is computed in general, and the probability that the segment visits the maximum number of tiles is obtained for a square grid.
+The rest of the paper is organized as follows. Fundamental results are presented in \S\ref{part: fund results}, which form the basis of the subsequent analysis. The direct and inverse problems for a deterministic segment are considered in \S\ref{part: max}, first for arbitrary grids and then for a square grid. The analysis for the random segment is carried out in \S\ref{part: rand}. The average number of tiles is computed for arbitrary grids, and the probability that the segment visits the maximum number of tiles is obtained for a square grid.
 
 % The rounding down (floor) and rounding up (ceiling) operations will be denoted as $\lfloor \cdot \rfloor$ and $\lceil \cdot \rceil$. The notation $[\mathsf S]$ will be used for the Iverson function, which equals $1$ if statement $\mathsf S$ is true and $0$ otherwise.
 
@@ -235,7 +235,7 @@ Consider first the case $a=b=1$. This is illustrated in Figure~\ref{fig: ijLS_1}
 }%
 \label{fig: ijLS_1}%
 \end{figure}%
-% ***Combine this figure and the next into one figure with two subfigures (stacked vertically, size similar to now)? This has been done in others
+% ***Maybe combine this figure and the next into one figure with two subfigures (stacked vertically, size similar to now). Not sure. It has been done in others
 % ***Are these figures necessary? They were created with the aim of helping understand the first of the two propositions on $\mss$. Now that proposition has been removed. They are probably still useful, but maybe the text about these figures needs to be rewritten.
 
 For a given $\len \in \mathbb R^+$, the $(i,j)$ pairs that can be achieved with segments of length not exceeding $\len$ are, by Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}, those whose distance from $(2a,2b)$ is less than $\len$, i.e.~those delimited by the corresponding arc. It is clear from the figure that for $i+j-1$ odd, if some point $(i_1,j_1)$ with $|i_1-j_1|>1$ is achievable with the length bound $\len$, then necessarily there is a point $(i_0,i_0)$ with the same number of visited tiles $i+j-1$ (same diagonal line) that is also achievable with the same length restriction (because it has smaller distance to $(2a,2b)$). Similarly, for $i+j-1$ even, if a point $(i_1,j_1)$ with $|i_1-j_1|>1$ is achievable, then there is a point $(i_0,i_0+1)$ in the same diagonal that is also achievable with the same length restriction.
@@ -476,6 +476,8 @@ For $\tiles \in \{1, 2\}$ both \eqref{eq: theo: funl, form; i} and \eqref{eq: th
 
 By Theorem~\ref{theo: funt, form}, $\funt$ has unit-height jumps at the values $\funl(\tiles)$, $\tiles \in \mathbb N, \tiles \geq 4$. This implies that $\funl$ is monotone increasing for $\tiles \geq 3$.
 \end{proof}
+
+***Comment about how the new formula has two terms with definite meanings: The first term is the distance-squared to the closest point on the diagonal, The second term is additional distance-squared incurred from rounding (i,j) to integers
 
 Theorems~\ref{theo: funt, form} and \ref{theo: funl, form} not only give the solutions $\funt(\len)$ and $\funl(\tiles)$ to the two problems stated in \S\ref{part: intro}; they also provide a way to actually position a segment of length slightly greater than $\len$ or $\funl(\tiles)$ so that it visits $\tiles$ or $\funt(\len)$ tiles. Namely, the segment should have its endpoints respectively in the interior of two tiles separated $\isoli-1$ steps horizontally and $\jsoli-1$ steps vertically, with its exact position and orientation  adjusted to avoid any grid points.
 
