@@ -1615,9 +1615,9 @@ xlabel y
 axis([-4 5 -4 5])
 for k = [0 1+3j 2+2j 3+1j 1-3j 2-2j 3-1j -3+1j -2+2j -1+3j -3-1j -2-2j -1-3j]
     if k==0
-        plot(real(k)+[0 1 1 0 0], imag(k)+[0 0 1 1 0], 'k-', 'linewidth', .75)
+        plot(real(k)+[0 1 1 0 0], imag(k)+[0 0 1 1 0], 'k-', 'linewidth', 1)
     else
-        plot(real(k)+[0 1 1 0 0], imag(k)+[0 0 1 1 0], 'k--', 'linewidth', .75)
+        plot(real(k)+[0 1 1 0 0], imag(k)+[0 0 1 1 0], 'k--', 'linewidth', 1)
     end
 end
 
@@ -1658,9 +1658,9 @@ patch([real(endpoint) 1 1 real(endpoint) real(endpoint)], [imag(endpoint) imag(e
 plot([3+3j endpoint], 'k')
 for k = [0 3+3j]
     if k==0
-        plot(real(k)+[0 1 1 0 0], imag(k)+[0 0 1 1 0], 'k-', 'linewidth', .75)
+        plot(real(k)+[0 1 1 0 0], imag(k)+[0 0 1 1 0], 'k-', 'linewidth', 1)
     else
-        plot(real(k)+[0 1 1 0 0], imag(k)+[0 0 1 1 0], 'k--', 'linewidth', .75)
+        plot(real(k)+[0 1 1 0 0], imag(k)+[0 0 1 1 0], 'k--', 'linewidth', 1)
     end
 end
 text(1.65, 2.27, char(hex2dec('2113')))
@@ -1706,9 +1706,9 @@ patch([real(endpoint) 1 1 real(endpoint) real(endpoint)], [imag(endpoint) imag(e
 plot([2+4j endpoint], 'k')
 for k = [0 2+4j]
     if k==0
-        plot(real(k)+[0 1 1 0 0], imag(k)+[0 0 1 1 0], 'k-', 'linewidth', .75)
+        plot(real(k)+[0 1 1 0 0], imag(k)+[0 0 1 1 0], 'k-', 'linewidth', 1)
     else
-        plot(real(k)+[0 1 1 0 0], imag(k)+[0 0 1 1 0], 'k--', 'linewidth', .75)
+        plot(real(k)+[0 1 1 0 0], imag(k)+[0 0 1 1 0], 'k--', 'linewidth', 1)
     end
 end
 text(1.09, 2.77, char(hex2dec('2113')))
