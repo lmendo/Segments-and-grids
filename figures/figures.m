@@ -1837,3 +1837,47 @@ funt_sq_2 = ii+jj-1;
 funt_sq_3 = floor(sqrt(2*ceil(L.^2/a^2) - 2)) + 3; % formula found by Alex
 isequal(funt_rect, funt_sq, funt_sq_2, funt_sq_3)
 
+
+%% #70. Figure for proof of {the proposition that gives the formula of the minimum sufficient set} based on a continuous solution that is then rounded (Alex)
+% Based on #43 (with flag_hexagram = false; flag_fun = false; flag_pairs = true)
+
+clear, clf, clc
+flag_pairs = true;
+a = 1.35; b = 1;
+hold on
+set(gca, 'layer', 'top')
+grid on
+plot([2*a+2j*b 2*a+5.7j*b], 'k') % "secondary" axes
+plot([2*a+2j*b 5.7*a+2j*b], 'k')
+chosen = [2*a+2j*b 2*a+3j*b 3*a+3j*b 3*a+4j*b 3*a+5j*b 4*a+5j*b];
+chosen_2 = 4*a+4j*b;
+ms = 5;
+plot(chosen, 'ko', 'markerfacecolor', 'k', 'markersize', ms) % chosen (i,j) pairs
+plot(chosen_2, 'ko', 'markerfacecolor', 'w', 'markersize', ms) % chosen 2
+plot(setdiff((2:5)*a + 1j*(2:5).'*b, [chosen chosen_2]), 'ko', 'markerfacecolor', 'none', 'markersize', ms) % non-chosen (i,j) pairs
+axis equal %pbaspect([1 1 1])
+axis([1*a 6*a 1*b 6*b])
+plot([1.8 2.4]*a, [2.2 1.6]*b, 'k--')
+plot([1.8 3.4]*a, [3.2 1.6]*b, 'k--')
+plot([1.8 4.4]*a, [4.2 1.6]*b, 'k--')
+plot([1.8 5.4]*a, [5.2 1.6]*b, 'k--')
+plot([2.5 5.4]*a, [5.5 2.6]*b, 'k--') % limit to secondary axes
+plot([3.5 5.4]*a, [5.5 3.6]*b, 'k--')
+plot([4.5 5.4]*a, [5.5 4.6]*b, 'k--')
+xl = xlim; yl = ylim;
+set(gca, 'GridAlpha', .4, 'XTick', xl(1):xl(2), 'YTick', yl(1):yl(2))
+xticks((0:7)*a), yticks((0:9)*b)
+xticklabels([{'0'} arrayfun(@(n)[num2str(n) char(8201) 'a'], 1:7, 'UniformOutput', false)]) % thin space
+yticklabels([{'0'} arrayfun(@(n)[num2str(n) char(8201) 'b'], 1:9, 'UniformOutput', false)])
+xlabel(['i' char(8201) 'a']), ylabel(['j' char(8201) 'b']) % thin space
+set(gca, 'colororderindex', 1)
+xl = [1.85 3.95];
+plot(xl*a, (xl-2)*a^2/b^2+2, '-') % line
+text(6.96, 2.43, ['i+j' char(8211) '1 = t'])
+set(gca, 'colororderindex', 1)
+t = 7; xl = (t-3)*b^2/(a^2+b^2) + 2; yl = (t-3)*a^2/(a^2+b^2) + 2; % computed
+ms = 6;
+plot(xl*a, yl*b, 's', 'markersize', ms)
+text(4.78, 4.69, '(i^+,j^+)')
+text(3.52, 4.82, '(i_t,j_t)')
+

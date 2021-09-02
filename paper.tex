@@ -105,7 +105,7 @@ As an example of the first question, consider $a=1.35$, $b=1$. A segment of unit
 \begin{figure}
 \centering%
 \includegraphics[width=.85\textwidth]{examples_1p35}%
-\caption{Examples for $a=1.35, b=1$; $\len=1$, $\len=2.4$ and $\len=4.7$
+\caption{Examples for $a=1.35$, $b=1$; $\len=1$, $\len=2.4$ and $\len=4.7$
 }%
 \label{fig: examples}%
 \end{figure}%
@@ -287,16 +287,17 @@ j = \frac{i a^2}{b^2} - \frac{5a^2}{2b^2} + \frac 3 2.
 \begin{proof}
 ***New proof based on treating i,j as continuous along the line i+j=constant, then quantizing to the nearest allowed point along that line. We should use the notation $\isolr$, $\jsolr$ for the continuous coordinates, in conformity to other proofs that use continuous coordinates.
 % ***The continuous argument gives something like $i-2 = b^2/(a^2+b^2)*(t-3)$, $j-2 = a^2/(a^2+b^2)*(t-3)$. We then compute how much the distance from $(i,j)$ to $(2,2)$ is increased by quantizing along the i+j line, to argue that the nearest quantized point should be chosen. To ensure that in case of a tie we choose the point with larger $i$, we apply floor(...+1/2) to i and ceiling(...-1/2) to j.
+% ***Reference the figure in the text. The figure is an example with $a=1.35$, $b=1$, $\tiles=7$. It contains the line j-2 = a^2/b^2*(i-2), whose intersection with i+j-1=t (which is perpendicular to it) gives the continuous solution $(\isolr, \jsolr)$ (marked with a square). 
 
 ***The bounding lines are a direct consequence of how $i_\tiles$ and $j_\tiles$ are obtained.
 
-%\begin{figure}%
-%\centering%
-%\includegraphics[width=.7\textwidth]{ijLS_1p35_detail_inverse}%
-%\caption{***Figure illustrating the proof of Proposition~\ref{prop: min suff set, form}. Example with $a=1.35, b=1$%
-%}%
-%\label{fig: ***}%
-%\end{figure}%
+\begin{figure}%
+\centering%
+\includegraphics[width=.7\textwidth]{mss}%
+\caption{Obtaining $(\isolr, \jsolr)$ and $(i_\tiles, j_\tiles)$ in  Proposition~\ref{prop: min suff set, form}. Example with $a=1.35$, $b=1$, $\tiles=7$%
+}%
+\label{fig: min suff set, form}%
+\end{figure}%
 \end{proof}
 
 The bounding lines in Proposition~\ref{prop: min suff set, form} are shown in Figure~\ref{fig: pairs_bounds}, using three different pairs of grid parameters $a$, $b$ as examples. Given $(i_\tiles,j_\tiles) \in \mss$, the next pair $(i_{\tiles+1},j_{\tiles+1})$ is obtained by incrementing $j$ if that results in a point below \eqref{eq: upper bound, line}. Else $i$ is incremented instead, and the new pair is guaranteed to be above or on \eqref{eq: lower bound, line}.
@@ -377,7 +378,7 @@ find the intersection $(\isolr, \jsolr)$ of the line \eqref{eq: lower bound, lin
 
 Specifically, assuming first that \eqref{eq: lower bound, line} holds, the largest $i$ that can be achieved with lengths not exceeding $\len$ is obtained, as given by Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}. This value, $\isoli$, is computed by rounding down $\isolr$. Then, assuming that $i = \isoli$, the largest $j$ allowed by Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}, $\jsoli$, is obtained. As will be seen, in some cases the resulting $(\isoli,\jsoli)$ is in $\mss$, and in other cases it is not. However, in either case $(\isoli,\jsoli)$ has the largest $i+j-1$ sum that can be achieved with segments of length up to $\len$. Thus the desired result is $\isoli+\jsoli-1$.
 
-The two possibilities are illustrated in Figure~\ref{fig: ijLS_1p35_detail} for $a=1.35, b=1$. In each case, the arc displayed in the graph is centered at $(2a,2b)$ and has radius $\len$. The inner region defined by the arc contains all $(i,j)$ pairs that are achievable according to Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}. As in previous figures, filled circles represent $(i,j)$ pairs that are in $\mss$, and empty circles are those that do not belong to $\mss$. The solid line is \eqref{eq: lower bound, line}. The intersection point $(\isolr, \jsolr)$ is displayed with a square marker.
+The two possibilities are illustrated in Figure~\ref{fig: ijLS_1p35_detail} for $a=1.35$, $b=1$. In each case, the arc displayed in the graph is centered at $(2a,2b)$ and has radius $\len$. The inner region defined by the arc contains all $(i,j)$ pairs that are achievable according to Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}. As in previous figures, filled circles represent $(i,j)$ pairs that are in $\mss$, and empty circles are those that do not belong to $\mss$. The solid line is \eqref{eq: lower bound, line}. The intersection point $(\isolr, \jsolr)$ is displayed with a square marker.
 
 \begin{figure}
 \centering%
@@ -389,7 +390,7 @@ The two possibilities are illustrated in Figure~\ref{fig: ijLS_1p35_detail} for 
 \label{fig: ijLS_1p35_detail_notin}%
 \includegraphics[width=.7\textwidth]{ijLS_1p35_detail_notin}%
 }%
-\caption{Obtaining $(\isoli,\jsoli)$ in Theorem~\ref{theo: funt, form}. Examples with $a=1.35, b=1$%
+\caption{Obtaining $(\isoli,\jsoli)$ in Theorem~\ref{theo: funt, form}. Examples with $a=1.35$, $b=1$%
 }%
 \label{fig: ijLS_1p35_detail}%
 \end{figure}%
