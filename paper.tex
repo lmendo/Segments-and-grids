@@ -116,6 +116,7 @@ The \emph{inverse} problem is, given $\tiles \in \mathbb N$, to determine the in
 
 The direct and inverse problems are closely related. Namely, if $\len$ is the infimum of all lengths that allow visiting at least $\tiles$ tiles (inverse problem), $\tiles$ is the maximum number of tiles that can be visited with lengths slightly greater than $\len$ (direct problem).
 
+% *** AA: Maybe add a transition that now we're switching to looking at the average number of tiles visited by a random segment.
 The notion of a \emph{random} segment of a given length is precisely defined as follows. By symmetry, one endpoint of the segment can be assumed to lie in a fixed, reference tile. The position of this endpoint is \emph{uniformly} distributed on the tile. The segment orientation has a \emph{uniform} distribution on the set of all possible directions, and is \emph{independent} of the endpoint position. Solving the problem of how many tiles the segment visits on average, as will be seen, also answers the inverse question (segment length to visit a given number of tiles on average). A natural, related question is with that probability the segment visits the maximum number of tiles. 
 
 % ***Do we need to discuss potential applications of this (if we can find any)? This probably depends on the journal
@@ -223,6 +224,9 @@ For instance, it is intuitively clear from Figure~\ref{fig: examples} that segme
 The corresponding $(i,j)$ pairs can be left out of the sufficient set. In general, the pairs included in a minimal sufficient set will be different depending on $a$ and $b$. Two specific examples of minimal sufficient sets will be presented later in this section.
 
 % ***Is the text from here to the proposition too long? Shorten it?
+
+% ***AA: Do we actually need the concept of a minimal sufficient set, given that there's a single value at each diagonal (tiebreaking a certain way)? Perhaps rename to suggest it's one value?
+
 Knowing a minimal sufficient set of $(i,j)$ pairs facilitates the solution of both the direct an inverse problems, because it reduces the number of pairs that need to be tried. In order to derive a general method to build a minimal sufficient set, it is insightful to consider two specific cases first. It is also convenient to use the equivalent formulation of the direct problem referred to in \S\ref{part: intro}, i.e.~finding the maximum number of tiles visited by segments of length $\len$ \emph{or less}.
 
 % Thus each choice of $(i, j)$ implies a maximum of $i+j-1$ visited tiles on one hand; and sets a lower bound on the required length $\len$ on the other hand.
@@ -463,6 +467,7 @@ with
 Equivalently,
 \begin{equation}
 \text{***new formula found by Alex; unless we can unify with the above}
+% *** AA: Wrote a shot at how a unification might look in e-mail.
 \end{equation}
 This function is monotone increasing for $\tiles \geq 3$.
 \end{theorem}
@@ -592,7 +597,7 @@ Equivalently,
 The proof of \eqref{eq: theo: funt, sq, form; funt, with i, j} uses a variation of the minimal sufficient set $\mss$ defined in Proposition~\ref{prop: min suff set, form} that is more suited to this situation.
 % ***``situation'' or ``case''?
 
-For $a=b=1$ the set $\mss$ consists of points of the form $(i,i)$ and $(i,i-1)$, as is easily seen from Proposition~\ref{prop: min suff set, form}, and as illustrated in Figure~\ref{fig: pairs_bounds_1}. By symmetry, replacing each point $(i,i-1)$ by $(i-1,i)$ gives a set $\mss'$ which is also minimal sufficient. For this new set, the lower bounding line \eqref{eq: lower bound, line} can be replaced by the simpler $j=i$. The same approach used in the proof of Theorem~\ref{theo: funt, form} can be followed, but using this line. Thus $(\isolr, \jsolr)$ is obtained from
+For $a=b=1$, the set $\mss$ consists of points of the form $(i,i)$ and $(i,i-1)$, as is easily seen from Proposition~\ref{prop: min suff set, form}, and as illustrated in Figure~\ref{fig: pairs_bounds_1}. By symmetry, replacing each point $(i,i-1)$ by $(i-1,i)$ gives a set $\mss'$ which is also minimal sufficient. For this new set, the lower bounding line \eqref{eq: lower bound, line} can be replaced by the simpler $j=i$. The same approach used in the proof of Theorem~\ref{theo: funt, form} can be followed, but using this line. Thus $(\isolr, \jsolr)$ is obtained from
 \begin{align}
 (\isolr-2)^2 + (\jsolr-2)^2  &= \len^2, \\
 \jsolr &= \isoli,
@@ -607,6 +612,28 @@ The pair $(\isoli,\jsoli)$ resulting from \eqref{eq: theo: funt, sq, form; proof
 ***Alex
 ***Derivation of \eqref{eq: theo: funt, sq, form; funt, simpler} \ldots
 ***It looks like we may have to use different techniques for deriving \eqref{eq: theo: funt, sq, form; funt, with i, j} and \eqref{eq: theo: funt, sq, form; funt, simpler}. I don't see a way to use a common proof method. And \eqref{eq: theo: funt, sq, form; funt, with i, j} is needed because of $\isoli$, $\jsoli$, which are used in (the text below in preparation for) \S\ref{part: probmax: unit square grid, real lengths}.
+
+To show \eqref{eq: theo: funt, sq, form; funt, simpler}, we refer back to \eqref{eq: theo: funt, sq, form; funl} in Corollary~\ref{theo: funl, sq, form} for $\tiles \geq 3$:
+\begin{equation}
+\funl(\tiles) = \sqrt{\left\lceil \frac{(\tiles-3)^2} {2} \right\rceil}
+\end{equation}
+Then, the pseudo-inverse function $\funt(\len)$ is given by the largest positive integer $t$ such that 
+\begin{equation}
+\left\lceil \frac{(\tiles-3)^2} {2} \right\rceil < \len ^ 2
+\end{equation}
+Since the left-hand side is an integer, the condition of being strictly less than $\len^2$ is equivalent to: 
+\begin{equation}
+\left\lceil \frac{(\tiles-3)^2} {2} \right\rceil  \leq \left\lceil \len^2 \right\rceil  - 1 
+\end{equation}
+and removing the now-superfluous ceiling on the left side gives:
+\begin{equation}
+\frac{(\tiles-3)^2} {2}\leq  \left\lceil \len^2 \right\rceil  - 1 
+\end{equation}
+Finally, we solve for $\tiles$:
+\begin{equation}
+\tiles \leq \sqrt{2 \left\lceil \len^2 \right\rceil -2 } + 3
+\end{equation}
+The desired quantity $\funt(\len)$, that is the largest positive integer $\tiles$ satisfying the above, is thus the floor of the right-hand side as given by \eqref{eq: theo: funt, sq, form; funt, simpler}.
 \end{proof}
 
 From Theorem~\ref{theo: funt, sq, form} it is easily seen that odd values of $\funt(\len)$ correspond to $\isoli = \jsoli$, whereas even values are achieved with $\jsoli = \isoli+1$. Given $\tiles \geq 3$ with $\tiles$ odd, $\funt(\len) = \tiles$ if and only
@@ -760,7 +787,7 @@ The stated properties for $\funli$ follow directly from those of $\funti$ establ
 \section{Probabilistic characterization for a random segment}
 \label{part: rand}
 
-Given $\len \in \mathbb R^+$, consider a segment of length $\len$ with random position and orientation. Specifically, the coordinates $x_1$, $y_1$ of the first endpoint are independent random variables uniformly distributed on $[0,a)$ and $[0,b)$ respectively. The orientation $\theta$ of the segment is uniformly distributed on $[0,2\pi)$. The variables $x_1$, $y_1$ and $\theta$ determine the coordinates $x_2$, $y_2$ of the second endpoint.
+Given $\len \in \mathbb R^+$, consider a segment of length $\len$ with uniformly random position and orientation. Specifically, the coordinates $x_1$, $y_1$ of the first endpoint are independent random variables uniformly distributed on $[0,a)$ and $[0,b)$ respectively. The orientation $\theta$ of the segment is uniformly distributed on $[0,2\pi)$. The variables $x_1$, $y_1$ and $\theta$ determine the coordinates $x_2$, $y_2$ of the second endpoint.
 
 Each realization of the random segment gives rise to a canonical rectangle, whose normalized dimensions $i$ and $j$ are thus random variables, as is the number $\tiles$ of visited tiles. Except for a set of realizations with zero probability, $i$ and $j$ are at least $1$, and $\tiles = i+j-1$ tiles. Note that $i$ and $j$ are not statistically independent. 
 
@@ -785,7 +812,23 @@ Given $a, b, \len \in \mathbb R^+$, consider a grid with parameters $a, b$ and a
 \end{theorem}
 
 \begin{proof}
-***New proof without using the proposition (which has been moved after the theorem)
+% *** Is this writeup too informal/non-rigorous?
+The classic Buffon's Needle result (*** cite Buffon's 1777 paper?) says that if we take infinite ruled paper with parallel lines a distance of $1$ apart, and we toss a needle of length $1$ with uniformly random position and orientation, the probability that it crosses any line is $2/\pi$.
+
+This is also the expected (that is, average) number of crossings, since this needle cannot reach more than one line\footnote{We may ignore the probability-zero event of it lying exactly along a line.}. For a needle of length $2$, the expected number of crossings is double the amount of $2/\pi$, since expectation is additive and so unchanged if we instead break this needle into two length-$1$ halves
+that we toss separately and count their total crossings. Conversely, for a needle of length $1/2$, it would be half the original expectation.
+
+A similar argument extends this proportionality to all rational lengths, and by monotonicity all real lengths: for a needle of length $l$, the expected number of crossings is
+$\frac{2\len}{\pi}$.
+If the lines are a distance $a$ apart, this is equivalent to shrinking the needle by a factor of $a$, giving expected crossings
+$\frac{2\len}{\pi a}$.
+
+Now, consider a rectangular grid paper with parameters of width $a$ and height $b$. Equivalently, this is paper ruled with horizontal lines $b$ apart and vertical lines $a$ apart. The distribution of the number of crossings of a needle tossed onto this grid is known as the Buffon-Laplace Needle Problem (*** cite). This number decomposes into the counts of crossings of horizontal and vertical grid lines, so the expected number of crossings is the sum of those for lined paper of width $a$ and $b$ respectively:
+\begin{equation}
+\frac{2\len}{\pi}\left(\frac \len a + \frac \len b\right)
+\end{equation}
+As noted in Proposition \ref{prop: i+j-1}, the number of grid cells visited by a segment is the count of its grid line crossings plus one -- unless, that is, it exactly crosses any grid points, but that occurs with probability zero and so doesn't affect the expectation. So, $\funta(\len)$ is the above quantity plus one.
+
 \end{proof}
 
 In view of Theorem~\ref{theo: funta, form}, the average number of visited tiles has a remarkably simple dependence on the segment length, namely an affine function. Conversely, for any $\tiles>1$ it is immediate to compute the length of a random segment that visits $\tiles$ tiles on average, given as $\funta^{-1}(\tiles)$.
