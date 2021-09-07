@@ -3,8 +3,8 @@
 - Are "sufficient" and "minimal sufficient" good names? They are used in statistics: analogously?
 
 Things to do:
-- Alex/Luis: new proof of the proposition that characterizes of the minimal sufficient set
-- Luis: figure for the new proof of the proposition that characterizes of the minimal sufficient set. The figure will illustrate the continuous solution i,j, as intersection of two lines
+- Alex/Luis: new proof of the proposition that characterizes the minimal sufficient set
+|- Luis: figure for the new proof of the proposition that characterizes of the minimal sufficient set. The figure will illustrate the continuous solution i,j, as intersection of two lines
 - Alex: extend Theorem 2 with the new formula and its proof (unless the formula can be unified with the current one)
 - Alex: comment after Theorem 2: how the new formula has two terms with definite meanings
 |- Alex: write the proof for the square grid formula for maximum number of visited tiles (Theorem 3)
