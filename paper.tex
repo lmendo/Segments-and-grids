@@ -368,15 +368,13 @@ with
 \label{eq: theo: funt, form; j}
 \jsoli &= \left\lceil \frac{\sqrt{\len^2-(\isoli-2)^2a^2}}{b} \right\rceil + 1.
 \end{align}
-The function $\funt$ is piecewise constant and left-continuous, with unit-height jumps. A jump occurs at $\len$ if and only if $\len = \funl(\tiles)$ for some $\tiles \in \mathbb N, \tiles \geq 4$; and then $\funt(\len) = \tiles-1$, $\lim_{h \rightarrow 0+} \funt(\len+h) = \tiles$.
+The function $\funt$ is piecewise constant and left-continuous, with unit-height jumps. A jump occurs at $\len$ if and only if $\len = \funl(\tiles)$ for some $\tiles \in \mathbb N$, $\tiles \geq 4$; and then $\funt(\len) = \tiles-1$, $\lim_{h \rightarrow 0+} \funt(\len+h) = \tiles$.
 \end{theorem}
 
 \begin{proof}
-The idea of the proof is loosely similar to that used in Proposition~\ref{prop: min suff set, form}:
-% ***is it appropriate to say that it is loosely similar? Both are based on a continuous approximation which is then quantized. Does ``loosely'' have a negative connotation?
-find the intersection $(\isolr, \jsolr)$ of the line \eqref{eq: lower bound, line} and the arc centered at $(2a,2b)$ with radius $\len$ for $i, j \geq 2$, and from that obtain the actual pair $(\isoli, \jsoli)$ of integer numbers that yields the solution.
+The approach is similar to that used in Proposition~\ref{prop: min suff set, form}. Namely, for $i, j \geq 2$ the intersection $(\isolr, \jsolr)$ of the line \eqref{eq: lower bound, line} and the arc centered at $(2a,2b)$ with radius $\len$ is found, and from that the actual integer solution $(\isoli, \jsoli)$ is computed.
 
-Specifically, assuming first that \eqref{eq: lower bound, line} holds, the largest $i$ that can be achieved with lengths not exceeding $\len$ is obtained, as given by Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}. This value, $\isoli$, is computed by rounding down $\isolr$. Then, assuming that $i = \isoli$, the largest $j$ allowed by Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}, $\jsoli$, is obtained. As will be seen, in some cases the resulting $(\isoli,\jsoli)$ is in $\mss$, and in other cases it is not. However, in either case $(\isoli,\jsoli)$ has the largest $i+j-1$ sum that can be achieved with segments of length up to $\len$. Thus the desired result is $\isoli+\jsoli-1$.
+More specifically, assuming that \eqref{eq: lower bound, line} holds, the largest $i$ that can be achieved with lengths not exceeding $\len$ is obtained, as given by Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}. This value, $\isoli$, is computed by rounding down $\isolr$. Then, assuming that $i = \isoli$, the largest $j$ allowed by Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}, $\jsoli$, is obtained. As will be seen, in some cases the resulting $(\isoli,\jsoli)$ is in $\mss$, and in other cases it is not. However, in either case $(\isoli,\jsoli)$ has the largest $i+j-1$ sum that can be achieved with segments of length up to $\len$. Thus the desired result is $\isoli+\jsoli-1$.
 
 The two possibilities are illustrated in Figure~\ref{fig: ijLS_1p35_detail} for $a=1.35$, $b=1$. In each case, the arc displayed in the graph is centered at $(2a,2b)$ and has radius $\len$. The inner region defined by the arc contains all $(i,j)$ pairs that are achievable according to Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}. As in previous figures, filled circles represent $(i,j)$ pairs that are in $\mss$, and empty circles are those that do not belong to $\mss$. The solid line is \eqref{eq: lower bound, line}. The intersection point $(\isolr, \jsolr)$ is displayed with a square marker.
 
@@ -430,9 +428,9 @@ Therefore, whether $(\isoli,\jsoli) \in \mss$ or $(\isoli,\jsoli) \notin \mss$, 
 It should be noted that for the specific case that $a^2/b^2 = 2k-1$, $k \in \mathbb N$ the lower bounding line \eqref{eq: lower bound, line} becomes $j = i(2k-1)-5k+4$, which gives integer $j$ for integer $i$. This means that the bound is actually achieved for all pairs in $\mss$ (see for example Figure~\ref{fig: pairs_bounds_1}), and the case $(\isoli,\jsoli) \notin \mss$ never occurs. Thus, when $a^2/b^2$ is an odd integer the obtained $(\isoli,\jsoli)$ is guaranteed to be in $\mss$, whereas for general $a^2/b^2$ either $(\isoli,\jsoli)$ or $(\isoli-1,\jsoli+1)$ are in in this set.
 % ^ If this is needed outside of the proof, it can be included at the end of the theorem statement
 
-As for the properties of $\funt$, it follows from \eqref{eq: theo: funt, form; funt}--\eqref{eq: theo: funt, form; j} that it is piecewise constant and left-continuous. From the procedure described in the previous paragraphs for obtaining $(\isoli, \jsoli)$ it is clear that $\isoli+\jsoli-1$ increases in steps of $1$ when $\len$ is increased continuously; that is, $\funt$ has jumps of unit value.
+As for the properties of $\funt$, it follows from \eqref{eq: theo: funt, form; funt}--\eqref{eq: theo: funt, form; j} that this function is piecewise constant and left-continuous. From the procedure described in the previous paragraphs for obtaining $(\isoli, \jsoli)$ it is clear that $\isoli+\jsoli-1$ increases in steps of $1$ when $\len$ is increased continuously; that is, $\funt$ has jumps of unit height.
 
-Consider an arbitrary $\len$ such that for some $\tiles \in \mathbb N, \tiles \geq 4$
+Consider an arbitrary $\len$ such that for some $\tiles \in \mathbb N$, $\tiles \geq 4$
 \begin{equation}
 \label{eq: theo funt, form: prop 1}
 \funl(\tiles)=\len.
@@ -484,7 +482,7 @@ For $\tiles \in \{1, 2\}$ both \eqref{eq: theo: funl, form; i} and \eqref{eq: th
 
 ***Proof of new formula
 
-By Theorem~\ref{theo: funt, form}, $\funt$ has unit-height jumps at the values $\funl(\tiles)$, $\tiles \in \mathbb N, \tiles \geq 4$. This implies that $\funl$ is monotone increasing for $\tiles \geq 3$.
+By Theorem~\ref{theo: funt, form}, $\funt$ has unit-height jumps at the values $\funl(\tiles)$, $\tiles \in \mathbb N$, $\tiles \geq 4$. This implies that $\funl$ is monotone increasing for $\tiles \geq 3$.
 \end{proof}
 
 ***Comment on how the new formula has two terms with definite meanings: The first term is the distance-squared to the closest point on the diagonal, The second term is additional distance-squared incurred from rounding (i,j) to integers
