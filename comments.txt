@@ -3,8 +3,8 @@
 - Are "sufficient" and "minimal sufficient" good names? They are used in statistics: analogously?
 
 Things to do:
-- Luis: remove ame "minimal suffucient set". Now that it's just a point in each diagonal, maybe we can refer to it just that way. I'll see how to reword to achieve that. Also, since the set of points is defined as "M" early on, we can use that notation without any specific name.
-- Luis: add "On Laplace’s Extension of the Buffon Needle Problem" and "Buffon's Noodle Problem" to the bibliography file, and let Alex know when done
+- Luis: remove name "minimal suffucient set". Now that it's just a point in each diagonal, maybe we can refer to it just that way. I'll see how to reword to achieve that. Also, since the set of points is defined as "M" early on, we can use that notation without any specific name.
+|- Luis: add "On Laplace’s Extension of the Buffon Needle Problem" and "Buffon's Noodle Problem" to the bibliography file, and let Alex know when done
 - Alex: rewrite (simplify) proof of average-length result (Theorem 6) using the two references of the Buffon Needle problem
 - Luis: new proof of the proposition that characterizes the minimal sufficient set, based on Alex's notes
 - Luis: comment that the floor and ceiling expressions (well, some of them) correspond to rounding with opposite tiebreaks. I think it's best to include that comment the first time that type of expression appears (I don't remember now where it is), and also in subsequent appearances (more briefly, as a quick mention referring to the first).

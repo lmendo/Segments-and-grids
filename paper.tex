@@ -121,9 +121,9 @@ To address the remaining two questions, the notion of a \emph{random} segment of
 % ***Do we need to discuss potential applications of this (if we can find any)? This probably depends on the journal
 % ***Do we need a section with conclusions? Probably not; depends on the journal
 
-The problems studied in this paper are related to \ldots ***maybe a short paragraph here mentioning related problems: Buffon's needle, Buffon-Laplace problem. Some references: ``Buffon's Noodle Problem'', J.F.~Ramaley, 1969. ``On Laplace's Extension of the Buffon Needle Problem'', B.J.~Arnow, 1994. \emph{An Introduction to Geometrical Probability}, A.M~Mathai, section 1.1. \\
-\url{https://www.jstor.org/stable/2317945} \\
-\url{https://www.jstor.org/stable/2687085}
+The problems studied in this paper are related to \ldots ***maybe a short paragraph here mentioning related problems: Buffon's needle, Buffon-Laplace problem. Some references: \cite{Ramaley69}, \cite{Arnow94}, \cite{Mathai99}.
+%\url{https://www.jstor.org/stable/2317945}
+%\url{https://www.jstor.org/stable/2687085}
 
 The rest of the paper is organized as follows. Fundamental results are presented in \S\ref{part: fund results}, which form the basis of the subsequent analysis. The direct and inverse problems for a deterministic segment are considered in \S\ref{part: max}, first for arbitrary grids and then for a square grid. The analysis for the random segment is carried out in \S\ref{part: rand}. The average number of tiles is computed for arbitrary grids, and the probability that the segment visits the maximum number of tiles is obtained for a square grid.
 
@@ -811,8 +811,8 @@ Given $a, b, \len \in \mathbb R^+$, consider a grid with parameters $a, b$ and a
 \end{theorem}
 
 \begin{proof}
-% *** Is this writeup too informal/non-rigorous?
-% ***LM: I would make the rational-length extension more explicit, and invoke a suitable theorem (with the corresponding book reference) for the real-length case. Or better yet: the first reference linked as a comment in the introduction (https://www.jstor.org/stable/2317945?seq=1#metadata_info_tab_contents) already gives the $2\len/(\pi a)$ formula. We can directly start from that formula, referencing that paper.
+% ***AA: Is this writeup too informal/non-rigorous?
+% ***LM: \cite{Ramaley69} already gives the $2\len/(\pi a)$ formula. We can directly start from that formula, referencing that paper, which simplies the proof.
 The classic Buffon's Needle result (**AA cite Buffon's 1777 paper?** **LM I think maybe something more modern such as the references that are linked in the Introduction section**) states that if a needle of length $1$ is tossed with uniformly random position and orientation on
 infinite ruled paper with parallel lines a distance of $1$ apart the probability that it crosses any line is $2/\pi$.
 
