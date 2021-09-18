@@ -32,7 +32,7 @@
 \newcommand{\funti}{T} % function that gives maximum number of touched tiles for integer-valued length
 \newcommand{\funli}{\Lambda} % function that gives minimum integer-valued length for a given number of touched tiles
 \newcommand{\funta}{\varphi} % function that gives average number of touched tiles for real-valued length
-\newcommand{\probmax}{\rho} % function that gives the probability of achieving the maximum number of touched files in the square case for real-valued length
+\newcommand{\probmax}{\rho} % function that gives the probability of achieving the maximum number of touched tiles in the square case for real-valued length
 \newcommand{\len}{\ell} % length variable, real-valued
 \newcommand{\leni}{\ell} % length variable, integer-valued. Same notation, but I keep the different command just in case
 \newcommand{\tiles}{t} % number of tiles (integer-valued)
@@ -1002,7 +1002,7 @@ For any $i,j$ with $i+j-1=\tiles$ and for a given orientation $\theta$, the segm
 
 There is a range of possible values of $\theta$ for which the above condition is satisfied. This range corresponds to the part of the arc with solid line in Figure~\ref{fig: probmax_funt_odd}. For convenience, the angle $\theta$ is defined clockwise from the downward direction. For each $\theta$ in the allowed range, the valid positions for the first endpoint of the (shifted) segment are in the shaded rectangle, whose dimensions depend on $\theta$. The area occupied by this rectangle is the probability $\probmax_{i-1,j-1}(\len,\theta)$ that the segment goes from the reference tile to that with lower-left corner $(i-1,j-1)$ conditioned on $\theta$. The desired probability, $\probmax(\len)$, is obtained by averaging $\probmax_{i-1,j-1}(\len, \theta)$ over $\theta$ and summing over all $i-1,j-1$ that can be reached from the reference tile.
 
-There are two situations depending on whether $\tiles$ is odd or even. Consider $\tiles$ odd first. Under this assumption, the range of lengths corresponding to $\tiles$ is given by \eqref{eq: square, odd max tiles, lengths}. For any length in this interval, there are some positions within the reference file from which the tile with lower-left coordinate $((\tiles-1)/2, (\tiles-1)/2)$ can be reached. Equivalently, the shifted segment with one endpoint at $((\tiles-1)/2, (\tiles-1)/2)$ can reach the reference tile. This is illustrated in Figure~\ref{fig: probmax_funt_odd_diag}. In addition, if 
+There are two situations depending on whether $\tiles$ is odd or even. Consider $\tiles$ odd first. Under this assumption, the range of lengths corresponding to $\tiles$ is given by \eqref{eq: square, odd max tiles, lengths}. For any length in this interval, there are some positions within the reference tile from which the tile with lower-left coordinate $((\tiles-1)/2, (\tiles-1)/2)$ can be reached. Equivalently, the shifted segment with one endpoint at $((\tiles-1)/2, (\tiles-1)/2)$ can reach the reference tile. This is illustrated in Figure~\ref{fig: probmax_funt_odd_diag}. In addition, if 
 \begin{equation}
 \label{eq: probmax len odd2}
 \len > \frac{\sqrt{(\tiles-5)^2 + (\tiles-1)^2}}{2}
