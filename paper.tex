@@ -121,7 +121,13 @@ To address the remaining two questions, the notion of a \emph{random} segment of
 % ***Do we need to discuss potential applications of this (if we can find any)? This probably depends on the journal
 % ***Do we need a section with conclusions? Probably not; depends on the journal
 
-The problems studied in this paper are related to \ldots ***maybe a short paragraph here mentioning related problems: Buffon's needle, Buffon-Laplace problem. Some references: \cite{Ramaley69}, \cite{Arnow94}, \cite{Mathai99}.
+The problems studied in this paper are related to Buffon's needle problem and Laplace's extension of it. Buffon's original 1733 problem considers tossing a needle of length $\len$ onto ruled paper with parallel lines a height $b$ apart, and asks what is the probability of the needle crossing a line if it lands in a uniformly random position and orientation. For a needle of length $\len = b$, this is $2/\pi$, and hence repeated trials of this experiment can be used to estimate $\pi$. This is generalized in \cite{Ramaley69} to $\frac{2\len}{\pi b}$ for the expected number of crossings of a needle which might multiple lines.
+
+The Buffon-Laplace needle problem considers a needle tossed onto a grid of rectangular tiles of width $a$ and height $b$. The number of visited tiles equals one plus the number of crossings with probability 1, as shown in Proposition \ref{prop: 
+i+j-1}. The probability of the needle staying within a single rectangle, that is visiting only one tile, is computed in \cite{Arnow94} for the case where $\len < \min(a,b)$. This work considers the complementary question of the chance that the needle visits the maximum number of tiles possible for its length, described by a formula in Theorem~\ref{theo: probmax, sq}.
+
+%  \ldots ***maybe a short paragraph here mentioning related problems: Buffon's needle, Buffon-Laplace problem. Some references: \cite{Ramaley69}, \cite{Arnow94}, \cite{Mathai99}. 
+% Alex: Mentioned Ramaley69 and Arnow94, not sure where Mathai99 fits in
 %\url{https://www.jstor.org/stable/2317945}
 %\url{https://www.jstor.org/stable/2687085}
 
@@ -811,16 +817,11 @@ Given $a, b, \len \in \mathbb R^+$, consider a grid with parameters $a, b$ and a
 \end{theorem}
 
 \begin{proof}
-% ***AA: Is this writeup too informal/non-rigorous?
-% ***LM: \cite{Ramaley69} already gives the $2\len/(\pi a)$ formula. We can directly start from that formula, referencing that paper, which simplies the proof.
-The classic Buffon's Needle result (**AA cite Buffon's 1777 paper?** **LM I think maybe something more modern such as the references that are linked in the Introduction section**) states that if a needle of length $1$ is tossed with uniformly random position and orientation on
-infinite ruled paper with parallel lines a distance of $1$ apart the probability that it crosses any line is $2/\pi$.
+First, suppose the grid is simplified to just horizontal lines a height of $b$ apart. This matches the setup of the 1733 Buffon's needle problem, except that here the length $\len$ of the needle may exceed the spacing $b$, allowing it to cross multiple lines. As shown in \cite{Ramaley69}, the expected (i.e., average) number of lines crossed equals
+$$ \frac{2\len}{\pi b}.$$
+Where $b<\len$, this expectation matches the probability of the needle crossing a grid line, since it cannot cross more than one.
 
-This is also the expected (that is, average) number of crossings, since the needle cannot reach more than one line, ignoring the event of it lying exactly along a line, which has probability $0$. For a needle of length $2$, the expected number of crossings is double the amount of $2/\pi$, since expectation is additive and thus unchanged if the needle is broken into two length-$1$ halves that are tossed separately, and their total crossings are counted. Conversely, for a needle of length $1/2$ the expectation would be half the original one.
-
-A similar argument extends this proportionality to all rational lengths, and by monotonicity all real lengths. Thus for a needle of length $\len$, the expected number of crossings is $2\len/\pi$. If the lines are a distance $a$ apart, this is equivalent to shrinking the needle by a factor of $a$, giving $2\len/(\pi a)$ as expected number of crossings.
-
-Consider a rectangular grid with horizontal spacing $a$ and vertical spacing $b$. Equivalently, this is paper ruled with horizontal lines $b$ apart and vertical lines $a$ apart. The distribution of the number of crossings of a needle tossed onto this grid is known as the Buffon-Laplace Needle Problem (*** cite). This number decomposes into the counts of crossings of horizontal and vertical grid lines, and thus the expected number of crossings is the sum of those for lined paper of width $a$ and $b$ respectively:
+Now consider again a grid of width $a$ and height $b$, as studied by Laplace as an extension to Buffon's original needle problem \cite{Arnow94}. The grid crossings decompose into crossings of horizontal and vertical grid lines, respectively. By linearity of expectation, the expected number of crossings is the sum of the respective expectations for parallel lines of width $a$ and $b$ respectively, giving:
 \[
 \frac{2\len}{\pi}\left(\frac 1 a + \frac 1 b\right)
 \]
