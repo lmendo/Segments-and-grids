@@ -5,7 +5,7 @@
 Things to do:
 - Luis: remove name "minimal suffucient set". Now that it's just a point in each diagonal, maybe we can refer to it just that way. I'll see how to reword to achieve that. Also, since the set of points is defined as "M" early on, we can use that notation without any specific name.
 |- Luis: add "On Laplace’s Extension of the Buffon Needle Problem" and "Buffon's Noodle Problem" to the bibliography file, and let Alex know when done
-- Alex: rewrite (simplify) proof of average-length result (Theorem 6) using the two references of the Buffon Needle problem
+|- Alex: rewrite (simplify) proof of average-length result (Theorem 6) using the two references of the Buffon Needle problem
 - Luis: new proof of the proposition that characterizes the minimal sufficient set, based on Alex's notes
 - Luis: comment that the floor and ceiling expressions (well, some of them) correspond to rounding with opposite tiebreaks. I think it's best to include that comment the first time that type of expression appears (I don't remember now where it is), and also in subsequent appearances (more briefly, as a quick mention referring to the first).
 |- Luis: figure for the new proof of the proposition that characterizes of the minimal sufficient set. The figure will illustrate the continuous solution i,j, as intersection of two lines
@@ -18,8 +18,7 @@ Things to do:
 - Luis: clarify that \probmax in the jumps takes the value on the left, rather than 0 on the right. Include that as a comment near (right after?) "As $\len$ grows, $\probmax(\len)$ has a jump when the maximum number of tiles that can be visited increases by $1$." Also write that the value of ρ(l_t) is the chance that a segment *barely not long enough to visit t tiles* visits its maximum of t-1 tiles. And, naturally, this is the largest chance among segment lengths whose maximum is t-1 tiles visited.
 |- Alex: write the proof for the square grid formula for maximum number of visited tiles (Theorem 3)
 |- Alex: write the new proof for the average number of tiles, without using the proposition on the distribution if i, which is now after the theorem
-- Alex/Luis: come up, if possible, with a simpler approach for the proof of Pr[max] = O(1/length); or else fill in some intermediate steps in the current proof. It's tedious by hand, but Maple can help
-- Alex/Luis: see if the new formula for λ (arbitrary a,b) can be turned into one for τ (maybe via the "inverse" relationship between λ and τ) which is simpler than the current formula in Theorem 1.
+- Luis: fill in some intermediate steps in the proof of Pr[max] = O(1/length); or else . It's tedious by hand, but Maple can help
 |- Luis: apply the structural changes (message by Luis, 26vii21:
  |- Theorem 3 will be replaced by your formula, and its derivation, for real-valued lengths. I don't think it's worth keeping the current formulas in Theorem 3, is it?. It turns out that it is, because i*, j* are used later.
  |- Corollary 2 should include the expression that unifies the odd and even cases with your ceiling function idea.
