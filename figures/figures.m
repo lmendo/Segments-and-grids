@@ -1608,8 +1608,8 @@ plot([-3.7 4.7], [0 0], 'k')
 plot([-3.7j 4.7j], 'k')
 set(gca, 'GridAlpha', .4)
 xticks(-3:4), yticks(-3:4)
-xticklabels([arrayfun(@(n)[num2str(n) char(8201) 'a'], -3:-1, 'UniformOutput', false) {'0'}  arrayfun(@(n)[num2str(n) char(8201) 'a'], 1:4, 'UniformOutput', false)]) % thin space
-yticklabels([arrayfun(@(n)[num2str(n) char(8201) 'a'], -3:-1, 'UniformOutput', false) {'0'}  arrayfun(@(n)[num2str(n) char(8201) 'a'], 1:4, 'UniformOutput', false)]) % thin space
+%xticklabels([arrayfun(@(n)[num2str(n) char(8201) 'a'], -3:-1, 'UniformOutput', false) {'0'}  arrayfun(@(n)[num2str(n) char(8201) 'a'], 1:4, 'UniformOutput', false)]) % thin space
+%yticklabels([arrayfun(@(n)[num2str(n) char(8201) 'a'], -3:-1, 'UniformOutput', false) {'0'}  arrayfun(@(n)[num2str(n) char(8201) 'a'], 1:4, 'UniformOutput', false)]) % thin space
 xlabel x 
 xlabel y
 axis([-4 5 -4 5])
