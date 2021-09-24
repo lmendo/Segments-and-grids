@@ -1,8 +1,9 @@
 - Is "canonical rectangle" a good name? "Canonical" is close to what I wanted, but perhaps a better word can be found for "smallest and wih sides following grid lines"
 
-- Are "sufficient" and "minimal sufficient" good names? They are used in statistics: analogously?
+|- Are "sufficient" and "minimal sufficient" good names? They are used in statistics: analogously? These names are going to be removed.
 
 Things to do:
+- Luis: check style uniformity in commit Sep 21, 2021
 - Luis: remove name "minimal suffucient set". Now that it's just a point in each diagonal, maybe we can refer to it just that way. I'll see how to reword to achieve that. Also, since the set of points is defined as "M" early on, we can use that notation without any specific name.
 |- Luis: add "On Laplace’s Extension of the Buffon Needle Problem" and "Buffon's Noodle Problem" to the bibliography file, and let Alex know when done
 |- Alex: rewrite (simplify) proof of average-length result (Theorem 6) using the two references of the Buffon Needle problem
@@ -13,7 +14,7 @@ Things to do:
 - Luis: comment after Theorem 2: how the new formula has two terms with definite meanings
 - Luis: move Figure 14 (graph of \probmax) closer to the statement of Theorem 7, since it nicely illustrates what the cases look like. There is not much margin for moving it, it seems, because the figure has to be after the theorem (and its proof).
 - Alex/Luis: when the paper is finished, decide if we move all proofs to an appendix, for readability
-- Luis: figure 12 ("Tiles in which the second endpoint can be for..."): the lines do not render well. Try dotted, or thicker
+|- Luis: figure 12 ("Tiles in which the second endpoint can be for..."): the lines do not render well. Try dotted, or thicker
 - Luis: figure 12 ("Tiles in which the second endpoint can be for..."): it's not clear what happens with the symmetry for smaller t. Actually the symmetry is better understood as being around the lines x=1/2, y=1/2 (rather than x=0, y=0). Also, for small t the "problematic" tiles need not be considered. This is explained later ("This can only happen for...").  I'll add a comment to explain this a bit when that figure is introduced. Also, this justifies referring to the symmetry in terms of "quadrants", which is convenient, even if the symmetry is not around the lines x=0, y=0. I'll see how to express this more clearly.
 - Luis: clarify that \probmax in the jumps takes the value on the left, rather than 0 on the right. Include that as a comment near (right after?) "As $\len$ grows, $\probmax(\len)$ has a jump when the maximum number of tiles that can be visited increases by $1$." Also write that the value of ρ(l_t) is the chance that a segment *barely not long enough to visit t tiles* visits its maximum of t-1 tiles. And, naturally, this is the largest chance among segment lengths whose maximum is t-1 tiles visited.
 |- Alex: write the proof for the square grid formula for maximum number of visited tiles (Theorem 3)
