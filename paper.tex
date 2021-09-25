@@ -315,6 +315,7 @@ In terms of the real-valued variables $i$, $j$, the solution $(\isolr, \jsolr)$ 
 \end{align}
 This point is shown in Figure~\ref{fig: min suff set, form} with a square marker.
 
+% ***This figure and Figure~\ref{fig: ijLS_1p35_detail} label the points as (i,j) instead of (ia,jb). Clarify in the text, or change the figures
 \begin{figure}%
 \centering%
 \includegraphics[width=.7\textwidth]{mss}%
@@ -530,15 +531,36 @@ This function is monotone increasing for $\tiles \geq 3$.
 \end{theorem}
 
 \begin{proof}
-The $(i_\tiles,j_\tiles)$ pair in the minimal sufficient set $\mss$ corresponds to a maximum of $\tiles$ visited tiles. By construction of this set, any segment that visits $\tiles$ tiles must have length greater than $\sqrt{(i_\tiles-2)^2a^2 + (j_\tiles-2)^2b^2}$. For $\tiles \geq 3$ the expressions \eqref{eq: theo: funl, form; isoli} and \eqref{eq: theo: funl, form; jsoli} coincide with \eqref{eq: min suff set, form, i} and \eqref{eq: min suff set, form, j}. Therefore \eqref{eq: theo: funl, form; funl} gives the desired result. For $\tiles \in \{1, 2\}$ both \eqref{eq: theo: funl, form; isoli} and \eqref{eq: theo: funl, form; jsoli} equal $2$, and \eqref{eq: theo: funl, form; funl} gives $0$, which is the correct result.
+The $(i_\tiles,j_\tiles)$ pair in the minimal sufficient set $\mss$ corresponds to a maximum of $\tiles$ visited tiles. By construction of this set, any segment that visits $\tiles$ tiles must have length greater than $\sqrt{(i_\tiles-2)^2a^2 + (j_\tiles-2)^2b^2}$. For $\tiles \geq 3$ the variables $\isoli$, $\jsoli$ in \eqref{eq: theo: funl, form; isoli} and \eqref{eq: theo: funl, form; jsoli} respectively coincide with $i_\tiles$, $j_\tiles$ as given by \eqref{eq: min suff set, form, i} and \eqref{eq: min suff set, form, j}. Therefore \eqref{eq: theo: funl, form; funl} gives the correct result. For $\tiles \in \{1, 2\}$ both \eqref{eq: theo: funl, form; isoli} and \eqref{eq: theo: funl, form; jsoli} equal $2$, and \eqref{eq: theo: funl, form; funl} gives $0$, which is again the correct result.
 
-***Proof of new formula. Perhaps it will reuse Figure~\ref{fig: min suff set, form}.
+For $\tiles \geq 3$, the term $\sqrt{(i_\tiles-2)^2a^2 + (j_\tiles-2)^2b^2}$ can be interpreted geometrically as the distance between $(i_\tiles, j_\tiles)$ and $(2a, 2b)$. As can be seen with the help of Figure~\ref{fig: min suff set, form}, this distance is the hypotenuse of a right triangle whose other two sides extend from $(2a, 2b)$ to $(\isolr a, \jsolr b)$ and from $(\isolr a, \jsolr b)$ to $(i_\tiles, j_\tiles)$ respectively. Therefore,
+\begin{equation}
+\label{eq: distance as hypotenuse}
+\begin{split}
+(i_\tiles-2)^2a^2 + (j_\tiles-2)^2b^2 &= (\isolr-2)^2a^2 + (\jsolr-2)^2b^2 \\
+&\quad + (i_\tiles-\isolr)^2a^2 + (j_\tiles-\jsolr)^2b^2.
+\end{split}
+\end{equation}
+For $\tiles \geq 3$ it stems from \eqref{eq: theo: funl, form; isolr}
+and \eqref{eq: theo: funl, form; jsolr} that
+\begin{equation}
+\label{eq: distance as hypotenuse, first leg}
+(\isolr-2)^2a^2 + (\jsolr-2)^2b^2 =
+\frac{(\tiles-3)^2 (b^4a^2+a^2b^4)}{(a^2+b^2)^2} =
+\frac{(\tiles-3)^2 a^2b^2}{a^2+b^2}.
+\end{equation}
+The fact that both $(\isolr, \jsolr)$ and $(i_\tiles, j_\tiles)$ are on the line $i+j-1=\tiles$ implies that $\isolr+\jsolr = i_\tiles+ j_\tiles$, and thus $|i_\tiles-\isolr| = |j_\tiles-\jsolr| = \roundterm$. Consequently,
+\begin{equation}
+\label{eq: distance as hypotenuse, second leg}
+(i_\tiles-\isolr)^2a^2 + (j_\tiles-\jsolr)^2b^2 = \roundterm^2 (a^2+b^2).
+\end{equation}
+Substituting \eqref{eq: distance as hypotenuse, first leg} and \eqref{eq: distance as hypotenuse, second leg} into \eqref{eq: distance as hypotenuse} yields \eqref{eq: theo: funl, form; funl 2}.
 
 By Theorem~\ref{theo: funt, form}, $\funt$ has unit-height jumps at the values $\funl(\tiles)$, $\tiles \in \mathbb N$, $\tiles \geq 4$. This implies that $\funl$ is monotone increasing for $\tiles \geq 3$.
 \end{proof}
 
 ***Comment on how the new formula has two terms with definite meanings: The first term is the distance-squared to the closest point on the diagonal, The second term is additional distance-squared incurred from rounding (i,j) to integers
-***Figure for that? \ref{fig: min suff set, form} would do, but it's within a proof and uses different notation for the final point
+***I think we can do without a figure (Figure~\ref{fig: min suff set, form} is inside a proof and uses different notation for the final point).
 
 Theorems~\ref{theo: funt, form} and \ref{theo: funl, form} not only give the solutions $\funt(\len)$ and $\funl(\tiles)$ to the two problems stated in \S\ref{part: intro}; they also provide a way to actually position a segment of length slightly greater than $\len$ or $\funl(\tiles)$ so that it visits $\tiles$ or $\funt(\len)$ tiles. Namely, the segment should have its endpoints respectively in the interior of two tiles separated $\isoli-1$ steps horizontally and $\jsoli-1$ steps vertically, with its exact position and orientation  adjusted to avoid any grid points.
 
