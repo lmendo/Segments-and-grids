@@ -41,7 +41,8 @@
 \newcommand{\isoli}{i^\ast}
 \newcommand{\jsoli}{j^\ast}
 \newcommand{\genfun}{q}
-\newcommand{\genvar}{r}
+\newcommand{\genvar}{s}
+\newcommand{\roundterm}{r}
 \newcommand{\mss}{M}
 
 \newtheorem{proposition}{Proposition}%[section]
@@ -271,12 +272,9 @@ The following proposition gives an explicit method to obtain a minimal sufficien
 Given $a, b \in \mathbb R^+$ and $\tiles \in \mathbb N$, $\tiles \geq 3$, a minimal sufficient set $\mss = \{(i_3,j_3), (i_4.j_4), \ldots\}$ can be obtained as
 \begin{align}
 \label{eq: min suff set, form, i}
-i_\tiles &= \left\lfloor \frac {(2\tiles-1)b^2+5a^2}{2(a^2+b^2)} \right\rfloor, \\
+i_\tiles &= \left\lfloor \frac{(\tiles-3) b^2}{a^2+b^2} + \frac 5 2 \right\rfloor, \\
 \label{eq: min suff set, form, j}
-j_\tiles &= \left\lceil \frac {(2\tiles-3) a^2 + 3b^2}{2(a^2+b^2)} \right\rceil,
-% ***change expressions to the following to match the statement of Theorem~\ref{theo: funl, form}:
-%i_\tiles &= \left\lfloor \frac{b^2 (\tiles-3)}{a^2+b^2} + \frac 5 2 \right\rfloor \\
-%j_\tiles &= \left\lceil  \frac{a^2 (\tiles-3)}{a^2+b^2} + \frac 3 2 \right\rceil
+j_\tiles &= \left\lceil  \frac{(\tiles-3) a^2}{a^2+b^2} + \frac 3 2 \right\rceil,
 \end{align}
 where $i_\tiles + j_\tiles-1 = \tiles$. All pairs $(i_\tiles,j_\tiles)$ are strictly below the line
 \begin{equation}
@@ -291,11 +289,31 @@ j = \frac{i a^2}{b^2} - \frac{5a^2}{2b^2} + \frac 3 2.
 \end{proposition}
 
 \begin{proof}
-***New proof based on treating i,j as continuous along the line i+j=constant, then quantizing to the nearest allowed point along that line. We should use the notation $\isolr$, $\jsolr$ for the continuous coordinates, in conformity to other proofs that use continuous coordinates.
-% ***The continuous argument gives something like $i-2 = b^2/(a^2+b^2)*(t-3)$, $j-2 = a^2/(a^2+b^2)*(t-3)$. We then compute how much the distance from $(i,j)$ to $(2,2)$ is increased by quantizing along the i+j line, to argue that the nearest quantized point should be chosen. To ensure that in case of a tie we choose the point with larger $i$, we apply floor(...+1/2) to i and ceiling(...-1/2) to j.
-% ***Reference the figure in the text. The figure is an example with $a=1.35$, $b=1$, $\tiles=7$. It contains the line j-2 = a^2/b^2*(i-2), whose intersection with i+j-1=t (which is perpendicular to it) gives the continuous solution $(\isolr, \jsolr)$ (marked with a square). 
+For each $\tiles$, the pair $(i_\tiles,j_\tiles)$ of the minimal sufficient set should be chosen as that on the line $i+j-1=\tiles$ which minimizes $(i-2)^2 a^2 + (j-2)^2 b^2$. This allows maximizing the sum $i+j-1$, and thus the number of visited tiles, for a given length restriction (direct problem); or minimizing the required lengths for a specified number of visited files (inverse problem).
 
-***The bounding lines are a direct consequence of how $i_\tiles$ and $j_\tiles$ are obtained.
+Consider, for the moment, $i$, $j$ as if they were real-valued variables, and denote $x=ia$, $y=jb$. The line $i+j-1 = \tiles$ then becomes
+\begin{equation}
+\label{eq: line 1}
+\frac x a + \frac y b = \tiles + 1,
+\end{equation}
+and $(i-2)^2 a^2 + (j-2)^2 b^2$ is expressed as $(x-2a)^2+(y-2b)^2$. The point minimizing this quadratic function along \eqref{eq: line 1} is the intersection of this line with the perpendicular line passing through $(2a,2b)$, that is,
+\begin{equation}
+\label{eq: line 2}
+y = \frac {a (x-2a)} b + 2b.
+\end{equation}
+This is depicted for $a=1.35$, $b=1$, $\tiles=7$ in Figure~\ref{fig: min suff set, form}, where \eqref{eq: line 2} is shown with solid line. Solving the system of equations \eqref{eq: line 1} and \eqref{eq: line 2} gives 
+\begin{align}
+\frac x a - 2 &= \frac{(t-3)b^2}{a^2+b^2}, \\
+\frac y b - 2 &= \frac{(t-3)a^2}{a^2+b^2}.
+\end{align}
+In terms of the real-valued variables $i$, $j$, the solution $(\isolr, \jsolr)$ is
+\begin{align}
+\label{eq: prop: min suff set, form: isolr}
+\isolr &= \frac{(t-3)b^2}{a^2+b^2} + 2, \\
+\label{eq: prop: min suff set, form: jsolr}
+\jsolr &= \frac{(t-3)a^2}{a^2+b^2} + 2.
+\end{align}
+This point is shown in Figure~\ref{fig: min suff set, form} with a square marker.
 
 \begin{figure}%
 \centering%
@@ -304,6 +322,29 @@ j = \frac{i a^2}{b^2} - \frac{5a^2}{2b^2} + \frac 3 2.
 }%
 \label{fig: min suff set, form}%
 \end{figure}%
+
+The variables $i$, $j$ are actually limited to integer values. The point $(i_\tiles, j_\tiles)$ that minimizes $(i-2)^2 a^2 + (j-2)^2 b^2$ along the line $i+j-1=\tiles$ restricted to integer values is either $(\lceil \isolr \rceil, \lfloor \jsolr \rfloor)$ or $(\lfloor \isolr \rfloor, \lceil \jsolr \rceil)$, whichever is closest to $(\isolr, \jsolr)$, as can be seen in Figure~\ref{fig: min suff set, form}. This can be expressed as
+\begin{align}
+\label{eq: prop: min suff set, form: isoli}
+i_\tiles &= \left\lfloor \isolr + \frac 1 2 \right\rfloor, \\
+\label{eq: prop: min suff set, form: jsoli}
+j_\tiles &= \left\lceil \jsolr - \frac 1 2 \right\rceil,
+\end{align}
+which in case of tie takes the first of the two points indicated above. Combining \eqref{eq: prop: min suff set, form: isolr}--\eqref{eq: prop: min suff set, form: jsoli}
+% *!*
+yields \eqref{eq: min suff set, form, i} and \eqref{eq: min suff set, form, j}.
+
+From \eqref{eq: prop: min suff set, form: isolr} and \eqref{eq: prop: min suff set, form: isoli},
+\begin{equation}
+\label{eq: prop: min suff set, form: isoli ineq}
+\frac{(t-3)b^2}{a^2+b^2} + \frac 3 2 < i_\tiles \leq \frac{(t-3)b^2}{a^2+b^2} + \frac 5 2,
+\end{equation}
+and similarly, from \eqref{eq: prop: min suff set, form: jsolr} and \eqref{eq: prop: min suff set, form: jsoli},
+\begin{equation}
+\label{eq: prop: min suff set, form: jsoli ineq}
+\frac{(t-3)a^2}{a^2+b^2} + \frac 3 2 \leq j_\tiles < \frac{(t-3)a^2}{a^2+b^2} + \frac 5 2.
+\end{equation}
+Considering the first inequality in \eqref{eq: prop: min suff set, form: isoli ineq} and the second in \eqref{eq: prop: min suff set, form: jsoli ineq} as equalities and eliminating $\tiles$ gives \eqref{eq: upper bound, line}. The point $(i_\tiles, j_\tiles)$ is strictly below that line because the considered inequalities are strict. Similarly, the bounding line \eqref{eq: lower bound, line} results from the second inequality in \eqref{eq: prop: min suff set, form: isoli ineq} and the first in \eqref{eq: prop: min suff set, form: jsoli ineq}, and the fact that both inequalities are not strict implies that the bound \eqref{eq: lower bound, line} can actually be attained.
 \end{proof}
 
 The bounding lines in Proposition~\ref{prop: min suff set, form} are shown in Figure~\ref{fig: pairs_bounds}, using three different pairs of grid parameters $a$, $b$ as examples. Given $(i_\tiles,j_\tiles) \in \mss$, the next pair $(i_{\tiles+1},j_{\tiles+1})$ is obtained by incrementing $j$ if that results in a point below \eqref{eq: upper bound, line}. Else $i$ is incremented instead, and the new pair is guaranteed to be above or on \eqref{eq: lower bound, line}.
@@ -464,29 +505,34 @@ For $a, b \in \mathbb R^+$ and $\tiles \in \mathbb N$,
 \label{eq: theo: funl, form; funl}
 \funl(\tiles) = \sqrt{(\isoli-2)^2 a^2 + (\jsoli-2)^2 b^2}
 \end{equation}
-with
+with **define i+, such that i* = round-half-up(i+), and similarly for j+**
 \begin{align}
-\label{eq: theo: funl, form; i}
-\isoli &= \max\left\{ \left\lfloor \frac {(2\tiles-1)b^2+5a^2}{2(a^2+b^2)} \right\rfloor, 2 \right\}, \\
-\label{eq: theo: funl, form; j}
-\jsoli &= \max\left\{ \left\lceil \frac {2\tiles a^2 + 3(b^2-a^2)}{2(a^2+b^2)} \right\rceil, 2 \right\}.
+\label{eq: theo: funl, form; isolr}
+\isolr &= \max\left\{ \frac{(\tiles-3) b^2}{a^2+b^2}, 0 \right\} + 2, \\
+\label{eq: theo: funl, form; jsolr}
+\jsolr &= \max\left\{ \frac{(\tiles-3) a^2}{a^2+b^2}, 0 \right\} + 2, \\
+\label{eq: theo: funl, form; isoli}
+\isoli &= \left\lfloor \isolr + \frac 1 2 \right\rfloor, \\
+\label{eq: theo: funl, form; jsoli}
+\jsoli &= \left\lceil \jsolr - \frac 1 2 \right\rceil.
 \end{align}
 Equivalently,
 \begin{equation}
-\text{***new formula found by Alex; unless we can unify with the above}
-% *** AA: Wrote a shot at how a unification might look in e-mail.
+\label{eq: theo: funl, form; funl 2}
+\funl(\tiles) = \sqrt{\frac{(t-3) a^2 b^2}{a^2+b^2} + \roundterm^2(a^2+b^2)}
+\end{equation}
+with
+\begin{equation}
+\label{eq: roundterm}
+\roundterm = |\isoli - \isolr| = |\jsoli - \jsolr|.
 \end{equation}
 This function is monotone increasing for $\tiles \geq 3$.
 \end{theorem}
 
 \begin{proof}
-The $(i_\tiles,j_\tiles)$ pair in the minimal sufficient set $\mss$ corresponds to a maximum of $\tiles$ visited tiles. By construction of this set, any segment that visits $\tiles$ tiles must have length greater than $\sqrt{(i_\tiles-2)^2a^2 + (j_\tiles-2)^2b^2}$.
+The $(i_\tiles,j_\tiles)$ pair in the minimal sufficient set $\mss$ corresponds to a maximum of $\tiles$ visited tiles. By construction of this set, any segment that visits $\tiles$ tiles must have length greater than $\sqrt{(i_\tiles-2)^2a^2 + (j_\tiles-2)^2b^2}$. For $\tiles \geq 3$ the expressions \eqref{eq: theo: funl, form; isoli} and \eqref{eq: theo: funl, form; jsoli} coincide with \eqref{eq: min suff set, form, i} and \eqref{eq: min suff set, form, j}. Therefore \eqref{eq: theo: funl, form; funl} gives the desired result. For $\tiles \in \{1, 2\}$ both \eqref{eq: theo: funl, form; isoli} and \eqref{eq: theo: funl, form; jsoli} equal $2$, and \eqref{eq: theo: funl, form; funl} gives $0$, which is the correct result.
 
-For $\tiles \geq 3$ the expressions \eqref{eq: theo: funl, form; i} and \eqref{eq: theo: funl, form; j} coincide with \eqref{eq: min suff set, form, i} and \eqref{eq: min suff set, form, j}. Therefore \eqref{eq: theo: funl, form; funl} gives the desired result.
-	
-For $\tiles \in \{1, 2\}$ both \eqref{eq: theo: funl, form; i} and \eqref{eq: theo: funl, form; j} equal $2$, and \eqref{eq: theo: funl, form; funl} gives $0$, which is the correct result.
-
-***Proof of new formula
+***Proof of new formula. I think it's better to do it once the proof of \ref{prop: min suff set, form} is done.
 
 By Theorem~\ref{theo: funt, form}, $\funt$ has unit-height jumps at the values $\funl(\tiles)$, $\tiles \in \mathbb N$, $\tiles \geq 4$. This implies that $\funl$ is monotone increasing for $\tiles \geq 3$.
 \end{proof}
@@ -497,7 +543,7 @@ Theorems~\ref{theo: funt, form} and \ref{theo: funl, form} not only give the sol
 
 It is interesting to consider the following particular cases: $\len \gg a,b$; $a \gg b$; and $a=b$. Regarding the first, from \eqref{eq: theo: funt, form; funt}--\eqref{eq: theo: funt, form; j}
 % *!*
-and from \eqref{eq: theo: funl, form; funl}--\eqref{eq: theo: funl, form; j}
+and from \eqref{eq: theo: funl, form; funl}--\eqref{eq: theo: funl, form; jsoli}
 % *!*
 it is seen that for long segments the number of visited tiles and the segment length are approximately proportional, with
 \begin{equation}
@@ -835,7 +881,7 @@ In spite of the dependence between the random variables $i$ and $j$, their margi
 For $0 \leq \genvar \leq 1$, let
 \begin{equation}
 \label{eq: f}
-f(\genvar) = \int_0^r \arccos z \diff z = \genvar \arccos \genvar - \sqrt{1-\genvar^2} + 1.
+f(\genvar) = \int_0^\genvar \arccos z \diff z = \genvar \arccos \genvar - \sqrt{1-\genvar^2} + 1.
 \end{equation}
 
 \begin{proposition}
@@ -941,7 +987,7 @@ For a random segment with length $\len \in \mathbb R^+$ on a unit square grid, l
 For $u, v \in \mathbb N$, $\genvar \in \mathbb R^+$, let
 \begin{equation}
 \label{eq: g def}
-g(\genvar, u, v) = \int_{\arcsin \frac u {2r}}^{\arccos \frac u {2r}} \left( r \sin \theta - \frac u 2 \right) \left( r \cos \theta - \frac v 2 \right) \diff \theta.
+g(\genvar, u, v) = \int_{\arcsin \frac u {2r}}^{\arccos \frac u {2r}} \left( \genvar \sin \theta - \frac u 2 \right) \left( \genvar \cos \theta - \frac v 2 \right) \diff \theta.
 \end{equation}
 Using the identities $\cos^2 \alpha = 1-\sin^2 \alpha$ and $\cos(2\alpha) = 2\cos^2\alpha-1 = 1 - 2\sin^2\alpha$, the integral in \eqref{eq: g def} is computed as
 \begin{equation}
