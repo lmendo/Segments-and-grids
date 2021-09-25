@@ -505,7 +505,7 @@ For $a, b \in \mathbb R^+$ and $\tiles \in \mathbb N$,
 \label{eq: theo: funl, form; funl}
 \funl(\tiles) = \sqrt{(\isoli-2)^2 a^2 + (\jsoli-2)^2 b^2}
 \end{equation}
-with **define i+, such that i* = round-half-up(i+), and similarly for j+**
+with
 \begin{align}
 \label{eq: theo: funl, form; isolr}
 \isolr &= \max\left\{ \frac{(\tiles-3) b^2}{a^2+b^2}, 0 \right\} + 2, \\
@@ -516,10 +516,10 @@ with **define i+, such that i* = round-half-up(i+), and similarly for j+**
 \label{eq: theo: funl, form; jsoli}
 \jsoli &= \left\lceil \jsolr - \frac 1 2 \right\rceil.
 \end{align}
-Equivalently,
+Equivalently, **I think this is valid for t geq 3 only, and needs a modification**
 \begin{equation}
 \label{eq: theo: funl, form; funl 2}
-\funl(\tiles) = \sqrt{\frac{(t-3) a^2 b^2}{a^2+b^2} + \roundterm^2(a^2+b^2)}
+\funl(\tiles) = \sqrt{\frac{(t-3)^2 a^2 b^2}{a^2+b^2} + \roundterm^2(a^2+b^2)}
 \end{equation}
 with
 \begin{equation}
@@ -532,12 +532,13 @@ This function is monotone increasing for $\tiles \geq 3$.
 \begin{proof}
 The $(i_\tiles,j_\tiles)$ pair in the minimal sufficient set $\mss$ corresponds to a maximum of $\tiles$ visited tiles. By construction of this set, any segment that visits $\tiles$ tiles must have length greater than $\sqrt{(i_\tiles-2)^2a^2 + (j_\tiles-2)^2b^2}$. For $\tiles \geq 3$ the expressions \eqref{eq: theo: funl, form; isoli} and \eqref{eq: theo: funl, form; jsoli} coincide with \eqref{eq: min suff set, form, i} and \eqref{eq: min suff set, form, j}. Therefore \eqref{eq: theo: funl, form; funl} gives the desired result. For $\tiles \in \{1, 2\}$ both \eqref{eq: theo: funl, form; isoli} and \eqref{eq: theo: funl, form; jsoli} equal $2$, and \eqref{eq: theo: funl, form; funl} gives $0$, which is the correct result.
 
-***Proof of new formula. I think it's better to do it once the proof of \ref{prop: min suff set, form} is done.
+***Proof of new formula. Perhaps it will reuse Figure~\ref{fig: min suff set, form}.
 
 By Theorem~\ref{theo: funt, form}, $\funt$ has unit-height jumps at the values $\funl(\tiles)$, $\tiles \in \mathbb N$, $\tiles \geq 4$. This implies that $\funl$ is monotone increasing for $\tiles \geq 3$.
 \end{proof}
 
 ***Comment on how the new formula has two terms with definite meanings: The first term is the distance-squared to the closest point on the diagonal, The second term is additional distance-squared incurred from rounding (i,j) to integers
+***Figure for that? \ref{fig: min suff set, form} would do, but it's within a proof and uses different notation for the final point
 
 Theorems~\ref{theo: funt, form} and \ref{theo: funl, form} not only give the solutions $\funt(\len)$ and $\funl(\tiles)$ to the two problems stated in \S\ref{part: intro}; they also provide a way to actually position a segment of length slightly greater than $\len$ or $\funl(\tiles)$ so that it visits $\tiles$ or $\funt(\len)$ tiles. Namely, the segment should have its endpoints respectively in the interior of two tiles separated $\isoli-1$ steps horizontally and $\jsoli-1$ steps vertically, with its exact position and orientation  adjusted to avoid any grid points.
 

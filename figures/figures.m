@@ -1881,3 +1881,15 @@ plot(xl*a, yl*b, 's', 'markersize', ms)
 text(4.78, 4.69, '(i^+,j^+)')
 text(3.52, 4.82, '(i_t,j_t)')
 
+
+%% #71. Check for new formula for funt:
+
+t = 12;
+a = 1.56;
+b = 1.15;
+iplus = max((t-3)*b^2/(a^2+b^2), 0)+2;
+jplus = max((t-3)*a^2/(a^2+b^2), 0)+2;
+istar = floor(iplus+1/2);
+jstar = ceil(jplus-1/2);
+lambda = sqrt((istar-2)^2*a^2 + (jstar-2)^2*b^2) % original formula
+lambda_2 = sqrt( (t-3)^2*a^2*b^2/(a^2+b^2) + (istar-iplus)^2*a^2 + (jstar-jplus)^2*b^2 ) % new formula, corrected
