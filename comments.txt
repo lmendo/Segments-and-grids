@@ -13,7 +13,7 @@ Things to do:
 |- Luis: unification of formulas in Theorem 2 and its proof, based on Alex's notes in his e-mail dated Sep 2, 2021.
 - Luis: comment after Theorem 2: how the new formula has two terms with definite meanings
 - Luis: move Figure 14 (graph of \probmax) closer to the statement of Theorem 7, since it nicely illustrates what the cases look like. There is not much margin for moving it, it seems, because the figure has to be after the theorem (and its proof).
-- Alex/Luis: see if the new formula for λ (arbitrary a,b; with the "r" term) can be turned into one for τ (maybe via the "inverse" relationship between λ and τ) which is simpler than the current formula in Theorem 1
+|~ - Alex/Luis: see if the new formula for λ (arbitrary a,b; with the "r" term) can be turned into one for τ (maybe via the "inverse" relationship between λ and τ) which is simpler than the current formula in Theorem 1
 - Alex/Luis: when the paper is finished, decide if we move all proofs to an appendix, for readability. Not sure
 |- Luis: figure 12 ("Tiles in which the second endpoint can be for..."): the lines do not render well. Try dotted, or thicker
 |- Luis: figure 12 ("Tiles in which the second endpoint can be for..."): it's not clear what happens with the symmetry for smaller t. Actually the symmetry is better understood as being around the lines x=1/2, y=1/2 (rather than x=0, y=0). Also, for small t the "problematic" tiles need not be considered. This is explained later ("This can only happen for...").  I'll add a comment to explain this a bit when that figure is introduced. Also, this justifies referring to the symmetry in terms of "quadrants", which is convenient, even if the symmetry is not around the lines x=0, y=0. I'll see how to express this more clearly.
@@ -31,5 +31,4 @@ Things to do:
  |- Current Proposition 4 will have the same statement, but with a proof based on Alex's finding for continuous i and j: starting from i = b^2/(a^2+b^2)*k, j = a^2/(a^2+b^2)*k, Proposition 4 is obtained by adjusting for the "-2" offset (i.e. add 2 to each expression and replace k by t-3) and then applying floor(...+1/2) to i and ceiling(...-1/2) to j. These rounding operations are equivalent to rounding to nearest, giving precedence to the pair with higher i in case of a tie
  |~ - The only new content in Section 3.3 is now the properties of the sequences (the formulas are now the same as those in Section 3.2). So perhaps Section 3.3 can be merged with Section 3.2
  |- Theorem 2 will now have a simpler formula. The current one should be kept because i*, j* are used later. The theorem will contain both formulas; they are actually related.
- |~ - Do the same for Theorem 1, if we can find a simple formula for τ based on that for λ (arbitrary a,b)
  |- Proposition 5 (Pr[i>=n]) will go after Theorem 5 (average number of tiles)
