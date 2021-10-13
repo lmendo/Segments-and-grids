@@ -1,4 +1,4 @@
-- Is "canonical rectangle" a good name? "Canonical" is close to what I wanted, but perhaps a better word can be found for "smallest and wih sides following grid lines"
+- Is "canonical rectangle" a good name? "Canonical" is close to what I wanted, but perhaps a better word can be found for "smallest and wih sides following grid lines". Following Alex's proposal: "Discrete bounding rectangle"?
 
 |- Are "sufficient" and "minimal sufficient" good names? They are used in statistics: analogously? These names are going to be removed.
 
@@ -11,6 +11,8 @@ Things to do:
 - Luis: comment that the floor and ceiling expressions (well, some of them) correspond to rounding with opposite tiebreaks. I think it's best to include that comment the first time that type of expression appears (I don't remember now where it is), and also in subsequent appearances (more briefly, as a quick mention referring to the first).
 |- Luis: figure for the new proof of the proposition that characterizes of the minimal sufficient set. The figure will illustrate the continuous solution i,j, as intersection of two lines
 |- Luis: unification of formulas in Theorem 2 and its proof, based on Alex's notes in his e-mail dated Sep 2, 2021.
+- Luis: remove name "minimal sufficient set"
+- Luis: change name "canonical rectangle"
 - Luis: comment after Theorem 2: how the new formula has two terms with definite meanings
 - Luis: move Figure 14 (graph of \probmax) closer to the statement of Theorem 7, since it nicely illustrates what the cases look like. There is not much margin for moving it, it seems, because the figure has to be after the theorem (and its proof).
 |~ - Alex/Luis: see if the new formula for λ (arbitrary a,b; with the "r" term) can be turned into one for τ (maybe via the "inverse" relationship between λ and τ) which is simpler than the current formula in Theorem 1
