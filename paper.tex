@@ -142,12 +142,12 @@ The rest of the paper is organized as follows. Fundamental results are presented
 
 For a grid with horizontal spacing $a$ and vertical spacing $b$, lines of the form $x = ka$ or $y = kb$ with $k \in \mathbb Z$ will be called \emph{grid lines}. A \emph{tile} is delimited by two pairs of consecutive horizontal and vertical grid lines. The intersection points of horizontal and vertical grid lines will be called \emph{grid points}. These correspond to vertices of the tiles.
 
-Every segment has an associated \emph{canonical rectangle}, which is the minimum-size rectangle that is formed by grid lines and contains the segment. More specifically, if the segment has endpoints $(x_1,y_1)$, $(x_2,y_2)$, where $x_1, x_2, y_1, y_2 \in \mathbb R$, its canonical rectangle has lower-left corner and upper-right corner given as
+Every segment has an associated \emph{discrete bounding rectangle}, which is the minimum-size rectangle that is formed by grid lines and contains the segment. More specifically, if the segment has endpoints $(x_1,y_1)$, $(x_2,y_2)$, where $x_1, x_2, y_1, y_2 \in \mathbb R$, its discrete bounding rectangle has lower-left corner and upper-right corner given as
 \begin{align*}
 & (\lfloor\min\{x_1, x_2\}/a\rfloor a, \lfloor\min\{y_1,y_2\}/b\rfloor b), \\
 & (\lceil\max\{x_1, x_2\}/a \rceil a, \lceil\max\{y_1,y_2\}/b \rceil b).
 \end{align*}
-The dimensions of the canonical rectangle, normalized to the tile width and height respectively, are two integer numbers $i$, $j$. Two examples are illustrated in Figure~\ref{fig: canonical rectangle and touched tiles}, both with $i=5$, $j=4$. Clearly, all tiles visited by the segment are contained in the canonical rectangle. Note also that the canonical rectangle can have $i=0$ or $j=0$ if the segment coincides with part of a grid line.
+The dimensions of the discrete bounding rectangle, normalized to the tile width and height respectively, are two integer numbers $i$, $j$. Two examples are illustrated in Figure~\ref{fig: discrete bounding rectangle and touched tiles}, both with $i=5$, $j=4$. Clearly, all tiles visited by the segment are contained in the discrete bounding rectangle. Note also that the rectangle can have $i=0$ or $j=0$ if the segment coincides with part of a grid line.
 
 \begin{figure}
 \centering%
@@ -159,22 +159,22 @@ The dimensions of the canonical rectangle, normalized to the tile width and heig
 \label{fig: S_gridpoints}%
 \includegraphics[width=.49\textwidth]{S_gridpoints_1p35}%
 }%
-\caption{Canonical rectangle and visited tiles
+\caption{Discrete bounding rectangle and visited tiles
 }%
-\label{fig: canonical rectangle and touched tiles}%
+\label{fig: discrete bounding rectangle and touched tiles}%
 \end{figure}%
 
 \begin{proposition}
 \label{prop: i+j-1}
-Consider an arbitrary segment, and let $i, j$ respectively denote the normalized width and height of its canonical rectangle. If $i, j \geq 1$, the number of tiles visited by the segment is at most $i+j-1$. This bound is attained if and only if the segment does not pass through any grid point in the interior of the rectangle.
+Consider an arbitrary segment, and let $i, j$ respectively denote the normalized width and height of its discrete bounding rectangle. If $i, j \geq 1$, the number of tiles visited by the segment is at most $i+j-1$. This bound is attained if and only if the segment does not pass through any grid point in the interior of the rectangle.
 \end{proposition}
 
 \begin{proof}
-The segment visits, by definition, two tiles in opposite corners of the canonical rectangle. It can be assumed, without loss of generality, that those tiles are in the lower-left and upper-right corners of the rectangle, as in Figure~\ref{fig: canonical rectangle and touched tiles}. The visited tiles can be thought of as following a path within the canonical rectangle. Starting at the lower-left tile, the next tile can be the one to the left, the one above, or the one above and to the left. The latter case occurs if and only if the segment passes through the grid point between those two tiles.
+The segment visits, by definition, two tiles in opposite corners of the discrete bounding rectangle. It can be assumed, without loss of generality, that those tiles are in the lower-left and upper-right corners of the rectangle, as in Figure~\ref{fig: discrete bounding rectangle and touched tiles}. The visited tiles can be thought of as following a path within the discrete bounding rectangle. Starting at the lower-left tile, the next tile can be the one to the left, the one above, or the one above and to the left. The latter case occurs if and only if the segment passes through the grid point between those two tiles.
 
 Since the segment follows a straight line, once it ``leaves'' a row of tiles in its path from the lower-left to the upper-right corner, it can never visit any more tiles from that row. The same observation applies to the columns.
 
-This implies that the maximum number of visited tiles is $i+j-1$, which is attained if and only if the segment avoids all grid points in the interior of the canonical rectangle, as in Figure~\ref{fig: S_nogridpoints}. Note that grid points at the corners of the rectangle do not count for this; and that the segment cannot pass through any other grid points on the rectangle border, because that would imply $i=0$ or $j=0$. Figure~\ref{fig: S_gridpoints} illustrates a case where the maximum is not attained.
+This implies that the maximum number of visited tiles is $i+j-1$, which is attained if and only if the segment avoids all grid points in the interior of the discrete bounding rectangle, as in Figure~\ref{fig: S_nogridpoints}. Note that grid points at the corners of the rectangle do not count for this; and that the segment cannot pass through any other grid points on the rectangle border, because that would imply $i=0$ or $j=0$. Figure~\ref{fig: S_gridpoints} illustrates a case where the maximum is not attained.
 \end{proof}
 
 \begin{proposition}
@@ -183,7 +183,7 @@ Consider $a, b, \len \in \mathbb R^+$ and $i, j \in \mathbb N$, $i, j \geq 2$ ar
 \begin{enumerate}
 \item
 \label{prop: len ineq i j: ineqs}
-The following inequalities hold for any segment with length $\len$ whose canonical rectangle has normalized dimensions $i, j$:
+The following inequalities hold for any segment with length $\len$ whose discrete bounding rectangle has normalized dimensions $i, j$:
 \begin{align}
 \label{eq: len > sqrt}
 \len &> \sqrt{(i-2)^2 a^2 + (j-2)^2 b^2}, \\
@@ -192,17 +192,17 @@ The following inequalities hold for any segment with length $\len$ whose canonic
 \end{align}
 \item
 \label{prop: len ineq i j: exist}
-Conversely, if $\len$, $i$, $j$ satisfy \eqref{eq: len > sqrt} and \eqref{eq: len leq sqrt} there exists a segment of length $\len$ whose canonical rectangle has normalized dimensions $i$ and $j$.
+Conversely, if $\len$, $i$, $j$ satisfy \eqref{eq: len > sqrt} and \eqref{eq: len leq sqrt} there exists a segment of length $\len$ whose discrete bounding rectangle has normalized dimensions $i$ and $j$.
 \item
 \label{prop: len ineq i j: ineq, exist}
-There is a segment of length not exceeding $\len$ that has a canonical rectangle with normalized dimensions $i, j$ if and only if \eqref{eq: len > sqrt} holds.
+There is a segment of length not exceeding $\len$ that has a discrete bounding rectangle with normalized dimensions $i, j$ if and only if \eqref{eq: len > sqrt} holds.
 \end{enumerate}
 \end{proposition}
 
 \begin{proof}
-\ref*{prop: len ineq i j: ineqs} The inequalities follow from the fact that the segment endpoints lie in the interiors or on the outer edges of two tiles in opposite corners of the canonical rectangle. This is illustrated in Figures~\ref{fig: len ineq 4 3} and \ref{fig: len ineq 4 2} for two specific $(i,j)$ pairs respectively. For each $(i,j)$, segments are shown with lengths close to either of the two bounds. Note that \eqref{eq: len > sqrt} is valid even for $i=2$, $j=2$, in which case it reduces to $\len>0$.
+\ref*{prop: len ineq i j: ineqs} The inequalities follow from the fact that the segment endpoints lie in the interiors or on the outer edges of two tiles in opposite corners of the discrete bounding rectangle. This is illustrated in Figures~\ref{fig: len ineq 4 3} and \ref{fig: len ineq 4 2} for two specific $(i,j)$ pairs respectively. For each $(i,j)$, segments are shown with lengths close to either of the two bounds. Note that \eqref{eq: len > sqrt} is valid even for $i=2$, $j=2$, in which case it reduces to $\len>0$.
 
-\ref*{prop: len ineq i j: exist} For $a$, $b$, $\len$, $i$, $j$ satisfying the two inequalities, a segment of length $\len$ can be found that has its endpoints in the interiors or on the outer edges of the two shaded tiles of a rectangle of normalized dimensions $i$ and $j$, as in Figure~\ref{fig: len ineq i j}. Therefore this segment has the given rectangle as canonical.
+\ref*{prop: len ineq i j: exist} For $a$, $b$, $\len$, $i$, $j$ satisfying the two inequalities, a segment of length $\len$ can be found that has its endpoints in the interiors or on the outer edges of the two shaded tiles of a rectangle of normalized dimensions $i$ and $j$, as in Figure~\ref{fig: len ineq i j}, which is thus the discrete bounding rectangle of that segment.
 \begin{figure}
 \centering%
 \subfigure[$i=4$, $j=3$]{%
@@ -213,17 +213,17 @@ There is a segment of length not exceeding $\len$ that has a canonical rectangle
 \label{fig: len ineq 4 2}%
 \includegraphics[width=.49\textwidth]{L_ineq_4_2_1p35}%
 }%
-\caption{Relationship between segment length $\len$ and dimensions $i$, $j$ of the canonical rectangle
+\caption{Relationship between segment length $\len$ and dimensions $i$, $j$ of the discrete bounding rectangle
 }%
 \label{fig: len ineq i j}
 \end{figure}%
 
 \ref*{prop: len ineq i j: ineq, exist} ``\eqref{eq: len > sqrt} $\Rightarrow$ there is a segment\ldots'': Assume that \eqref{eq: len > sqrt} holds. It is always possible to choose a length equal to or smaller than $\len$ such that both \eqref{eq: len > sqrt} and \eqref{eq: len leq sqrt} hold. The result follows, for that length, from part~\ref{prop: len ineq i j: exist}.
 
-``There is a segment\ldots $\Rightarrow$ \eqref{eq: len > sqrt} '': Assume that a segment exists with length not exceeding $\len$ and with a canonical rectangle with normalized dimensions $i$, $j$. From part~\ref{prop: len ineq i j: ineqs}, inequality \eqref{eq: len > sqrt} holds for that segment length, and thus for $\len$.
+``There is a segment\ldots $\Rightarrow$ \eqref{eq: len > sqrt} '': Assume that a segment exists with length not exceeding $\len$ and with a discrete bounding rectangle with normalized dimensions $i$, $j$. From part~\ref{prop: len ineq i j: ineqs}, inequality \eqref{eq: len > sqrt} holds for that segment length, and thus for $\len$.
 \end{proof}
 
-According to Proposition~\ref{prop: i+j-1}, in order to maximize the number of visited tiles for a given length, the position and orientation of the segment should be chosen to obtain $i+j-1$ as large as possible, where $i$ and $j$ are the normalized dimensions of its canonical rectangle. On the other hand, Proposition~\ref{prop: len ineq i j} restricts the $i, j$ values that can be achieved with a given length. A relevant question is: are there any $(i,j)$ pairs that can be disregarded irrespective of the length $\len$? In other words, what is the ``smallest'' subset of $\mathbb N^2$ such that the $(i,j)$ pair that maximizes the number of tiles for any given length can always be found within that subset? A subset that contains a maximizing $(i,j)$ for any length will be called a \emph{sufficient} set. Clearly, this set must contain at least one such pair for each possible value of $i+j-1$, so that the set can produce that value as solution (for certain lengths). A sufficient set that contains exactly one pair $(i,j)$ for each value of $i+j-1$ will be called a \emph{minimal sufficient} set.
+According to Proposition~\ref{prop: i+j-1}, in order to maximize the number of visited tiles for a given length, the position and orientation of the segment should be chosen to obtain $i+j-1$ as large as possible, where $i$ and $j$ are the normalized dimensions of its discrete bounding rectangle. On the other hand, Proposition~\ref{prop: len ineq i j} restricts the $i, j$ values that can be achieved with a given length. A relevant question is: are there any $(i,j)$ pairs that can be disregarded irrespective of the length $\len$? In other words, what is the ``smallest'' subset of $\mathbb N^2$ such that the $(i,j)$ pair that maximizes the number of tiles for any given length can always be found within that subset? A subset that contains a maximizing $(i,j)$ for any length will be called a \emph{sufficient} set. Clearly, this set must contain at least one such pair for each possible value of $i+j-1$, so that the set can produce that value as solution (for certain lengths). A sufficient set that contains exactly one pair $(i,j)$ for each value of $i+j-1$ will be called a \emph{minimal sufficient} set.
 
 For instance, it is intuitively clear from Figure~\ref{fig: examples} that segment orientations near the vertical or horizontal directions (resulting in $i=1$ with large $j$, or $j=1$ with large $i$) will not maximize the number of visited tiles.
 % This is true for any a, b: 2 can achieved instead of 1 without compromising the other dimension.
@@ -242,7 +242,7 @@ Consider first $a=b=1$. This is illustrated in Figure~\ref{fig: ijLS_1}. Note th
 \begin{figure}
 \centering%
 \includegraphics[width=.7\textwidth]{ijLS_1}%
-\caption{Relationship of segment length and number of visited tiles with the width and height of the canonical rectangle, for $a=b$
+\caption{Relationship of segment length and number of visited tiles with the width and height of the discrete bounding rectangle, for $a=b$
 }%
 \label{fig: ijLS_1}%
 \end{figure}%
@@ -260,7 +260,7 @@ As a second example, consider $a=1.35$, $b=1$. This is depicted in Figure~\ref{f
 \begin{figure}
 \centering%
 \includegraphics[width=.7\textwidth]{ijLS_1p35}%
-\caption{Relationship of segment length and number of visited tiles with the width and height of the canonical rectangle, for $a=1.35b$
+\caption{Relationship of segment length and number of visited tiles with the width and height of the discrete bounding rectangle, for $a=1.35b$
 }%
 \label{fig: ijLS_1p35}%
 \end{figure}%
@@ -369,12 +369,10 @@ The bounding lines in Proposition~\ref{prop: min suff set, form} are shown in Fi
 \label{fig: pairs_bounds}%
 \end{figure}%
  
-For $a^2/b^2$ arbitrary, the number of pairs with the same $i$ coordinate, or with the same $j$, in the set $\mss$ is in general irregular, because the lines \eqref{eq: upper bound, line} and \eqref{eq: lower bound, line} do not follow a ``natural''
-% ***it may be better to say ``simple'' instead of ``natural'', specially if we rename ``canonical`'' to ``natural'' or ``natural bounding''
-direction of the grid. This happens for instance in Figure~\ref{fig: pairs_bounds_1p35}, where the number of pairs for the first $i$ values equals either $2$ or $3$ without a clear pattern.\footnote{Strictly, there is a periodic pattern whenever $a^2/b^2$ is rational, which is the case in Figure~\ref{fig: pairs_bounds_1p35}. However, this is not easily discernible unless $a^2/b^2$ is a ratio of small numbers.}
+For $a^2/b^2$ arbitrary, the number of pairs with the same $i$ coordinate, or with the same $j$, in the set $\mss$ is in general irregular, because the lines \eqref{eq: upper bound, line} and \eqref{eq: lower bound, line} do not follow a ``natural'' direction of the grid. This happens for instance in Figure~\ref{fig: pairs_bounds_1p35}, where the number of pairs for the first $i$ values equals either $2$ or $3$ without a clear pattern.\footnote{Strictly, there is a periodic pattern whenever $a^2/b^2$ is rational, which is the case in Figure~\ref{fig: pairs_bounds_1p35}. However, this is not easily discernible unless $a^2/b^2$ is a ratio of small numbers.}
 On the other hand, a simple pattern arises when $a^2/b^2$ or $b^2/a^2$ is a natural number, as seen in Figures~\ref{fig: pairs_bounds_1} and \ref{fig: pairs_bounds_sqrt2}.
 
-A segment whose canonical rectangle has normalized width $i$ and height $j$ is oriented with approximate slope $jb/(ia)$ with respect to the $x$ axis (see Figure~\ref{fig: len ineq i j}); and the approximation becomes better for greater segment lengths. From \eqref{eq: upper bound, line} and \eqref{eq: lower bound, line} it can be seen that the positions of the pairs $(i,j) \in \mss$ have $j/i \approx a^2/b^2$ for large $i, j$. Therefore the optimal slope for long segments is approximately $a/b$. This formalizes the intuition that to maximize the number of visited tiles, the segment should follow a direction along which the perceived ``length'' of the tile is smaller.
+A segment whose discrete bounding rectangle has normalized width $i$ and height $j$ is oriented with approximate slope $jb/(ia)$ with respect to the $x$ axis (see Figure~\ref{fig: len ineq i j}); and the approximation becomes better for greater segment lengths. From \eqref{eq: upper bound, line} and \eqref{eq: lower bound, line} it can be seen that the positions of the pairs $(i,j) \in \mss$ have $j/i \approx a^2/b^2$ for large $i, j$. Therefore the optimal slope for long segments is approximately $a/b$. This formalizes the intuition that to maximize the number of visited tiles, the segment should follow a direction along which the perceived ``length'' of the tile is smaller.
 % but not ``smallest'', if that were the case it would always be either vertical or horizontal
 
 
@@ -576,7 +574,7 @@ it is seen that for long segments the number of visited tiles and the segment le
 = \sqrt{1/a^2 + 1/b^2}.
 \end{equation}
 
-As for $a \gg b$, in this case the optimal canonical rectangle has $\isoli = 2$, and $\jsoli$ as large as allowed by $\len$ (direct problem) or as required by $\tiles$ (inverse problem), corresponding to an almost vertical segment. Obviously, for $a \gg b$ the length of the segment is best invested in increasing the number of tiles traversed vertically (but the segment should be slightly tilted to cross a vertical edge), and the asymptotic value of \eqref{eq: asympt} is approximately $1/b$.
+As for $a \gg b$, in this case the optimal discrete bounding rectangle has $\isoli = 2$, and $\jsoli$ as large as allowed by $\len$ (direct problem) or as required by $\tiles$ (inverse problem), corresponding to an almost vertical segment. Obviously, for $a \gg b$ the length of the segment is best invested in increasing the number of tiles traversed vertically (but the segment should be slightly tilted to cross a vertical edge), and the asymptotic value of \eqref{eq: asympt} is approximately $1/b$.
 
 For $a=b$, either from symmetry considerations or particularizing the formulas in the previous theorems it stems that the optimal orientation of the segment is close to $45^\circ$. This case will be dealt with in \S\ref{part: max: unit square grid, real lengths}, as it lends itself to simplified formulas.
 
@@ -863,7 +861,7 @@ The stated properties for $\funli$ follow directly from those of $\funti$ establ
 
 Given $\len \in \mathbb R^+$, consider a segment of length $\len$ with uniformly random position and orientation. Specifically, the coordinates $x_1$, $y_1$ of the first endpoint are independent random variables uniformly distributed on $[0,a)$ and $[0,b)$ respectively. The orientation $\theta$ of the segment is uniformly distributed on $[0,2\pi)$. The variables $x_1$, $y_1$ and $\theta$ determine the coordinates $x_2$, $y_2$ of the second endpoint.
 
-Each realization of the random segment gives rise to a canonical rectangle, whose normalized dimensions $i$ and $j$ are thus random variables, as is the number $\tiles$ of visited tiles. Except for a set of realizations with zero probability, $i$ and $j$ are at least $1$, and $\tiles = i+j-1$ tiles. Note that $i$ and $j$ are not statistically independent. 
+Each realization of the random segment gives rise to a discrete bounding rectangle, whose normalized dimensions $i$ and $j$ are thus random variables, as is the number $\tiles$ of visited tiles. Except for a set of realizations with zero probability, $i$ and $j$ are at least $1$, and $\tiles = i+j-1$ tiles. Note that $i$ and $j$ are not statistically independent. 
 
 
 \subsection{Arbitrary grid with real-valued lengths}
@@ -909,7 +907,7 @@ f(\genvar) = \int_0^\genvar \arccos z \diff z = \genvar \arccos \genvar - \sqrt{
 
 \begin{proposition}
 \label{prop: Pr i}
-Given $a, b, \len \in \mathbb R^+$, consider a grid with parameters $a, b$ and a uniformly random segment of length $\len$, as defined above. Let the random variables $i$, $j$ represent the normalized dimensions of the canonical rectangle. For $n \in \mathbb N$,
+Given $a, b, \len \in \mathbb R^+$, consider a grid with parameters $a, b$ and a uniformly random segment of length $\len$, as defined above. Let the random variables $i$, $j$ represent the normalized dimensions of the discrete bounding rectangle. For $n \in \mathbb N$,
 \begin{equation}
 \label{eq: Pr i geq n}
 \Pr[i \geq n] = \begin{cases}
@@ -950,7 +948,7 @@ The two conditional probabilities on the right-hand side of \eqref{eq: Pr i cond
 \label{fig: Pr_i_notfull}%
 \includegraphics[width=.58\textwidth]{Pr_i_notfull_1p35}%
 }%
-\caption{Conditions for the normalized width of the canonical rectangle, $i$, to be equal or greater than a given $n$. Example with $a=1.35$, $b=1$, $n=3$
+\caption{Conditions for the normalized width of the discrete bounding rectangle, $i$, to be equal or greater than a given $n$. Example with $a=1.35$, $b=1$, $n=3$
 }%
 \label{fig: Pr_i}
 \end{figure}%
@@ -995,7 +993,7 @@ gives the average number of lines crossed in Buffon's experiment. For $\len \leq
 
 Lastly, $\Pr[i \geq n]$ as computed in Proposition~\ref{prop: Pr i} for $n \geq 2$ can be seen as a generalization of the probability of crossing at least one line in Buffon's experiment, when a needle endpoint is only allowed to move in a narrower region of width $n-1$ times smaller than the width of the strips (instead of across the full strip as in Buffon's setting).
 
-***Maybe a graph comparing maximum and average. Or compute/plot their ratio. The asymptotic slopes are $\sqrt(1/a^2+1/b^2)$ for $\funt$ and $2/\pi(1/a+1/b)$. It may be interesting to consider the ratio of asymptotic slopes, as a function of $a/b$. It is maximum for $a=b$, and equals $2\sqrt 2/\pi = 0.9003$. It tends to $2/\pi$ for $a/b \rightarrow \infty$ and for $a/b \rightarrow 0$. The minimum number of tiles that can be visited with non-zero probability (corresponding to an n times 1 canonical rectangle if a>=b) can also be plotted.
+***Maybe a graph comparing maximum and average. Or compute/plot their ratio. The asymptotic slopes are $\sqrt(1/a^2+1/b^2)$ for $\funt$ and $2/\pi(1/a+1/b)$. It may be interesting to consider the ratio of asymptotic slopes, as a function of $a/b$. It is maximum for $a=b$, and equals $2\sqrt 2/\pi = 0.9003$. It tends to $2/\pi$ for $a/b \rightarrow \infty$ and for $a/b \rightarrow 0$. The minimum number of tiles that can be visited with non-zero probability (corresponding to an n times 1 discrete bounding rectangle if a>=b) can also be plotted.
 
 The probability of visiting the maximum number of tiles for a rectangular grid is difficult to compute, due to the irregularity of the minimal sufficient set (see \S\ref{part: fund results}). In the square case, however, the simplicity of the set makes the problem more tractable. 
 
