@@ -223,21 +223,11 @@ There is a segment of length not exceeding $\len$ that has a discrete bounding r
 ``There is a segment\ldots $\Rightarrow$ \eqref{eq: len > sqrt} '': Assume that a segment exists with length not exceeding $\len$ and with a discrete bounding rectangle with normalized dimensions $i$, $j$. From part~\ref{prop: len ineq i j: ineqs}, inequality \eqref{eq: len > sqrt} holds for that segment length, and thus for $\len$.
 \end{proof}
 
-According to Proposition~\ref{prop: i+j-1}, in order to maximize the number of visited tiles for a given length, the position and orientation of the segment should be chosen to obtain $i+j-1$ as large as possible, where $i$ and $j$ are the normalized dimensions of its discrete bounding rectangle. On the other hand, Proposition~\ref{prop: len ineq i j} restricts the $i, j$ values that can be achieved with a given length. A relevant question is: are there any $(i,j)$ pairs that can be disregarded irrespective of the length $\len$? In other words, what is the ``smallest'' subset of $\mathbb N^2$ such that the $(i,j)$ pair that maximizes the number of tiles for any given length can always be found within that subset? A subset that contains a maximizing $(i,j)$ for any length will be called a \emph{sufficient} set. Clearly, this set must contain at least one such pair for each possible value of $i+j-1$, so that the set can produce that value as solution (for certain lengths). A sufficient set that contains exactly one pair $(i,j)$ for each value of $i+j-1$ will be called a \emph{minimal sufficient} set.
+According to Proposition~\ref{prop: i+j-1}, in order to maximize the number of visited tiles for a given length, the position and orientation of the segment should be chosen to obtain $i+j-1$ as large as possible, where $i$ and $j$ are the normalized dimensions of its discrete bounding rectangle. On the other hand, Proposition~\ref{prop: len ineq i j} restricts the $i, j$ values that can be achieved with a given length. A relevant question is: are there any $(i,j)$ pairs that can be disregarded irrespective of the length $\len$? In other words, what is the ``smallest'' subset of $\mathbb N^2$ such that the $(i,j)$ pair that maximizes the number of tiles for any given length can always be found within that subset?
 
-For instance, it is intuitively clear from Figure~\ref{fig: examples} that segment orientations near the vertical or horizontal directions (resulting in $i=1$ with large $j$, or $j=1$ with large $i$) will not maximize the number of visited tiles.
-% This is true for any a, b: 2 can achieved instead of 1 without compromising the other dimension.
-The corresponding $(i,j)$ pairs can be left out of the sufficient set. In general, the pairs included in a minimal sufficient set will be different depending on $a$ and $b$. Two specific examples of minimal sufficient sets will be presented later in this section.
+For instance, it is clear from Figure~\ref{fig: examples} that segment orientations near the vertical or horizontal directions (resulting in $i=1$ with large $j$, or $j=1$ with large $i$) will not maximize the number of visited tiles, and thus the corresponding $(i,j)$ pairs can be discarded. On the other hand, the set of optimal $(i,j)$ pairs must contain one such pair for each possible value of $i+j-1$, so that the set can produce that value as the solution (maximum number of visited tiles) for certain lengths. It is insightful to examine two specific examples before giving an explicit formula for the coordinates of the optimal pairs.
 
-% ***Is the text from here to the proposition too long? Shorten it?
-
-% ***AA: Do we actually need the concept of a minimal sufficient set, given that there's a single value at each diagonal (tiebreaking a certain way)? Perhaps rename to suggest it's one value?
-
-Knowing a minimal sufficient set of $(i,j)$ pairs facilitates the solution of both the direct an inverse problems, because it reduces the number of pairs that need to be tried. In order to derive a general method to build a minimal sufficient set, it is insightful to consider two specific cases first. It is also convenient to use the equivalent formulation of the direct problem referred to in \S\ref{part: intro}, i.e.~finding the maximum number of tiles visited by segments of length $\len$ \emph{or less}.
-
-% Thus each choice of $(i, j)$ implies a maximum of $i+j-1$ visited tiles on one hand; and sets a lower bound on the required length $\len$ on the other hand.
-
-Consider first $a=b=1$. This is illustrated in Figure~\ref{fig: ijLS_1}. Note that in this and in the next figures the axes represent $ia$ and $jb$ (not $i$ and $j$). Each dashed diagonal line joins $(i, j)$ pairs with the same $i+j-1$. The radius of each arc represents the lower bound on $\len$ given by \eqref{eq: len > sqrt}, for certain $(i,j)$ pairs, which are marked with filled circles (these pairs form a minimal sufficient set, as will be seen).
+Consider $a=b=1$ first. This is illustrated in Figure~\ref{fig: ijLS_1}. Note that in this and in the next figures the axes represent $ia$ and $jb$ (not $i$ and $j$). It is convenient, however, to refer to the point $(ia,jb)$ by its normalized coordinates $(i,j)$. In this graph, each dashed diagonal line contains pairs $(i,j)$ with the same $i+j-1$; and the lower bound \eqref{eq: len > sqrt} corresponds to an arc centered at normalized coordinates $(2,2)$.
 
 \begin{figure}
 \centering%
@@ -247,15 +237,12 @@ Consider first $a=b=1$. This is illustrated in Figure~\ref{fig: ijLS_1}. Note th
 \label{fig: ijLS_1}%
 \end{figure}%
 % ***Maybe combine this figure and the next into one figure with two subfigures (stacked vertically, size similar to now). Not sure. It has been done in others
-% ***Are these figures necessary? They were created with the aim of helping understand the first of the two propositions on $\mss$. Now that proposition has been removed. They are probably still useful, but maybe the text about these figures needs to be rewritten.
 
-For a given $\len \in \mathbb R^+$, the $(i,j)$ pairs that can be achieved with segments of length not exceeding $\len$ are, by Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}, those whose distance from $(2a,2b)$ is less than $\len$, i.e.~those delimited by the corresponding arc. It is clear from the figure that for $i+j-1$ odd, if some point $(i',j')$ with $|i'-j'|>1$ is achievable with the length bound $\len$, then necessarily there is a point $(i'',i'')$ with the same number of visited tiles $i+j-1$ (same diagonal line) that is also achievable with the same length restriction (because it has smaller distance to $(2a,2b)$). Similarly, for $i+j-1$ even, if a point $(i',j')$ with $|i'-j'|>1$ is achievable, then there is a point $(i'',i''-1)$ in the same diagonal that is also achievable with the same length restriction.
+For a given $\len \in \mathbb R^+$, the $(i,j)$ pairs that can be achieved with segments of length not exceeding $\len$ are, by Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}, those that satisfy \eqref{eq: len > sqrt}. Thus for a given value of $i+j-1$ the optimal $(i,j)$ pair (the one that can be achieved with the smallest possible length) is that with minimum distance to the point with normalized coordinates $(2,2)$. Such pairs are depicted as filled circles in the figure. The displayed arcs represent the inequality \eqref{eq: len > sqrt} for each of the optimal pairs. Conversely, given a length $\len$, the maximum number of visited tiles will be achieved with one of these pairs, namely that situated on the highest (or rightmost) diagonal line that still lies within the circle with radius $\len$ centered at normalized coordinates $(2,2)$. 
 
-Thus for $a=b=1$, a minimal sufficient set is formed by the pairs $(i,j)$ with $j=i$ or $j=i+1$. Observe that due to symmetry, any point $(i'',i''-1)$ could be replaced by $(i''-1,i'')$. This illustrates that the minimal sufficient set is not unique in general. 
+The optimal pairs in this specific case have $j=i$ or $j=i-1$, as seen in the figure. Due to symmetry, any pair $(i,i-1)$ could be replaced by $(i-1,i)$. This illustrates that the set of optimal pairs is not unique in general. 
 
-The pairs in the minimal sufficient set are marked with filled circles in Figure~\ref{fig: ijLS_1}. Given a length $\len$, the maximum number of visited tiles will be achieved with one of those pairs, namely that in the diagonal line furthest from $(2a,2b)$ that is within the circle with radius $\len$ centered at that point.
-
-As a second example, consider $a=1.35$, $b=1$. This is depicted in Figure~\ref{fig: ijLS_1p35}. In this case the minimal sufficient set does not follow a rule as simple as in the previous example.
+As a second example, consider $a=1.35$, $b=1$. This is depicted in Figure~\ref{fig: ijLS_1p35}. Again, the optimal pair $(i,j)$ for each diagonal is that closest to $(2,2)$; but in this case the $i,j$ coordinates of these pairs do not follow a rule as simple as in the previous example.
 
 \begin{figure}
 \centering%
@@ -265,11 +252,11 @@ As a second example, consider $a=1.35$, $b=1$. This is depicted in Figure~\ref{f
 \label{fig: ijLS_1p35}%
 \end{figure}%
 
-The following proposition gives an explicit method to obtain a minimal sufficient set, $\mss = \{(i_3,j_3), (i_4.j_4), \ldots\}$, where the pair $(i_\tiles,j_\tiles)$ corresponds to $i+j-1 = \tiles$.
+The following proposition gives an explicit method to obtain a set of optimal $(i,j)$ pairs. This set will be denoted as $\mss = \{(i_3,j_3), (i_4.j_4), \ldots\}$, where the pair $(i_\tiles,j_\tiles)$ corresponds to $i+j-1 = \tiles$.
 
 \begin{proposition}
 \label{prop: min suff set, form}
-Given $a, b \in \mathbb R^+$ and $\tiles \in \mathbb N$, $\tiles \geq 3$, a minimal sufficient set $\mss = \{(i_3,j_3), (i_4.j_4), \ldots\}$ can be obtained as
+Given $a, b \in \mathbb R^+$ and $\tiles \in \mathbb N$, $\tiles \geq 3$, a set of optimal pairs $\mss = \{(i_3,j_3), (i_4.j_4), \ldots\}$ can be obtained as
 \begin{align}
 \label{eq: min suff set, form, i}
 i_\tiles &= \left\lfloor \frac{(\tiles-3) b^2}{a^2+b^2} + \frac 5 2 \right\rfloor, \\
@@ -289,7 +276,7 @@ j = \frac{i a^2}{b^2} - \frac{5a^2}{2b^2} + \frac 3 2.
 \end{proposition}
 
 \begin{proof}
-For each $\tiles$, the pair $(i_\tiles,j_\tiles)$ of the minimal sufficient set should be chosen as that on the line $i+j-1=\tiles$ which minimizes $(i-2)^2 a^2 + (j-2)^2 b^2$. This allows maximizing the sum $i+j-1$, and thus the number of visited tiles, for a given length restriction (direct problem); or minimizing the required lengths for a specified number of visited files (inverse problem).
+For each $\tiles$, the pair $(i_\tiles,j_\tiles)$ should be chosen as that on the line $i+j-1=\tiles$ which minimizes $(i-2)^2 a^2 + (j-2)^2 b^2$. This allows maximizing the sum $i+j-1$, and thus the number of visited tiles, for a given length restriction (direct problem); or minimizing the required lengths for a specified number of visited files (inverse problem).
 
 Consider, for the moment, $i$, $j$ as if they were real-valued variables, and denote $x=ia$, $y=jb$. The line $i+j-1 = \tiles$ then becomes
 \begin{equation}
@@ -315,7 +302,7 @@ In terms of the real-valued variables $i$, $j$, the solution $(\isolr, \jsolr)$ 
 \end{align}
 This point is shown in Figure~\ref{fig: min suff set, form} with a square marker.
 
-% ***This figure and Figure~\ref{fig: ijLS_1p35_detail} label the points as (i,j) instead of (ia,jb). Clarify in the text, or change the figures
+% ***This figure and Figure~\ref{fig: ijLS_1p35_detail} label the points as (i,j) instead of (ia,jb). Clarify in the text, or change the figures ***Maybe use the concept of normalized coordinates
 \begin{figure}%
 \centering%
 \includegraphics[width=.7\textwidth]{mss}%
@@ -364,7 +351,7 @@ The bounding lines in Proposition~\ref{prop: min suff set, form} are shown in Fi
 \label{fig: pairs_bounds_sqrt2}%
 \includegraphics[height=.24\textheight]{pairs_bounds_sqrt2}% *!*
 }%
-\caption{Minimal sufficient set $\mss$ and bounding lines
+\caption{Set of optimal pairs $\mss$, and bounding lines
 }%
 \label{fig: pairs_bounds}%
 \end{figure}%
@@ -529,7 +516,7 @@ This function is monotone increasing for $\tiles \geq 3$.
 \end{theorem}
 
 \begin{proof}
-The $(i_\tiles,j_\tiles)$ pair in the minimal sufficient set $\mss$ corresponds to a maximum of $\tiles$ visited tiles. By construction of this set, any segment that visits $\tiles$ tiles must have length greater than $\sqrt{(i_\tiles-2)^2a^2 + (j_\tiles-2)^2b^2}$. For $\tiles \geq 3$ the variables $\isoli$, $\jsoli$ in \eqref{eq: theo: funl, form; isoli} and \eqref{eq: theo: funl, form; jsoli} respectively coincide with $i_\tiles$, $j_\tiles$ as given by \eqref{eq: min suff set, form, i} and \eqref{eq: min suff set, form, j}. Therefore \eqref{eq: theo: funl, form; funl} gives the correct result. For $\tiles \in \{1, 2\}$ both \eqref{eq: theo: funl, form; isoli} and \eqref{eq: theo: funl, form; jsoli} equal $2$, and \eqref{eq: theo: funl, form; funl} gives $0$, which is again the correct result.
+The $(i_\tiles,j_\tiles)$ pair in $\mss$ corresponds to a maximum of $\tiles$ visited tiles. By construction of this set, any segment that visits $\tiles$ tiles must have length greater than $\sqrt{(i_\tiles-2)^2a^2 + (j_\tiles-2)^2b^2}$. For $\tiles \geq 3$ the variables $\isoli$, $\jsoli$ in \eqref{eq: theo: funl, form; isoli} and \eqref{eq: theo: funl, form; jsoli} respectively coincide with $i_\tiles$, $j_\tiles$ as given by \eqref{eq: min suff set, form, i} and \eqref{eq: min suff set, form, j}. Therefore \eqref{eq: theo: funl, form; funl} gives the correct result. For $\tiles \in \{1, 2\}$ both \eqref{eq: theo: funl, form; isoli} and \eqref{eq: theo: funl, form; jsoli} equal $2$, and \eqref{eq: theo: funl, form; funl} gives $0$, which is again the correct result.
 
 For $\tiles \geq 3$, the term $\sqrt{(i_\tiles-2)^2a^2 + (j_\tiles-2)^2b^2}$ can be interpreted geometrically as the distance between $(i_\tiles, j_\tiles)$ and $(2a, 2b)$. As can be seen with the help of Figure~\ref{fig: min suff set, form}, this distance is the hypotenuse of a right triangle whose other two sides extend from $(2a, 2b)$ to $(\isolr a, \jsolr b)$ and from $(\isolr a, \jsolr b)$ to $(i_\tiles, j_\tiles)$ respectively. Therefore,
 \begin{equation}
@@ -668,10 +655,9 @@ Equivalently,
 \end{theorem}
 
 \begin{proof}
-The proof of \eqref{eq: theo: funt, sq, form; funt, with i, j} uses a variation of the minimal sufficient set $\mss$ defined in Proposition~\ref{prop: min suff set, form} that is more suited to this situation.
-% ***``situation'' or ``case''?
+The proof of \eqref{eq: theo: funt, sq, form; funt, with i, j} uses a variation of the set $\mss$ defined in Proposition~\ref{prop: min suff set, form} that is more suited to this situation.
 
-For $a=b=1$, the set $\mss$ consists of points of the form $(i,i)$ and $(i,i-1)$, as is easily seen from Proposition~\ref{prop: min suff set, form}, and as illustrated in Figure~\ref{fig: pairs_bounds_1}. By symmetry, replacing each point $(i,i-1)$ by $(i-1,i)$ gives a set $\mss'$ which is also minimal sufficient. For this new set, the lower bounding line \eqref{eq: lower bound, line} can be replaced by the simpler $j=i$. The same approach used in the proof of Theorem~\ref{theo: funt, form} can be followed, but using this line. Thus $(\isolr, \jsolr)$ is obtained from
+For $a=b=1$, the set $\mss$ consists of points of the form $(i,i)$ and $(i,i-1)$, as is easily seen from Proposition~\ref{prop: min suff set, form}, and as illustrated in Figure~\ref{fig: pairs_bounds_1}. By symmetry, replacing each point $(i,i-1)$ by $(i-1,i)$ gives a set $\mss'$ which is also optimal. For this new set, the lower bounding line \eqref{eq: lower bound, line} can be replaced by the simpler $j=i$. The same approach used in the proof of Theorem~\ref{theo: funt, form} can be followed, but using this line. Thus $(\isolr, \jsolr)$ is obtained from
 \begin{align}
 (\isolr-2)^2 + (\jsolr-2)^2  &= \len^2, \\
 \jsolr &= \isoli,
@@ -995,7 +981,7 @@ Lastly, $\Pr[i \geq n]$ as computed in Proposition~\ref{prop: Pr i} for $n \geq 
 
 ***Graph of asymptotic slopes: $\sqrt(1/a^2+1/b^2)$ for $\funt$ and $2/\pi(1/a+1/b)$. It may be interesting to consider the ratio of asymptotic slopes, as a function of $a/b$. It is maximum for $a=b$, and equals $2\sqrt 2/\pi = 0.9003$. It tends to $2/\pi$ for $a/b \rightarrow \infty$ and for $a/b \rightarrow 0$.
 
-The probability of visiting the maximum number of tiles for a rectangular grid is difficult to compute, due to the irregularity of the minimal sufficient set (see \S\ref{part: fund results}). In the square case, however, the simplicity of the set makes the problem more tractable. 
+The probability of visiting the maximum number of tiles for a rectangular grid is difficult to compute, due to the irregularity of the optimal $(i,j)$ pairs (see \S\ref{part: fund results}). In the square case, however, the simplicity of the set makes the problem more tractable. 
 
 
 \subsection{Unit square grid with real-valued lengths}
