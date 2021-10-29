@@ -222,7 +222,9 @@ According to Proposition~\ref{prop: i+j-1}, in order to maximize the number of v
 
 For instance, it is clear from Figure~\ref{fig: examples} that segment orientations near the vertical or horizontal directions (resulting in $i=1$ with large $j$, or $j=1$ with large $i$) will not maximize the number of visited tiles, and thus the corresponding $(i,j)$ pairs can be discarded. On the other hand, the set of optimal $(i,j)$ pairs must contain one such pair for each possible value of $i+j-1$, so that the set can produce that value as the solution (maximum number of visited tiles) for certain lengths. It is insightful to examine two specific examples before giving an explicit formula for the coordinates of the optimal pairs.
 
-Consider $a=b=1$ first. This is illustrated in Figure~\ref{fig: ijLS_1}. Note that in this and in the next figures the axes represent $ia$ and $jb$, rather than normalized coordinates $i$ and $j$. In this graph, each dashed diagonal line contains pairs $(i,j)$ with the same $i+j-1$; and the lower bound \eqref{eq: len > sqrt} corresponds to an arc centered at normalized coordinates $(2,2)$.
+Consider $a=b=1$ first. This is illustrated in Figure~\ref{fig: ijLS_1}. Note that in this and in the next figures the axes represent $ia$ and $jb$, rather than
+% normalized coordinates
+$i$ and $j$. In this graph, each dashed diagonal line contains pairs $(ia,jb)$ with the same $i+j-1$; and the lower bound \eqref{eq: len > sqrt} corresponds to an arc centered at $(2a,2b)$.
 
 \begin{figure}
 \centering%
@@ -233,11 +235,12 @@ Consider $a=b=1$ first. This is illustrated in Figure~\ref{fig: ijLS_1}. Note th
 \end{figure}%
 % ***Maybe combine this figure and the next into one figure with two subfigures (stacked vertically, size similar to now). Not sure. It has been done in others
 
-For a given $\len \in \mathbb R^+$, the $(i,j)$ pairs that can be achieved with segments of length not exceeding $\len$ are, by Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}, those that satisfy \eqref{eq: len > sqrt}. Thus for a given value of $i+j-1$ the optimal $(i,j)$ pair (the one that can be achieved with the smallest possible length) is that with minimum distance to the point with normalized coordinates $(2,2)$. Such pairs are depicted as filled circles in the figure. The displayed arcs represent the inequality \eqref{eq: len > sqrt} for each of the optimal pairs. Conversely, given a length $\len$, the maximum number of visited tiles will be achieved with one of these pairs, namely that situated on the highest (or rightmost) diagonal line that still lies within the circle with radius $\len$ centered at normalized coordinates $(2,2)$. 
+For a given $\len \in \mathbb R^+$, the $(i,j)$ pairs that can be achieved with segments of length not exceeding $\len$ are, by Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}, those that satisfy \eqref{eq: len > sqrt}. Thus for a given value of $i+j-1$ the optimal $(i,j)$ pair (the one that can be achieved with the smallest possible length) is determined by the condition that the point $(ia,jb)$ minimizes the distance to $(2a,2b)$. Such pairs are depicted as filled circles in the figure. The displayed arcs represent the inequality \eqref{eq: len > sqrt} for each of the optimal pairs. Conversely, given a length $\len$, the maximum number of visited tiles will be achieved with one of these pairs, namely the pair $(i,j)$ such that $(ia,jb)$ is on the highest (or rightmost) diagonal line while still being contained in the circle with radius $\len$ centered at $(2a,2b)$.
+% ***rephrase this better?
 
 The optimal pairs in this specific case have $j=i$ or $j=i-1$, as seen in the figure. Due to symmetry, any pair $(i,i-1)$ could be replaced by $(i-1,i)$. This illustrates that the set of optimal pairs is not unique in general. 
 
-As a second example, consider $a=1.35$, $b=1$. This is depicted in Figure~\ref{fig: ijLS_1p35}. Again, the optimal pair $(i,j)$ for each diagonal is that closest to $(2,2)$; but in this case the $i,j$ coordinates of these pairs do not follow a rule as simple as in the previous example.
+As a second example, consider $a=1.35$, $b=1$. This is depicted in Figure~\ref{fig: ijLS_1p35}. Again, the optimal pair $(i,j)$ for each diagonal is that for which the point $(ia,jb)$ is closest to $(2a,2b)$; but in this case the $i$, $j$ coordinates of these pairs do not follow a rule as simple as in the previous example.
 
 \begin{figure}
 \centering%
@@ -278,7 +281,7 @@ Consider, for the moment, $i$, $j$ as if they were real-valued variables, and de
 \label{eq: line 1}
 \frac x a + \frac y b = \tiles + 1,
 \end{equation}
-and $(i-2)^2 a^2 + (j-2)^2 b^2$ is expressed as $(x-2a)^2+(y-2b)^2$. The point minimizing this quadratic function along \eqref{eq: line 1} is the intersection of this line with the perpendicular line passing through $(2a,2b)$, that is,
+and $(i-2)^2 a^2 + (j-2)^2 b^2$ is expressed as $(x-2a)^2+(y-2b)^2$. The point minimizing this quadratic function along \eqref{eq: line 1} is the intersection of that line with the perpendicular line passing through $(2a,2b)$, that is,
 \begin{equation}
 \label{eq: line 2}
 y = \frac {a (x-2a)} b + 2b.
@@ -295,9 +298,9 @@ In terms of the real-valued variables $i$, $j$, the solution $(\isolr, \jsolr)$ 
 \label{eq: prop: min suff set, form: jsolr}
 \jsolr &= \frac{(t-3)a^2}{a^2+b^2} + 2.
 \end{align}
-This point is shown in Figure~\ref{fig: min suff set, form} with a square marker.
+The corresponding point $(\isolr a, \jsolr b)$ is shown in Figure~\ref{fig: min suff set, form} with a square marker.
 
-% ***This figure and Figure~\ref{fig: ijLS_1p35_detail} label the points as (i,j) instead of (ia,jb). Clarify in the text, or change the figures ***Maybe use the concept of normalized coordinates
+% ***Correct the two labels in the figure
 \begin{figure}%
 \centering%
 \includegraphics[width=.7\textwidth]{mss}%
@@ -306,14 +309,14 @@ This point is shown in Figure~\ref{fig: min suff set, form} with a square marker
 \label{fig: min suff set, form}%
 \end{figure}%
 
-The variables $i$, $j$ are actually limited to integer values. The point $(i_\tiles, j_\tiles)$ that minimizes $(i-2)^2 a^2 + (j-2)^2 b^2$ along the line $i+j-1=\tiles$ restricted to integer values is either $(\lceil \isolr \rceil, \lfloor \jsolr \rfloor)$ or $(\lfloor \isolr \rfloor, \lceil \jsolr \rceil)$, whichever is closest to $(\isolr, \jsolr)$, as can be seen in Figure~\ref{fig: min suff set, form}. This can be expressed as
+The variables $i$, $j$ are actually limited to integer values. The pair $(i_\tiles, j_\tiles)$ that minimizes $(i-2)^2 a^2 + (j-2)^2 b^2$ along the line $i+j-1=\tiles$ restricted to integer values is either $(\lceil \isolr \rceil, \lfloor \jsolr \rfloor)$ or $(\lfloor \isolr \rfloor, \lceil \jsolr \rceil)$, whichever gives $(i_\tiles a, j_\tiles b)$ closest to $(\isolr a, \jsolr b)$, as illustrated in Figure~\ref{fig: min suff set, form}. This can be expressed as
 \begin{align}
 \label{eq: prop: min suff set, form: isoli}
 i_\tiles &= \left\lfloor \isolr + \frac 1 2 \right\rfloor, \\
 \label{eq: prop: min suff set, form: jsoli}
 j_\tiles &= \left\lceil \jsolr - \frac 1 2 \right\rceil,
 \end{align}
-which in case of tie takes the first of the two points indicated above. Combining \eqref{eq: prop: min suff set, form: isolr}--\eqref{eq: prop: min suff set, form: jsoli}
+which in case of tie takes the first of the two pairs indicated above. Combining \eqref{eq: prop: min suff set, form: isolr}--\eqref{eq: prop: min suff set, form: jsoli}
 % *!*
 yields \eqref{eq: min suff set, form, i} and \eqref{eq: min suff set, form, j}.
 
@@ -327,7 +330,7 @@ and similarly, from \eqref{eq: prop: min suff set, form: jsolr} and \eqref{eq: p
 \label{eq: prop: min suff set, form: jsoli ineq}
 \frac{(t-3)a^2}{a^2+b^2} + \frac 3 2 \leq j_\tiles < \frac{(t-3)a^2}{a^2+b^2} + \frac 5 2.
 \end{equation}
-Considering the first inequality in \eqref{eq: prop: min suff set, form: isoli ineq} and the second in \eqref{eq: prop: min suff set, form: jsoli ineq} as equalities and eliminating $\tiles$ gives \eqref{eq: upper bound, line}. The point $(i_\tiles, j_\tiles)$ is strictly below that line because the considered inequalities are strict. Similarly, the bounding line \eqref{eq: lower bound, line} results from the second inequality in \eqref{eq: prop: min suff set, form: isoli ineq} and the first in \eqref{eq: prop: min suff set, form: jsoli ineq}, and the fact that both inequalities are not strict implies that the bound \eqref{eq: lower bound, line} can actually be attained.
+Considering the first inequality in \eqref{eq: prop: min suff set, form: isoli ineq} and the second in \eqref{eq: prop: min suff set, form: jsoli ineq} as equalities and eliminating $\tiles$ gives \eqref{eq: upper bound, line}. The pair $(i_\tiles, j_\tiles)$ is strictly below the line \eqref{eq: upper bound, line} because the used inequalities are strict. Similarly, the bounding line \eqref{eq: lower bound, line} results from the second inequality in \eqref{eq: prop: min suff set, form: isoli ineq} and the first in \eqref{eq: prop: min suff set, form: jsoli ineq}, and the fact that both inequalities are not strict implies that the bound \eqref{eq: lower bound, line} can actually be attained.
 \end{proof}
 
 The bounding lines in Proposition~\ref{prop: min suff set, form} are shown in Figure~\ref{fig: pairs_bounds}, using three different pairs of grid parameters $a$, $b$ as examples. Given $(i_\tiles,j_\tiles) \in \mss$, the next pair $(i_{\tiles+1},j_{\tiles+1})$ is obtained by incrementing $j$ if that results in a point below \eqref{eq: upper bound, line}. Else $i$ is incremented instead, and the new pair is guaranteed to be above or on \eqref{eq: lower bound, line}.
@@ -351,10 +354,10 @@ The bounding lines in Proposition~\ref{prop: min suff set, form} are shown in Fi
 \label{fig: pairs_bounds}%
 \end{figure}%
  
-For $a^2/b^2$ arbitrary, the number of pairs with the same $i$ coordinate, or with the same $j$, in the set $\mss$ is in general irregular, because the lines \eqref{eq: upper bound, line} and \eqref{eq: lower bound, line} do not follow a ``natural'' direction of the grid. This happens for instance in Figure~\ref{fig: pairs_bounds_1p35}, where the number of pairs for the first $i$ values equals either $2$ or $3$ without a clear pattern.\footnote{Strictly, there is a periodic pattern whenever $a^2/b^2$ is rational, which is the case in Figure~\ref{fig: pairs_bounds_1p35}. However, this is not easily discernible unless $a^2/b^2$ is a ratio of small numbers.}
+For $a^2/b^2$ arbitrary, the number of pairs in $\mss$ with the same $i$ coordinate, or with the same $j$, is in general irregular, because the lines \eqref{eq: upper bound, line} and \eqref{eq: lower bound, line} do not follow a ``natural'' direction of the grid. This happens for instance in Figure~\ref{fig: pairs_bounds_1p35}, where the number of pairs for each $i$ equals either $2$ or $3$ without a clear pattern.\footnote{Strictly, there is a periodic pattern whenever $a^2/b^2$ is rational, which is the case in Figure~\ref{fig: pairs_bounds_1p35}. However, it is not easily discernible unless $a^2/b^2$ is a ratio of small numbers.}
 On the other hand, a simple pattern arises when $a^2/b^2$ or $b^2/a^2$ is a natural number, as seen in Figures~\ref{fig: pairs_bounds_1} and \ref{fig: pairs_bounds_sqrt2}.
 
-A segment whose discrete bounding rectangle has normalized width $i$ and height $j$ is oriented with approximate slope $jb/(ia)$ with respect to the $x$ axis (see Figure~\ref{fig: len ineq i j}); and the approximation becomes better for greater segment lengths. From \eqref{eq: upper bound, line} and \eqref{eq: lower bound, line} it can be seen that the positions of the pairs $(i,j) \in \mss$ have $j/i \approx a^2/b^2$ for large $i, j$. Therefore the optimal slope for long segments is approximately $a/b$. This formalizes the intuition that to maximize the number of visited tiles, the segment should follow a direction along which the perceived ``length'' of the tile is smaller.
+A segment whose discrete bounding rectangle has normalized width $i$ and height $j$ is oriented with approximate slope $jb/(ia)$ with respect to the $x$ axis (see Figure~\ref{fig: len ineq i j}); and this approximation becomes better for greater segment lengths. From \eqref{eq: upper bound, line} and \eqref{eq: lower bound, line} it can be seen that the positions of the pairs $(i,j) \in \mss$ have $j/i \approx a^2/b^2$ for large $i, j$. Therefore the optimal slope for long segments is approximately $a/b$. This formalizes the intuition that to maximize the number of visited tiles, the segment should follow a direction along which the perceived ``length'' of the tile is smaller.
 % but not ``smallest'', if that were the case it would always be either vertical or horizontal
 
 
@@ -400,12 +403,13 @@ The function $\funt$ is piecewise constant and left-continuous, with unit-height
 \end{theorem}
 
 \begin{proof}
-The approach is similar to that used in Proposition~\ref{prop: min suff set, form}. Namely, for $i, j \geq 2$ the intersection $(\isolr, \jsolr)$ of the line \eqref{eq: lower bound, line} and the arc centered at $(2a,2b)$ with radius $\len$ is found, and from that the actual integer solution $(\isoli, \jsoli)$ is computed.
+The approach is similar to that used in Proposition~\ref{prop: min suff set, form}. Namely, for $i, j \geq 2$ the intersection $(\isolr a, \jsolr b)$ of the line defined by \eqref{eq: lower bound, line} and the arc centered at $(2a,2b)$ with radius $\len$ is found, and from that the actual integer solution $(\isoli, \jsoli)$ is computed.
 
-More specifically, assuming that \eqref{eq: lower bound, line} holds, the largest $i$ that can be achieved with lengths not exceeding $\len$ is obtained, as given by Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}. This value, $\isoli$, is computed by rounding down $\isolr$. Then, assuming that $i = \isoli$, the largest $j$ allowed by Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}, $\jsoli$, is obtained. As will be seen, in some cases the resulting $(\isoli,\jsoli)$ is in $\mss$, and in other cases it is not. However, in either case $(\isoli,\jsoli)$ has the largest $i+j-1$ sum that can be achieved with segments of length up to $\len$. Thus the desired result is $\isoli+\jsoli-1$.
+More specifically, assuming that \eqref{eq: lower bound, line} holds, the largest $i$ that can be achieved with lengths not exceeding $\len$ is obtained, as given by Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}. This value, $\isoli$, is computed by rounding down $\isolr$. Then, assuming that $i = \isoli$, the largest $j$ allowed by Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}, $\jsoli$, is obtained. As will be seen, in some cases the resulting $(\isoli,\jsoli)$ is in $\mss$ as defined by Proposition~\ref{prop: min suff set, form}, and in other cases it is not. However, in either case $(\isoli,\jsoli)$ has the largest $i+j-1$ sum that can be achieved with segments of length up to $\len$. Thus the desired result is $\isoli+\jsoli-1$.
 
-The two possibilities are illustrated in Figure~\ref{fig: ijLS_1p35_detail} for $a=1.35$, $b=1$. In each case, the arc displayed in the graph is centered at $(2a,2b)$ and has radius $\len$. The inner region defined by the arc contains all $(i,j)$ pairs that are achievable according to Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}. As in previous figures, filled circles represent $(i,j)$ pairs that are in $\mss$, and empty circles are those that do not belong to $\mss$. The solid line is \eqref{eq: lower bound, line}. The intersection point $(\isolr, \jsolr)$ is displayed with a square marker.
+The two possibilities are illustrated in Figure~\ref{fig: ijLS_1p35_detail} for $a=1.35$, $b=1$. In each case, the arc displayed in the graph is centered at $(2a,2b)$ and has radius $\len$. The inner region defined by the arc contains all $(ia,jb)$ points such that the pair $(i,j)$ is achievable according to Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}. As in previous figures, filled circles represent points $(ia,jb)$ such that $(i,j) \in \mss$. The solid line is the bound \eqref{eq: lower bound, line}. The intersection point $(\isolr a, \jsolr b)$ is displayed with a square marker.
 
+% ***Correct two labels in each of the two graphs
 \begin{figure}
 \centering%
 \subfigure[$\len = 3.1$: $(\isoli,\jsoli) \in \mss$]{%
@@ -421,7 +425,7 @@ The two possibilities are illustrated in Figure~\ref{fig: ijLS_1p35_detail} for 
 \label{fig: ijLS_1p35_detail}%
 \end{figure}%
 
-The point $(\isolr, \jsolr)$ can be obtained as a solution of the equation system
+The pair $(\isolr, \jsolr)$ can be obtained as a solution of the equation system
 \begin{align}
 \label{eq: icont jcont 1}
 (\isolr-2)^2 a^2 + (\jsolr-2)^2 b^2 &= \len^2, \\
@@ -433,7 +437,7 @@ Substituting \eqref{eq: icont jcont 2} into \eqref{eq: icont jcont 1} yields a q
 \label{eq: quadratic, i}
 4a^2(\isolr-2)^2 - 4a^2(\isolr-2) + a^2+b^2-\frac{4\len^2 b^2}{a^2+b^2},
 \end{equation}
-which can have zero, one or two real-valued solutions (this respectively means that the line is exterior, tangent or secant to the circle \eqref{eq: icont jcont 1}). Only the solution with $\isolr, \jsolr \geq 2$, if any, is of interest. This solution can only exist as the one with largest $\isolr$ value when there are real-valued solutions, and it is obtained as
+which can have zero, one or two real-valued solutions (this respectively means that the line \eqref{eq: icont jcont 2} is exterior, tangent or secant to the circle \eqref{eq: icont jcont 1}). Only the solution with $\isolr, \jsolr \geq 2$, if any, is of interest. This solution can only exist as the one with largest $\isolr$ value when there are real-valued solutions, and it is obtained as
 \begin{equation}
 \label{eq: icont jcont 3}
 \isolr = \frac{a + b \sqrt{4\len^2/(a^2+b^2)-1}}{2a} + 2.
@@ -445,13 +449,13 @@ If \eqref{eq: quadratic, i} has two real-valued solutions or one real-valued dou
 
 Lastly, for $\len \geq (a^2+b^2) / (2a)$ the expressions \eqref{eq: icont jcont 2} and \eqref{eq: icont jcont 3} give $\isolr, \jsolr \geq 2$, and $\isoli$ should be taken as the greatest integer less than $\isolr$, i.e.~$\lceil \isolr \rceil-1$.
  
-The three cases are unified by taking the real part of \eqref{eq: icont jcont 3} and computing $\isoli = \lceil \isolr \rceil-1$, as is easily checked. This gives \eqref{eq: theo: funt, form; i}. Once $\isoli$ is known, $\jsoli$ is computed, according to \eqref{eq: theo: funt, form; j}, as the greatest integer such that $(\isoli,\jsoli)$ is within the arc determined by $\len$. This ensures that $(\isoli,\jsoli)$ is achievable with lengths less than $\len$.
+The three cases are unified by taking the real part of \eqref{eq: icont jcont 3} and computing $\isoli = \lceil \isolr \rceil-1$, as is easily checked. This gives \eqref{eq: theo: funt, form; i}. Once $\isoli$ is known, $\jsoli$ is computed, according to \eqref{eq: theo: funt, form; j}, as the greatest integer such that $(\isoli a,\jsoli b)$ is within the circle determined by $\len$. This ensures that $(\isoli,\jsoli)$ is achievable with lengths less than $\len$.
 
-There are two possibilities for the point $(\isoli,\jsoli)$, as stated at the outset. These are illustrated in Figures~\ref{fig: ijLS_1p35_detail_in} and \ref{fig: ijLS_1p35_detail_notin} respectively. The first possibility is that $(\isoli,\jsoli) \in \mss$ (Figure~\ref{fig: ijLS_1p35_detail_in}). Then, by construction  $(\isoli,\jsoli)$ maximizes $i+j-1$ among all achievable pairs of $\mss$, and is therefore optimal.
+There are two possibilities for the pair $(\isoli,\jsoli)$, as stated at the outset. These are illustrated in Figures~\ref{fig: ijLS_1p35_detail_in} and \ref{fig: ijLS_1p35_detail_notin} respectively. The first possibility is that $(\isoli,\jsoli) \in \mss$ (Figure~\ref{fig: ijLS_1p35_detail_in}). Then, by construction  $(\isoli,\jsoli)$ maximizes $i+j-1$ among all achievable pairs of $\mss$, and is therefore optimal.
 
-The second possibility is that $(\isoli,\jsoli) \notin \mss$ (Figure~\ref{fig: ijLS_1p35_detail_notin}). This happens when the point from $\mss$ that has $i = \isoli$ ($(4,5)$ in the figure) is outside the arc, i.e.~it would require a length greater than $\len$. The selected point  $(\isoli,\jsoli)$ ($(4,4)$ in the figure), however, has the same $i+j-1$ sum as the point from $\mss$ that ``should'' be used, which is $(\isoli-1,\jsoli+1)$ ($(3,5)$ in the figure); and therefore gives the same result. This is always the case, because  $(\isoli,\jsoli+1) \in \mss$ (it is above or on the bounding line) and $(\isoli,\jsoli) \notin \mss$ (it is below the line), and due to how $\mss$ has been constructed, this implies that $(\isoli-1,\jsoli+1) \in \mss$ and $(\isoli-1,\jsoli+k) \notin \mss$ for $k =2, 3, \ldots$.  Therefore, $(\isoli,\jsoli)$ is achievable and maximizes $i+j-1$, which implies that $\isoli+\jsoli-1$ is the desired solution.
+The second possibility is that $(\isoli,\jsoli) \notin \mss$ (Figure~\ref{fig: ijLS_1p35_detail_notin}). This happens when the pair from $\mss$ that has $i = \isoli$ ($(4,5)$ in the figure) is outside the circle, i.e.~it would require a length greater than $\len$. The selected $(\isoli,\jsoli)$ ($(4,4)$ in the figure), however, has the same $i+j-1$ sum as the pair from $\mss$ that ``should'' be used, which is $(\isoli-1,\jsoli+1)$ ($(3,5)$ in the figure); and therefore gives the same result. This is always the case, because  $(\isoli,\jsoli+1) \in \mss$ (it is above or on the bounding line) and $(\isoli,\jsoli) \notin \mss$ (it is below the line), and due to how $\mss$ has been constructed, this implies that $(\isoli-1,\jsoli+1) \in \mss$ and $(\isoli-1,\jsoli+k) \notin \mss$ for $k =2, 3, \ldots$.  Therefore, $(\isoli,\jsoli)$ is achievable and maximizes $i+j-1$, which implies that $\isoli+\jsoli-1$ is the desired solution.
 
-Therefore, whether $(\isoli,\jsoli) \in \mss$ or $(\isoli,\jsoli) \notin \mss$, equations \eqref{eq: theo: funt, form; i} and \eqref{eq: theo: funt, form; j} give $\isoli+\jsoli-1$ equal to $\funt(\len)$, as claimed.
+Therefore, regardless of whether $(\isoli,\jsoli)$ is in $\mss$ or not, \eqref{eq: theo: funt, form; i} and \eqref{eq: theo: funt, form; j} give $\isoli+\jsoli-1$ equal to $\funt(\len)$, as claimed.
 
 It should be noted that for the specific case that $a^2/b^2 = 2k-1$, $k \in \mathbb N$ the lower bounding line \eqref{eq: lower bound, line} becomes $j = i(2k-1)-5k+4$, which gives integer $j$ for integer $i$. This means that the bound is actually achieved for all pairs in $\mss$ (see for example Figure~\ref{fig: pairs_bounds_1}), and the case $(\isoli,\jsoli) \notin \mss$ never occurs. Thus, when $a^2/b^2$ is an odd integer the obtained $(\isoli,\jsoli)$ is guaranteed to be in $\mss$, whereas for general $a^2/b^2$ either $(\isoli,\jsoli)$ or $(\isoli-1,\jsoli+1)$ are in in this set.
 % ^ If this is needed outside of the proof, it can be included at the end of the theorem statement
