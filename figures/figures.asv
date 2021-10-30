@@ -870,7 +870,7 @@ x = (k+k^2 + sqrt(-k^3-2*k^2-k + 4*k*(k+1)*L.^2/b^2)) /2/k/(k+1) % unquantized s
 
 %% #41. Like #31 but a smaller section is shown, with the lower bound for j.
 clf
-flag_in = false; % whether the pair is in the minimal sufficient set or not
+flag_in = true; % whether the pair is in the minimal sufficient set or not
 flag_hexagram = false;
 flag_fun = false;
 flag_pairs = 2; % 0: no; 1: yes, normalized labels, 2: yes, not normalized
@@ -896,9 +896,9 @@ if flag_pairs==1
     end
 elseif flag_pairs==2
     fs = 10; % fontsize
-    if flag_in text(4.24, 3.9, '(i^+a, j^+b)', 'fontsize', fs, 'Backgroundcolor', 'w'), text(3.28-~flag_hexagram*.05, 4.18, '(i^\ast{}a, j^\ast{}b)', 'fontsize', fs, 'Backgroundcolor', 'w')
+    if flag_in text(4.21, 3.89, '(i^+a, j^+a)', 'fontsize', fs, 'Backgroundcolor', 'w'), text(3.61-~flag_hexagram*.05, 4.24, '(i^\ast{}a, j^\ast{}a)', 'fontsize', fs, 'Backgroundcolor', 'w')
     else
-        text(5.65, 4.45 , '(i^+a, j^+b)', 'fontsize', fs, 'Backgroundcolor', 'w'), text(5.15-~flag_hexagram*.02, 3.76+~flag_hexagram*.03, '(i^\ast{}a, j^\ast{}b)', 'fontsize', fs,'Backgroundcolor', 'w')
+        text(5.67, 4.45 , '(i^+a, j^+a)', 'fontsize', fs, 'Backgroundcolor', 'w'), text(5.14-~flag_hexagram*.02, 3.7+~flag_hexagram*.03, '(i^\ast{}a, j^\ast{}a)', 'fontsize', fs,'Backgroundcolor', 'w')
         %text(5.61, 4.42 , ['(i' char(8314) 'a, j' char(8314) 'a)'], 'fontsize', fs, 'Backgroundcolor', 'w'), text(5.13-~flag_hexagram*.02, 3.76+~flag_hexagram*.03, '(i^\ast{}a, j^\ast{}a)', 'fontsize', fs,'Backgroundcolor', 'w')
     end
 end
@@ -1874,9 +1874,9 @@ xlabel(['i' char(8201) 'a']), ylabel(['j' char(8201) 'b']) % thin space
 text(6.96, 2.43, ['i+j' char(8211) '1 = t'])
 t = 7; xl = (t-3)*b^2/(a^2+b^2) + 2; yl = (t-3)*a^2/(a^2+b^2) + 2; % computed
 %text(4.78, 4.69, '(i^+,j^+)')
-text(4.71, 4.5, '(i^+a, j^+b)', 'BackgroundColor', 'w')
+text(4.69, 4.49, '(i^+a, j^+b)', 'BackgroundColor', 'w')
 %text(3.52, 4.82, '(i_t,j_t)')
-text(3.27, 4.83, '(i_ta, j_tb)', 'BackgroundColor', 'w')
+text(3.29, 4.83, '(i_ta, j_tb)', 'BackgroundColor', 'w')
 ms = 6;
 plot(xl*a, yl*b, 's', 'markersize', ms)
 set(gca, 'colororderindex', 1)
