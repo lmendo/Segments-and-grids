@@ -32,6 +32,7 @@
 \newcommand{\funti}{T} % function that gives maximum number of touched tiles for integer-valued length
 \newcommand{\funli}{\Lambda} % function that gives minimum integer-valued length for a given number of touched tiles
 \newcommand{\funta}{\varphi} % function that gives average number of touched tiles for real-valued length
+\newcommand{\funca}{\psi} % function that gives average number of grid line crossings for real-valued length
 \newcommand{\probmax}{\rho} % function that gives the probability of achieving the maximum number of touched tiles in the square case for real-valued length
 \newcommand{\len}{\ell} % length variable, real-valued
 \newcommand{\leni}{\ell} % length variable, integer-valued. Same notation, but I keep the different command just in case
@@ -117,15 +118,14 @@ The \emph{inverse} problem is, given $\tiles \in \mathbb N$, to determine the in
 
 The direct and inverse problems are closely related. Namely, if $\len$ is the infimum of all lengths that allow visiting at least $\tiles$ tiles (inverse problem), $\tiles$ is the maximum number of tiles that can be visited with lengths slightly greater than $\len$ (direct problem).
 
-To address the remaining two questions, the notion of a \emph{random} segment of a given length needs to be precisely defined. This is done as follows. By symmetry, one endpoint of the segment can be assumed to lie in a fixed, reference tile. The position of this endpoint is \emph{uniformly} distributed on the tile. The segment orientation has a \emph{uniform} distribution on the set of all possible directions, and is \emph{independent} of the endpoint position. Solving the problem of how many tiles the segment visits on average, as will be seen, also answers the inverse question (segment length to visit a given number of tiles on average). A natural, related question is with that probability the segment visits the maximum number of tiles. 
+To address the remaining two questions, the notion of a \emph{random} segment of a given length needs to be precisely defined. This is done as follows. By symmetry, one endpoint of the segment can be assumed to lie in a fixed, reference tile. The position of this endpoint is \emph{uniformly} distributed on the tile. The segment orientation has a \emph{uniform} distribution on the set of all possible directions, and is \emph{independent} of the endpoint position. Solving the problem of how many tiles the segment visits on average, as will be seen, also answers the inverse question (segment length to visit a given number of tiles on average). A natural, related question is with what probability the segment visits the maximum number of tiles. 
 
 % ***Do we need to discuss potential applications of this (if we can find any)? This probably depends on the journal
 % ***Do we need a section with conclusions? Probably not; depends on the journal
 
-The problems studied in this paper are related to Buffon's needle problem and Laplace's extension of it. Buffon's original 1733 problem considers tossing a needle of length $\len$ onto ruled paper with parallel lines a height $b$ apart, and asks what is the probability of the needle crossing a line if it lands in a uniformly random position and orientation. For a needle of length $\len = b$, this is $2/\pi$, and hence repeated trials of this experiment can be used to estimate $\pi$. This is generalized in \cite{Ramaley69} to $\frac{2\len}{\pi b}$ for the expected number of crossings of a needle which might intersect multiple lines.
+The problems studied in this paper are related to Buffon's needle problem and Laplace's extension of it. Buffon's original problem considers tossing a needle of length $\len$ onto ruled paper with parallel lines a distance $b$ apart, and asks what is the probability of the needle crossing a line if it lands in a uniformly random position and orientation. For a needle of length $\len = b$, this is $2/\pi$, and hence repeated trials of this experiment can be used to estimate $\pi$. This is generalized in \cite{Ramaley69} to $2\len /(\pi b)$ for the expected number of crossings of a needle with arbitrary length.
 
-The Buffon-Laplace needle problem, described in \cite{Mathai99}, considers a needle tossed onto a grid of rectangular tiles of width $a$ and height $b$. The number of visited tiles equals one plus the number of crossings with probability 1, as shown in Proposition \ref{prop: 
-i+j-1}. The probability of the needle staying within a single rectangle, that is visiting only one tile, is computed in \cite{Arnow94} for the case where $\len < \min(a,b)$. This work considers the complementary question of the chance that the needle visits the maximum number of tiles possible for its length, described by a formula in Theorem~\ref{theo: probmax, sq}.
+The Buffon-Laplace needle problem \cite{Mathai99} considers a needle tossed onto a grid of rectangular tiles of width $a$ and height $b$. The number of visited tiles equals one plus the number of crossings almost surely. The probability of the needle staying within a single rectangle, that is visiting only one tile, is computed in \cite{Arnow94} for the case where $\len < \min(a,b)$. One of the results in this paper, as has been mentioned, is the complementary question of the probability that the needle visits the maximum number of tiles possible for its length.
 
 The rest of the paper is organized as follows. Fundamental results are presented in \S\ref{part: fund results}, which form the basis of the subsequent analysis. The direct and inverse problems for a deterministic segment are considered in \S\ref{part: max}, first for arbitrary grids and then for a square grid. The analysis for the random segment is carried out in \S\ref{part: rand}. The average number of tiles is computed for arbitrary grids, and the probability that the segment visits the maximum number of tiles is obtained for a square grid.
 
@@ -867,15 +867,15 @@ Given $a, b, \len \in \mathbb R^+$, consider a grid with parameters $a, b$ and a
 \end{theorem}
 
 \begin{proof}
-First, suppose the grid is simplified to just horizontal lines a height of $b$ apart. This matches the setup of the 1733 Buffon's needle problem described in \cite{Mathai99}, except that here the length $\len$ of the needle may exceed the spacing $b$, allowing it to cross multiple lines. As shown in \cite{Ramaley69}, the expected (i.e., average) number of lines crossed equals
-$$ \frac{2\len}{\pi b}.$$
-Where $b<\len$, this expectation matches the probability of the needle crossing a grid line, since it cannot cross more than one.
+Suppose first that the grid is simplified to only horizontal lines with spacing $b$. This matches the setup of Buffon's original needle problem \cite{Mathai99}, except that here the length $\len$ of the needle may exceed the spacing $b$, allowing it to cross multiple lines. As shown in \cite{Ramaley69}, the expected number of lines crossed equals $2\len/(\pi b)$.
+% When $\len<b$ this expectation matches the probability of the needle crossing a grid line, since it cannot cross more than one.
 
-Now consider again a grid of width $a$ and height $b$, as studied by Laplace as an extension to Buffon's original needle problem \cite{Arnow94}. The grid crossings decompose into crossings of horizontal and vertical grid lines, respectively. By linearity of expectation, the expected number of crossings is the sum of the respective expectations for parallel lines of width $a$ and $b$ respectively, giving:
-\[
-\frac{2\len}{\pi}\left(\frac 1 a + \frac 1 b\right)
-\]
-As noted in Proposition \ref{prop: i+j-1}, the number of tiles visited by a segment is the count of its grid line crossings plus $1$, unless it exactly crosses any grid points, but again that occurs with probability $0$ and therefore it does not affect the expectation. Thus, $\funta(\len)$ is the above quantity plus $1$.
+Consider again a grid with horizontal spacing $a$ and vertical spacing $b$. The grid crossings decompose into crossings of horizontal and vertical grid lines. By linearity of expectation, the expected number of crossings $\funca(\len)$ is the sum of the expectations for parallel lines with spacing $a$ and $b$ respectively, which gives
+\begin{equation}
+\label{eq: funca}
+\funca(\len) = \frac{2\len}{\pi}\left(\frac 1 a + \frac 1 b\right).
+\end{equation}
+As noted in Proposition \ref{prop: i+j-1}, the number of tiles visited by a segment is the count of its grid line crossings plus $1$, unless it exactly passes through any grid points, but that occurs with probability $0$ and therefore does not affect the expectation. Thus, $\funta(\len)$ is given by the right-hand side of \eqref{eq: funca} plus $1$.
 \end{proof}
 
 In view of Theorem~\ref{theo: funta, form}, the average number of visited tiles as a function of the segment length has a very simple form, namely an affine function. Conversely, for any $\tiles>1$ it is immediate to compute the length of a random segment that visits $\tiles$ tiles on average, given as $\funta^{-1}(\tiles)$.
