@@ -300,7 +300,6 @@ In terms of the real-valued variables $i$, $j$, the solution $(\isolr, \jsolr)$ 
 \end{align}
 The corresponding point $(\isolr a, \jsolr b)$ is shown in Figure~\ref{fig: min suff set, form} with a square marker.
 
-% ***Correct the two labels in the figure
 \begin{figure}%
 \centering%
 \includegraphics[width=.7\textwidth]{mss}%
@@ -309,14 +308,14 @@ The corresponding point $(\isolr a, \jsolr b)$ is shown in Figure~\ref{fig: min 
 \label{fig: min suff set, form}%
 \end{figure}%
 
-The variables $i$, $j$ are actually limited to integer values. The pair $(i_\tiles, j_\tiles)$ that minimizes $(i-2)^2 a^2 + (j-2)^2 b^2$ along the line $i+j-1=\tiles$ restricted to integer values is either $(\lceil \isolr \rceil, \lfloor \jsolr \rfloor)$ or $(\lfloor \isolr \rfloor, \lceil \jsolr \rceil)$, whichever gives $(i_\tiles a, j_\tiles b)$ closest to $(\isolr a, \jsolr b)$, as illustrated in Figure~\ref{fig: min suff set, form}. This can be expressed as
+The variables $i$, $j$ are actually limited to integer values. The pair $(i_\tiles, j_\tiles)$ that minimizes $(i-2)^2 a^2 + (j-2)^2 b^2$ along the line $i+j-1=\tiles$ restricted to integer values is either $(\lceil \isolr \rceil, \lfloor \jsolr \rfloor)$ or $(\lfloor \isolr \rfloor, \lceil \jsolr \rceil)$, whichever gives $(i_\tiles a, j_\tiles b)$ closest to $(\isolr a, \jsolr b)$, as illustrated in Figure~\ref{fig: min suff set, form}. In case of a tie the first of the two pairs is chosen. This can be expressed as
 \begin{align}
 \label{eq: prop: min suff set, form: isoli}
 i_\tiles &= \left\lfloor \isolr + \frac 1 2 \right\rfloor, \\
 \label{eq: prop: min suff set, form: jsoli}
 j_\tiles &= \left\lceil \jsolr - \frac 1 2 \right\rceil,
 \end{align}
-which in case of tie takes the first of the two pairs indicated above. Combining \eqref{eq: prop: min suff set, form: isolr}--\eqref{eq: prop: min suff set, form: jsoli}
+which corresponds to rounding $\isolr$ and $\jsolr$ to the closest integers, with ties resolved in opposite directions. Combining \eqref{eq: prop: min suff set, form: isolr}--\eqref{eq: prop: min suff set, form: jsoli}
 % *!*
 yields \eqref{eq: min suff set, form, i} and \eqref{eq: min suff set, form, j}.
 
@@ -543,8 +542,7 @@ Substituting \eqref{eq: distance as hypotenuse, first leg} and \eqref{eq: distan
 By Theorem~\ref{theo: funt, form}, $\funt$ has unit-height jumps at the values $\funl(\tiles)$, $\tiles \in \mathbb N$, $\tiles \geq 4$. This implies that $\funl$ is monotone increasing for $\tiles \geq 3$.
 \end{proof}
 
-***Comment on how the new formula has two terms with definite meanings: The first term is the distance-squared to the closest point on the diagonal, The second term is additional distance-squared incurred from rounding (i,j) to integers
-***I think we can do without a figure (Figure~\ref{fig: min suff set, form} is inside a proof and uses different notation for the final point).
+The expression \eqref{eq: theo: funl, form; funl 2} allows a neat interpretation of $\funl(\tiles)$ (as stems from the arguments used in the proof). Namely, $\funl^2(\tiles)$ is the sum of the two terms within the square root in that expression. The first term is the squared distance from $(2a, 2b)$ to the diagonal line defined by $i+j-1=t$; and the second term is additional squared distance incurred from rounding $i$, $j$ to integer values.
 
 Theorems~\ref{theo: funt, form} and \ref{theo: funl, form} not only give the solutions $\funt(\len)$ and $\funl(\tiles)$ to the two problems stated in \S\ref{part: intro}; they also provide a way to actually position a segment of length slightly greater than $\len$ or $\funl(\tiles)$ so that it visits $\tiles$ or $\funt(\len)$ tiles. Namely, the segment should have its endpoints respectively in the interior of two tiles separated $\isoli-1$ steps horizontally and $\jsoli-1$ steps vertically, with its exact position and orientation  adjusted to avoid any grid points.
 
