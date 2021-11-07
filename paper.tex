@@ -1115,7 +1115,15 @@ The expressions for the third and fourth cases in \eqref{eq: probmax}, correspon
 
 The technique used in the proof of Theorem~\ref{theo: probmax, sq} could in principle be used for obtaining the probability that the number of tiles visited by the segment equals or exceeds any given value $t < \funt(\len)$. The resulting expressions, however, are cumbersome, because more cases (more subintervals for the length) need to be distinguished depending on how many tiles with lower-left corner $(i-1,j-1)$ such that $i+j-1=t$ can be reached from the reference tile.
 
-Figure~\ref{fig: probmax_len} shows the probability $\probmax(\len)$ of visiting the maximum number of tiles on a unit square grid, as given by \eqref{eq: probmax}. As $\len$ grows, $\probmax(\len)$ has a jump when the maximum number of tiles that can be visited increases by $1$. This happens when $\len$ equals the right endpoint of the interval \eqref{eq: square, odd max tiles, lengths} for $\tiles$ odd or of \eqref{eq: square, even max tiles, lengths} for $\tiles$ even. Let these length values be denoted as $\len_\tiles$:
+\begin{figure}%
+\centering%
+\includegraphics[width=.75\textwidth]{probmax_len}%
+\caption{Probability $\probmax(\len)$ that a random segment of length $\len$ visits the maximum number of tiles%
+}%
+\label{fig: probmax_len}%
+\end{figure}%
+
+Figure~\ref{fig: probmax_len} shows the probability $\probmax(\len)$ of visiting the maximum number of tiles on a unit square grid, as given by \eqref{eq: probmax}. As $\len$ grows, $\probmax(\len)$ has a jump when the maximum number of tiles that can be visited increases by $1$ (and there the function takes the value approached from the left). This happens when $\len$ equals the right endpoint of the interval \eqref{eq: square, odd max tiles, lengths} for $\tiles$ odd or of \eqref{eq: square, even max tiles, lengths} for $\tiles$ even. Let these length values be denoted as $\len_\tiles$:
 \begin{equation}
 \len_\tiles = \begin{cases}
 \displaystyle
@@ -1124,15 +1132,7 @@ Figure~\ref{fig: probmax_len} shows the probability $\probmax(\len)$ of visiting
 \frac{\tiles-2}{\sqrt{2}} & \text{ for $\tiles$ odd, $\tiles \geq 4$}.
 \end{cases}
 \end{equation}
-For example, the first continuous section seen in Figure~\ref{fig: probmax_len} corresponds to a maximum number of tiles $\tiles=3$, for lengths in the interval $(0, \len_3]$, with $\len_3= 1$. The second corresponds to $\tiles=4$, for lengths in $(\len_3, \len_4]$, with $\len_4= \sqrt{2}$. Within each continuous section the probability monotonically increases from $0$ to a maximum value. The heights of the maxima follow a different trend**better word?** for odd and even $\tiles$, as can be seen in the figure; but in each case they are asymptotically proportional to $1/\len_\tiles$. This is established by the next result.
-
-\begin{figure}%
-\centering%
-\includegraphics[width=.75\textwidth]{probmax_len}%
-\caption{Probability $\probmax(\len)$ that a random segment of length $\len$ visits the maximum number of tiles%
-}%
-\label{fig: probmax_len}%
-\end{figure}%
+For example, the first continuous section seen in Figure~\ref{fig: probmax_len} corresponds to a maximum number of tiles $\tiles=3$, for lengths in the interval $(0, \len_3]$, where $\len_3= 1$. The second corresponds to $\tiles=4$, for lengths in $(\len_3, \len_4]$, where $\len_4= \sqrt{2}$. Within each continuous section the probability monotonically increases from $0$ to a maximum value. The heights of the maxima follow different trends for odd and even $\tiles$ respectively, as can be seen in the figure; but in each case they are asymptotically proportional to $1/\len_\tiles$. This is established by the next result.
 
 \begin{proposition}
 The function $\probmax$ has the following asymptotic behaviour:
@@ -1160,7 +1160,7 @@ For \eqref{eq: probmax lim odd} it suffices to note that
 \lim_{\tiles \rightarrow \infty}\, \tiles g\left(\frac{\sqrt{(\tiles-3)^2+(\tiles-1)^2}} 2, \tiles-5, \tiles-1 \right)
 & = \frac 2 {3\pi},
 \end{align}
-as can be checked using L'H\^opital's rule \cite[section~5.3]{Abbott15}.
+as can be (somewhat tediously) checked using L'H\^opital's rule \cite[section~5.3]{Abbott15}.
 %***I think. It's very tedious by hand. I used Maple to compute the limit, and then checked it numerically. Maybe one or two intermediate steps from applying L'H\^opital's rule should be included. Perhaps those can be obtained with Maple too, and this part can be rewritten.
 Combining these expressions with the second equality in \eqref{eq: probmax} yields \eqref{eq: probmax lim odd}.
 
