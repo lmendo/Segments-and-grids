@@ -1903,3 +1903,29 @@ jstar = ceil(jplus-1/2);
 lambda = sqrt((istar-2)^2*a^2 + (jstar-2)^2*b^2) % original formula
 %lambda_2 = sqrt( (t-3)^2*a^2*b^2/(a^2+b^2) + (istar-iplus)^2*a^2 + (jstar-jplus)^2*b^2 ) % new formula, corrected
 lambda_2 = sqrt( (t-3)^2*a^2*b^2/(a^2+b^2) + (istar-iplus)^2*(a^2+b^2) ) % new formula, corrected
+
+
+%% #72. Ratio of asymptotic slopes (with respect to length) for maximum and average numbers of visited tiles, as a function of a/b
+
+clear, clc, close all
+ratio_ab = logspace(-2,2,300);
+as_ratio_slopes = 2/pi*(1+ratio_ab)./hypot(1, ratio_ab);
+plot(ratio_ab, as_ratio_slopes)
+set(gca, 'xscale', 'log'), grid on, xticklabels(xticks), xlabel('a/b'), ylabel([char(hex2dec('03C3')) '(a/b)']), set(gcf, 'Position', [360 300 560 310])
+
+
+%% #73. Maximum and average numbers of visited tiles as a function of length, with (a,b) as a parameter.
+% Part taken from #42
+
+clear, clc, close all
+L = .01:.01:200;
+a = 2.35; b = 1;
+ii = ceil((a + b*real(sqrt(4*L.^2/(a^2+b^2)-1))) / 2/a) + 1;
+jj = ceil(sqrt( L.^2 - (ii-2).^2*a^2 )/b) + 1;
+funt = ii+jj-1;
+funta = 2*L/pi*(1/a+1/b)+1;
+as_ratio_slopes = 2/pi*(1+a/b)./hypot(1, a/b)
+%plot(L, funt), hold on, plot(L, funta);
+plot(funta./funt), hold on, plot(xlim, repmat(as_ratio_slopes, 1, 2))
+
+

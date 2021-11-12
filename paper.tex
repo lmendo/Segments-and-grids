@@ -34,6 +34,7 @@
 \newcommand{\funta}{\varphi} % function that gives average number of touched tiles for real-valued length
 \newcommand{\funca}{\psi} % function that gives average number of grid line crossings for real-valued length
 \newcommand{\probmax}{\rho} % function that gives the probability of achieving the maximum number of touched tiles in the square case for real-valued length
+\newcommand{\ras}{\sigma}
 \newcommand{\len}{\ell} % length variable, real-valued
 \newcommand{\leni}{\ell} % length variable, integer-valued. Same notation, but I keep the different command just in case
 \newcommand{\tiles}{t} % number of tiles (integer-valued)
@@ -235,8 +236,7 @@ $i$ and $j$. In this graph, each dashed diagonal line contains pairs $(ia,jb)$ w
 \end{figure}%
 % ***Maybe combine this figure and the next into one figure with two subfigures (stacked vertically, size similar to now). Not sure. It has been done in others
 
-For a given $\len \in \mathbb R^+$, the $(i,j)$ pairs that can be achieved with segments of length not exceeding $\len$ are, by Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}, those that satisfy \eqref{eq: len > sqrt}. Thus for a given value of $i+j-1$ the optimal $(i,j)$ pair (the one that can be achieved with the smallest possible length) is determined by the condition that the point $(ia,jb)$ minimizes the distance to $(2a,2b)$. Such pairs are depicted as filled circles in the figure. The displayed arcs represent the inequality \eqref{eq: len > sqrt} for each of the optimal pairs. Conversely, given a length $\len$, the maximum number of visited tiles will be achieved with one of these pairs, namely the pair $(i,j)$ such that $(ia,jb)$ is on the highest (or rightmost) diagonal line while still being contained in the circle with radius $\len$ centered at $(2a,2b)$.
-% ***rephrase this better?
+For a given $\len \in \mathbb R^+$, the $(i,j)$ pairs that can be achieved with segments of length not exceeding $\len$ are, by Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}, those that satisfy \eqref{eq: len > sqrt}. Thus for a given value of $i+j-1$ the optimal $(i,j)$ pair (the one that can be achieved with the smallest possible length) is determined by the condition that the point $(ia,jb)$ minimizes the distance to $(2a,2b)$. Such pairs are depicted as filled circles in the figure. The displayed arcs represent the inequality \eqref{eq: len > sqrt} for each of the optimal pairs. Conversely, given a length $\len$, the maximum number of visited tiles will be achieved with one of these pairs, namely the pair $(i,j)$ such that $(ia,jb)$ is on the highest (or rightmost) diagonal line while still being contained in the circle of radius $\len$ centered at $(2a,2b)$.
 
 The optimal pairs in this specific case have $j=i$ or $j=i-1$, as seen in the figure. Due to symmetry, any pair $(i,i-1)$ could be replaced by $(i-1,i)$. This illustrates that the set of optimal pairs is not unique in general. 
 
@@ -408,7 +408,6 @@ More specifically, assuming that \eqref{eq: lower bound, line} holds, the larges
 
 The two possibilities are illustrated in Figure~\ref{fig: ijLS_1p35_detail} for $a=1.35$, $b=1$. In each case, the arc displayed in the graph is centered at $(2a,2b)$ and has radius $\len$. The inner region defined by the arc contains all $(ia,jb)$ points such that the pair $(i,j)$ is achievable according to Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}. As in previous figures, filled circles represent points $(ia,jb)$ such that $(i,j) \in \mss$. The solid line is the bound \eqref{eq: lower bound, line}. The intersection point $(\isolr a, \jsolr b)$ is displayed with a square marker.
 
-% ***Correct two labels in each of the two graphs
 \begin{figure}
 \centering%
 \subfigure[$\len = 3.1$: $(\isoli,\jsoli) \in \mss$]{%
@@ -552,13 +551,13 @@ and from \eqref{eq: theo: funl, form; funl}--\eqref{eq: theo: funl, form; jsoli}
 % *!*
 it is seen that for long segments the number of visited tiles and the segment length are approximately proportional, with
 \begin{equation}
-\label{eq: asympt}
+\label{eq: asympt slope}
 \lim_{\len \rightarrow \infty} \frac{\funt(\len)}{\len}
 = \lim_{\tiles \rightarrow \infty} \frac{\tiles}{\funl(\tiles)}
 = \sqrt{1/a^2 + 1/b^2}.
 \end{equation}
 
-As for $a \gg b$, in this case the optimal discrete bounding rectangle has $\isoli = 2$, and $\jsoli$ as large as allowed by $\len$ (direct problem) or as required by $\tiles$ (inverse problem), corresponding to an almost vertical segment. Obviously, for $a \gg b$ the length of the segment is best invested in increasing the number of tiles traversed vertically (but the segment should be slightly tilted to cross a vertical edge), and the asymptotic value of \eqref{eq: asympt} is approximately $1/b$.
+As for $a \gg b$, in this case the optimal discrete bounding rectangle has $\isoli = 2$, and $\jsoli$ as large as allowed by $\len$ (direct problem) or as required by $\tiles$ (inverse problem), corresponding to an almost vertical segment. Obviously, for $a \gg b$ the length of the segment is best invested in increasing the number of tiles traversed vertically (but the segment should be slightly tilted to cross a vertical edge), and the asymptotic value of \eqref{eq: asympt slope} is approximately $1/b$.
 
 For $a=b$, either from symmetry considerations or particularizing the formulas in the previous theorems it stems that the optimal orientation of the segment is close to $45^\circ$. This case will be dealt with in \S\ref{part: max: unit square grid, real lengths}, as it lends itself to simplified formulas.
 
@@ -976,7 +975,30 @@ gives the average number of lines crossed in Buffon's experiment. For $\len \leq
 
 Lastly, $\Pr[i \geq n]$ as computed in Proposition~\ref{prop: Pr i} for $n \geq 2$ can be seen as a generalization of the probability of crossing at least one line in Buffon's experiment, when a needle endpoint is only allowed to move in a narrower region of width $n-1$ times smaller than the width of the strips (instead of across the full strip as in Buffon's setting).
 
-***Graph of asymptotic slopes: $\sqrt(1/a^2+1/b^2)$ for $\funt$ and $2/\pi(1/a+1/b)$. It may be interesting to consider the ratio of asymptotic slopes, as a function of $a/b$. It is maximum for $a=b$, and equals $2\sqrt 2/\pi = 0.9003$. It tends to $2/\pi$ for $a/b \rightarrow \infty$ and for $a/b \rightarrow 0$.
+For $\len \rightarrow \infty$, the average number of visited tiles $\funta$ has the following asymptotic slope, as stems from \eqref{eq: funta, form}:
+\begin{equation}
+\label{eq: asympt slope ave}
+\lim_{\len \rightarrow \infty} \frac{\funta(\len)}{\len} = \frac 2 \pi \left(\frac 1 a + \frac 1 b \right).
+\end{equation}
+On the other hand, the maximum number of visited tiles $\funt$ has an asymptotic slope given by \eqref{eq: asympt slope}. It is interesting to consider the ratio of these values, which also gives the asymptotic ratio of average and maximum numbers of visited tiles. This depends only on $a/b$:
+\begin{equation}
+\label{eq: ras}
+\ras(a/b) = \lim_{\len \rightarrow \infty}
+\frac { \funta(\len) } { \funt(\len) }
+= \frac
+{ \lim_{\len \rightarrow \infty} \funta(\len)/\len }
+{ \lim_{\len \rightarrow \infty} \funt(\len)/\len }
+= \frac{2\left(1 + a/b\right)}{\pi\sqrt{1 + \left(a/b\right)^2}}.
+\end{equation}
+The function $\ras$ satisfies $\ras(x) = \ras(1/x)$, and is therefore symmetric in logarithmic scale, as can be seen in Figure~\ref{fig: ratio asympt slopes}. It is unimodal with maximum value $2\sqrt 2/\pi \approx 0.9003$ for $a/b=1$, and its limit when $a/b$ tends to $0$ or $\infty$ is $2/\pi \approx 0.6366$. This implies that for $\len$ large the average number of tiles $\funta(\len)$ cannot very small compared with the maximum number of tiles $\funt(\len)$. For example, $\funta(\len)$ asymptotically exceeds $0.8\funt(\len)$ for $1/3 \leq a/b \leq 3$.
+
+\begin{figure}
+\centering%
+\includegraphics[width=.7\textwidth]{ratio_asympt_slopes}%
+\caption{Asymptotic ratio of average and maximum numbers of visited tiles
+}%
+\label{fig: ratio asympt slopes}%
+\end{figure}%
 
 The probability of visiting the maximum number of tiles for a rectangular grid is difficult to compute, due to the irregularity of the optimal $(i,j)$ pairs (see \S\ref{part: fund results}). In the square case, however, the simplicity of the set makes the problem more tractable. 
 
