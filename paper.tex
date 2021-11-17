@@ -97,13 +97,33 @@ line segment on a rectangular grid
 \label{part: intro}
 
 Given $a, b \in \mathbb R^+$, consider a grid on $\mathbb R^2$ formed by rectangular \emph{tiles} of width $a$ and height $b$. A line segment of length $\len \in \mathbb R^+$ is located on the plane with arbitrary position and orientation. The segment is said to \emph{visit} a tile if it intersects its interior.\footnote{
-The definition uses the interior of the tile, excluding the border, to avoid uninteresting results such as a ``zero-length'' segment visiting (a vertex of) $4$ tiles.} This paper deals with the following problems:
-\begin{itemize}
-\item What is the maximum number of tiles that the segment can visit? Conversely, what length should a segment have to visit a given number of tiles?
-\item What is the average number of tiles visited by a uniformly random segment of a given length? How often does the random segment visit the maximum number of tiles?
-\end{itemize}
+The definition uses the interior of the tile, excluding the border, to avoid uninteresting results such as a ``zero-length'' segment visiting (a vertex of) $4$ tiles.}
 
-As an example of the first question, consider $a=1.35$, $b=1$. A segment of unit length can be placed as shown in Figure~\ref{fig: examples} (left) to make it visit $3$ tiles. In fact, this is the maximum number for $\len=1$. The figure also illustrates that the solution for length $2.4$ is $5$ (center), and for $4.7$ it is $8$ (right).
+This paper deals with the following problems, which relate the length of the segment with the number of visited tiles. Two settings are considered, which correspond respectively to the segment position and orientation being deterministic or random. In the \emph{deterministic} case, the relevant questions are:
+\begin{enumerate}
+\renewcommand{\labelenumi}{(1\alph{enumi})}
+\renewcommand{\theenumi}{(1\alph{enumi})}
+\item
+\label{prob: determ dir}
+What is the maximum number of tiles that the segment can visit given its length?
+\item
+\label{prob: determ inv}
+Conversely, what length should a segment have to visit a given number of tiles?
+\end{enumerate}
+
+In the \emph{random} setting, if the segment position and orientation are uniformly distributed (this will be precisely defined later),
+\begin{enumerate}
+\renewcommand{\labelenumi}{(2\alph{enumi})}
+\renewcommand{\theenumi}{(2\alph{enumi})}
+\item
+\label{prob: rand ave}
+What is the average number of tiles visited by a segment of a given length?
+\item
+\label{prob: rand prob}
+How often does the random segment visit the maximum number of tiles?
+\end{enumerate}
+
+As an example of the first question \ref{prob: determ dir}, consider $a=1.35$, $b=1$. A segment of unit length can be placed as shown in Figure~\ref{fig: examples} (left) to make it visit $3$ tiles. In fact, this is the maximum number for $\len=1$. The figure also illustrates that the solution for length $2.4$ is $5$ (center), and for $4.7$ it is $8$ (right).
 
 \begin{figure}
 \centering%
@@ -115,18 +135,18 @@ As an example of the first question, consider $a=1.35$, $b=1$. A segment of unit
 
 An equivalent formulation of the problem is obtained allowing segments of length $\len$ \emph{or smaller}. The equivalence is clear from the fact that reducing the length cannot increase the number of visited tiles. Either of these formulations will be referred to as the \emph{direct} problem.
 
-The \emph{inverse} problem is, given $\tiles \in \mathbb N$, to determine the infimum length of all segments that visit at least $\tiles$ tiles. For real-valued lengths this infimum is not a minimum, because given a segment that visits $\tiles$ tiles, its length can always be reduced by some non-zero amount without changing the number of visited tiles. This is a consequence of the interior of each tile being an open set.
+The \emph{inverse} problem \ref{prob: determ inv} is, given $\tiles \in \mathbb N$, to determine the infimum length of all segments that visit at least $\tiles$ tiles. If the length can take any real value the infimum is not a minimum, because given any segment can be shortened by some small amount without changing the number of visited tiles. This is a consequence of the interior of each tile being an open set.
 
 The direct and inverse problems are closely related. Namely, if $\len$ is the infimum of all lengths that allow visiting at least $\tiles$ tiles (inverse problem), $\tiles$ is the maximum number of tiles that can be visited with lengths slightly greater than $\len$ (direct problem).
 
-To address the remaining two questions, the notion of a \emph{random} segment of a given length needs to be precisely defined. This is done as follows. By symmetry, one endpoint of the segment can be assumed to lie in a fixed, reference tile. The position of this endpoint is \emph{uniformly} distributed on the tile. The segment orientation has a \emph{uniform} distribution on the set of all possible directions, and is \emph{independent} of the endpoint position. Solving the problem of how many tiles the segment visits on average, as will be seen, also answers the inverse question (segment length to visit a given number of tiles on average). A natural, related question is with what probability the segment visits the maximum number of tiles. 
+To address the remaining two questions, the notion of a \emph{random} segment of a given length needs to be precisely defined. This is done as follows. By symmetry, one endpoint of the segment can be assumed to lie in a fixed, reference tile. The position of this endpoint is \emph{uniformly} distributed on the tile. The segment orientation has a \emph{uniform} distribution on $[0,2\pi)$, and is \emph{independent} of the endpoint position. Solving the problem of how many tiles the segment visits on average \ref{prob: rand ave} also answers, as will be seen, the inverse question (segment length to visit a given number of tiles on average). A natural, related question \ref{prob: rand prob} is with what probability the segment visits the maximum number of tiles. 
 
 % ***Do we need to discuss potential applications of this (if we can find any)? This probably depends on the journal
 % ***Do we need a section with conclusions? Probably not; depends on the journal
 
-The problems studied in this paper are related to Buffon's needle problem and Laplace's extension of it. Buffon's original problem considers tossing a needle of length $\len$ onto ruled paper with parallel lines a distance $b$ apart, and asks what is the probability of the needle crossing a line if it lands in a uniformly random position and orientation. For a needle of length $\len = b$, this is $2/\pi$, and hence repeated trials of this experiment can be used to estimate $\pi$. This is generalized in \cite{Ramaley69} to $2\len /(\pi b)$ for the expected number of crossings of a needle with arbitrary length.
+The questions studied in this paper are related to Buffon's needle problem and Laplace's extension of it. Buffon's original problem considers tossing a needle of length $\len$ onto ruled paper with parallel lines a distance $b$ apart, and asks what is the probability of the needle crossing a line if it lands in a uniformly random position and orientation. For a needle of length $\len = b$, this is $2/\pi$ (and hence repeated trials of this experiment can be used to estimate $\pi$). This is generalized in \cite{Ramaley69} to $2\len /(\pi b)$ for the expected number of crossings of a needle with arbitrary length.
 
-The Buffon-Laplace needle problem \cite{Mathai99} considers a needle tossed onto a grid of rectangular tiles of width $a$ and height $b$. The number of visited tiles equals one plus the number of crossings almost surely. The probability of the needle staying within a single rectangle, that is visiting only one tile, is computed in \cite{Arnow94} for the case where $\len < \min(a,b)$. One of the results in this paper, as has been mentioned, is the complementary question of the probability that the needle visits the maximum number of tiles possible for its length.
+The Buffon-Laplace needle problem \cite{Mathai99} considers a needle tossed onto a grid of rectangular tiles of width $a$ and height $b$. The number of visited tiles equals one plus the number of crossings almost surely. The probability of the needle staying within a single tile is computed in \cite{Arnow94} for the case where $\len < \min(a,b)$. One of the problems considered in this paper, as mentioned above, is the complementary question \ref{prob: rand prob} of the probability that the needle visits the maximum number of tiles possible for its length.
 
 The rest of the paper is organized as follows. Fundamental results are presented in \S\ref{part: fund results}, which form the basis of the subsequent analysis. The direct and inverse problems for a deterministic segment are considered in \S\ref{part: max}, first for arbitrary grids and then for a square grid. The analysis for the random segment is carried out in \S\ref{part: rand}. The average number of tiles is computed for arbitrary grids, and the probability that the segment visits the maximum number of tiles is obtained for a square grid.
 
@@ -359,7 +379,7 @@ A segment whose discrete bounding rectangle has normalized width $i$ and height 
 % but not ``smallest'', if that were the case it would always be either vertical or horizontal
 
 
-\section{Direct and inverse problems for a deterministic segment}
+\section{Deterministic segment: direct and inverse problems}
 \label{part: max}
 
 The direct and inverse problems defined in \S\ref{part: intro}, considering the segment position and orientation as deterministic, are addressed in this section. The general case for rectangular grids with real-valued segment lengths is analyzed first, in \S\ref{part: max: arbitrary grid, real lengths}. The particular case of square grids is addressed in \S\ref{part: max: unit square grid, real lengths}, as it allows a specialized formula for the direct problem. Lastly, the analysis of a unit square grid with integer-valued lengths is presented in \S\ref{part: max: unit square grid, integer lengths}.
@@ -837,7 +857,7 @@ The stated properties for $\funli$ follow directly from those of $\funti$ establ
 \end{proof}
 
 
-\section{Probabilistic characterization for a random segment}
+\section{Random segment: probabilistic characterization}
 \label{part: rand}
 
 Given $\len \in \mathbb R^+$, consider a segment of length $\len$ with uniformly random position and orientation. Specifically, the coordinates $x_1$, $y_1$ of the first endpoint are independent random variables uniformly distributed on $[0,a)$ and $[0,b)$ respectively. The orientation $\theta$ of the segment is uniformly distributed on $[0,2\pi)$. The variables $x_1$, $y_1$ and $\theta$ determine the coordinates $x_2$, $y_2$ of the second endpoint.
