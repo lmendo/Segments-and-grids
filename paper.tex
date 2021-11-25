@@ -263,7 +263,7 @@ Consider $a=b=1$ first. This is illustrated in Figure~\ref{fig: ijLS_1}. Note th
 
 For a given $\len \in \mathbb R^+$, the $(i,j)$ pairs that can be achieved with segments of length not exceeding $\len$ are, by Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}, those that satisfy \eqref{eq: len > sqrt}. Thus for a given value of $i+j-1$ the optimal $(i,j)$ pair (the one that can be achieved with the smallest possible length) is determined by the condition that the point $(ia,jb)$ minimizes the distance to $(2a,2b)$. Such pairs are depicted as filled circles in the figure. The displayed arcs represent the inequality \eqref{eq: len > sqrt} for each of the optimal pairs. Conversely, given a length $\len$, the maximum number of visited tiles will be achieved with one of these pairs, namely the pair $(i,j)$ such that $(ia,jb)$ is on the highest (or rightmost) diagonal line while still being contained in the circle of radius $\len$ centered at $(2a,2b)$.
 
-The optimal pairs in this specific case have $j=i$ or $j=i-1$, as seen in the figure. Due to symmetry, any pair $(i,i-1)$ could be replaced by $(i-1,i)$. This illustrates that the set of optimal pairs is not unique in general. 
+The optimal pairs in this specific case have the form $(i,i)$ or $(i,i-1)$, as seen in the figure. Due to symmetry, any pair $(i,i-1)$ could be replaced by $(i-1,i)$. This illustrates that the set of optimal pairs is not unique in general. 
 
 As a second example, consider $a=1.35$, $b=1$. This is depicted in Figure~\ref{fig: ijLS_1p35}. Again, the optimal pair $(i,j)$ for each diagonal is that for which the point $(ia,jb)$ is closest to $(2a,2b)$; but in this case the $i$, $j$ coordinates of these pairs do not follow a rule as simple as in the previous example.
 
@@ -291,24 +291,24 @@ j = \frac{i a^2}{b^2} - \frac{5a^2}{2b^2} + \frac 3 2.
 \end{proposition}
 
 \begin{proof}
-For each $\tiles$, the pair $(i_\tiles,j_\tiles)$ should be chosen as that on the line $i+j-1=\tiles$ which minimizes $(i-2)^2 a^2 + (j-2)^2 b^2$. This allows maximizing the sum $i+j-1$, and thus the number of visited tiles, for a given length restriction (direct problem); or minimizing the required lengths for a specified number of visited files (inverse problem).
+For each $\tiles$, the pair $(i_\tiles,j_\tiles)$ should be chosen as that on the line $i+j-1=\tiles$ which minimizes $(i-2)^2 a^2 + (j-2)^2 b^2$. This allows maximizing the sum $i+j-1$, and thus the number of visited tiles, for a given length restriction; or visiting a specified number of files with lengths as small as possible.
 
 Consider, for the moment, $i$, $j$ as if they were real-valued variables, and denote $x=ia$, $y=jb$. The line $i+j-1 = \tiles$ then becomes
 \begin{equation}
 \label{eq: line 1}
 \frac x a + \frac y b = \tiles + 1,
 \end{equation}
-and $(i-2)^2 a^2 + (j-2)^2 b^2$ is expressed as $(x-2a)^2+(y-2b)^2$. The point minimizing this quadratic function along \eqref{eq: line 1} is the intersection of that line with the perpendicular line passing through $(2a,2b)$, that is,
+and $(i-2)^2 a^2 + (j-2)^2 b^2$ is expressed as $(x-2a)^2+(y-2b)^2$. The point minimizing this quadratic function along the line \eqref{eq: line 1} is the intersection of that with the perpendicular line passing through $(2a,2b)$,
 \begin{equation}
 \label{eq: line 2}
 y = \frac {a (x-2a)} b + 2b.
 \end{equation}
-This is depicted for $a=1.35$, $b=1$, $\tiles=7$ in Figure~\ref{fig: min suff set, form}, where \eqref{eq: line 2} is shown with solid line. Solving the system of equations \eqref{eq: line 1} and \eqref{eq: line 2} gives 
+An example with $a=1.35$, $b=1$, $\tiles=7$ is depicted in Figure~\ref{fig: min suff set, form}, where \eqref{eq: line 2} is shown with solid line. Solving the system of equations \eqref{eq: line 1} and \eqref{eq: line 2} gives 
 \begin{align}
 \frac x a - 2 &= \frac{(t-3)b^2}{a^2+b^2}, \\
 \frac y b - 2 &= \frac{(t-3)a^2}{a^2+b^2}.
 \end{align}
-In terms of the real-valued variables $i$, $j$, the solution $(\isolr, \jsolr)$ is
+In terms of the real-valued variables $i$, $j$, the solution $(\isolr, \jsolr)$ is thus
 \begin{align}
 \label{eq: prop: min suff set, form: isolr}
 \isolr &= \frac{(t-3)b^2}{a^2+b^2} + 2, \\
@@ -325,7 +325,7 @@ The corresponding point $(\isolr a, \jsolr b)$ is shown in Figure~\ref{fig: min 
 \label{fig: min suff set, form}%
 \end{figure}%
 
-The variables $i$, $j$ are actually limited to integer values. The pair $(i_\tiles, j_\tiles)$ that minimizes $(i-2)^2 a^2 + (j-2)^2 b^2$ along the line $i+j-1=\tiles$ restricted to integer values is either $(\lceil \isolr \rceil, \lfloor \jsolr \rfloor)$ or $(\lfloor \isolr \rfloor, \lceil \jsolr \rceil)$, whichever gives $(i_\tiles a, j_\tiles b)$ closest to $(\isolr a, \jsolr b)$, as illustrated in Figure~\ref{fig: min suff set, form}. In case of a tie the first of the two pairs is chosen. This can be expressed as
+The variables $i$, $j$ are actually limited to integer values. The pair $(i_\tiles, j_\tiles)$ that minimizes $(i-2)^2 a^2 + (j-2)^2 b^2$ along the line $i+j-1=\tiles$ restricted to integer values is either $(\lceil \isolr \rceil, \lfloor \jsolr \rfloor)$ or $(\lfloor \isolr \rfloor, \lceil \jsolr \rceil)$, whichever gives $(i_\tiles a, j_\tiles b)$ closest to $(\isolr a, \jsolr b)$, as illustrated in Figure~\ref{fig: min suff set, form}. In case of a tie the first of the two pairs is (arbitrarily) chosen. This can be expressed as
 \begin{align}
 \label{eq: prop: min suff set, form: isoli}
 i_\tiles &= \left\lfloor \isolr + \frac 1 2 \right\rfloor, \\
@@ -346,7 +346,7 @@ and similarly, from \eqref{eq: prop: min suff set, form: jsolr} and \eqref{eq: p
 \label{eq: prop: min suff set, form: jsoli ineq}
 \frac{(t-3)a^2}{a^2+b^2} + \frac 3 2 \leq j_\tiles < \frac{(t-3)a^2}{a^2+b^2} + \frac 5 2.
 \end{equation}
-Considering the first inequality in \eqref{eq: prop: min suff set, form: isoli ineq} and the second in \eqref{eq: prop: min suff set, form: jsoli ineq} as equalities and eliminating $\tiles$ gives \eqref{eq: upper bound, line}. The pair $(i_\tiles, j_\tiles)$ is strictly below the line \eqref{eq: upper bound, line} because the used inequalities are strict. Similarly, the bounding line \eqref{eq: lower bound, line} results from the second inequality in \eqref{eq: prop: min suff set, form: isoli ineq} and the first in \eqref{eq: prop: min suff set, form: jsoli ineq}, and the fact that both inequalities are not strict implies that the bound \eqref{eq: lower bound, line} can actually be attained.
+Considering the first inequality in \eqref{eq: prop: min suff set, form: isoli ineq} and the second in \eqref{eq: prop: min suff set, form: jsoli ineq} as equalities and eliminating $\tiles$ gives \eqref{eq: upper bound, line}. The pair $(i_\tiles, j_\tiles)$ is strictly below the line \eqref{eq: upper bound, line} because the used inequalities are strict. Similarly, the bounding line \eqref{eq: lower bound, line} results from the second inequality in \eqref{eq: prop: min suff set, form: isoli ineq} and the first in \eqref{eq: prop: min suff set, form: jsoli ineq}, and the fact that those inequalities are not strict implies that the bound \eqref{eq: lower bound, line} can actually be attained.
 \end{proof}
 
 The bounding lines in Proposition~\ref{prop: min suff set, form} are shown in Figure~\ref{fig: pairs_bounds}, using three different pairs of grid parameters $a$, $b$ as examples. Given $(i_\tiles,j_\tiles) \in \mss$, the next pair $(i_{\tiles+1},j_{\tiles+1})$ is obtained by incrementing $j$ if that results in a point below \eqref{eq: upper bound, line}. Else $i$ is incremented instead, and the new pair is guaranteed to be above or on \eqref{eq: lower bound, line}.
@@ -370,7 +370,7 @@ The bounding lines in Proposition~\ref{prop: min suff set, form} are shown in Fi
 \label{fig: pairs_bounds}%
 \end{figure}%
  
-For $a^2/b^2$ arbitrary, the number of pairs in $\mss$ with the same $i$ coordinate, or with the same $j$, is in general irregular, because the lines \eqref{eq: upper bound, line} and \eqref{eq: lower bound, line} do not follow a ``natural'' direction of the grid. This happens for instance in Figure~\ref{fig: pairs_bounds_1p35}, where the number of pairs for each $i$ equals either $2$ or $3$ without a clear pattern.\footnote{Strictly, there is a periodic pattern whenever $a^2/b^2$ is rational, which is the case in Figure~\ref{fig: pairs_bounds_1p35}. However, it is not easily discernible unless $a^2/b^2$ is a ratio of small numbers.}
+For $a^2/b^2$ arbitrary, the number of pairs in $\mss$ with the same $i$ coordinate, or with the same $j$, is in general irregular, because the lines \eqref{eq: upper bound, line} and \eqref{eq: lower bound, line} do not follow a ``natural'' direction of the grid. This happens for instance in Figure~\ref{fig: pairs_bounds_1p35}, where the number of pairs for each $i$ equals either $2$ or $3$ without a clear pattern.\footnote{Strictly, there is a periodic pattern whenever $a^2/b^2$ is rational, which is the case in Figure~\ref{fig: pairs_bounds_1p35}. However, the pattern is not easily discernible unless $a^2/b^2$ is a ratio of small numbers.}
 On the other hand, a simple pattern arises when $a^2/b^2$ or $b^2/a^2$ is a natural number, as seen in Figures~\ref{fig: pairs_bounds_1} and \ref{fig: pairs_bounds_sqrt2}.
 
 A segment whose discrete bounding rectangle has normalized width $i$ and height $j$ is oriented with approximate slope $jb/(ia)$ with respect to the $x$ axis (see Figure~\ref{fig: len ineq i j}); and this approximation becomes better for greater segment lengths. From \eqref{eq: upper bound, line} and \eqref{eq: lower bound, line} it can be seen that the positions of the pairs $(i,j) \in \mss$ have $j/i \approx a^2/b^2$ for large $i, j$. Therefore the optimal slope for long segments is approximately $a/b$. This formalizes the intuition that to maximize the number of visited tiles, the segment should follow a direction along which the perceived ``length'' of the tile is smaller.
