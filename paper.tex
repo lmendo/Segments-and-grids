@@ -380,7 +380,7 @@ A segment whose discrete bounding rectangle has normalized width $i$ and height 
 \section{Deterministic segment: direct and inverse problems}
 \label{part: max}
 
-The direct and inverse problems defined in \S\ref{part: intro}, considering the segment position and orientation as deterministic, are addressed in this section. The general case for rectangular grids with real-valued segment lengths is analyzed first, in \S\ref{part: max: arbitrary grid, real lengths}. The particular case of square grids is addressed in \S\ref{part: max: unit square grid, real lengths}, as it allows a specialized formula for the direct problem. Lastly, the analysis of a unit square grid with integer-valued lengths is presented in \S\ref{part: max: unit square grid, integer lengths}.
+The direct and inverse problems defined in \S\ref{part: intro}, considering the segment position and orientation as deterministic, are addressed in this section. The general case for rectangular grids with real-valued segment lengths is analyzed first, in \S\ref{part: max: arbitrary grid, real lengths}. The square grid with real-valued segment lengths is addressed in \S\ref{part: max: unit square grid, real lengths}, as it allows a specialized formula for the direct problem. Lastly, the analysis of a unit square grid with integer-valued lengths is presented in \S\ref{part: max: unit square grid, integer lengths}.
 
 
 \subsection{Arbitrary grid with real-valued lengths}
@@ -860,7 +860,9 @@ The stated properties for $\funli$ follow directly from those of $\funti$ establ
 
 Given $\len \in \mathbb R^+$, consider a segment of length $\len$ with uniformly random position and orientation. Specifically, the coordinates $x_1$, $y_1$ of the first endpoint are independent random variables uniformly distributed on $[0,a)$ and $[0,b)$ respectively. The orientation $\theta$ of the segment is uniformly distributed on $[0,2\pi)$. The variables $x_1$, $y_1$ and $\theta$ determine the coordinates $x_2$, $y_2$ of the second endpoint.
 
-Each realization of the random segment gives rise to a discrete bounding rectangle, whose normalized dimensions $i$ and $j$ are thus random variables, as is the number $\tiles$ of visited tiles. Except for a set of realizations with zero probability, $i$ and $j$ are at least $1$, and $\tiles = i+j-1$ tiles. Note that $i$ and $j$ are not statistically independent. 
+Each realization of the random segment gives rise to a discrete bounding rectangle, whose normalized dimensions $i$ and $j$ are thus random variables, as is the number $\tiles$ of visited tiles. Except for a set of realizations with zero probability, $i$ and $j$ are at least $1$, and $\tiles = i+j-1$ tiles. Note that $i$ and $j$ are not statistically independent.
+
+Rectangular grids with real-valued segment lengths are considered in \S\ref{part: probmax: arbitrary grid, real lengths}. The main result is the average number of visited tiles. The square grid with real-valued lengths is addressed in \S\ref{part: probmax: unit square grid, real lengths}. This more specialized setting allows computation of the probability of visiting the maximum possible number of tiles.
 
 
 \subsection{Arbitrary grid with real-valued lengths}
