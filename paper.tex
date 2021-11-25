@@ -388,7 +388,7 @@ The direct and inverse problems defined in \S\ref{part: intro}, considering the 
 
 For a grid with parameters $a, b \in \mathbb R^+$, the maximum number $\tiles$ of visited tiles with a given real-valued length $\len$ can be represented by a function $\funt: \mathbb R^+ \to \mathbb N$ such that $\tiles = \funt(\len)$. Similarly, for the inverse problem a function $\funl: \mathbb N \to \mathbb R^+$ can be defined such that $\funl(\tiles)$ gives the infimum length of all segments that visit at least $\tiles$ tiles.
 
-The function $\funt$ can be obtained from $\funl$ by noting that the maximum number of tiles that can be visited by a segment of length $\len$ is the index of the largest term of the sequence $\funl(\tiles)$ that is less than $\len$:
+The function $\funt$ can be obtained from $\funl$ by noting that the maximum number of tiles that can be visited by a segment of length $\len$ is the index of the last term of the sequence $\funl(\tiles)$ that is less than $\len$:
 \begin{equation}
 \label{eq: funt funl}
 \funt(\len) = \max \{\tiles \in \mathbb N \st \funl(\tiles)<\len\}.
@@ -399,7 +399,7 @@ Conversely, $\funl$ can be obtained from $\funt$ as
 \funl(\tiles) = \inf\{\len \in \mathbb R^+ \st \funt(\len) \geq \tiles\}.
 \end{equation}
 
-For arbitrary $a, b \in \mathbb R^+$, the functions $\funt$ and $\funl$ can be computed using an iterative procedure, which exploits the fact that the pairs $(i_3,j_3), (i_4,j_4), \ldots$ of $\mss$ are sorted by increasing $i+j-1$, and also by increasing $(i-2)^2 a^2 + (j-2)^2 b^2$. Namely, for $\funt$ the following procedure yields the solution: generate successive pairs to find the last one, $(i_\tiles,j_\tiles)$, that satisfies \eqref{eq: len > sqrt}; then $\funt(\len) = \tiles$. For $\funl$ the analogous method gives a direct formula. In addition, it is possible to obtain a direct formula also for $\funt$ using a different approach. These formulas are given in Theorems \ref{theo: funt, form} and \ref{theo: funl, form}.
+For arbitrary $a, b \in \mathbb R^+$, the functions $\funt$ and $\funl$ can be computed using an iterative procedure, which exploits the fact that the pairs $(i_3,j_3), (i_4,j_4), \ldots$ of the set $\mss$ are sorted by increasing $i+j-1$, and also by increasing $(i-2)^2 a^2 + (j-2)^2 b^2$. Namely, for $\funt$ the following procedure yields the solution: generate successive pairs to find the last one, $(i_\tiles,j_\tiles)$, that satisfies \eqref{eq: len > sqrt}; then $\funt(\len) = \tiles$. For $\funl$ the analogous method gives a direct formula. In addition, it is possible to obtain a direct formula also for $\funt$ using a different approach. These formulas are given in Theorems \ref{theo: funt, form} and \ref{theo: funl, form}.
 
 \begin{theorem}
 \label{theo: funt, form}
@@ -421,7 +421,7 @@ The function $\funt$ is piecewise constant and left-continuous, with unit-height
 \begin{proof}
 The approach is similar to that used in Proposition~\ref{prop: min suff set, form}. Namely, for $i, j \geq 2$ the intersection $(\isolr a, \jsolr b)$ of the line defined by \eqref{eq: lower bound, line} and the arc centered at $(2a,2b)$ with radius $\len$ is found, and from that the actual integer solution $(\isoli, \jsoli)$ is computed.
 
-More specifically, assuming that \eqref{eq: lower bound, line} holds, the largest $i$ that can be achieved with lengths not exceeding $\len$ is obtained, as given by Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}. This value, $\isoli$, is computed by rounding down $\isolr$. Then, assuming that $i = \isoli$, the largest $j$ allowed by Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}, $\jsoli$, is obtained. As will be seen, in some cases the resulting $(\isoli,\jsoli)$ is in $\mss$ as defined by Proposition~\ref{prop: min suff set, form}, and in other cases it is not. However, in either case $(\isoli,\jsoli)$ has the largest $i+j-1$ sum that can be achieved with segments of length up to $\len$. Thus the desired result is $\isoli+\jsoli-1$.
+More specifically, assuming that \eqref{eq: lower bound, line} holds, the largest $i$ that can be achieved with lengths not exceeding $\len$ is obtained, as given by Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}. This value, $\isoli$, is computed by rounding down $\isolr$. Then, assuming that $i = \isoli$, the largest $j$ allowed by Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}, $\jsoli$, is obtained. As will be seen, in some cases the resulting $(\isoli,\jsoli)$ is in the set $\mss$ defined by Proposition~\ref{prop: min suff set, form}, and in other cases it is not. However, in either case $(\isoli,\jsoli)$ has the largest $i+j-1$ sum that can be achieved with segments of length up to $\len$. Thus the desired result is $\isoli+\jsoli-1$.
 
 The two possibilities are illustrated in Figure~\ref{fig: ijLS_1p35_detail} for $a=1.35$, $b=1$. In each case, the arc displayed in the graph is centered at $(2a,2b)$ and has radius $\len$. The inner region defined by the arc contains all $(ia,jb)$ points such that the pair $(i,j)$ is achievable according to Proposition~\ref{prop: len ineq i j}.\ref{prop: len ineq i j: ineq, exist}. As in previous figures, filled circles represent points $(ia,jb)$ such that $(i,j) \in \mss$. The solid line is the bound \eqref{eq: lower bound, line}. The intersection point $(\isolr a, \jsolr b)$ is displayed with a square marker.
 
@@ -450,9 +450,9 @@ The pair $(\isolr, \jsolr)$ can be obtained as a solution of the equation system
 Substituting \eqref{eq: icont jcont 2} into \eqref{eq: icont jcont 1} yields a quadratic equation for $\isolr$,
 \begin{equation}
 \label{eq: quadratic, i}
-4a^2(\isolr-2)^2 - 4a^2(\isolr-2) + a^2+b^2-\frac{4\len^2 b^2}{a^2+b^2},
+4a^2(\isolr-2)^2 - 4a^2(\isolr-2) + a^2+b^2-\frac{4\len^2 b^2}{a^2+b^2} = 0,
 \end{equation}
-which can have zero, one or two real-valued solutions (this respectively means that the line \eqref{eq: icont jcont 2} is exterior, tangent or secant to the circle \eqref{eq: icont jcont 1}). Only the solution with $\isolr, \jsolr \geq 2$, if any, is of interest. This solution can only exist as the one with largest $\isolr$ value when there are real-valued solutions, and it is obtained as
+which can have zero, one or two real-valued solutions. These cases respectively mean that the solid line in Figure~\ref{fig: ijLS_1p35_detail} is exterior, tangent or secant to the circle (the figure shows the latter case). Only the solution with $\isolr, \jsolr \geq 2$, if any, is of interest. This solution can only exist as the one with largest $\isolr$ value when there are real-valued solutions, and it is obtained as %***Here rewriting
 \begin{equation}
 \label{eq: icont jcont 3}
 \isolr = \frac{a + b \sqrt{4\len^2/(a^2+b^2)-1}}{2a} + 2.
@@ -460,7 +460,7 @@ which can have zero, one or two real-valued solutions (this respectively means t
 
 The case with no real-valued solutions to \eqref{eq: quadratic, i} corresponds to $\len < \sqrt{a^2+b^2}/2$. Since $a \geq b$, this implies that $\len < a$. Thus any achievable $(i,j)$ pair, if any, will have $i=2$. Therefore in this case $\isoli$ should be set to $2$; and then the maximum achievable $\jsoli$ will be obtained from \eqref{eq: icont jcont 2}.
 
-If \eqref{eq: quadratic, i} has two real-valued solutions or one real-valued double solution, which is the case when $\len \geq \sqrt{a^2+b^2}/2$, the largest solution will have $\jsolr < 2$ if $\isolr < (b^2/a^2+5)/2$, as can be seen setting $\jsolr=2$ in \eqref{eq: icont jcont 2}; or equivalently if $\sqrt{a^2+b^2}/2 \leq \len < (a^2+b^2) / (2a)$, as can be seen substituting $\jsolr < 2$ and $\isolr < (b^2/a^2+5)/2$ in \eqref{eq: icont jcont 1}. Since $\isolr < (b^2/a^2+5)/2 < 3$ for $a \geq b$, only pairs with $i=2$ are achievable in this case again, and thus the solution $\isoli$ should also be $2$.
+If \eqref{eq: quadratic, i} has two real-valued solutions or one real-valued double solution, which occurs when $\len \geq \sqrt{a^2+b^2}/2$, the largest solution will have $\jsolr < 2$ if $\isolr < (b^2/a^2+5)/2$, as can be seen setting $\jsolr=2$ in \eqref{eq: icont jcont 2}; or equivalently if $\sqrt{a^2+b^2}/2 \leq \len < (a^2+b^2) / (2a)$, as can be seen substituting $\jsolr < 2$ and $\isolr < (b^2/a^2+5)/2$ in \eqref{eq: icont jcont 1}. Since $\isolr < (b^2/a^2+5)/2 < 3$ for $a \geq b$, only pairs with $i=2$ are achievable in this case again, and thus the solution $\isoli$ should also be $2$.
 
 Lastly, for $\len \geq (a^2+b^2) / (2a)$ the expressions \eqref{eq: icont jcont 2} and \eqref{eq: icont jcont 3} give $\isolr, \jsolr \geq 2$, and $\isoli$ should be taken as the greatest integer less than $\isolr$, i.e.~$\lceil \isolr \rceil-1$.
  
@@ -494,9 +494,10 @@ that is, $\funt$ has a jump at $\len$. In addition, since the jump has unit heig
 Conversely, assume that \eqref{eq: theo funt, form: prop 2} and \eqref{eq: theo funt, form: prop 3} hold for some $\len \in \mathbb R^+$, $\tiles \in \mathbb N$. From \eqref{eq: theo funt, form: prop 2} it follows that  $\funl(\tiles) \geq \len$. On the other hand, \eqref{eq: theo funt, form: prop 3} implies that $\funl(\tiles) \leq \len$. Thus $\funl(\tiles)=\len$.
 \end{proof}
 
-Although Theorem~\ref{theo: funt, form} is valid for $a \geq b$, the result could be applied for $a < b$ by simply swapping the values of $a$ and $b$. In other words, \eqref{eq: theo: funt, form; funt}--\eqref{eq: theo: funt, form; j}
+Although Theorem~\ref{theo: funt, form} requires $a \geq b$, the result could be applied for $a < b$ by simply swapping the values of $a$ and $b$.
+%In other words, \eqref{eq: theo: funt, form; funt}--\eqref{eq: theo: funt, form; j}
 % *!*
-can be used for any grid if $a$, $b$ are interpreted as the largest and smallest sides of a tile, respectively.
+%can be used for any grid if $a$, $b$ are interpreted as the largest and smallest sides of a tile, respectively.
 
 \begin{theorem}
 \label{theo: funl, form}
