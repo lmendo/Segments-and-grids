@@ -77,7 +77,7 @@ line segment on a rectangular grid
 \affil[1]{\small Universidad Polit\'ecnica de Madrid. \texttt{luis.mendo@upm.es}}
 %Information Processing and Telecommunications Center, Universidad Polit\'ecnica de Madrid\\
 %Avenida Complutense, 30. 28040 Madrid, Spain.\\
-\affil[2]{\small **Affiliation, e-mail**}
+\affil[2]{\small \texttt{arkhipov@alum.mit.edu}}
 
 
 %ORCID: Luis Mendo: 0000-0001-5691-714X
@@ -156,14 +156,14 @@ The rest of the paper is organized as follows. Fundamental results are presented
 \section{Fundamentals}
 \label{part: fund results}
 
-For a grid with horizontal spacing $a$ and vertical spacing $b$, lines of the form $x = ka$ or $y = kb$ with $k \in \mathbb Z$ will be called \emph{grid lines}. A \emph{tile} is delimited by two pairs of consecutive horizontal and vertical grid lines. The intersection points of horizontal and vertical grid lines will be called \emph{grid points}. These correspond to vertices of the tiles.
+For a grid with horizontal spacing $a$ and vertical spacing $b$, lines $x = ka$ or $y = kb$ with $k \in \mathbb Z$ will be called \emph{grid lines}. A \emph{tile} is delimited by two pairs of consecutive horizontal and vertical grid lines. The intersection points of horizontal and vertical grid lines will be called \emph{grid points}. These correspond to vertices of the tiles.
 
-Every segment has an associated \emph{discrete bounding rectangle}, which is the minimum-size rectangle that is formed by grid lines and contains the segment. More specifically, if the segment has endpoints $(x_1,y_1)$, $(x_2,y_2)$, where $x_1, x_2, y_1, y_2 \in \mathbb R$, its discrete bounding rectangle has lower-left corner and upper-right corner given as
+Every segment has an associated \emph{discrete bounding rectangle}, which is the minimum-size rectangle that is formed by grid lines and contains the segment. More specifically, if the segment has endpoints $(x_1,y_1)$, $(x_2,y_2) \in \mathbb R^2$, its discrete bounding rectangle has lower-left and upper-right corners respectively given as
 \begin{align*}
 & (\lfloor\min\{x_1, x_2\}/a\rfloor a, \lfloor\min\{y_1,y_2\}/b\rfloor b), \\
 & (\lceil\max\{x_1, x_2\}/a \rceil a, \lceil\max\{y_1,y_2\}/b \rceil b).
 \end{align*}
-The dimensions of the discrete bounding rectangle, normalized to the tile width and height respectively, are two integer numbers $i$, $j$. Two examples are illustrated in Figure~\ref{fig: discrete bounding rectangle and touched tiles}, both with $i=5$, $j=4$. Clearly, all tiles visited by the segment are contained in the discrete bounding rectangle. Note also that the rectangle can have $i=0$ or $j=0$ if the segment coincides with part of a grid line.
+The dimensions of the discrete bounding rectangle, normalized to the tile width and height respectively, are two integer numbers $i$, $j$. Two examples are illustrated in Figure~\ref{fig: discrete bounding rectangle and touched tiles}, both with $i=5$, $j=4$. All tiles visited by the segment are contained in the discrete bounding rectangle. Note also that the rectangle can have $i=0$ or $j=0$ if the segment coincides with part of a grid line.
 
 \begin{figure}
 \centering%
@@ -216,9 +216,9 @@ There is a segment of length not exceeding $\len$ that has a discrete bounding r
 \end{proposition}
 
 \begin{proof}
-\ref*{prop: len ineq i j: ineqs} The inequalities follow from the fact that the segment endpoints lie in the interiors or on the outer edges of two tiles in opposite corners of the discrete bounding rectangle. This is illustrated in Figures~\ref{fig: len ineq 4 3} and \ref{fig: len ineq 4 2} for two specific $(i,j)$ pairs respectively. For each $(i,j)$, segments are shown with lengths close to either of the two bounds. Note that \eqref{eq: len > sqrt} is valid even for $i=2$, $j=2$, in which case it reduces to $\len>0$.
+\ref*{prop: len ineq i j: ineqs} The inequalities follow from the fact that the segment endpoints lie in the interiors or on the outer edges of two tiles in opposite corners of the discrete bounding rectangle. This is illustrated in Figures~\ref{fig: len ineq 4 3} and \ref{fig: len ineq 4 2} for two specific $(i,j)$ pairs respectively. For each $(i,j)$, segments are shown with lengths close to either of the two bounds. Note that inequality \eqref{eq: len > sqrt} is valid even for $i=2$, $j=2$, in which case it reduces to $\len>0$.
 
-\ref*{prop: len ineq i j: exist} For $a$, $b$, $\len$, $i$, $j$ satisfying the two inequalities, a segment of length $\len$ can be found that has its endpoints in the interiors or on the outer edges of the two shaded tiles of a rectangle of normalized dimensions $i$ and $j$, as in Figure~\ref{fig: len ineq i j}, which is thus the discrete bounding rectangle of that segment.
+\ref*{prop: len ineq i j: exist} For $a$, $b$, $\len$, $i$, $j$ satisfying the two inequalities, a segment of length $\len$ can be found that has its endpoints in the interiors or on the outer edges of the two shaded tiles of a rectangle with normalized dimensions $i$ and $j$, as in Figure~\ref{fig: len ineq i j}, which is thus the discrete bounding rectangle of that segment.
 \begin{figure}
 \centering%
 \subfigure[$i=4$, $j=3$]{%
@@ -236,16 +236,14 @@ There is a segment of length not exceeding $\len$ that has a discrete bounding r
 
 \ref*{prop: len ineq i j: ineq, exist} ``\eqref{eq: len > sqrt} $\Rightarrow$ there is a segment\ldots'': Assume that \eqref{eq: len > sqrt} holds. It is always possible to choose a length equal to or smaller than $\len$ such that both \eqref{eq: len > sqrt} and \eqref{eq: len leq sqrt} hold. The result follows, for that length, from part~\ref{prop: len ineq i j: exist}.
 
-``There is a segment\ldots $\Rightarrow$ \eqref{eq: len > sqrt} '': Assume that a segment exists with length not exceeding $\len$ and with a discrete bounding rectangle with normalized dimensions $i$, $j$. From part~\ref{prop: len ineq i j: ineqs}, inequality \eqref{eq: len > sqrt} holds for that segment length, and thus for $\len$.
+``There is a segment\ldots $\Rightarrow$ \eqref{eq: len > sqrt} '': Assume that a segment exists with length $\len' \leq \len$ and with a discrete bounding rectangle of normalized dimensions $i$, $j$. From part~\ref{prop: len ineq i j: ineqs}, inequality \eqref{eq: len > sqrt} holds for the length $\len'$, and thus for $\len$.
 \end{proof}
 
-According to Proposition~\ref{prop: i+j-1}, in order to maximize the number of visited tiles for a given length, the position and orientation of the segment should be chosen to obtain $i+j-1$ as large as possible, where $i$ and $j$ are the normalized dimensions of its discrete bounding rectangle. On the other hand, Proposition~\ref{prop: len ineq i j} restricts the $i, j$ values that can be achieved with a given length. A relevant question is: are there any $(i,j)$ pairs that can be disregarded irrespective of the length $\len$? In other words, what is the ``smallest'' subset of $\mathbb N^2$ such that the $(i,j)$ pair that maximizes the number of tiles for any given length can always be found within that subset?
+Consider the problem of maximizing the number of visited tiles for a given length. According to Proposition~\ref{prop: i+j-1}, the position and orientation of the segment should be chosen to obtain $i+j-1$ as large as possible, where $i$ and $j$ are the normalized dimensions of its discrete bounding rectangle. On the other hand, Proposition~\ref{prop: len ineq i j} restricts the $i, j$ values that can be achieved with a given length. A relevant question is: are there any $(i,j)$ pairs that can be disregarded for all lengths $\len$? In other words, what is the ``smallest'' subset of $\mathbb N^2$ such that the $(i,j)$ pair that maximizes the number of tiles for any given length can always be found within that subset?
 
 For instance, it is clear from Figure~\ref{fig: examples} that segment orientations near the vertical or horizontal directions (resulting in $i=1$ with large $j$, or $j=1$ with large $i$) will not maximize the number of visited tiles, and thus the corresponding $(i,j)$ pairs can be discarded. On the other hand, the set of optimal $(i,j)$ pairs must contain one such pair for each possible value of $i+j-1$, so that the set can produce that value as the solution (maximum number of visited tiles) for certain lengths. It is insightful to examine two specific examples (Figure~\ref{fig: ijLS}) before giving an explicit formula for the coordinates of the optimal pairs.
 
-Consider $a=b=1$ first. This is illustrated in Figure~\ref{fig: ijLS_1}. Note that in this and in the next figures the axes represent $ia$ and $jb$, rather than
-% normalized coordinates
-$i$ and $j$. In this graph, each dashed diagonal line contains pairs $(ia,jb)$ with the same $i+j-1$; and the lower bound \eqref{eq: len > sqrt} corresponds to an arc centered at $(2a,2b)$.
+Consider $a=b=1$ first. This is illustrated in Figure~\ref{fig: ijLS_1}. Note that in this and in the next figures the axes represent $ia$ and $jb$ (not $i$ and $j$). In this graph, each dashed diagonal line contains points $(ia,jb)$ with the same $i+j-1$; and the lower bound \eqref{eq: len > sqrt} corresponds to an arc centered at $(2a,2b)$.
 
 \begin{figure}
 \centering%
@@ -885,7 +883,7 @@ Given $a, b, \len \in \mathbb R^+$, consider a grid with parameters $a, b$ and a
 \end{theorem}
 
 \begin{proof}
-Suppose first that the grid is simplified to only horizontal lines with spacing $b$. This matches the setup of Buffon's original needle problem \cite{Mathai99}, except that here the length $\len$ of the needle may exceed the spacing $b$, allowing it to cross multiple lines. As shown in \cite{Ramaley69}, the expected number of lines crossed equals $2\len/(\pi b)$.
+Suppose first that the grid is simplified to only horizontal lines with spacing $b$. This matches the set-up of Buffon's original needle problem \cite{Mathai99}, except that here the length $\len$ of the needle may exceed the spacing $b$, allowing it to cross multiple lines. As shown in \cite{Ramaley69}, the expected number of lines crossed equals $2\len/(\pi b)$.
 % When $\len<b$ this expectation matches the probability of the needle crossing a grid line, since it cannot cross more than one.
 
 Consider again a grid with horizontal spacing $a$ and vertical spacing $b$. The grid crossings decompose into crossings of horizontal and vertical grid lines. By linearity of expectation, the expected number of crossings $\funca(\len)$ is the sum of the expectations for parallel lines with spacing $a$ and $b$ respectively, which gives
