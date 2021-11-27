@@ -447,26 +447,29 @@ The pair $(\isolr, \jsolr)$ can be obtained as a solution of the equation system
 \label{eq: icont jcont 2}
 \jsolr = \frac{\isolr a^2}{b^2} - \frac{5a^2}{2b^2} + \frac 3 2.
 \end{align}
-Substituting \eqref{eq: icont jcont 2} into \eqref{eq: icont jcont 1} yields a quadratic equation for $\isolr$,
+Substituting \eqref{eq: icont jcont 2} into \eqref{eq: icont jcont 1} gives a quadratic equation for $\isolr$,
 \begin{equation}
 \label{eq: quadratic, i}
 4a^2(\isolr-2)^2 - 4a^2(\isolr-2) + a^2+b^2-\frac{4\len^2 b^2}{a^2+b^2} = 0,
 \end{equation}
-which can have zero, one or two real-valued solutions. These cases respectively mean that the solid line in Figure~\ref{fig: ijLS_1p35_detail} is exterior, tangent or secant to the circle (the figure shows the latter case). Only the solution with $\isolr, \jsolr \geq 2$, if any, is of interest. This solution can only exist as the one with largest $\isolr$ value when there are real-valued solutions, and it is obtained as %***Here rewriting. Maybe rephrase the following: the expression is general (isn't it?), i.e. may give complex values; and the three cases (0, 1 or 2 real solutions are not clearly identified) 
+which is solved as
 \begin{equation}
 \label{eq: icont jcont 3}
-\isolr = \frac{a + b \sqrt{4\len^2/(a^2+b^2)-1}}{2a} + 2.
+\isolr = \frac{a \pm b \sqrt{4\len^2/(a^2+b^2)-1}}{2a} + 2,
 \end{equation}
+and then $\jsolr$ can be obtained from \eqref{eq: icont jcont 2}. This can produce zero, one or two real-valued solution pairs $(\isolr, \jsolr)$, which respectively corresponds to the solid line in Figure~\ref{fig: ijLS_1p35_detail} being exterior, tangent or secant to the circle (the figure shows the latter case).
 
-The case with no real-valued solutions to \eqref{eq: quadratic, i} corresponds to $\len < \sqrt{a^2+b^2}/2$. Since $a \geq b$, this implies that $\len < a$. Thus any achievable $(i,j)$ pair, if any, will have $i=2$. Therefore in this case $\isoli$ should be set to $2$; and then the maximum achievable $\jsoli$ will be obtained from \eqref{eq: icont jcont 2}.
+A solution $(\isolr, \jsolr)$ is of interest only if it is real-valued with $\isolr, \jsolr \geq 2$. This solution, if it exists, is always associated with the positive sign in \eqref{eq: icont jcont 3} (the negative sign either yields the same solution, in the tangent case, or yields a solution with $\jsolr < 2$, in the secant case). In this regard, three cases need to be distinguished: there are no real-valued solution pairs $(\isolr, \jsolr)$; there are one or two but do not satisfy $\isolr, \jsolr \geq 2$; there are one or two and and one of them satisfies that inequality.
 
-If \eqref{eq: quadratic, i} has two real-valued solutions or one real-valued double solution, which occurs when $\len \geq \sqrt{a^2+b^2}/2$, the largest solution will have $\jsolr < 2$ if $\isolr < (b^2/a^2+5)/2$, as can be seen setting $\jsolr=2$ in \eqref{eq: icont jcont 2}; or equivalently if $\sqrt{a^2+b^2}/2 \leq \len < (a^2+b^2) / (2a)$, as can be seen substituting $\jsolr < 2$ and $\isolr < (b^2/a^2+5)/2$ in \eqref{eq: icont jcont 1}. Since $\isolr < (b^2/a^2+5)/2 < 3$ for $a \geq b$, only pairs with $i=2$ are achievable in this case again, and thus the solution $\isoli$ should also be $2$.
+If $\len < \sqrt{a^2+b^2}/2$, \eqref{eq: icont jcont 3} yields no real-valued solutions for $\isolr$. Since $a \geq b$, $\len < \sqrt{a^2+b^2}/2$ implies that $\len < a$, and therefore any achievable $(i,j)$ pair, if any, will have $i=2$. Thus in this case $\isoli$ should be set to $2$; and then the maximum achievable $\jsoli$ will be obtained from \eqref{eq: icont jcont 2}.
 
-Lastly, for $\len \geq (a^2+b^2) / (2a)$ the expressions \eqref{eq: icont jcont 2} and \eqref{eq: icont jcont 3} give $\isolr, \jsolr \geq 2$, and $\isoli$ should be taken as the greatest integer less than $\isolr$, i.e.~$\lceil \isolr \rceil-1$.
+For $\len \geq \sqrt{a^2+b^2}/2$ there are either two real-valued solutions or one real-valued double solution for $\isolr$. These solutions will give $\jsolr < 2$ if $\isolr < (b^2/a^2+5)/2$, as can be seen setting $\jsolr=2$ in \eqref{eq: icont jcont 2}; or equivalently if $\sqrt{a^2+b^2}/2 \leq \len < (a^2+b^2) / (2a)$, as can be seen substituting $\jsolr < 2$ and $\isolr < (b^2/a^2+5)/2$ in \eqref{eq: icont jcont 1}. Thus for $\len$ in this range, since $\isolr < (b^2/a^2+5)/2 < 3$ for $a \geq b$, only pairs with $i=2$ are achievable again, and therefore $\isoli$ must also be $2$.
+
+Lastly, for $\len \geq (a^2+b^2) / (2a)$ the expressions \eqref{eq: icont jcont 2} and \eqref{eq: icont jcont 3} with positive sign give $\isolr, \jsolr \geq 2$, and $\isoli$ should be taken as the greatest integer less than $\isolr$, i.e.~$\lceil \isolr \rceil-1$.
  
-The three cases are unified by taking the real part of \eqref{eq: icont jcont 3} and computing $\isoli = \lceil \isolr \rceil-1$, as is easily checked. This gives \eqref{eq: theo: funt, form; i}. Once $\isoli$ is known, $\jsoli$ is computed, according to \eqref{eq: theo: funt, form; j}, as the greatest integer such that $(\isoli a,\jsoli b)$ is within the circle determined by $\len$. This ensures that $(\isoli,\jsoli)$ is achievable with lengths less than $\len$.
+The three cases are unified by taking the real part of \eqref{eq: icont jcont 3} and computing $\isoli = \lceil \isolr \rceil-1$, as can be easily checked. This yield \eqref{eq: theo: funt, form; i}. Once $\isoli$ is known, $\jsoli$ is computed, according to \eqref{eq: theo: funt, form; j}, as the greatest integer such that $(\isoli a,\jsoli b)$ is within the circle determined by $\len$. This ensures that $(\isoli,\jsoli)$ is achievable with lengths less than $\len$.
 
-There are two possibilities for the pair $(\isoli,\jsoli)$, as stated at the outset. These are illustrated in Figures~\ref{fig: ijLS_1p35_detail_in} and \ref{fig: ijLS_1p35_detail_notin} respectively. The first possibility is that $(\isoli,\jsoli) \in \mss$ (Figure~\ref{fig: ijLS_1p35_detail_in}). Then, by construction  $(\isoli,\jsoli)$ maximizes $i+j-1$ among all achievable pairs of $\mss$, and is therefore optimal.
+There are two possibilities for the resulting pair $(\isoli,\jsoli)$, as stated at the outset. These are illustrated in Figures~\ref{fig: ijLS_1p35_detail_in} and \ref{fig: ijLS_1p35_detail_notin} respectively. The first possibility is that $(\isoli,\jsoli) \in \mss$ (Figure~\ref{fig: ijLS_1p35_detail_in}). Then, by construction  $(\isoli,\jsoli)$ maximizes $i+j-1$ among all achievable pairs of $\mss$, and is therefore optimal.
 
 The second possibility is that $(\isoli,\jsoli) \notin \mss$ (Figure~\ref{fig: ijLS_1p35_detail_notin}). This happens when the pair from $\mss$ that has $i = \isoli$ ($(4,5)$ in the figure) is outside the circle, i.e.~it would require a length greater than $\len$. The selected $(\isoli,\jsoli)$ ($(4,4)$ in the figure), however, has the same $i+j-1$ sum as the pair from $\mss$ that ``should'' be used, which is $(\isoli-1,\jsoli+1)$ ($(3,5)$ in the figure); and therefore gives the same result. This is always the case, because  $(\isoli,\jsoli+1) \in \mss$ (it is above or on the bounding line) and $(\isoli,\jsoli) \notin \mss$ (it is below the line), and due to how $\mss$ has been constructed, this implies that $(\isoli-1,\jsoli+1) \in \mss$ and $(\isoli-1,\jsoli+k) \notin \mss$ for $k =2, 3, \ldots$.  Therefore, $(\isoli,\jsoli)$ is achievable and maximizes $i+j-1$, which implies that $\isoli+\jsoli-1$ is the desired solution.
 
