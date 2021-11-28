@@ -468,33 +468,36 @@ The three cases are unified by taking the real part of the positive-sign version
 
 There are two possibilities for the resulting pair $(\isoli,\jsoli)$, as stated at the outset. These are illustrated in Figures~\ref{fig: ijLS_1p35_detail_in} and \ref{fig: ijLS_1p35_detail_notin} respectively. The first possibility is that $(\isoli,\jsoli) \in \mss$ (Figure~\ref{fig: ijLS_1p35_detail_in}). Then, by construction  $(\isoli,\jsoli)$ maximizes $i+j-1$ among all achievable pairs of $\mss$, and is therefore optimal.
 
-The second possibility is that $(\isoli,\jsoli) \notin \mss$ (Figure~\ref{fig: ijLS_1p35_detail_notin}). This happens when the pair from $\mss$ that has $i = \isoli$ ($(4,5)$ in the figure) is outside the circle, i.e.~it would require a length greater than $\len$. The selected $(\isoli,\jsoli)$ ($(4,4)$ in the figure), however, has the same $i+j-1$ sum as the pair from $\mss$ that ``should'' be used, which is $(\isoli-1,\jsoli+1)$ ($(3,5)$ in the figure); and therefore gives the same result. This is always the case, because  $(\isoli,\jsoli+1) \in \mss$ (it is above or on the bounding line) and $(\isoli,\jsoli) \notin \mss$ (it is below the line), and due to how $\mss$ has been constructed, this implies that $(\isoli-1,\jsoli+1) \in \mss$ and $(\isoli-1,\jsoli+k) \notin \mss$ for $k =2, 3, \ldots$.  Therefore, $(\isoli,\jsoli)$ is achievable and maximizes $i+j-1$, which implies that $\isoli+\jsoli-1$ is the desired solution.
+The second possibility is that $(\isoli,\jsoli) \notin \mss$ (Figure~\ref{fig: ijLS_1p35_detail_notin}). This happens when the pair from $\mss$ that has $i = \isoli$ ($(4,5)$ in the figure) is outside the circle, i.e.~it would require a length greater than $\len$. The selected $(\isoli,\jsoli)$ ($(4,4)$ in the figure), however, has the same $i+j-1$ sum as the pair from $\mss$ that ``should'' be used, which is $(\isoli-1,\jsoli+1)$ ($(3,5)$ in the figure); and therefore gives the same result. This is always the case, because  $(\isoli,\jsoli+1) \in \mss$ (it is above or on the bounding line) and $(\isoli,\jsoli) \notin \mss$ (it is below the line), and due to how $\mss$ has been constructed, this implies that $(\isoli-1,\jsoli+1) \in \mss$ and $(\isoli-1,\jsoli+k) \notin \mss$ for $k =2, 3, \ldots$. It follows that $(\isoli,\jsoli)$ is achievable and maximizes $i+j-1$, and thus $\isoli+\jsoli-1$ is the desired solution.
 
 Therefore, regardless of whether $(\isoli,\jsoli)$ is in $\mss$ or not, \eqref{eq: theo: funt, form; i} and \eqref{eq: theo: funt, form; j} give $\isoli+\jsoli-1$ equal to $\funt(\len)$, as claimed.
 
-It should be noted that for the specific case that $a^2/b^2 = 2k-1$, $k \in \mathbb N$ the lower bounding line \eqref{eq: lower bound, line} becomes $j = i(2k-1)-5k+4$, which gives integer $j$ for integer $i$. This means that the bound is actually achieved for all pairs in $\mss$ (see for example Figure~\ref{fig: pairs_bounds_1}), and the case $(\isoli,\jsoli) \notin \mss$ never occurs. Thus, when $a^2/b^2$ is an odd integer the obtained $(\isoli,\jsoli)$ is guaranteed to be in $\mss$, whereas for general $a^2/b^2$ either $(\isoli,\jsoli)$ or $(\isoli-1,\jsoli+1)$ are in in this set.
+Interestingly, for the specific case that $a^2/b^2 = 2k-1$, $k \in \mathbb N$ the lower bounding line \eqref{eq: lower bound, line} becomes $j = (2k-1)i - 5k + 4$, which gives integer $j$ for integer $i$. This means that the bound is actually achieved for all pairs in $\mss$ (see for example Figure~\ref{fig: pairs_bounds_1}), and the case $(\isoli,\jsoli) \notin \mss$ never occurs.
 % ^ If this is needed outside of the proof, it can be included at the end of the theorem statement
 
-As for the properties of $\funt$, it follows from \eqref{eq: theo: funt, form; funt}--\eqref{eq: theo: funt, form; j} that this function is piecewise constant and left-continuous. From the procedure described in the previous paragraphs for obtaining $(\isoli, \jsoli)$ it is clear that $\isoli+\jsoli-1$ increases in steps of $1$ when $\len$ is increased continuously; that is, $\funt$ has jumps of unit height.
+As for the properties of $\funt$, it stems from \eqref{eq: theo: funt, form; funt}--\eqref{eq: theo: funt, form; j} that this function is piecewise constant and left-continuous. From the procedure described in the previous paragraphs for obtaining $(\isoli, \jsoli)$ it is clear that $\isoli+\jsoli-1$ increases in steps of $1$ when $\len$ is increased continuously; that is, $\funt$ has jumps of unit height.
 
 Consider an arbitrary $\len$ such that for some $\tiles \in \mathbb N$, $\tiles \geq 4$
 \begin{equation}
 \label{eq: theo funt, form: prop 1}
 \funl(\tiles)=\len.
 \end{equation}
-To see that $\funt$ has a jump at $\len$, assume for the sake of contradiction that $\funt$ is continuous, therefore constant, at that point. Then there is $\epsilon > 0$ for which $\funt(\len+\epsilon) = \tiles = \funt(\len-\epsilon)$. This means that there exists a segment with length $\len-\epsilon$ that visits $\tiles$ tiles, and thus $\funl(\tiles) \leq \len-\epsilon < \len$, in contradiction with \eqref{eq: theo funt, form: prop 1}. Therefore $\funt$ is discontinuous, from the right, at $\len$. By definition of $\funl$, \eqref{eq: theo funt, form: prop 1} implies that $\funt(\len) < \tiles$, and that there exists $\epsilon > 0$ such that $\funt(\len+h) = \tiles$ for $0 < h < \epsilon$. This means that
-\begin{align}
+To see that $\funt$ has a jump at $\len$, assume for the sake of contradiction that $\funt$ is continuous, therefore constant, at that point. Then there is $\epsilon > 0$ for which $\funt(\len-\epsilon) = \tiles = \funt(\len+\epsilon)$. This means that there exists a segment with length $\len-\epsilon$ that visits $\tiles$ tiles, and thus $\funl(\tiles) \leq \len-\epsilon < \len$, in contradiction with \eqref{eq: theo funt, form: prop 1}. Therefore $\funt$ is discontinuous, from the right, at $\len$. By definition of $\funl$, from \eqref{eq: theo funt, form: prop 1} it follows that
+\begin{equation}
 \label{eq: theo funt, form: prop 2}
-\funt(\len) &< \tiles, \\
+\funt(\len) < \tiles
+\end{equation}
+and there exists $\epsilon > 0$ such that $\funt(\len+h) = \tiles$ for $0 < h < \epsilon$. This implies that
+\begin{equation}
 \label{eq: theo funt, form: prop 3}
-\lim_{h \rightarrow 0+} \funt(\len+h) &= \tiles,
-\end{align}
-that is, $\funt$ has a jump at $\len$. In addition, since the jump has unit height, it follows from \eqref{eq: theo funt, form: prop 2} and \eqref{eq: theo funt, form: prop 3}  that $\funt(\len) = \tiles-1$.
+\lim_{h \rightarrow 0+} \funt(\len+h) = \tiles,
+\end{equation}
+that is, $\funt$ has a jump at $\len$. In addition, since the jump has unit height, it stems from \eqref{eq: theo funt, form: prop 2} and \eqref{eq: theo funt, form: prop 3}  that $\funt(\len) = \tiles-1$.
 
-Conversely, assume that \eqref{eq: theo funt, form: prop 2} and \eqref{eq: theo funt, form: prop 3} hold for some $\len \in \mathbb R^+$, $\tiles \in \mathbb N$. From \eqref{eq: theo funt, form: prop 2} it follows that  $\funl(\tiles) \geq \len$. On the other hand, \eqref{eq: theo funt, form: prop 3} implies that $\funl(\tiles) \leq \len$. Thus $\funl(\tiles)=\len$.
+Conversely, assume that $\funt$ has a jump from $\tiles-1$ to $\tiles$ at some $\len \in \mathbb R^+$. This means that \eqref{eq: theo funt, form: prop 2} and \eqref{eq: theo funt, form: prop 3} hold for those $\tiles$ and $\len$. From \eqref{eq: theo funt, form: prop 2} it follows that  $\funl(\tiles) \geq \len$. On the other hand, \eqref{eq: theo funt, form: prop 3} implies that $\funl(\tiles) \leq \len$. Thus $\funl(\tiles)=\len$.
 \end{proof}
 
-Although Theorem~\ref{theo: funt, form} requires $a \geq b$, the result could be applied for $a < b$ by simply swapping the values of $a$ and $b$.
+Although Theorem~\ref{theo: funt, form} requires $a \geq b$, the result could obviously be applied for $a < b$ by swapping the values of $a$ and $b$.
 %In other words, \eqref{eq: theo: funt, form; funt}--\eqref{eq: theo: funt, form; j}
 % *!*
 %can be used for any grid if $a$, $b$ are interpreted as the largest and smallest sides of a tile, respectively.
