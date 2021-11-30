@@ -20,7 +20,7 @@
 
 \newcommand{\mr}{\mathrm}
 \newcommand{\st}{\mid}%{\,|\,}
-\newcommand{\cond}{\,|\,} % less spacing that \mid
+\newcommand{\cond}{\,|\,} % less spacing than \mid
 \newcommand{\diff}{\,\mathrm d}
 \let\Re\relax % remove the command...
 \DeclareMathOperator{\Re}{Re} % ...to define it differently
@@ -534,7 +534,9 @@ This function is monotone increasing for $\tiles \geq 3$.
 \end{theorem}
 
 \begin{proof}
-The $(i_\tiles,j_\tiles)$ pair in $\mss$ corresponds to a maximum of $\tiles$ visited tiles. By construction of this set, any segment that visits $\tiles$ tiles must have length greater than $\sqrt{(i_\tiles-2)^2a^2 + (j_\tiles-2)^2b^2}$. For $\tiles \geq 3$ the variables $\isoli$, $\jsoli$ in \eqref{eq: theo: funl, form; isoli} and \eqref{eq: theo: funl, form; jsoli} respectively coincide with $i_\tiles$, $j_\tiles$ as given by \eqref{eq: min suff set, form, i} and \eqref{eq: min suff set, form, j}. Therefore \eqref{eq: theo: funl, form; funl} gives the correct result. For $\tiles \in \{1, 2\}$ both \eqref{eq: theo: funl, form; isoli} and \eqref{eq: theo: funl, form; jsoli} equal $2$, and \eqref{eq: theo: funl, form; funl} gives $0$, which is again the correct result.
+The $(i_\tiles,j_\tiles)$ pair in set $\mss$ defined in Proposition~\ref{prop: min suff set, form} corresponds to a maximum of $\tiles$ visited tiles. By construction of this set, any segment that visits $\tiles$ tiles must have length greater than $\sqrt{(i_\tiles-2)^2a^2 + (j_\tiles-2)^2b^2}$. For $\tiles \geq 3$ the variables $\isoli$, $\jsoli$ computed in \eqref{eq: theo: funl, form; isolr}--\eqref{eq: theo: funl, form; jsoli}
+% -- *!*
+coincide with $i_\tiles$, $j_\tiles$ as given by \eqref{eq: min suff set, form, i} and \eqref{eq: min suff set, form, j}, and therefore \eqref{eq: theo: funl, form; funl} gives the correct result. For $\tiles \in \{1, 2\}$ both \eqref{eq: theo: funl, form; isoli} and \eqref{eq: theo: funl, form; jsoli} equal $2$, and \eqref{eq: theo: funl, form; funl} gives $0$, which is again the correct result.
 
 For $\tiles \geq 3$, the term $\sqrt{(i_\tiles-2)^2a^2 + (j_\tiles-2)^2b^2}$ can be interpreted geometrically as the distance between $(i_\tiles, j_\tiles)$ and $(2a, 2b)$. As can be seen with the help of Figure~\ref{fig: min suff set, form}, this distance is the hypotenuse of a right triangle whose other two sides extend from $(2a, 2b)$ to $(\isolr a, \jsolr b)$ and from $(\isolr a, \jsolr b)$ to $(i_\tiles, j_\tiles)$ respectively. Therefore,
 \begin{equation}
@@ -552,19 +554,20 @@ and \eqref{eq: theo: funl, form; jsolr} that
 \frac{(\tiles-3)^2 (b^4a^2+a^2b^4)}{(a^2+b^2)^2} =
 \frac{(\tiles-3)^2 a^2b^2}{a^2+b^2}.
 \end{equation}
-The fact that both $(\isolr, \jsolr)$ and $(i_\tiles, j_\tiles)$ are on the line $i+j-1=\tiles$ implies that $\isolr+\jsolr = i_\tiles+ j_\tiles$, and thus $|i_\tiles-\isolr| = |j_\tiles-\jsolr| = \roundterm$. Consequently,
+The fact that both $(\isolr, \jsolr)$ and $(i_\tiles, j_\tiles)$ are on the line $i+j-1=\tiles$ implies that $\isolr+\jsolr = i_\tiles+ j_\tiles$, and thus $|i_\tiles-\isolr| = |j_\tiles-\jsolr| = \roundterm$ with $\roundterm$ given by \eqref{eq: roundterm}. Consequently,
 \begin{equation}
 \label{eq: distance as hypotenuse, second leg}
 (i_\tiles-\isolr)^2a^2 + (j_\tiles-\jsolr)^2b^2 = \roundterm^2 (a^2+b^2).
 \end{equation}
 Substituting \eqref{eq: distance as hypotenuse, first leg} and \eqref{eq: distance as hypotenuse, second leg} into \eqref{eq: distance as hypotenuse} yields \eqref{eq: theo: funl, form; funl 2}.
 
-By Theorem~\ref{theo: funt, form}, $\funt$ has unit-height jumps at the values $\funl(\tiles)$, $\tiles \in \mathbb N$, $\tiles \geq 4$. This implies that $\funl$ is monotone increasing for $\tiles \geq 3$.
+The definition of $\funl$ implies that $\funl(\tiles) \geq \funl(\tiles-1)$ for any $\tiles \in \mathbb N$. On the other hand, 
+by Theorem~\ref{theo: funt, form}, $\funt$ is piecewise constant and has a unit-height jump from $\tiles-1$ to $\tiles$ at $\funl(\tiles)$, $\tiles \in \mathbb N$, $\tiles \geq 4$. This implies that $\funl(\tiles) > \funl(\tiles-1)$ for $\tiles \geq 4$.
 \end{proof}
 
-The expression \eqref{eq: theo: funl, form; funl 2} allows a neat interpretation of $\funl(\tiles)$ (as stems from the arguments used in the proof). Namely, $\funl^2(\tiles)$ is the sum of the two terms within the square root in that expression. The first term is the squared distance from $(2a, 2b)$ to the diagonal line defined by $i+j-1=t$; and the second term is additional squared distance incurred from rounding $i$, $j$ to integer values.
+The expression \eqref{eq: theo: funl, form; funl 2} allows a neat interpretation of $\funl(\tiles)$ (as stems from the arguments used in the proof of Theorem~\ref{theo: funl, form}). Namely, $\funl^2(\tiles)$ is the sum of the two terms that appear in that expression. The first term is the squared distance from $(2a, 2b)$ to the diagonal line defined by $i+j-1=t$; and the second term is additional squared distance incurred from rounding $i$, $j$ to integer values.
 
-Theorems~\ref{theo: funt, form} and \ref{theo: funl, form} not only give the solutions $\funt(\len)$ and $\funl(\tiles)$ to the two problems stated in \S\ref{part: intro}; they also provide a way to actually position a segment of length slightly greater than $\len$ or $\funl(\tiles)$ so that it visits $\tiles$ or $\funt(\len)$ tiles. Namely, the segment should have its endpoints respectively in the interior of two tiles separated $\isoli-1$ steps horizontally and $\jsoli-1$ steps vertically, with its exact position and orientation  adjusted to avoid any grid points.
+Theorems~\ref{theo: funt, form} and \ref{theo: funl, form} not only give the solutions $\funt(\len)$ and $\funl(\tiles)$ to the first two problems stated in \S\ref{part: intro}; they also provide a way to actually position a segment of length $\len$ or slightly greater than $\funl(\tiles)$, respectively, so that it visits $\funt(\len)$ or $\tiles$ tiles. Namely, for $\isoli$, $\jsoli$ computed as in the corresponding theorem, the segment should have its endpoints in the interiors of two tiles separated $\isoli-1$ steps horizontally and $\jsoli-1$ steps vertically, with its exact position and orientation  adjusted to avoid any grid points.
 
 It is interesting to consider the following particular cases: $\len \gg a,b$; $a \gg b$; and $a=b$. Regarding the first, from \eqref{eq: theo: funt, form; funt}--\eqref{eq: theo: funt, form; j}
 % *!*
