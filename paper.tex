@@ -581,11 +581,11 @@ it is seen that for long segments the number of visited tiles and the segment le
 = \sqrt{1/a^2 + 1/b^2}.
 \end{equation}
 
-As for $a \gg b$, in this case the optimal discrete bounding rectangle has $\isoli = 2$, and $\jsoli$ as large as allowed by $\len$ (direct problem) or as required by $\tiles$ (inverse problem), corresponding to an almost vertical segment. Obviously, for $a \gg b$ the length of the segment is best invested in increasing the number of tiles traversed vertically (but the segment should be slightly tilted to cross a vertical edge), and the asymptotic value of \eqref{eq: asympt slope} is approximately $1/b$.
+As for $a \gg b$, in this case the optimal discrete bounding rectangle has $\isoli = 2$, and $\jsoli$ as large as allowed by $\len$ (direct problem) or as required by $\tiles$ (inverse problem), corresponding to an almost vertical segment. In other words, for $a \gg b$ the length of the segment is best invested in increasing the number of tiles traversed vertically (but the segment should be slightly tilted to cross a vertical edge), and the asymptotic ratio \eqref{eq: asympt slope} is approximately $1/b$.
 
-For $a=b$, either from symmetry considerations or particularizing the formulas in the previous theorems it stems that the optimal orientation of the segment is close to $45^\circ$. This case will be dealt with in \S\ref{part: max: unit square grid, real lengths}, as it lends itself to simplified formulas.
+For $a=b$, either from symmetry considerations or particularizing the formulas in the above theorems it stems that the optimal orientation of the segment is close to $45^\circ$. This case will be dealt with in \S\ref{part: max: unit square grid, real lengths}, as it lends itself to simplified formulas.
 
-Figure~\ref{fig: funt funl examples} shows $\funt$ and $\funl$ for several pairs of grid parameters $a$, $b$. The graphs illustrate some of the observations of the previous paragraphs. Indeed, the asymptotic slope in Figure~\ref{fig: funt examples}, or the inverse of the asymptotic slope in Figure~\ref{fig: funl examples}, is approximately $\sqrt{2}$ for $a, b=1$; and it is $1/b$ for the case $a=5,b=1$, or even for $a=5,b=1.5$ or $a=10,b=3$. Comparing the latter two cases it is also seen that scaling $a$, $b$ and $\len$ by the same factor does not alter $\funt(\len)$, and results in $\funl(\tiles)$ being scaled by that factor.
+Figure~\ref{fig: funt funl examples} shows the functions $\funt$ and $\funl$ for several pairs of grid parameters $a$, $b$. The graphs illustrate some of the observations of the previous paragraphs. Indeed, the asymptotic slope in Figure~\ref{fig: funt examples}, or the inverse of the asymptotic slope in Figure~\ref{fig: funl examples}, is approximately $\sqrt{2}$ for $a, b=1$; and it is $1/b$ for the case $a=5,b=1$, or even for $a=5,b=1.5$ or $a=10,b=3$. Comparing the latter two cases it is also seen that scaling $a$, $b$ and $\len$ by the same factor does not alter $\funt(\len)$, and results in $\funl(\tiles)$ being scaled by that factor.
 
 \begin{figure}
 \centering%
@@ -606,7 +606,7 @@ Figure~\ref{fig: funt funl examples} shows $\funt$ and $\funl$ for several pairs
 \subsection{Unit square grid with real-valued lengths}
 \label{part: max: unit square grid, real lengths}
 
-A square grid has $a=b$. For real-valued segment lengths it can be further assumed that $a=1$. For $a \neq 1$ the results to be obtained apply with $\len$ replaced by $\len/a$.
+A square grid has $a=b$. For real-valued segment lengths it can be further assumed that $a=1$. For $a \neq 1$ the expressions to be obtained are valid with $\len$ and $\funl(\tiles)$ replaced by $\len/a$ and $\funl(\tiles)/a$ respectively.
 
 Particularizing the results in \S\ref{part: max: arbitrary grid, real lengths} to $a=b=1$ obviously yields simpler formulas.
 
@@ -620,9 +620,9 @@ For a unit square grid with $\len \in \mathbb R^+$,
 with
 \begin{align}
 \label{eq: cor: funt, sq, form; i}
-\isoli &= \left\lceil \frac{1 + \Re \sqrt{2\len^2-1}}{2} \right\rceil + 1, \\
+\isoli &= \left\lceil \frac 3 2 + \Re\sqrt{\frac{\len^2}{2} - \frac 1 4} \right\rceil, \\
 \label{eq: cor: funt, sq, form; j}
-\jsoli &= \left\lceil \sqrt{\len^2-(\isoli-2)^2} \right\rceil + 1,
+\jsoli &= \left\lceil 1 + \sqrt{\len^2-(\isoli-2)^2} \right\rceil.
 \end{align}
 \end{corollary}
 
@@ -677,7 +677,7 @@ Equivalently,
 \begin{proof}
 The proof of \eqref{eq: theo: funt, sq, form; funt, with i, j} uses a variation of the set $\mss$ defined in Proposition~\ref{prop: min suff set, form} that is more suited to this situation.
 
-For $a=b=1$, the set $\mss$ consists of points of the form $(i,i)$ and $(i,i-1)$, as is easily seen from Proposition~\ref{prop: min suff set, form}, and as illustrated in Figure~\ref{fig: pairs_bounds_1}. By symmetry, replacing each point $(i,i-1)$ by $(i-1,i)$ gives a set $\mss'$ which is also optimal. For this new set, the lower bounding line \eqref{eq: lower bound, line} can be replaced by the simpler $j=i$. The same approach used in the proof of Theorem~\ref{theo: funt, form} can be followed, but using this line. Thus $(\isolr, \jsolr)$ is obtained from
+For $a=b=1$, the set $\mss$ consists of points of the form $(i,i)$ and $(i,i-1)$, as is easily seen from Proposition~\ref{prop: min suff set, form}, and as illustrated in Figure~\ref{fig: pairs_bounds_1}. By symmetry, replacing each point $(i,i-1)$ by $(i-1,i)$ gives a set $\mss'$ which is also optimal. For this new set, the lower bounding line \eqref{eq: lower bound, line} can be replaced by the simpler $j=i$. The same approach followed in the proof of Theorem~\ref{theo: funt, form} can be applied here, but using this line. Thus $(\isolr, \jsolr)$ is obtained from
 \begin{align}
 (\isolr-2)^2 + (\jsolr-2)^2  &= \len^2, \\
 \jsolr &= \isoli,
@@ -687,13 +687,13 @@ which gives
 \label{eq: theo: funt, sq, form; proof 1}
 \isolr = \len/\sqrt{2} + 2.
 \end{equation}
-The pair $(\isoli,\jsoli)$ resulting from \eqref{eq: theo: funt, sq, form; proof 1} is in $\mss'$, and is given in \eqref{eq: theo: funt, sq, form; i} and \eqref{eq: theo: funt, sq, form; j}. This establishes \eqref{eq: theo: funt, sq, form; funt, with i, j}.
+The pair $(\isoli,\jsoli)$ resulting from \eqref{eq: theo: funt, sq, form; proof 1} is in $\mss'$, and is as given by \eqref{eq: theo: funt, sq, form; i} and \eqref{eq: theo: funt, sq, form; j}. This establishes \eqref{eq: theo: funt, sq, form; funt, with i, j}.
 
 To show \eqref{eq: theo: funt, sq, form; funt, simpler}, it is first noted that for $\tiles \geq 3$ Corollary~\ref{theo: funl, sq, form} gives
 \begin{equation}
 \funl(\tiles) = \sqrt{\left\lceil \frac{(\tiles-3)^2} {2} \right\rceil}.
 \end{equation}
-According to \eqref{eq: funt funl}, the function $\funt(\len)$ is given by the largest positive integer $t$ such that 
+According to \eqref{eq: funt funl}, $\funt(\len)$ is obtained by the largest positive integer $t$ such that 
 \begin{equation}
 \label{eq: theo: funt, sq, form; proof 2}
 \left\lceil \frac{(\tiles-3)^2} {2} \right\rceil < \len ^ 2.
@@ -706,7 +706,7 @@ which in turn is the same as
 \begin{equation}
 \frac{(\tiles-3)^2} {2}\leq  \left\lceil \len^2 \right\rceil  - 1. 
 \end{equation}
-Finally, solving for $\tiles$ gives
+Solving for $\tiles$ gives
 \begin{equation}
 \label{eq: theo: funt, sq, form; proof 3}
 \tiles \leq \sqrt{2 \left\lceil \len^2 \right\rceil -2 } + 3.
