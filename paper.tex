@@ -665,9 +665,9 @@ with
 \label{eq: theo: funt, sq, form; i}
 \isoli &= \left\lceil \frac{\len}{\sqrt{2}} \right\rceil + 1, \\
 \label{eq: theo: funt, sq, form; j}
-\jsoli &= \left\lceil \sqrt{\len^2-(\isoli-2)^2} \right\rceil + 1.
+\jsoli &= \left\lceil \sqrt{\len^2-(\isoli-2)^2} \right\rceil + 1,
 \end{align}
-Equivalently,
+where either $\jsoli = \isoli$ or $\jsoli = \isoli+1$. Equivalently,
 \begin{equation}
 \label{eq: theo: funt, sq, form; funt, simpler}
 \funt(\len) = \left\lfloor \sqrt{2 \left\lceil \len^2 \right\rceil - 2} \right\rfloor + 3.
@@ -675,19 +675,25 @@ Equivalently,
 \end{theorem}
 
 \begin{proof}
-The proof of \eqref{eq: theo: funt, sq, form; funt, with i, j} uses a variation of the set $\mss$ defined in Proposition~\ref{prop: min suff set, form} that is more suited to this situation.
+The proof of \eqref{eq: theo: funt, sq, form; funt, with i, j}--\eqref{eq: theo: funt, sq, form; j}
+% *!* --
+uses a variation of the set $\mss$ defined in Proposition~\ref{prop: min suff set, form} that is more suited to this situation.
 
-For $a=b=1$, the set $\mss$ consists of points of the form $(i,i)$ and $(i,i-1)$, as is easily seen from Proposition~\ref{prop: min suff set, form}, and as illustrated in Figure~\ref{fig: pairs_bounds_1}. By symmetry, replacing each point $(i,i-1)$ by $(i-1,i)$ gives a set $\mss'$ which is also optimal. For this new set, the lower bounding line \eqref{eq: lower bound, line} can be replaced by the simpler $j=i$. The same approach followed in the proof of Theorem~\ref{theo: funt, form} can be applied here, but using this line. Thus $(\isolr, \jsolr)$ is obtained from
+For $a=b=1$, the set $\mss$ consists of points of the form $(i,i)$ and $(i,i-1)$, as is easily seen from Proposition~\ref{prop: min suff set, form}, and as illustrated in Figure~\ref{fig: pairs_bounds_1}. By symmetry, replacing each point $(i,i-1)$ by $(i-1,i)$ gives a set $\mss'$ that is also optimal. For this new set, the lower bounding line \eqref{eq: lower bound, line} can be replaced by the simpler $j=i$. The same approach followed in the proof of Theorem~\ref{theo: funt, form} can be applied here, but using this line. Thus $(\isolr, \jsolr)$ is obtained from
 \begin{align}
 (\isolr-2)^2 + (\jsolr-2)^2  &= \len^2, \\
-\jsolr &= \isoli,
+\jsolr &= \isolr,
 \end{align}
 which gives
 \begin{equation}
 \label{eq: theo: funt, sq, form; proof 1}
-\isolr = \len/\sqrt{2} + 2.
+\isolr = \jsolr = \len/\sqrt{2} + 2.
 \end{equation}
-The pair $(\isoli,\jsoli)$ resulting from \eqref{eq: theo: funt, sq, form; proof 1} is in $\mss'$, and is as given by \eqref{eq: theo: funt, sq, form; i} and \eqref{eq: theo: funt, sq, form; j}. This establishes \eqref{eq: theo: funt, sq, form; funt, with i, j}.
+As in Theorem~\ref{theo: funt, form}, $\isoli$ is obtained as $\lceil \isolr \rceil-1$; and then $\jsoli$ is chosen as the largest integer such that $(\isoli, \jsoli)$ is achievable, i.e.~its distance from $(2, 2)$ is less than $\len$. The resulting $\isoli$ and $\jsoli$ are given by \eqref{eq: theo: funt, sq, form; i} and \eqref{eq: theo: funt, sq, form; j}.
+
+The above procedure for choosing $\jsoli$ given $\isoli = \lceil \isolr \rceil-1$ always results in $\jsoli$ being either $\isoli$ or $\isoli+1$. This can be seen as follows. For $\jsoli = \isoli$, the point $(\isoli, \jsoli)$ is closer to $(2,2)$ than $(\isolr, \jsolr)$ is, and is therefore achievable. This implies that values of $\jsoli$ smaller than $\isoli$ will never be chosen. On the other hand, $\jsoli = \isoli+2$ or larger values are not achievable, because they would produce a sum $i+j-1$ greater than $\isolr+\jsolr$, which is impossible.
+
+The preceding analysis shows that the pair $(\isoli,\jsoli)$ is in $\mss'$ and maximizes $i+j-1$. Therefore \eqref{eq: theo: funt, sq, form; funt, with i, j} holds.
 
 To show \eqref{eq: theo: funt, sq, form; funt, simpler}, it is first noted that for $\tiles \geq 3$ Corollary~\ref{theo: funl, sq, form} gives
 \begin{equation}
@@ -714,7 +720,7 @@ Solving for $\tiles$ gives
 The desired quantity $\funt(\len)$, that is the largest positive integer $\tiles$ satisfying \eqref{eq: theo: funt, sq, form; proof 3}, is thus the right-hand side rounded down, as given by \eqref{eq: theo: funt, sq, form; funt, simpler}.
 \end{proof}
 
-From Theorem~\ref{theo: funt, sq, form} it is easily seen that odd values of $\funt(\len)$ correspond to $\isoli = \jsoli$, whereas even values are achieved with $\jsoli = \isoli+1$. Given $\tiles \geq 3$ with $\tiles$ odd, $\funt(\len) = \tiles$ if and only
+From Theorem~\ref{theo: funt, sq, form} it stems that odd values of $\funt(\len)$ correspond to $\isoli = \jsoli$, whereas even values are achieved with $\jsoli = \isoli+1$. In addition, noting that $\funt(\len) = \tiles$ is equivalent to $\funl(\tiles) < \len \leq \funl(\tiles+1)$ and using Corollary~\ref{theo: funl, sq, form}, the following characterization of $\funt$ is obtained. For $\tiles \geq 3$ with $\tiles$ odd, $\funt(\len) = \tiles$ if and only if
 \begin{equation}
 \label{eq: square, odd max tiles, lengths}
 \len \in \left( \frac{\tiles-3}{\sqrt{2}}, \frac{ \sqrt{(\tiles-1)^2+(\tiles-3)^2}}{2} \right].
@@ -724,6 +730,7 @@ For $\tiles \geq 4$, $\tiles$ even, $\funt(\len) = \tiles$ if and only if
 \label{eq: square, even max tiles, lengths}
 \len \in \left(\frac{ \sqrt{(\tiles-2)^2+(\tiles-4)^2}}{2}, \frac{\tiles-2}{\sqrt{2}} \right].
 \end{equation}
+% *** The corollary says \sqrt{\frac{(\tiles-3)^2+1} {2}}, which comes from the corresponding theorem. This is equal to \frac{\sqrt{(\tiles-2)^2+(\tiles-4)^2}} {2}. Here we are using the second expression, which is probably needed for the random analysis. If so, the expression in the corollary should be changed from the first to the second. (But this change cannnot be made in the theorem it comes from. It's hopefully not a problem that the expression changes from the theorem to the corollary).
 
 
 \subsection{Unit square grid with integer lengths}
