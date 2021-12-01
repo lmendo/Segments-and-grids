@@ -720,7 +720,7 @@ Solving for $\tiles$ gives
 The desired quantity $\funt(\len)$, that is the largest positive integer $\tiles$ satisfying \eqref{eq: theo: funt, sq, form; proof 3}, is thus the right-hand side rounded down, as given by \eqref{eq: theo: funt, sq, form; funt, simpler}.
 \end{proof}
 
-From Theorem~\ref{theo: funt, sq, form} it stems that odd values of $\funt(\len)$ correspond to $\isoli = \jsoli$, whereas even values are achieved with $\jsoli = \isoli+1$. In addition, noting that $\funt(\len) = \tiles$ is equivalent to $\funl(\tiles) < \len \leq \funl(\tiles+1)$ and using Corollary~\ref{theo: funl, sq, form}, the following characterization of $\funt$ is obtained. For $\tiles \geq 3$ with $\tiles$ odd, $\funt(\len) = \tiles$ if and only if
+From Theorem~\ref{theo: funt, sq, form} it stems that odd values of $\funt(\len)$ correspond to $\isoli = \jsoli$, whereas even values are achieved with $\jsoli = \isoli+1$. In addition, noting that $\funt(\len) = \tiles$ is equivalent to $\funl(\tiles) < \len \leq \funl(\tiles+1)$ and using Corollary~\ref{theo: funl, sq, form} the following characterization of $\funt$ is obtained. For $\tiles \geq 3$ with $\tiles$ odd, $\funt(\len) = \tiles$ if and only if
 \begin{equation}
 \label{eq: square, odd max tiles, lengths}
 \len \in \left( \frac{\tiles-3}{\sqrt{2}}, \frac{ \sqrt{(\tiles-1)^2+(\tiles-3)^2}}{2} \right].
@@ -736,9 +736,9 @@ For $\tiles \geq 4$, $\tiles$ even, $\funt(\len) = \tiles$ if and only if
 \subsection{Unit square grid with integer lengths}
 \label{part: max: unit square grid, integer lengths}
 
-A natural variation of the first two problems introduced in \S\ref{part: intro} is to consider $a=b=1$ with the additional restriction that the segment length can only be a positive integer (equivalently, the square grid has spacing $a$ and the segment length can only be an integer multiple of $a$).
+A natural variation of the direct and inverse problems introduced in \S\ref{part: intro} is to consider $a=b=1$ with the additional restriction that the segment length can only be a positive integer (equivalently, the square grid has spacing $a$ and the segment lengths are restricted to integer multiples of $a$).
 
-The \emph{direct problem} in this setting corresponds to the restriction of the function $\funt$ to $\mathbb N$. This will be denoted as a function $\funti: \mathbb N \to \mathbb N$ for greater clarity, although obviously $\funti(\leni) = \funt(\leni)$ for all $\leni \in \mathbb N$. The sequence $\funti(\leni)$, $\leni \in \mathbb N$, which takes values $3, 5, 7, 8, 9, \ldots$, is depicted in Figure~\ref{fig: funti}. This is A346232 in the On-Line Encyclopedia of Integer Sequences \cite{OEIS_unitsq_int_dir}. For this sequence, the expression in Theorem~\ref{theo: funt, sq, form} simplifies in the obvious way, and the following properties hold.
+The direct problem in this setting corresponds to the restriction of $\funt$ to $\mathbb N$. This will be denoted as a function $\funti: \mathbb N \to \mathbb N$ for greater clarity, although obviously $\funti(\leni) = \funt(\leni)$ for all $\leni \in \mathbb N$. The sequence $\funti(\leni)$, $\leni \in \mathbb N$ takes values $3, 5, 7, 8, 9, \ldots$, and is depicted in Figure~\ref{fig: funti}. This is A346232 in the On-Line Encyclopedia of Integer Sequences \cite{OEIS_unitsq_int_dir}. For this sequence, the expression \eqref{eq: theo: funt, sq, form; funt, simpler} in Theorem~\ref{theo: funt, sq, form} simplifies in the obvious way, and the following properties hold.
 
 \begin{figure}%
 \centering%
@@ -806,12 +806,12 @@ Similarly, using the second bound in \eqref{eq: der bounds 2} twice,
 which implies that $\funti(\leni+2)-\funti(\leni) \leq 3$ for $\leni \geq 3$. Therefore the two increments $\funti(\leni+1)-\funti(\leni)$ and $\funti(\leni+2)-\funti(\leni+1)$ cannot both be $2$ for $\leni \geq 3$.
 \end{proof}
 
-The \emph{inverse problem} with integer-length segments can be formulated as follows: given $\tiles \in \mathbb N$, find the \emph{minimum} integer length that allows visiting at least $\tiles$ tiles. Observe that in this case, unlike with real-valued lengths, there is indeed a minimum length, because every subset of $\mathbb N$ has a minimum. This can be expressed as a function $\funli: \mathbb N \to \mathbb N$:
+The inverse problem with integer-length segments can be formulated as follows: given $\tiles \in \mathbb N$, find the \emph{minimum} integer length that allows visiting at least $\tiles$ tiles. Observe that in this case, unlike with real-valued lengths, there is indeed a minimum length, as every subset of $\mathbb N$ has a minimum. This can be expressed as a function $\funli: \mathbb N \to \mathbb N$:
 \begin{equation}
 \label{eq: funli funti}
 \funli(\tiles) = \min\{\leni \in \mathbb N \st \funti(\leni) \geq \tiles\},
 \end{equation}
-which is related to the function $\funl$ corresponding to real-valued lengths by
+which is related to the function $\funl$ for real-valued lengths by
 \begin{equation}
 \label{eq: funli funl}
 \funli(\tiles) = \lfloor\funl(\tiles)\rfloor + 1.
@@ -823,7 +823,7 @@ The converse to \eqref{eq: funli funti} is (compare to \eqref{eq: funt funl}):
 \end{equation}
 In view of \eqref{eq: funli funti} and \eqref{eq: funti funli}, $\funti$ and $\funli$ can be considered as ``pseudo-inverse'' sequences of each other.
 
-The sequence $\funli(\tiles)$, $\tiles \in \mathbb N$ can be computed using \eqref{eq: theo: funt, sq, form; funl} and \eqref{eq: funli funl}, and has initial values $1, 1, 1, 2, 2, 3, 3, 4, 5 \ldots$, as shown in Figure~\ref{fig: funli}. This is A346693 in the On-Line Encyclopedia of Integer Sequences \cite{OEIS_unitsq_int_inv}. However, a slightly simpler expression can be obtained from \eqref{eq: funti leni} and \eqref{eq: funli funti}. This is established by the next theorem, which also states some properties of $\funli$, parallel to those of $\funti$.
+The sequence $\funli(\tiles)$, $\tiles \in \mathbb N$ can be computed using \eqref{eq: theo: funt, sq, form; funl} and \eqref{eq: funli funl}. It has initial values $1, 1, 1, 2, 2, 3, 3, 4, 5 \ldots$, as seen in Figure~\ref{fig: funli}. This is A346693 in the On-Line Encyclopedia of Integer Sequences \cite{OEIS_unitsq_int_inv}. However, a slightly simpler expression can be obtained from \eqref{eq: funti leni} and \eqref{eq: funli funti}. This is established by the next theorem, which also states some properties of $\funli$, parallel to those of $\funti$.
 
 \begin{theorem}
 \label{theo: funli}
@@ -861,7 +861,7 @@ Since the right-hand side is an integer, this is equivalent to
 \end{equation}
 For $\tiles \geq 4$, taking squares and rearranging gives
 \begin{equation}
-\leni \geq \left \lceil \sqrt{\frac{(\tiles-3)^2} 2 + 1} \ \right \rceil,
+\leni \geq \sqrt{\frac{(\tiles-3)^2} 2 + 1},
 \end{equation}
 which combined with \eqref{eq: funli funti} yields the second part of \eqref{eq: funli}. The first part results from noting that $\tiles-3 \leq 0$ for $\tiles \leq 3$, and thus $\leni=1$ satisfies \eqref{eq: theo funli ineq}.
 
