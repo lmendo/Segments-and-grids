@@ -872,26 +872,28 @@ The stated properties for $\funli$ follow directly from those of $\funti$ establ
 \section{Random segment: probabilistic characterization}
 \label{part: rand}
 
-Given $\len \in \mathbb R^+$, consider a segment of length $\len$ with uniformly random position and orientation. Specifically, the coordinates $x_1$, $y_1$ of the first endpoint are independent random variables uniformly distributed on $[0,a)$ and $[0,b)$ respectively. The orientation $\theta$ of the segment is uniformly distributed on $[0,2\pi)$. The variables $x_1$, $y_1$ and $\theta$ determine the coordinates $x_2$, $y_2$ of the second endpoint.
+Given $\len \in \mathbb R^+$, consider a segment of length $\len$ with uniformly random position and orientation. Specifically, the coordinates $x_1$, $y_1$ of the first endpoint are independent random variables uniformly distributed on $[0,a)$ and $[0,b)$ respectively, where $a$, $b$ are the grid parameters. The orientation $\theta$ of the segment is uniformly distributed on $[0,2\pi)$. The coordinates $x_2$, $y_2$ of the second endpoint are determined by $x_1$, $y_1$ and $\theta$.
 
-Each realization of the random segment gives rise to a discrete bounding rectangle, whose normalized dimensions $i$ and $j$ are thus random variables, as is the number $\tiles$ of visited tiles. Except for a set of realizations with zero probability, $i$ and $j$ are at least $1$, and $\tiles = i+j-1$ tiles. Note that $i$ and $j$ are not statistically independent.
+Each realization of the random segment gives rise to a discrete bounding rectangle, whose normalized dimensions $i$ and $j$ are thus random variables, as is the number $\tiles$ of visited tiles. Except for a set of realizations with zero probability, $i$ and $j$ are at least $1$, and $\tiles = i+j-1$. Note that $i$ and $j$ are not statistically independent.
 
-Rectangular grids with real-valued segment lengths are considered in \S\ref{part: probmax: arbitrary grid, real lengths}. The main result is the average number of visited tiles. The square grid with real-valued lengths is addressed in \S\ref{part: probmax: unit square grid, real lengths}. This more specialized setting allows computation of the probability of visiting the maximum possible number of tiles.
+This section deals with the two problems stated in \S\ref{part: intro} for random segments, namely obtaining the average number of visited tiles and the probability of visiting the maximum number of tiles. Segment lengths will be assumed to be real-valued. The results to be obtained are directly applicable for integer lengths as a particular case.
+
+Arbitrary grids are considered in \S\ref{part: probmax: arbitrary grid, real lengths}. The main result is the average number of visited tiles. The square grid is addressed in \S\ref{part: probmax: unit square grid, real lengths}. This more specialized setting allows computation of the probability of visiting the maximum possible number of tiles.
 
 
 \subsection{Arbitrary grid with real-valued lengths}
 \label{part: probmax: arbitrary grid, real lengths}
 
-Let $\funta: \mathbb R^+ \to \mathbb R^+$ be defined such that $\funta(\len)$ gives the average number of tiles visited by a random segment of length $\len$, with the distributions specified in \S\ref{part: rand}. This function can be easily computed using the fact that
+Let $\funta: \mathbb R^+ \to \mathbb R^+$ be defined such that $\funta(\len)$ is the average number of tiles visited by a random segment of length $\len$, with the distributions specified in \S\ref{part: rand}. This function can be easily computed using the fact that
 \begin{equation}
 \label{eq: funta E[i] E[j]}
 \funta(\len) = \E[\tiles] = \E[i]+\E[j]-1,
 \end{equation}
-and noting that events of probability $0$, such as $x_1=a$ or the segment passing through a grid point, can be disregarded.
+and noting that events of probability $0$, such as $x_1=0$ or the segment passing through a grid point, can be disregarded.
 
 \begin{theorem}
 \label{theo: funta, form}
-Given $a, b, \len \in \mathbb R^+$, consider a grid with parameters $a, b$ and a uniformly random segment of length $\len$, as defined above. The average number of tiles visited by the segment, $\funta(\len)$, is 
+Given $a, b, \len \in \mathbb R^+$, consider a grid with parameters $a, b$ and a uniformly random segment of length $\len$, as defined above. The average number of tiles visited by the segment is 
 \begin{equation}
 \label{eq: funta, form}
 \funta(\len) = \frac{2\len}{\pi}\left(\frac 1 a + \frac 1 b\right) + 1.
@@ -907,7 +909,7 @@ Consider again a grid with horizontal spacing $a$ and vertical spacing $b$. The 
 \label{eq: funca}
 \funca(\len) = \frac{2\len}{\pi}\left(\frac 1 a + \frac 1 b\right).
 \end{equation}
-As noted in Proposition \ref{prop: i+j-1}, the number of tiles visited by a segment is the count of its grid line crossings plus $1$, unless it exactly passes through any grid points, but that occurs with probability $0$ and therefore does not affect the expectation. Thus, $\funta(\len)$ is given by the right-hand side of \eqref{eq: funca} plus $1$.
+As noted in Proposition \ref{prop: i+j-1}, the number of tiles visited by a segment is the count of its grid line crossings plus $1$, unless it exactly passes through any grid points, but that occurs with probability $0$ and therefore does not affect the expected value. Thus, $\funta(\len)$ is obtained by adding $1$ to \eqref{eq: funca}, which gives \eqref{eq: funta, form}.
 \end{proof}
 
 In view of Theorem~\ref{theo: funta, form}, the average number of visited tiles as a function of the segment length has a very simple form, namely an affine function. Conversely, for any $\tiles>1$ it is immediate to compute the length of a random segment that visits $\tiles$ tiles on average, given as $\funta^{-1}(\tiles)$.
@@ -997,7 +999,7 @@ The third case obviously gives $\Pr[i \geq n] = 0$, as in \eqref{eq: Pr i geq n}
 The above arguments can be applied to $\Pr[j \geq n]$ if the $x$ and $y$ axes are interchanged. Thus the result is the same with $a$ replaced by $b$.
 \end{proof}
 
-The results in Theorem~\ref{theo: funta, form} and Proposition~\ref{prop: Pr i} make clear the relationship between the problem considered in this section here and Buffon's needle problem, i.e.~the probability that a random segment of fixed length crosses a line in a regular structure of parallel strips \cite[section 1.1]{Mathai99}. Firstly, since the number $\pi$ is involved in \eqref{eq: funta, form}, it is possible to design a simple probabilistic experiment to estimate the value of $\pi$, as in Buffon's original experiment. For example, choosing $a=b=\len=1$ gives $\funta(\len) = 1+1/\pi$.
+The results in Theorem~\ref{theo: funta, form} and Proposition~\ref{prop: Pr i} make clear the relationship between the problem considered here and Buffon's needle problem, i.e.~the probability that a random segment of fixed length crosses a line in a regular structure of parallel strips \cite[section 1.1]{Mathai99}. Firstly, since the number $\pi$ is involved in \eqref{eq: funta, form}, it is possible to design a simple probabilistic experiment to estimate the value of $\pi$, as in Buffon's original experiment. For example, choosing $a=b=\len=1$ gives $\funta(\len) = 1+1/\pi$.
 
 Secondly, a grid with $b \rightarrow \infty$ corresponds to Buffon's arrangement of parallel strips with spacing $a$. Thus
 \begin{equation}
@@ -1033,7 +1035,7 @@ The function $\ras$ satisfies $\ras(x) = \ras(1/x)$, and is therefore symmetric 
 \label{fig: ratio asympt slopes}%
 \end{figure}%
 
-The probability of visiting the maximum number of tiles for a rectangular grid is difficult to compute, due to the irregularity of the optimal $(i,j)$ pairs (see \S\ref{part: fund results}). In the square case, however, the simplicity of the set makes the problem more tractable. 
+The probability of visiting the maximum number of tiles for a rectangular grid is difficult to compute, due to the irregularity of the optimal $(i,j)$ pairs (as was discussed in \S\ref{part: fund results}; in particular see Figure~\ref{fig: pairs_bounds}). In the square case, however, the simplicity of the set of optimal pairs makes the problem more tractable.
 
 
 \subsection{Unit square grid with real-valued lengths}
