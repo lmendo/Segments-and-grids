@@ -32,7 +32,7 @@
 \newcommand{\funti}{T} % function that gives maximum number of touched tiles for integer-valued length
 \newcommand{\funli}{\Lambda} % function that gives minimum integer-valued length for a given number of touched tiles
 \newcommand{\funta}{\varphi} % function that gives average number of touched tiles for real-valued length
-\newcommand{\funca}{\psi} % function that gives average number of grid line crossings for real-valued length
+%\newcommand{\funca}{\psi} % function that gives average number of grid line crossings for real-valued length
 \newcommand{\probmax}{\rho} % function that gives the probability of achieving the maximum number of touched tiles in the square case for real-valued length
 \newcommand{\ras}{\sigma}
 \newcommand{\len}{\ell} % length variable, real-valued
@@ -146,7 +146,7 @@ To address the remaining two questions, the notion of a \emph{random} segment of
 
 The questions studied in this paper are related to Buffon's needle problem and Laplace's extension of it. Buffon's original problem considers tossing a needle of length $\len$ onto ruled paper with parallel lines a distance $b$ apart, and asks what is the probability of the needle crossing a line if it lands in a uniformly random position and orientation. For a needle of length $\len = b$, this is $2/\pi$ (and hence repeated trials of this experiment can be used to estimate $\pi$). This is generalized in \cite{Ramaley69} to $2\len /(\pi b)$ for the expected number of crossings of a needle with arbitrary length.
 
-The Buffon-Laplace needle problem \cite{Mathai99} considers a needle tossed onto a grid of rectangular tiles of width $a$ and height $b$. The number of visited tiles equals one plus the number of crossings almost surely. The probability of the needle staying within a single tile is computed in \cite{Arnow94} for the case where $\len < \min(a,b)$. One of the problems considered in this paper, as mentioned above, is the complementary question \ref{prob: rand prob} of the probability that the needle visits the maximum number of tiles possible for its length.
+The Buffon-Laplace needle problem \cite[section 1.1]{Mathai99} considers a needle tossed onto a grid of rectangular tiles of width $a$ and height $b$. The number of visited tiles equals one plus the number of crossings almost surely. The probability of the needle staying within a single tile is computed in \cite{Arnow94} for the case where $\len < \min(a,b)$. One of the problems considered in this paper, as mentioned above, is the complementary question \ref{prob: rand prob} of the probability that the needle visits the maximum number of tiles possible for its length.
 
 The rest of the paper is organized as follows. Fundamental results are presented in \S\ref{part: fund results}, which form the basis of the subsequent analysis. The direct and inverse problems for a deterministic segment are considered in \S\ref{part: max}, first for arbitrary grids and then for a square grid. The analysis for the random segment is carried out in \S\ref{part: rand}. The average number of tiles is computed for arbitrary grids, and the probability that the segment visits the maximum number of tiles is obtained for a square grid.
 
@@ -872,13 +872,13 @@ The stated properties for $\funli$ follow directly from those of $\funti$ establ
 \section{Random segment: probabilistic characterization}
 \label{part: rand}
 
-Given $\len \in \mathbb R^+$, consider a segment of length $\len$ with uniformly random position and orientation. Specifically, the coordinates $x_1$, $y_1$ of the first endpoint are independent random variables uniformly distributed on $[0,a)$ and $[0,b)$ respectively, where $a$, $b$ are the grid parameters. The orientation $\theta$ of the segment is uniformly distributed on $[0,2\pi)$. The coordinates $x_2$, $y_2$ of the second endpoint are determined by $x_1$, $y_1$ and $\theta$.
+Given $\len \in \mathbb R^+$, consider a segment of length $\len$ with uniformly random position and orientation. Specifically, the coordinates $x_1, y_1$ of the first endpoint are independent random variables uniformly distributed on $[0,a)$ and $[0,b)$ respectively, where $a$, $b$ are the grid parameters. The orientation $\theta$ of the segment is uniformly distributed on $[0,2\pi)$. The variables $x_1$, $y_1$ and $\theta$ determine the coordinates $x_2, y_2$ of the second endpoint.
 
 Each realization of the random segment gives rise to a discrete bounding rectangle, whose normalized dimensions $i$ and $j$ are thus random variables, as is the number $\tiles$ of visited tiles. Except for a set of realizations with zero probability, $i$ and $j$ are at least $1$, and $\tiles = i+j-1$. Note that $i$ and $j$ are not statistically independent.
 
-This section deals with the two problems stated in \S\ref{part: intro} for random segments, namely obtaining the average number of visited tiles and the probability of visiting the maximum number of tiles. Segment lengths will be assumed to be real-valued. The results to be obtained are directly applicable for integer lengths as a particular case.
+This section deals with the two problems stated in \S\ref{part: intro} for random segments, namely obtaining the average number of visited tiles and the probability of visiting the maximum possible number of tiles. Segment lengths will be assumed to be real-valued. The results to be obtained are directly applicable for integer lengths as a particular case.
 
-Arbitrary grids are considered in \S\ref{part: probmax: arbitrary grid, real lengths}. The main result is the average number of visited tiles. The square grid is addressed in \S\ref{part: probmax: unit square grid, real lengths}. This more specialized setting allows computation of the probability of visiting the maximum possible number of tiles.
+Arbitrary grids are considered in \S\ref{part: probmax: arbitrary grid, real lengths}. The main result is the average number of visited tiles. The square grid is addressed in \S\ref{part: probmax: unit square grid, real lengths}. This more specialized setting allows computation of the probability of visiting the maximum number of tiles.
 
 
 \subsection{Arbitrary grid with real-valued lengths}
@@ -901,15 +901,14 @@ Given $a, b, \len \in \mathbb R^+$, consider a grid with parameters $a, b$ and a
 \end{theorem}
 
 \begin{proof}
-Suppose first that the grid is simplified to only horizontal lines with spacing $b$. This matches the set-up of Buffon's original needle problem \cite{Mathai99}, except that here the length $\len$ of the needle may exceed the spacing $b$, allowing it to cross multiple lines. As shown in \cite{Ramaley69}, the expected number of lines crossed equals $2\len/(\pi b)$.
+Suppose first that the grid is simplified to only horizontal lines with spacing $b$. This matches the set-up of Buffon's original needle problem \cite[section 1.1]{Mathai99}, except that here the length $\len$ of the needle may exceed the spacing $b$, allowing it to cross multiple lines. As shown in \cite{Ramaley69}, the expected number of lines crossed equals $2\len/(\pi b)$.
 % When $\len<b$ this expectation matches the probability of the needle crossing a grid line, since it cannot cross more than one.
 
-Consider again a grid with horizontal spacing $a$ and vertical spacing $b$. The grid crossings decompose into crossings of horizontal and vertical grid lines. By linearity of expectation, the expected number of crossings $\funca(\len)$ is the sum of the expectations for parallel lines with spacing $a$ and $b$ respectively, which gives
-\begin{equation}
-\label{eq: funca}
-\funca(\len) = \frac{2\len}{\pi}\left(\frac 1 a + \frac 1 b\right).
-\end{equation}
-As noted in Proposition \ref{prop: i+j-1}, the number of tiles visited by a segment is the count of its grid line crossings plus $1$, unless it exactly passes through any grid points, but that occurs with probability $0$ and therefore does not affect the expected value. Thus, $\funta(\len)$ is obtained by adding $1$ to \eqref{eq: funca}, which gives \eqref{eq: funta, form}.
+Consider again a grid with horizontal spacing $a$ and vertical spacing $b$. The grid crossings decompose into crossings of horizontal and vertical grid lines. By linearity of expectation, the expected number of crossings is the sum of the expectations for parallel lines with spacing $a$ and $b$ respectively, which gives
+\[
+\frac{2\len}{\pi}\left(\frac 1 a + \frac 1 b\right).
+\]
+As noted in Proposition \ref{prop: i+j-1}, the number of tiles visited by a segment is the count of its grid line crossings plus $1$, unless it exactly passes through any grid points, but that occurs with probability $0$ and therefore does not affect the expected value. Thus $\funta(\len)$ is obtained by adding $1$ to the above expression, which gives \eqref{eq: funta, form}.
 \end{proof}
 
 In view of Theorem~\ref{theo: funta, form}, the average number of visited tiles as a function of the segment length has a very simple form, namely an affine function. Conversely, for any $\tiles>1$ it is immediate to compute the length of a random segment that visits $\tiles$ tiles on average, given as $\funta^{-1}(\tiles)$.
@@ -944,7 +943,7 @@ and $\Pr[j \geq n]$ is given by the same expressions with $a$ replaced by $b$.
 \begin{proof}
 Clearly, $\Pr[i \geq 1]=1$. In the following it will be assumed that $n \geq 2$. The basic idea is to compute $\Pr[i \geq n]$ conditioned on $(x_1,y_1)$ (or, as will be seen, only on $x_1$), and then to average over $x_1$ and $y_1$ (actually only over $x_1$).
 
-Given the coordinates $(x_1, y_1)$ of the first endpoint of the segment, with $0 \leq x_1 \leq a$, $0 \leq y_1 \leq b$, the second endpoint $(x_2, y_2)$ lies on a circle with radius $\len$ centered at $(x_1,y_1)$, as shown in Figure~\ref{fig: Pr_i}. The segment orientation is a random angle $\theta$ uniformly distributed on $[0,2\pi)$. It is clear from the figure that $i \geq n$ if and only if $x_2 \geq a(n-1)$ or $x_2 \leq -a(n-2)$; and these events are exclusive for $n \geq 2$. Thus
+Given the coordinates $(x_1, y_1)$ of the first endpoint of the segment, with $0 \leq x_1 < a$, $0 \leq y_1 < b$, the second endpoint $(x_2, y_2)$ lies on a circle with radius $\len$ centered at $(x_1,y_1)$, as shown in Figure~\ref{fig: Pr_i}. The segment orientation is a random angle $\theta$ uniformly distributed on $[0,2\pi)$. It is clear from the figure that $i \geq n$ if and only if $x_2 \geq a(n-1)$ or $x_2 \leq -a(n-2)$; and these events are exclusive for $n \geq 2$. Thus
 \begin{equation}
 \label{eq: Pr i cond}
 \Pr[i \geq n \cond x_1, y_1] = \Pr[x_2 \geq a(n-1) \cond x_1, y_1] + \Pr[x_2 \leq -a(n-2) \cond x_1, y_1].
@@ -952,7 +951,7 @@ Given the coordinates $(x_1, y_1)$ of the first endpoint of the segment, with $0
 The two conditional probabilities on the right-hand side of \eqref{eq: Pr i cond} are different in general. However, averaging over $x_1, y_1$ gives, by symmetry, $\Pr[x_2 \geq a(n-1)] = \Pr[x_2 \leq -a(n-2)]$. In addition, the coordinate $y_1$ does not have any influence on these events, and therefore conditioning on $x_1, y_1$ is the same as conditioning on $x_1$. This implies that, for $n \geq 2$,
 \begin{equation}
 \label{eq: Pr i = 2 Pr}
-\Pr[i \geq n] = 2 \Pr[x_2 \geq a(n-1)] = 2 \E[\Pr[x_2 \geq a(n-1) \cond x_1]].
+\Pr[i \geq n] = 2 \Pr[x_2 \geq a(n-1)].
 \end{equation}
 
 \begin{figure}
@@ -970,18 +969,19 @@ The two conditional probabilities on the right-hand side of \eqref{eq: Pr i cond
 \label{fig: Pr_i}
 \end{figure}%
 
-Consider the event $x_2 \geq a(n-1)$ conditioned on $x_1$, with $n \geq 2$. There are three possibilities depending on $x_1$, $n$ and $\len$. If $a(n-1) < \len$, regardless of $x_1$ the length $\len$ is enough for $x_2$ to exceed $a(n-1)$ for some angles $\theta$. This is depicted in Figure~\ref{fig: Pr_i_full}, where the section of the arc with solid line represents those angles for which $x_2 > a(n-1)$. If $a(n-2) < \len \leq  a(n-1)$, the length will be enough provided that $x_1 \geq a(n-1)-\len$, which corresponds to the shaded region in Figure~\ref{fig: Pr_i_notfull}. Lastly, if $\len \leq  a(n-2)$ it is not possible for $x_2$ to exceed $a(n-1)$. Note that the coordinate $y_1$ is irrelevant to this.
+Consider the event $x_2 \geq a(n-1)$ conditioned on $x_1$, with $n \geq 2$. There are three possibilities depending on $x_1$, $n$ and $\len$. If $a(n-1) < \len$, regardless of $x_1$ the length $\len$ is enough for $x_2$ to exceed $a(n-1)$ for some angles $\theta$. This is depicted in Figure~\ref{fig: Pr_i_full}, where the section of the arc with solid line represents, for a given $x_1$, those angles for which $x_2 > a(n-1)$. If $a(n-2) < \len \leq  a(n-1)$, the length will be enough provided that $x_1 \geq a(n-1)-\len$, and then only for certain angles. This restriction on $x_1$ corresponds to the shaded region in Figure~\ref{fig: Pr_i_notfull}. Lastly, if $\len \leq  a(n-2)$ it is not possible for $x_2$ to exceed $a(n-1)$, regardless of $x_1$ or $\theta$. The figure makes it clear that the coordinate $y_1$ is irrelevant to this.
 
 In the first two cases above, the probability that $x_2 \geq a(n-1)$, conditioned on $x_1$, is the length of the arc to the right of the line $x=a(n-1)$ divided by $2\pi\len$, that is,
 \begin{equation}
 \label{eq: Pr x_2 geq a(n-1) cond}
 \Pr[x_2 \geq a(n-1) \cond x_1] = \frac 1 \pi \arccos \frac{a(n-1)-x_1}{\len}.
 \end{equation}
-In the first case $x_1$ has a uniform distribution on $(0,a)$, and $\Pr[x_2 \geq a(n-1)]$ is easily obtained from \eqref{eq: Pr x_2 geq a(n-1) cond} as
+In the first case $x_1$ has a uniform distribution on $[0,a)$, and $\Pr[x_2 \geq a(n-1)]$ is easily obtained from \eqref{eq: Pr x_2 geq a(n-1) cond} as
 \begin{equation}
 \label{eq: Pr x_2 geq a(n-1), first case}
 \begin{split}
-\Pr[x_2 \geq a(n-1)] &= \frac 1 {\pi a} \int_0^a\arccos \frac{a(n-1)-x_1}{\len} \diff x_1 \\
+\Pr[x_2 \geq a(n-1)] &= \E[\Pr[x_2 \geq a(n-1) \cond x_1]] \\
+&= \frac 1 {\pi a} \int_0^a\arccos \frac{a(n-1)-x_1}{\len} \diff x_1 \\
 &= \frac{\len}{\pi a}\,\, \left( f\left( \frac{a(n-1)}{\len} \right) - f\left( \frac{a(n-2)}{\len} \right) \right),
 \end{split}
 \end{equation}
@@ -996,7 +996,7 @@ which combined with \eqref{eq: Pr i = 2 Pr} yields the expression in \eqref{eq: 
 
 The third case obviously gives $\Pr[i \geq n] = 0$, as in \eqref{eq: Pr i geq n}, fourth line.
 
-The above arguments can be applied to $\Pr[j \geq n]$ if the $x$ and $y$ axes are interchanged. Thus the result is the same with $a$ replaced by $b$.
+The above arguments can be applied to $\Pr[j \geq n]$ if the $x$ and $y$ axes are interchanged. Thus the formulas are the same with $a$ replaced by $b$.
 \end{proof}
 
 The results in Theorem~\ref{theo: funta, form} and Proposition~\ref{prop: Pr i} make clear the relationship between the problem considered here and Buffon's needle problem, i.e.~the probability that a random segment of fixed length crosses a line in a regular structure of parallel strips \cite[section 1.1]{Mathai99}. Firstly, since the number $\pi$ is involved in \eqref{eq: funta, form}, it is possible to design a simple probabilistic experiment to estimate the value of $\pi$, as in Buffon's original experiment. For example, choosing $a=b=\len=1$ gives $\funta(\len) = 1+1/\pi$.
@@ -1006,9 +1006,14 @@ Secondly, a grid with $b \rightarrow \infty$ corresponds to Buffon's arrangement
 \label{eq: number of lines crossed, Buffon}
 \lim_{b \rightarrow \infty} \funta(\len)-1 = \frac{2\len}{\pi a}
 \end{equation}
-gives the average number of lines crossed in Buffon's experiment. For $\len \leq a$ the segment can cross at most one line, and \eqref{eq: number of lines crossed, Buffon} coincides with the probability of crossing \cite[section 1.1]{Mathai99}.
+gives the average number of lines crossed in Buffon's experiment. For $\len \leq a$ the segment can cross at most one line, and \eqref{eq: number of lines crossed, Buffon} coincides with the probability of crossing \cite[theorem 1.1.1]{Mathai99}.
 
-Lastly, $\Pr[i \geq n]$ as computed in Proposition~\ref{prop: Pr i} for $n \geq 2$ can be seen as a generalization of the probability of crossing at least one line in Buffon's experiment, when a needle endpoint is only allowed to move in a narrower region of width $n-1$ times smaller than the width of the strips (instead of across the full strip as in Buffon's setting).
+% ***Alex: please check this, as I've done some content changes
+Lastly, $\Pr[i \geq 2]$ as computed in Proposition~\ref{prop: Pr i} can be interpreted as the probability of crossing at least one line in Buffon's experiment. Indeed, for $n=2$ the third line in \eqref{eq: Pr i geq n} reduces again to $2\len/(\pi a)$ for $\len \leq a$, whereas the second line reduces to $2\len f(a/\len)/(\pi a)$ for $\len > a$. Using \eqref{eq: f} this is expressed as
+\[
+\frac 2 \pi \arccos\frac a \len + \frac{2\len}{\pi a} \left(1 - \sqrt{1-\frac{a^2}{\len^2}} \right),
+\]
+in agreement with the known result for Buffon's needle problem with $\len > a$ \cite[theorem 1.1.2]{Mathai99}. On the other hand, $\Pr[i \geq n]$ for $n \geq 3$ can be seen as the probability of crossing at least one line in a modified version of Buffon's setting in which a needle endpoint is only allowed to move in a narrower region in the middle of a strip, of width $2n-3$ times smaller than the strip width. 
 
 For $\len \rightarrow \infty$, the average number of visited tiles $\funta$ has the following asymptotic slope, as stems from \eqref{eq: funta, form}:
 \begin{equation}
@@ -1027,6 +1032,7 @@ On the other hand, the maximum number of visited tiles $\funt$ has an asymptotic
 \end{equation}
 The function $\ras$ satisfies $\ras(x) = \ras(1/x)$, and is therefore symmetric in logarithmic scale, as can be seen in Figure~\ref{fig: ratio asympt slopes}. It is unimodal with maximum value $2\sqrt 2/\pi \approx 0.9003$ for $a/b=1$, and its limit when $a/b$ tends to $0$ or $\infty$ is $2/\pi \approx 0.6366$. This implies that for $\len$ large the average number of tiles $\funta(\len)$ cannot very small compared with the maximum number of tiles $\funt(\len)$. For example, $\funta(\len)$ asymptotically exceeds $0.8\funt(\len)$ for $1/3 \leq a/b \leq 3$.
 
+% ***Change vertical axis scale: [0 1]? [0.5 1]?
 \begin{figure}
 \centering%
 \includegraphics[width=.7\textwidth]{ratio_asympt_slopes}%
