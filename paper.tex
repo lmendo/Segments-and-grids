@@ -1068,9 +1068,9 @@ g(\genvar, u, v) &= \frac 1 {2\pi} \biggl(
 
 \begin{theorem}
 \label{theo: probmax, sq}
-Given $\len \in \mathbb R^+$, consider a unit square grid and a uniformly random segment of length $\len$, as previously defined. The probability $\probmax(\len)$ that the segment visits the maximum number of tiles $\funt(\len)$ is
+Given $\len \in \mathbb R^+$, consider a unit square grid and a uniformly random segment of length $\len$, as previously defined. The probability $\probmax(\len)$ that the segment visits the maximum number of tiles $\tiles = \funt(\len)$ is
 \begin{equation}
-\label{eq: probmax}
+\label{eq: probmax} %***Change order of the two summands under each square root? here and in the rest of the proof, in accordance with \eqref{eq: square, odd max tiles, lengths}. Or change there
 \begin{split}
 \probmax(\len) & = g\left(\len, 
 \tiles-3, \tiles-3 \right) \quad\ \text{for } \tiles \text{ odd, } \textstyle \len \in \left( \frac{\tiles-3}{\sqrt{2}}, \frac{\sqrt{(\tiles-5)^2+(\tiles-1)^2}} 2 \right]; \\
@@ -1084,11 +1084,11 @@ Given $\len \in \mathbb R^+$, consider a unit square grid and a uniformly random
 \end{theorem}
 
 \begin{proof}
-The approach is similar to that used in the proof of Proposition~\ref{prop: Pr i}, but conditioning on the segment orientation $\theta$ instead of on the location of its first endpoint.
+The approach is analogous to that used in the proof of Proposition~\ref{prop: Pr i}, but conditioning on the segment orientation $\theta$ instead of on the location of its first endpoint.
 
-The first endpoint of the segment is assumed to be in the reference tile with lower-left corner $(0,0)$. For an arbitrary value $\tiles$, the segment visits $\tiles$ tiles almost surely if and only if its second endpoint is in a tile with lower-left corner $(i-1,j-1)$, $i,j\geq 1$, $i+j-1=\tiles$, or in a tile symmetrical to this with respect to the line $x=1/2$ (with $i \leq 0$), or $y=1/2$ (with $j \leq 0$), or both.
+For $i,j \in \mathbb Z$, the (square) tile with lower-left coordinate $(i,j)$ is defined as $[i,i+1) \times [j,j+1)$, i.e.~the tile includes its lower and left edges, and tiles are disjoint. The first endpoint of the segment is contained in the tile with lower-left corner $(0,0)$, which will be referred to as reference tile. For an arbitrary value $\tiles$, the segment visits $\tiles$ tiles almost surely if and only if its second endpoint is in a tile with lower-left corner $(i-1,j-1)$, $i,j\geq 1$, $i+j-1=\tiles$, or in a tile symmetrical to this about the line $x=1/2$ (with $i \leq 0$), or about $y=1/2$ (with $j \leq 0$), or about both.
 
-Consider $i,j\geq 1$ for the moment, and let $\tiles = \funt(\len)$. For a given orientation $\theta$, the segment goes from the reference tile to that with lower-left corner $(i-1,j-1)$ if and only if shifting the segment so that its second endpoint has coordinates $(i-1,j-1)$ results in the first endpoint being in the reference tile. It cannot be the case that the segment ``overshoots'' past this tile, because that would result in a number of visited tiles exceeding the assumed maximum, $\tiles$.
+Given $\len \in \mathbb R^+$, let $\tiles = \funt(\len)$, and consider $i,j\geq 1$ such that $i+j-1=\tiles$. For a fixed orientation $\theta$, the segment goes from the reference tile to that with lower-left corner $(i-1,j-1)$ if and only if shifting the segment so that its second endpoint has coordinates $(i-1,j-1)$ results in the first endpoint being in the reference tile. It cannot be the case that the segment ``overshoots'' past this tile, because that would result in a number of visited tiles exceeding $\tiles$, which is the maximum.
 
 \begin{figure}
 \centering%
@@ -1105,21 +1105,21 @@ Consider $i,j\geq 1$ for the moment, and let $\tiles = \funt(\len)$. For a given
 \label{fig: probmax_funt_odd}%
 \end{figure}%
 
-There is a range of possible values of $\theta$ for which the above condition is satisfied. This range corresponds to the part of the arc with solid line in Figure~\ref{fig: probmax_funt_odd}. For convenience, the angle $\theta$ is defined clockwise from the downward direction. For each $\theta$ in the allowed range, the valid positions for the first endpoint of the (shifted) segment are in the shaded rectangle, whose dimensions depend on $\theta$. The area occupied by this rectangle is the probability $\probmax_{i-1,j-1}(\len,\theta)$ that the segment goes from the reference tile to that with lower-left corner $(i-1,j-1)$ conditioned on $\theta$. The desired probability, $\probmax(\len)$, will be obtained by averaging $\probmax_{i-1,j-1}(\len, \theta)$ over $\theta$, summing over all $i, j \geq 1$ such that the tile with lower-left corner $(i-1, j-1)$ can be reached from the reference tile, and then using symmetry to take into account the tiles with $i \leq 0$ or $j \leq 0$.
+There is a range of possible values of $\theta$ for which the above condition is satisfied. This range corresponds to the part of the arc with solid line in Figure~\ref{fig: probmax_funt_odd}. For convenience, the angle $\theta$ is defined clockwise from the downward direction. For each $\theta$ in the allowed range, the valid positions for the first endpoint of the (shifted) segment are in a rectangle contained in the reference tile. The rectangle associated with an example $\theta$ is shown in the figure, shaded. The area occupied by this rectangle is the probability $\probmax_{i-1,j-1}(\len,\theta)$ that the segment goes from the reference tile to that with lower-left corner $(i-1,j-1)$ conditioned on $\theta$. The desired probability $\probmax(\len)$ will be obtained by averaging $\probmax_{i-1,j-1}(\len, \theta)$ over $\theta$, summing over all $i, j \geq 1$ such that the tile with lower-left corner $(i-1, j-1)$ can be reached from the reference tile, and then using symmetry to take into account the tiles with $i \leq 0$ or $j \leq 0$.
 
-The situation is different depending on whether $\tiles$ is odd or even. Consider $\tiles$ odd first. Under this assumption, the range of lengths corresponding to the condition $\tiles = \funt(\len)$ is given by \eqref{eq: square, odd max tiles, lengths}. For any length in this interval, there are some positions within the reference tile from which the tile with lower-left coordinate $((\tiles-1)/2, (\tiles-1)/2)$ can be reached. Equivalently, the shifted segment with one endpoint at $((\tiles-1)/2, (\tiles-1)/2)$ can reach the reference tile. This is illustrated in Figure~\ref{fig: probmax_funt_odd_diag}. In addition, if 
+The situation is different depending on whether $\tiles = \funt(\len)$ is odd or even. Consider $\tiles$ odd first. Under this assumption, the range of lengths for which $\funt(\len)$ equals $\tiles$ is given by \eqref{eq: square, odd max tiles, lengths}. For any length in this interval, there are some positions within the reference tile from which the tile with lower-left coordinate $((\tiles-1)/2, (\tiles-1)/2)$ can be reached. Equivalently, the shifted segment with one endpoint at $((\tiles-1)/2, (\tiles-1)/2)$ can reach the reference tile. This is illustrated in Figure~\ref{fig: probmax_funt_odd_diag}. In addition, if 
 \begin{equation}
 \label{eq: probmax len odd2}
 \len > \frac{\sqrt{(\tiles-5)^2 + (\tiles-1)^2}}{2}
 \end{equation}
-the two tiles with lower-left coordinates $((\tiles-3)/2, (\tiles+1)/2)$ and $((\tiles+1)/2, (\tiles-3)/2)$ are also reachable from the reference tile; or equivalently the shifted segment can reach the reference tile, as shown in Figure~\ref{fig: probmax_funt_odd_offdiag}. This can only happen for $\tiles \geq 5$ (for $\tiles=3$ the inequality \eqref{eq: probmax len odd2} cannot be satisfied for lengths in the range given by \eqref{eq: square, odd max tiles, lengths}). In this case, by symmetry, each of those two tiles contributes the same probability. Other tiles with $i,j\geq 1$ corresponding to the same $\tiles$ do not need to be considered, because they cannot be reached with lengths satisfying \eqref{eq: square, odd max tiles, lengths}.
+the two tiles with lower-left coordinates $((\tiles-3)/2, (\tiles+1)/2)$ and $((\tiles+1)/2, (\tiles-3)/2)$ are also reachable from the reference tile; or equivalently the shifted segment can reach the reference tile, as shown in Figure~\ref{fig: probmax_funt_odd_offdiag}. This can only happen for $\tiles \geq 5$ (for $\tiles=3$ the inequality \eqref{eq: probmax len odd2} cannot be satisfied for lengths in the range given by \eqref{eq: square, odd max tiles, lengths}). In this case, by symmetry, each of those two tiles contributes the same probability. Other tiles with $i,j\geq 1$, $i+j-1 = \tiles$ do not need to be considered, because they cannot be reached with lengths satisfying \eqref{eq: square, odd max tiles, lengths}.
 
 For $\tiles$ even, which corresponds to lengths in the interval \eqref{eq: square, even max tiles, lengths}, the two tiles with lower-left coordinates $(\tiles/2-1, \tiles/2)$ and $(\tiles/2, \tiles/2-1)$ can always be reached from some positions within the reference tile. In addition, if
 \begin{equation}
 \label{eq: probmax len even2}
 \len > \frac{\sqrt{((\tiles-6)^2 + \tiles^2}}{2}
 \end{equation}
-the two tiles with lower-left coordinates $(\tiles/2-2, \tiles/2+1)$ and $(\tiles/2+1, \tiles/2-2)$ have to be considered too. This can only happen for $\tiles \geq 8$. No other tiles with $i,j\geq 1$ can be reached from the reference tile.
+the two tiles with lower-left coordinates $(\tiles/2-2, \tiles/2+1)$ and $(\tiles/2+1, \tiles/2-2)$ have to be considered too. This can only happen for $\tiles \geq 8$. No other tiles with $i,j\geq 1$ can be reached from the reference tile $i+j-1 = \tiles$.
 
 The above two paragraphs show that, among all possible tiles with lower-left corner $(i-1,j-1)$, $i,j\geq 1$, those whose centers lie on the lines $x=1/2$ or $y=1/2$ (i.e.~those with $i=1$ of $j=1$) are never reachable from the reference tile, in the sense that a segment that touches the maximum number of tiles cannot have its second endpoint in those tiles. This implies that $\probmax(\len)$ can be computed by considering only the tiles with $i,j\geq 1$ (actually $i,j \geq 2$), and then multiplying by $4$ to include the symmetrical tiles with respect to $x=1/2$ and $y=1/2$. As an example, Figure~\ref{fig: probmax_possible_tiles} shows the reference tile (solid line) and the tiles that can contain the second endpoint (dotted lines) for $\funt(\len) = 5$.
 
@@ -1131,9 +1131,9 @@ The above two paragraphs show that, among all possible tiles with lower-left cor
 \label{fig: probmax_possible_tiles}%
 \end{figure}%
 
-According to the preceding analysis, two cases need to be distinguished for $\tiles$ odd, depending on whether \eqref{eq: probmax len odd2} is satisfied or not; and similarly two cases exist for $\tiles$ even, depending on whether \eqref{eq: probmax len even2} holds or not. These are, respectively, the four cases in \eqref{eq: probmax}.
+According to the preceding analysis, two cases need to be distinguished for $\tiles = \funt(\len)$ odd, depending on whether \eqref{eq: probmax len odd2} is satisfied or not; and similarly two cases exist for $\tiles = \funt(\len)$ even, depending on whether \eqref{eq: probmax len even2} holds or not. These are, respectively, the four cases in \eqref{eq: probmax}.
 
-In the first case indicated in \eqref{eq: probmax}, as argued, $\tiles$ is odd and only the tile with lower-left coordinates $((\tiles-1)/2, (\tiles-1)/2)$ is reachable. For a given $\theta$, the conditional probability $\probmax_{(\tiles-1)/2, (\tiles-1)/2}(\len, \theta)$ is the area of the shaded rectangle in Figure~\ref{fig: probmax_funt_odd_diag}:
+In the first case indicated in \eqref{eq: probmax}, as previously argued, $\tiles$ is odd and only the tile with lower-left coordinates $((\tiles-1)/2, (\tiles-1)/2)$ is reachable. For a given $\theta$, the conditional probability $\probmax_{(\tiles-1)/2, (\tiles-1)/2}(\len, \theta)$ is the area of the shaded rectangle in Figure~\ref{fig: probmax_funt_odd_diag}:
 \begin{equation}
 \label{eq: probmax: probmax theta odd}
 \probmax_{(\tiles-1)/2, (\tiles-1)/2}(\len, \theta) = \left(\len\sin\theta - \frac{\tiles-3}2\right) \left(\len\cos\theta - \frac{\tiles-3}2\right).
@@ -1145,7 +1145,7 @@ The range of allowed values for $\theta$, as can be seen from the figure, is $(\
 \label{eq: odd theta 1}
 \theta_1 & = \arccos\frac{\tiles-3}{2\len}.
 \end{align}
-Computing the average of \eqref{eq: probmax: probmax theta odd} over $\theta$, multiplying by $4$ to include all quadrants and comparing with \eqref{eq: g def} gives $\probmax(\len)$ as
+Averaging \eqref{eq: probmax: probmax theta odd} over $\theta$, multiplying by $4$ to include the symmetrical tiles in other quadrants and using \eqref{eq: g def} gives $\probmax(\len)$ as
 \begin{equation}
 \label{eq: probmax: probmax odd}
 \begin{split}
