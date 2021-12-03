@@ -1015,22 +1015,22 @@ Lastly, $\Pr[i \geq 2]$ as computed in Proposition~\ref{prop: Pr i} can be inter
 \]
 in agreement with the known result for Buffon's needle problem with $\len > a$ \cite[theorem 1.1.2]{Mathai99}. On the other hand, $\Pr[i \geq n]$ for $n \geq 3$ can be seen as the probability of crossing at least one line in a modified version of Buffon's setting in which a needle endpoint is only allowed to move in a narrower region in the middle of a strip, of width $2n-3$ times smaller than the strip width. 
 
-For $\len \rightarrow \infty$, the average number of visited tiles $\funta$ has the following asymptotic slope, as stems from \eqref{eq: funta, form}:
+For $\len \rightarrow \infty$, the average number of visited tiles $\funta(\len)$ has the following asymptotic slope, as stems from \eqref{eq: funta, form}:
 \begin{equation}
 \label{eq: asympt slope ave}
 \lim_{\len \rightarrow \infty} \frac{\funta(\len)}{\len} = \frac 2 \pi \left(\frac 1 a + \frac 1 b \right).
 \end{equation}
-On the other hand, the maximum number of visited tiles $\funt$ has an asymptotic slope given by \eqref{eq: asympt slope}. It is interesting to consider the ratio of these values, which also gives the asymptotic ratio of average and maximum numbers of visited tiles. This depends only on $a/b$:
+On the other hand, the maximum number of visited tiles $\funt(\len)$ has an asymptotic slope given by \eqref{eq: asympt slope}. It is interesting to consider the ratio of these values, which also gives the asymptotic ratio of average and maximum numbers of visited tiles. This depends only on $a/b$, and is thus expressed as a function $\ras: \mathbb R^+ \to (0,1)$:
 \begin{equation}
 \label{eq: ras}
 \ras(a/b) = \lim_{\len \rightarrow \infty}
 \frac { \funta(\len) } { \funt(\len) }
 = \frac
-{ \lim_{\len \rightarrow \infty} \funta(\len)/\len }
-{ \lim_{\len \rightarrow \infty} \funt(\len)/\len }
+{ \lim_{\len \rightarrow \infty} (\funta(\len)/\len) }
+{ \lim_{\len \rightarrow \infty} (\funt(\len)/\len) }
 = \frac{2\left(1 + a/b\right)}{\pi\sqrt{1 + \left(a/b\right)^2}}.
 \end{equation}
-The function $\ras$ satisfies $\ras(x) = \ras(1/x)$, and is therefore symmetric in logarithmic scale, as can be seen in Figure~\ref{fig: ratio asympt slopes}. It is unimodal with maximum value $2\sqrt 2/\pi \approx 0.9003$ for $a/b=1$, and its limit when $a/b$ tends to $0$ or $\infty$ is $2/\pi \approx 0.6366$. This implies that for $\len$ large the average number of tiles $\funta(\len)$ cannot very small compared with the maximum number of tiles $\funt(\len)$. For example, $\funta(\len)$ asymptotically exceeds $0.8\funt(\len)$ for $1/3 \leq a/b \leq 3$.
+The function $\ras$ satisfies $\ras(x) = \ras(1/x)$, and is therefore symmetric in logarithmic scale, as can be observed in Figure~\ref{fig: ratio asympt slopes}. It is unimodal with maximum value $2\sqrt 2/\pi \approx 0.9003$ for $a/b=1$, and its limit when $a/b$ tends to $0$ or $\infty$ is $2/\pi \approx 0.6366$. This implies that for $\len$ large the average number of tiles $\funta(\len)$ cannot very small compared with the maximum number of tiles $\funt(\len)$. For example, $\funta(\len)$ asymptotically exceeds $0.8\funt(\len)$ for $1/3 \leq a/b \leq 3$.
 
 % ***Change vertical axis scale: [0 1]? [0.5 1]?
 \begin{figure}
@@ -1054,9 +1054,9 @@ For a random segment with length $\len \in \mathbb R^+$ on a unit square grid, l
 For $u, v \in \mathbb N$, $\genvar \in \mathbb R^+$, let
 \begin{equation}
 \label{eq: g def}
-g(\genvar, u, v) = \int_{\arcsin \frac u {2r}}^{\arccos \frac u {2r}} \left( \genvar \sin \theta - \frac u 2 \right) \left( \genvar \cos \theta - \frac v 2 \right) \diff \theta.
+g(\genvar, u, v) = \frac 2 \pi \int_{\arcsin \frac v {2\genvar}}^{\arccos \frac u {2\genvar}} \left( \genvar \sin \theta - \frac u 2 \right) \left( \genvar \cos \theta - \frac v 2 \right) \diff \theta.
 \end{equation}
-Using the identities $\cos^2 \alpha = 1-\sin^2 \alpha$ and $\cos(2\alpha) = 2\cos^2\alpha-1 = 1 - 2\sin^2\alpha$, the integral in \eqref{eq: g def} is computed as
+Computing the integral in \eqref{eq: g def} and using the identities $\cos^2 \alpha = 1-\sin^2 \alpha$ and $\cos(2\alpha) = 2\cos^2\alpha-1 = 1 - 2\sin^2\alpha$,
 \begin{equation}
 \label{eq: g fin}
 \begin{split}
