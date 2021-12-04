@@ -1771,11 +1771,12 @@ limit(G*t, t, inf)
 syms t, assume(t, 'real'), pretty(simplify(diff((acos((t-3)/hypot(t-3, t-1)) - asin((t-3)/hypot(t-1, t-3))), t)))
 
 
-%% #67. Figure
+%% #67. Figure: probmax
 
 clear, clc
 a = 1;
-g = @(r,u,v) ((acos(u/2./r)-asin(v/2./r)).*u.*v + 2*r.^2 + u.^2/2 + v.^2/2 - u.*sqrt(4*r.^2-v.^2) - v.*sqrt(4*r.^2-u.^2))/2/pi;
+%g= @(r,u,v) ((acos(u/2./r)-asin(v/2./r)).*u.*v + 2*r.^2 + u.^2/2 + v.^2/2 - u.*sqrt(4*r.^2-v.^2) - v.*sqrt(4*r.^2-u.^2))/2/pi; % #65
+g = @(r,u,v) ((acos(v/2./r)-asin(u/2./r)).*u.*v + 2*r.^2 + u.^2/2 + v.^2/2 - u.*sqrt(4*r.^2-v.^2) - v.*sqrt(4*r.^2-u.^2))/2/pi; % #74
 L_fine = .01:.01:16;
 ii = ceil(L_fine/sqrt(2)) + 1;
 jj = ceil(sqrt(L_fine.^2 - (ii-2).^2 )) + 1;
@@ -1929,3 +1930,38 @@ as_ratio_slopes = 2/pi*(1+a/b)./hypot(1, a/b)
 plot(funta./funt), hold on, plot(xlim, repmat(as_ratio_slopes, 1, 2))
 
 
+%% #74. Like #65 but defining the g function differently (gives the same result)
+% Checked
+
+clear, clc
+a = 1;
+L = .1:.1:10; %3.8:.1:4.2;%3:.1:3.5;
+N = 3e5;
+ii = ceil(L/sqrt(2)) + 1;
+jj = ceil(sqrt(L.^2 - (ii-2).^2 )) + 1;
+funt = ii+jj-1 % formula valid for real-valued lengths
+z0 = rand(N, numel(L)) + 1j*rand(N, numel(L));
+z1 = z0 + L.*exp(1j*2*pi*rand(N, numel(L)));
+ii = ceil(abs(real(z1))) + (real(z1)<0); % add 1 for negative
+jj = ceil(abs(imag(z1))) + (imag(z1)<0); % add 1 for negative
+result = mean(ii+jj-1 == funt , 1);
+plot(L, result, 'o', 'markersize', 4), hold on, grid on
+
+%g= @(r,u,v) ((acos(u/2./r)-asin(v/2./r)).*u.*v + 2*r.^2 + u.^2/2 + v.^2/2 - u.*sqrt(4*r.^2-v.^2) - v.*sqrt(4*r.^2-u.^2))/2/pi; % #65
+g = @(r,u,v) ((acos(v/2./r)-asin(u/2./r)).*u.*v + 2*r.^2 + u.^2/2 + v.^2/2 - u.*sqrt(4*r.^2-v.^2) - v.*sqrt(4*r.^2-u.^2))/2/pi; % #74
+L_fine = linspace(.01,10,1e4);
+ii = ceil(L_fine/sqrt(2)) + 1;
+jj = ceil(sqrt(L_fine.^2 - (ii-2).^2 )) + 1;
+funt_fine = ii+jj-1; % formula valid for real-valued lengths
+result_computed = NaN(size(funt_fine));
+ind_odd = (mod(funt_fine,2)==1) & (L_fine > (funt_fine-3)/sqrt(2)) & (L_fine <= sqrt((funt_fine-5).^2+(funt_fine-1).^2)/2);
+result_computed(ind_odd) = g(L_fine(ind_odd)/a, funt_fine(ind_odd)-3, funt_fine(ind_odd)-3);
+ind_odd2 = (mod(funt_fine,2)==1) & (L_fine > sqrt((funt_fine-5).^2+(funt_fine-1).^2)/2) & (L_fine <= sqrt((funt_fine-3).^2+(funt_fine-1).^2)/2);
+result_computed(ind_odd2) = g(L_fine(ind_odd2)/a, funt_fine(ind_odd2)-3, funt_fine(ind_odd2)-3) + 2*g(L_fine(ind_odd2)/a, funt_fine(ind_odd2)-5, funt_fine(ind_odd2)-1);
+ind_even = (mod(funt_fine,2)==0) & (L_fine > sqrt((funt_fine-4).^2+(funt_fine-2).^2)/2) & (L_fine <= sqrt((funt_fine-6).^2+funt_fine.^2)/2);
+result_computed(ind_even) = 2*g(L_fine(ind_even)/a, funt_fine(ind_even)-4, funt_fine(ind_even)-2);
+ind_even2 = (mod(funt_fine,2)==0) & (L_fine > sqrt((funt_fine-6).^2+funt_fine.^2)/2) & (L_fine <= (funt_fine-2)/sqrt(2));
+result_computed(ind_even2) = 2*g(L_fine(ind_even2)/a, funt_fine(ind_even2)-4, funt_fine(ind_even2)-2) + 2*g(L_fine(ind_even2)/a, funt_fine(ind_even2)-6, funt_fine(ind_even2));
+plot(L_fine.*(ind_odd|ind_odd2)./(ind_odd|ind_odd2), result_computed.*(ind_odd|ind_odd2)./(ind_odd|ind_odd2), '-', 'linewidth', .7), hold on, grid on
+plot(L_fine.*(ind_even|ind_even2)./(ind_even|ind_even2), result_computed.*(ind_even|ind_even2)./(ind_even|ind_even2), '-', 'linewidth', .7), hold on, grid on
+legend({'Simulated' 'Computed, odd max number of squares' 'Computed, even max number of squares'})
