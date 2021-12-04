@@ -150,7 +150,8 @@ The Buffon-Laplace needle problem \cite[section 1.1]{Mathai99} considers a needl
 
 The rest of the paper is organized as follows. Fundamental results are presented in \S\ref{part: fund results}, which form the basis of the subsequent analysis. The direct and inverse problems for a deterministic segment are considered in \S\ref{part: max}, first for arbitrary grids and then for a square grid. The analysis for the random segment is carried out in \S\ref{part: rand}. The average number of tiles is computed for arbitrary grids, and the probability that the segment visits the maximum number of tiles is obtained for a square grid.
 
-% The rounding down (floor) and rounding up (ceiling) operations will be denoted as $\lfloor \cdot \rfloor$ and $\lceil \cdot \rceil$. The notation $[\mathsf S]$ will be used for the Iverson function, which equals $1$ if statement $\mathsf S$ is true and $0$ otherwise.
+The symbols $\lfloor x \rfloor$ and $\lceil x \rceil$ respectively denote the floor (rounding down) and ceiling (rounding up) operations. The functions $\arcsin x$ and $\arccos x$ are defined as their principal branches in the usual way. In particular, the output angles are in $[0, \pi/2]$ for $x \in [0,1]$.
+% The notation $[\mathsf S]$ will be used for the Iverson function, which equals $1$ if statement $\mathsf S$ is true and $0$ otherwise.
 
 
 \section{Fundamentals}
@@ -1065,6 +1066,7 @@ g(\genvar, u, v) &= \frac 1 {2\pi} \biggl(
 & \quad  - u \sqrt{4\genvar^2-v^2} - v \sqrt{4\genvar^2-u^2} \biggr).
 \end{split}
 \end{equation}
+Taking into account that $\arcsin x = \pi/2 - \arccos x$, it follows from \eqref{eq: g fin} that $g(\genvar, u, v) = g(\genvar, v, u)$.
 
 \begin{theorem}
 \label{theo: probmax, sq}
