@@ -85,11 +85,13 @@ line segment on a rectangular grid
 \maketitle
 
 \begin{abstract}
-***
+The relationship between the length of a line segment and the number of tiles it visits on a rectangular grid is addressed in this paper. For a segment with deterministic but arbitrary position and orientation, the maximum number of visited tiles given its length and the infimum length for a desired number of visited tiles are characterized. For a segment with random position and orientation, the average number of visited tiles and the probability of visiting the maximum number of tiles are studied. These questions are related to Buffon's needle problem and its extension by Laplace.
 
-\emph{Keywords:} ***.
+\emph{Keywords:} Discrete geometry, Geometric probability, Rectangular lattice, Buffon's needle problem.
 
-%\emph{MSC2010:} 65C10, 65C50.
+\emph{MSC2020:} 52C99, 60D05. % ***Alex: check if there's a better one
+% 52C99: Discrete geometry: None of the above, but in this section
+% 60D05: Geometric probability and stochastic geometry
 \end{abstract}
 
 
@@ -1072,7 +1074,7 @@ Taking into account that $\arcsin x = \pi/2 - \arccos x$, it follows from \eqref
 \label{theo: probmax, sq}
 Given $\len \in \mathbb R^+$, consider a unit square grid and a uniformly random segment of length $\len$, as previously defined. The probability $\probmax(\len)$ that the segment visits the maximum number of tiles $\tiles = \funt(\len)$ is
 \begin{equation}
-\label{eq: probmax} %***Change order of the two summands under each square root here and in the rest of the proof, in accordance with \eqref{eq: square, odd max tiles, lengths}. (Or change there, but I think that is less preferable because it would correspond to using the y coordinate, then the x coordinate from the figure)
+\label{eq: probmax}
 \begin{split}
 \probmax(\len) & = g\left(\len, 
 \tiles-3, \tiles-3 \right) \quad\ \text{for } \tiles \text{ odd, } \textstyle \len \in \left( \frac{\tiles-3}{\sqrt{2}}, \frac{\sqrt{(\tiles-5)^2+(\tiles-1)^2}} 2 \right] \\
