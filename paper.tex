@@ -568,7 +568,7 @@ by Theorem~\ref{theo: funt, form}, $\funt$ is piecewise constant and has a unit-
 
 The expression \eqref{eq: theo: funl, form; funl 2} allows a neat interpretation of $\funl(\tiles)$ (as stems from the arguments used in the proof of Theorem~\ref{theo: funl, form}). Namely, $\funl^2(\tiles)$ is the sum of the two terms that appear in that expression. The first term is the squared distance from $(2a, 2b)$ to the diagonal line defined by $i+j-1 = \tiles$; and the second term is additional squared distance incurred from rounding $i$, $j$ to integer values.
 
-Theorems~\ref{theo: funt, form} and \ref{theo: funl, form} not only give the solutions $\funt(\len)$ and $\funl(\tiles)$ to the first two problems stated in \S\ref{part: intro}; they also provide a way to actually position a segment of length $\len$ or slightly greater than $\funl(\tiles)$, respectively, so that it visits $\funt(\len)$ or $\tiles$ tiles. Namely, for $\isoli$, $\jsoli$ computed as in the corresponding theorem, the segment should have its endpoints in the interiors of two tiles separated $\isoli-1$ steps horizontally and $\jsoli-1$ steps vertically, with its exact position and orientation  adjusted to avoid any grid points.
+Theorems \ref{theo: funt, form} and \ref{theo: funl, form} not only give the solutions $\funt(\len)$ and $\funl(\tiles)$ to the first two problems stated in \S\ref{part: intro}; they also provide a way to actually position a segment of length $\len$ or slightly greater than $\funl(\tiles)$, respectively, so that it visits $\funt(\len)$ or $\tiles$ tiles. Namely, for $\isoli$, $\jsoli$ computed as in the corresponding theorem, the segment should have its endpoints in the interiors of two tiles separated $\isoli-1$ steps horizontally and $\jsoli-1$ steps vertically, with its exact position and orientation  adjusted to avoid any grid points.
 
 It is interesting to consider the following particular cases: $\len \gg a,b$; $a \gg b$; and $a=b$. Regarding the first, from \eqref{eq: theo: funt, form; funt}--\eqref{eq: theo: funt, form; j}
 % *!*
@@ -637,7 +637,7 @@ For a unit square grid, and for $\tiles \in \mathbb N$,
 \displaystyle
 \frac{\tiles-3}{\sqrt{2}} & \text{for } \tiles \text{ odd, } \tiles \geq 3 \\[4.5mm]
 \displaystyle
-\sqrt{\frac{(\tiles-3)^2+1} {2}} & \text{for } \tiles \text{ even, } \tiles \geq 4,
+\frac{\sqrt{(\tiles-4)^2+(\tiles-2)^2}} {2} & \text{for } \tiles \text{ even, } \tiles \geq 4,
 \end{cases}
 \end{equation}
 or equivalently
@@ -651,6 +651,7 @@ or equivalently
 \end{cases}
 \end{equation}
 \end{corollary}
+% Theorem~\ref{theo: funl, form} for $a=b=1$ gives $\sqrt{\frac{(\tiles-3)^2+1} {2}}$. Instead, this corollary uses the equivalent expression $\frac{\sqrt{(\tiles-4)^2+(\tiles-2)^2}} {2}$, which is better for subsequent analysis.
 
 Furthermore, an even simpler formula can be obtained for $\funt$, as the next theorem shows.
 
@@ -724,14 +725,13 @@ The desired quantity $\funt(\len)$, that is the largest positive integer $\tiles
 From Theorem~\ref{theo: funt, sq, form} it stems that odd values of $\funt(\len)$ correspond to $\isoli = \jsoli$, whereas even values are achieved with $\jsoli = \isoli+1$. In addition, noting that $\funt(\len) = \tiles$ is equivalent to $\funl(\tiles) < \len \leq \funl(\tiles+1)$ and using Corollary~\ref{theo: funl, sq, form} the following characterization of $\funt$ is obtained. For $\tiles \geq 3$ with $\tiles$ odd, $\funt(\len) = \tiles$ if and only if
 \begin{equation}
 \label{eq: square, odd max tiles, lengths}
-\len \in \left( \frac{\tiles-3}{\sqrt{2}}, \frac{ \sqrt{(\tiles-1)^2+(\tiles-3)^2}}{2} \right].
+\len \in \left( \frac{\tiles-3}{\sqrt{2}}, \frac{ \sqrt{(\tiles-3)^2+(\tiles-1)^2}}{2} \right].
 \end{equation}
 For $\tiles \geq 4$, $\tiles$ even, $\funt(\len) = \tiles$ if and only if
 \begin{equation}
 \label{eq: square, even max tiles, lengths}
-\len \in \left(\frac{ \sqrt{(\tiles-2)^2+(\tiles-4)^2}}{2}, \frac{\tiles-2}{\sqrt{2}} \right].
+\len \in \left(\frac{ \sqrt{(\tiles-4)^2+(\tiles-2)^2}}{2}, \frac{\tiles-2}{\sqrt{2}} \right].
 \end{equation}
-% *** The corollary says \sqrt{\frac{(\tiles-3)^2+1} {2}}, which comes from the corresponding theorem. This is equal to \frac{\sqrt{(\tiles-2)^2+(\tiles-4)^2}} {2}. Here we are using the latter expression, which is probably needed for the random analysis. If so, the expression in the corollary should be changed from the first to the second. (But this change cannnot be made in the theorem it comes from. It's hopefully not a problem that the expression changes from the theorem to the corollary).
 
 
 \subsection{Unit square grid with integer lengths}
@@ -909,7 +909,7 @@ Consider again a grid with horizontal spacing $a$ and vertical spacing $b$. The 
 \[
 \frac{2\len}{\pi}\left(\frac 1 a + \frac 1 b\right).
 \]
-As noted in Proposition \ref{prop: i+j-1}, the number of tiles visited by a segment is the count of its grid line crossings plus $1$, unless it exactly passes through any grid points, but that occurs with probability $0$ and therefore does not affect the expected value. Thus $\funta(\len)$ is obtained by adding $1$ to the above expression, which gives \eqref{eq: funta, form}.
+As noted in Proposition~\ref{prop: i+j-1}, the number of tiles visited by a segment is the count of its grid line crossings plus $1$, unless it exactly passes through any grid points, but that occurs with probability $0$ and therefore does not affect the expected value. Thus $\funta(\len)$ is obtained by adding $1$ to the above expression, which gives \eqref{eq: funta, form}.
 \end{proof}
 
 In view of Theorem~\ref{theo: funta, form}, the average number of visited tiles as a function of the segment length has a very simple form, namely an affine function. Conversely, for any $\tiles>1$ it is immediate to compute the length of a random segment that visits $\tiles$ tiles on average, given as $\funta^{-1}(\tiles)$.
@@ -1217,28 +1217,27 @@ The function $\probmax$ has the following asymptotic behaviour:
 \end{proposition}
 
 \begin{proof}
-The probability $\probmax(\len)$ becomes $0$ whenever the length causes the maximum number of visited tiles to increase by $1$. This establishes \eqref{eq: probmax liminf}.
+The probability $\probmax(\len)$ becomes $0$ whenever the length causes the maximum number of visited tiles to increase by $1$. This proves \eqref{eq: probmax liminf}.
 
 For \eqref{eq: probmax lim odd} it suffices to note that
-\begin{align}
-\label{eq: tedious limit, odd 1}
-\lim_{\tiles \rightarrow \infty}\, \tiles g\left(\frac{\sqrt{(\tiles-3)^2+(\tiles-1)^2}} 2, \tiles-3, \tiles-3 \right) &= \frac 2 {3\pi} \\
-\label{eq: tedious limit, odd 2}
-\lim_{\tiles \rightarrow \infty}\, \tiles g\left(\frac{\sqrt{(\tiles-3)^2+(\tiles-1)^2}} 2, \tiles-5, \tiles-1 \right)
-& = \frac 2 {3\pi},
-\end{align}
+\begin{equation}
+\begin{split}
+\label{eq: tedious limit, odd}
+&\lim_{\tiles \rightarrow \infty}\, \tiles g\left(\frac{\sqrt{(\tiles-3)^2+(\tiles-1)^2}} 2, \tiles-3, \tiles-3 \right) \\
+&\quad = \lim_{\tiles \rightarrow \infty}\, \tiles g\left(\frac{\sqrt{(\tiles-3)^2+(\tiles-1)^2}} 2, \tiles-5, \tiles-1 \right) = \frac 2 {3\pi},
+\end{split}
+\end{equation}
 as can be (somewhat tediously) checked using L'H\^opital's rule \cite[section~5.3]{Abbott15}.
 % It's very tedious by hand. I used Maple to compute the limit, and then checked it numerically. Maybe one or two intermediate steps from applying L'H\^opital's rule should be included. Perhaps those can be obtained with Maple too, and this part can be rewritten.
 Combining these expressions with the second equality in \eqref{eq: probmax} yields \eqref{eq: probmax lim odd}.
 
 Similarly,
-\begin{align}
-\label{eq: tedious limit, even 1}
-\lim_{\tiles \rightarrow \infty}\, \tiles g\left(\frac{\tiles-2}{\sqrt 2}, \tiles-4, \tiles-2 \right) &= \frac 2 {3\pi} \\
-\label{eq: tedious limit, even 2}
+\begin{equation}
+\label{eq: tedious limit, even}
+\lim_{\tiles \rightarrow \infty}\, \tiles g\left(\frac{\tiles-2}{\sqrt 2}, \tiles-4, \tiles-2 \right) =
 \lim_{\tiles \rightarrow \infty}\, \tiles g\left(\frac{\tiles-2}{\sqrt 2}, \tiles-6, \tiles \right)
-& = \frac 2 {3\pi},
-\end{align}
+= \frac 2 {3\pi},
+\end{equation}
 and combining with the fourth equality in \eqref{eq: probmax} gives \eqref{eq: probmax lim even}.
 
 For large $\tiles$, $\len_\tiles$ asymptotically approaches $\tiles/\sqrt{2}$. Using this into \eqref{eq: probmax lim even}, which is greater than \eqref{eq: probmax lim odd}, yields \eqref{eq: probmax limsup}.
