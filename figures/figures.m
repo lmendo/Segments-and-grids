@@ -1795,7 +1795,7 @@ plot(L_fine.*(ind_odd|ind_odd2)./(ind_odd|ind_odd2), result_computed.*(ind_odd|i
 set(gca, 'colororderindex', 1)
 plot(L_fine.*(ind_even|ind_even2)./(ind_even|ind_even2), result_computed.*(ind_even|ind_even2)./(ind_even|ind_even2), '-')
 %plot(L_fine, result_computed, '-')
-legend({'Odd maximum number of squares' 'Even maximum number of squares'})
+legend({'Odd maximum number of tiles' 'Even maximum number of tiles'})
 xlabel(char(hex2dec('2113'))), ylabel([char(hex2dec('03C1')) '(' char(hex2dec('2113')) ')'])
 
 
