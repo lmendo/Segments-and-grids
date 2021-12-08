@@ -11,8 +11,8 @@
 \usepackage[tight]{subfigure}
 \usepackage{authblk}
 
-\addtolength{\textheight}{28mm}
-\addtolength{\voffset}{-17mm}
+\addtolength{\textheight}{34mm}
+\addtolength{\voffset}{-20mm}
 \addtolength{\textwidth}{-3mm}
 \addtolength{\hoffset}{1.5mm}
 
@@ -125,7 +125,7 @@ What is the average number of tiles visited by a segment of a given length?
 How often does the random segment visit the maximum number of tiles?
 \end{enumerate}
 
-As an example of the first question \ref{prob: determ dir}, consider $a=1.35$, $b=1$. A segment of unit length can be placed as shown in Figure~\ref{fig: examples} (left) to make it visit $3$ tiles. In fact, this is the maximum number for $\len=1$. The figure also illustrates that the solution for length $2.4$ is $5$ (center), and for $4.7$ it is $8$ (right).
+As an example of question \ref{prob: determ dir}, consider $a=1.35$, $b=1$. A segment of unit length can be placed as shown in Figure~\ref{fig: examples} (left) to make it visit $3$ tiles. In fact, this is the maximum number for $\len=1$. The figure also illustrates that the solution for length $2.4$ is $5$ (center), and for $4.7$ it is $8$ (right).
 
 \begin{figure}
 \centering%
@@ -141,10 +141,10 @@ The \emph{inverse} problem \ref{prob: determ inv} is, given $\tiles \in \mathbb 
 
 The direct and inverse problems are closely related. Namely, if $\len$ is the infimum of all lengths that allow visiting at least $\tiles$ tiles (inverse problem), $\tiles$ is the maximum number of tiles that can be visited with lengths slightly greater than $\len$ (direct problem).
 
-To address the remaining two questions, the notion of a \emph{random} segment of a given length needs to be precisely defined. This is done as follows. By symmetry, one endpoint of the segment can be assumed to lie in a fixed, reference tile. The position of this endpoint is \emph{uniformly} distributed on the tile. The segment orientation has a \emph{uniform} distribution on $[0,2\pi)$, and is \emph{independent} of the endpoint position. Solving the problem of how many tiles the segment visits on average \ref{prob: rand ave} also answers, as will be seen, the inverse question (segment length to visit a given number of tiles on average). A natural, related question \ref{prob: rand prob} is with what probability the segment visits the maximum number of tiles. 
+To address the remaining two questions, the notion of a \emph{random} segment of a given length needs to be precisely defined. This is done as follows. By symmetry, one endpoint of the segment can be assumed to lie in a fixed, reference tile. The position of this endpoint is \emph{uniformly} distributed on the tile. The segment orientation has a \emph{uniform} distribution on $[0,2\pi)$, and is \emph{independent} of the endpoint position. Solving the problem \ref{prob: rand ave} of how many tiles the segment visits on average also answers, as will be seen, the inverse question (segment length to visit a given number of tiles on average). A natural, related problem \ref{prob: rand prob} is with what probability the segment visits the maximum number of tiles. 
 
-% ***Do we need to discuss potential applications of this (if we can find any)? This probably depends on the journal
-% ***Do we need a section with conclusions? Probably not; depends on the journal
+% Do we need to discuss potential applications of this (if we can find any)? This probably depends on the journal
+% Do we need a section with conclusions? Probably not; depends on the journal
 
 The questions studied in this paper are related to Buffon's needle problem and Laplace's extension of it. Buffon's original problem considers tossing a needle of length $\len$ onto ruled paper with parallel lines a distance $b$ apart, and asks what is the probability of the needle crossing a line if it lands in a uniformly random position and orientation. For a needle of length $\len = b$, this is $2/\pi$ (and hence repeated trials of this experiment can be used to estimate $\pi$). This is generalized in \cite{Ramaley69} to $2\len /(\pi b)$ for the expected number of crossings of a needle with arbitrary length.
 
@@ -301,22 +301,22 @@ Consider, for the moment, $i$, $j$ as if they were real-valued variables, and de
 \label{eq: line 1}
 \frac x a + \frac y b = \tiles + 1,
 \end{equation}
-and $(i-2)^2 a^2 + (j-2)^2 b^2$ is expressed as $(x-2a)^2+(y-2b)^2$. The point minimizing this quadratic function along the line \eqref{eq: line 1} is the intersection of that with the perpendicular line passing through $(2a,2b)$,
+and $(i-2)^2 a^2 + (j-2)^2 b^2$ is expressed as $(x-2a)^2+(y-2b)^2$. The point minimizing this quadratic function along the line \eqref{eq: line 1} is the intersection of the latter with the perpendicular line passing through $(2a,2b)$,
 \begin{equation}
 \label{eq: line 2}
 y = \frac {a (x-2a)} b + 2b.
 \end{equation}
-An example with $a=1.35$, $b=1$, $\tiles=7$ is depicted in Figure~\ref{fig: min suff set, form}, where \eqref{eq: line 2} is shown with solid line. Solving the system of equations \eqref{eq: line 1} and \eqref{eq: line 2} gives 
+An example with $a=1.35$, $b=1$, $\tiles=7$ is shown in Figure~\ref{fig: min suff set, form}, where \eqref{eq: line 2} is depicted as a solid line. Solving the system of equations \eqref{eq: line 1} and \eqref{eq: line 2} gives 
 \begin{align}
-\frac x a - 2 &= \frac{(t-3)b^2}{a^2+b^2}, \\
-\frac y b - 2 &= \frac{(t-3)a^2}{a^2+b^2}.
+\frac x a - 2 &= \frac{(\tiles-3)b^2}{a^2+b^2}, \\
+\frac y b - 2 &= \frac{(\tiles-3)a^2}{a^2+b^2}.
 \end{align}
 In terms of the real-valued variables $i$, $j$, the solution $(\isolr, \jsolr)$ is thus
 \begin{align}
 \label{eq: prop: min suff set, form: isolr}
-\isolr &= \frac{(t-3)b^2}{a^2+b^2} + 2, \\
+\isolr &= \frac{(\tiles-3)b^2}{a^2+b^2} + 2, \\
 \label{eq: prop: min suff set, form: jsolr}
-\jsolr &= \frac{(t-3)a^2}{a^2+b^2} + 2.
+\jsolr &= \frac{(\tiles-3)a^2}{a^2+b^2} + 2.
 \end{align}
 The corresponding point $(\isolr a, \jsolr b)$ is shown in Figure~\ref{fig: min suff set, form} with a square marker.
 
@@ -328,7 +328,7 @@ The corresponding point $(\isolr a, \jsolr b)$ is shown in Figure~\ref{fig: min 
 \label{fig: min suff set, form}%
 \end{figure}%
 
-The variables $i$, $j$ are actually limited to integer values. The pair $(i_\tiles, j_\tiles)$ that minimizes $(i-2)^2 a^2 + (j-2)^2 b^2$ along the line $i+j-1=\tiles$ restricted to integer values is either $(\lceil \isolr \rceil, \lfloor \jsolr \rfloor)$ or $(\lfloor \isolr \rfloor, \lceil \jsolr \rceil)$, whichever gives $(i_\tiles a, j_\tiles b)$ closest to $(\isolr a, \jsolr b)$, as illustrated in Figure~\ref{fig: min suff set, form}. In case of a tie the first of the two pairs is (arbitrarily) chosen. This can be expressed as
+The variables $i$, $j$ are actually limited to integer values. The pair $(i_\tiles, j_\tiles) \in \mathbb Z^2$ that minimizes $(i-2)^2 a^2 + (j-2)^2 b^2$ along the line $i+j-1=\tiles$ is either $(\lceil \isolr \rceil, \lfloor \jsolr \rfloor)$ or $(\lfloor \isolr \rfloor, \lceil \jsolr \rceil)$, whichever gives $(i_\tiles a, j_\tiles b)$ closest to $(\isolr a, \jsolr b)$, as illustrated in Figure~\ref{fig: min suff set, form}. In case of a tie the first of the two pairs is (arbitrarily) chosen. This can be expressed as
 \begin{align}
 \label{eq: prop: min suff set, form: isoli}
 i_\tiles &= \left\lfloor \isolr + \frac 1 2 \right\rfloor, \\
@@ -342,14 +342,14 @@ yields \eqref{eq: min suff set, form, i} and \eqref{eq: min suff set, form, j}.
 From \eqref{eq: prop: min suff set, form: isolr} and \eqref{eq: prop: min suff set, form: isoli},
 \begin{equation}
 \label{eq: prop: min suff set, form: isoli ineq}
-\frac{(t-3)b^2}{a^2+b^2} + \frac 3 2 < i_\tiles \leq \frac{(t-3)b^2}{a^2+b^2} + \frac 5 2,
+\frac{(\tiles-3)b^2}{a^2+b^2} + \frac 3 2 < i_\tiles \leq \frac{(\tiles-3)b^2}{a^2+b^2} + \frac 5 2,
 \end{equation}
 and similarly, from \eqref{eq: prop: min suff set, form: jsolr} and \eqref{eq: prop: min suff set, form: jsoli},
 \begin{equation}
 \label{eq: prop: min suff set, form: jsoli ineq}
-\frac{(t-3)a^2}{a^2+b^2} + \frac 3 2 \leq j_\tiles < \frac{(t-3)a^2}{a^2+b^2} + \frac 5 2.
+\frac{(\tiles-3)a^2}{a^2+b^2} + \frac 3 2 \leq j_\tiles < \frac{(\tiles-3)a^2}{a^2+b^2} + \frac 5 2.
 \end{equation}
-Considering the first inequality in \eqref{eq: prop: min suff set, form: isoli ineq} and the second in \eqref{eq: prop: min suff set, form: jsoli ineq} as equalities and eliminating $\tiles$ gives \eqref{eq: upper bound, line}. The pair $(i_\tiles, j_\tiles)$ is strictly below the line \eqref{eq: upper bound, line} because the used inequalities are strict. Similarly, the bounding line \eqref{eq: lower bound, line} results from the second inequality in \eqref{eq: prop: min suff set, form: isoli ineq} and the first in \eqref{eq: prop: min suff set, form: jsoli ineq}, and the fact that those inequalities are not strict implies that the bound \eqref{eq: lower bound, line} can actually be attained.
+Considering the first inequality in \eqref{eq: prop: min suff set, form: isoli ineq} and the second in \eqref{eq: prop: min suff set, form: jsoli ineq} as equalities and eliminating $\tiles$ gives \eqref{eq: upper bound, line}. The pair $(i_\tiles, j_\tiles)$ is strictly below the line \eqref{eq: upper bound, line} because the used inequalities are strict. Similarly, \eqref{eq: lower bound, line} results from the second inequality in \eqref{eq: prop: min suff set, form: isoli ineq} and the first in \eqref{eq: prop: min suff set, form: jsoli ineq}, and the fact that those inequalities are not strict implies that the bound \eqref{eq: lower bound, line} can actually be attained.
 \end{proof}
 
 The bounding lines in Proposition~\ref{prop: min suff set, form} are shown in Figure~\ref{fig: pairs_bounds}, using three different pairs of grid parameters $a$, $b$ as examples. Given $(i_\tiles,j_\tiles) \in \mss$, the next pair $(i_{\tiles+1},j_{\tiles+1})$ is obtained by incrementing $j$ if that results in a point below \eqref{eq: upper bound, line}. Else $i$ is incremented instead, and the new pair is guaranteed to be above or on \eqref{eq: lower bound, line}.
@@ -358,15 +358,15 @@ The bounding lines in Proposition~\ref{prop: min suff set, form} are shown in Fi
 \centering%
 \subfigure[$a = 1$, $b = 1$]{%
 \label{fig: pairs_bounds_1}%
-\includegraphics[height=.24\textheight]{pairs_bounds_1}% *!*
+\includegraphics[height=.235\textheight]{pairs_bounds_1}% *!*
 }\hfill%
 \subfigure[$a = 1.35$, $b = 1$]{%
 \label{fig: pairs_bounds_1p35}%
-\includegraphics[height=.24\textheight]{pairs_bounds_1p35}% *!*
+\includegraphics[height=.235\textheight]{pairs_bounds_1p35}% *!*
 }\hfill%
 \subfigure[$a = \sqrt{2}$, $b = 1$]{%
 \label{fig: pairs_bounds_sqrt2}%
-\includegraphics[height=.24\textheight]{pairs_bounds_sqrt2}% *!*
+\includegraphics[height=.235\textheight]{pairs_bounds_sqrt2}% *!*
 }%
 \caption{Set of optimal pairs $\mss$, and bounding lines
 }%
@@ -526,7 +526,7 @@ with
 Equivalently, for $\tiles \geq 3$,
 \begin{equation}
 \label{eq: theo: funl, form; funl 2}
-\funl(\tiles) = \sqrt{\frac{(t-3)^2 a^2 b^2}{a^2+b^2} + \roundterm^2(a^2+b^2)}
+\funl(\tiles) = \sqrt{\frac{(\tiles-3)^2 a^2 b^2}{a^2+b^2} + \roundterm^2(a^2+b^2)}
 \end{equation}
 with
 \begin{equation}
@@ -703,7 +703,7 @@ To show \eqref{eq: theo: funt, sq, form; funt, simpler}, it is first noted that 
 \begin{equation}
 \funl(\tiles) = \sqrt{\left\lceil \frac{(\tiles-3)^2} {2} \right\rceil}.
 \end{equation}
-According to \eqref{eq: funt funl}, $\funt(\len)$ is obtained by the largest positive integer $t$ such that 
+According to \eqref{eq: funt funl}, $\funt(\len)$ is obtained by the largest positive integer $\tiles$ such that 
 \begin{equation}
 \label{eq: theo: funt, sq, form; proof 2}
 \left\lceil \frac{(\tiles-3)^2} {2} \right\rceil < \len ^ 2.
@@ -1180,7 +1180,7 @@ is recognized to be $2 g(\len, \tiles-5, \tiles-1)$. This proves the second equa
 The expressions for the third and fourth cases in \eqref{eq: probmax}, corresponding to $\tiles$ even, are established analogously.
 \end{proof}
 
-The technique used in the proof of Theorem~\ref{theo: probmax, sq} could in principle be used for obtaining the probability that the number of tiles visited by the segment equals or exceeds any given value $t < \funt(\len)$. The resulting expressions, however, are cumbersome, because more cases (more subintervals for the length) need to be distinguished depending on how many tiles with lower-left corner $(i-1,j-1)$ such that $i+j-1=\tiles$ can be reached from the reference tile.
+The technique used in the proof of Theorem~\ref{theo: probmax, sq} could in principle be used for obtaining the probability that the number of tiles visited by the segment equals or exceeds any given value $\tiles < \funt(\len)$. The resulting expressions, however, are cumbersome, because more cases (more subintervals for the length) need to be distinguished depending on how many tiles with lower-left corner $(i-1,j-1)$ such that $i+j-1=\tiles$ can be reached from the reference tile.
 
 \begin{figure}%
 \centering%
