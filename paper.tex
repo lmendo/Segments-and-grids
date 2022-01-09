@@ -146,9 +146,9 @@ To address the remaining two questions, the notion of a \emph{random} segment of
 % Do we need to discuss potential applications of this (if we can find any)? This probably depends on the journal
 % Do we need a section with conclusions? Probably not; depends on the journal
 
-The questions studied in this paper are related to Buffon's needle problem and Laplace's extension of it. Buffon's original problem considers tossing a needle of length $\len$ onto ruled paper with parallel lines a distance $b$ apart, and asks what is the probability of the needle crossing a line if it lands in a uniformly random position and orientation. For a needle of length $\len = b$, this is $2/\pi$ (and hence repeated trials of this experiment can be used to estimate $\pi$). This is generalized in \cite{Ramaley69} to $2\len /(\pi b)$ for the expected number of crossings of a needle with arbitrary length.
+The questions studied in this paper are related to Buffon's needle problem and Laplace's extension of it. Buffon's original problem considers a plane with vertical lines a distance $a$ apart. A needle is placed on the plane with uniformly random position\footnote{It suffices to define position using a horizontal coordinate modulo $a$, for which a uniform distribution can be defined.} and orientation, and the probability of the needle crossing a line is studied. For a needle of length $\len = a$, this probability is $2/\pi$ (and hence repeated trials of this experiment can be used to estimate $\pi$). This is generalized in \cite{Ramaley69} to $2\len /(\pi a)$ for the expected number of crossings of a needle with arbitrary length.
 
-The Buffon-Laplace needle problem \cite[section 1.1]{Mathai99} considers a needle tossed onto a grid of rectangular tiles of width $a$ and height $b$. The number of visited tiles equals one plus the number of crossings almost surely. The probability of the needle staying within a single tile is computed in \cite{Arnow94} for the case where $\len < \min(a,b)$. One of the problems considered in this paper, as mentioned above, is the complementary question \ref{prob: rand prob} of the probability that the needle visits the maximum number of tiles possible for its length.
+The Buffon-Laplace needle problem \cite[section 1.1]{Mathai99} considers a needle randomly placed on a grid of rectangular tiles of width $a$ and height $b$. The number of visited tiles equals one plus the number of crossings almost surely. The probability of the needle staying within a single tile is computed in \cite{Arnow94} for the case where $\len < \min\{a,b\}$. One of the problems considered in this paper, as mentioned above, is the complementary question \ref{prob: rand prob} of the probability that the needle visits the maximum number of tiles possible for its length.
 
 The rest of the paper is organized as follows. Fundamental results are presented in \S\ref{part: fund results}, which form the basis of the subsequent analysis. The direct and inverse problems for a deterministic segment are considered in \S\ref{part: max}, first for arbitrary grids and then for a square grid. The analysis for the random segment is carried out in \S\ref{part: rand}. The average number of tiles is computed for arbitrary grids, and the probability that the segment visits the maximum number of tiles is obtained for a square grid.
 
@@ -904,8 +904,8 @@ Given $a, b, \len \in \mathbb R^+$, consider a grid with parameters $a, b$ and a
 \end{theorem}
 
 \begin{proof}
-Suppose first that the grid is simplified to only horizontal lines with spacing $b$. This matches the set-up of Buffon's original needle problem \cite[section 1.1]{Mathai99}, except that here the length $\len$ of the needle may exceed the spacing $b$, allowing it to cross multiple lines. As shown in \cite{Ramaley69}, the expected number of lines crossed equals $2\len/(\pi b)$.
-% When $\len<b$ this expectation matches the probability of the needle crossing a grid line, since it cannot cross more than one.
+Suppose first that the grid is simplified to only vertical lines with spacing $a$. This matches the set-up of Buffon's original needle problem \cite[section 1.1]{Mathai99}, except that here the length $\len$ of the needle may exceed the spacing $a$, allowing it to cross multiple lines. As shown in \cite{Ramaley69}, the expected number of lines crossed equals $2\len/(\pi a)$.
+% When $\len<a$ this expectation matches the probability of the needle crossing a grid line, since it cannot cross more than one.
 
 Consider again a grid with horizontal spacing $a$ and vertical spacing $b$. The grid crossings decompose into crossings of horizontal and vertical grid lines. By linearity of expectation, the expected number of crossings is the sum of the expectations for parallel lines with spacing $a$ and $b$ respectively, which gives
 \[
@@ -1011,7 +1011,6 @@ Secondly, a grid with $b \rightarrow \infty$ corresponds to Buffon's arrangement
 \end{equation}
 gives the average number of lines crossed in Buffon's experiment. For $\len \leq a$ the segment can cross at most one line, and \eqref{eq: number of lines crossed, Buffon} coincides with the probability of crossing \cite[theorem 1.1.1]{Mathai99}.
 
-% ***Alex: please check this, as I've done some content changes
 Lastly, $\Pr[i \geq 2]$ as computed in Proposition~\ref{prop: Pr i} can be interpreted as the probability of crossing at least one line in Buffon's experiment. Indeed, for $n=2$ the third expression in \eqref{eq: Pr i geq n} reduces again to $2\len/(\pi a)$ for $\len \leq a$, whereas the second reduces to $2\len f(a/\len)/(\pi a)$ for $\len > a$. Using \eqref{eq: f} this is expressed as
 \[
 \frac 2 \pi \arccos\frac a \len + \frac{2\len}{\pi a} \left(1 - \sqrt{1-\frac{a^2}{\len^2}} \right),
