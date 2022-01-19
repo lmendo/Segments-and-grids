@@ -1,0 +1,111 @@
+Publication fees: yo me ocupo
+
+Published papers seem more advanced than ours. But we let's try and if rejected we can proceed with another journal
+
+
+# Journals about mathematics of applied mathematics, Q2 and Q3 impact factor:
+
+- SIAM Journal of Applied Mathematics
+
+- Journal of Applied Mathematics and Computing
+
+- Revista Matematica Complutense
+
+- Computational Methods in Applied Mathematics
+
+- EUROPEAN JOURNAL OF APPLIED MATHEMATICS
+
+- Discrete Optimization
+https://www.journals.elsevier.com/discrete-optimization
+"integer programming and combinatorial optimization"
+Not suited, in principle
+
+- Results in Mathematics
+
+- JOURNAL OF COMBINATORIAL OPTIMIZATION
+
+- DISCRETE APPLIED MATHEMATICS
+https://www.journals.elsevier.com/discrete-applied-mathematics
+"algorithmic and applicable discrete mathematics as well as applications of combinatorial mathematics to informatics and various areas of science and technology"
+Probably not very suited, jugding from titles of published papers
+
+- Mathematical Communications: https://www.mathos.unios.hr/ "All fields of pure and applied mathematics"
+
+- AIMS Mathematics: https://www.aimspress.com/journal/Math
+
+- Research in the Mathematical Sciences: https://www.springer.com/journal/40687
+
+- Acta Mathematica Scientia: https://www.springer.com/journal/10473
+
+- Cambridge Journal of Mathematics: https://intlpress.com/site/pub/pages/journals/items/cjm/_home/_main/ "emphasis on pure mathematics"
+
+- Forum mathematicum
+
+- Dissertationes mathematicae
+
+- Studia mathematica
+https://intlpress.com/site/pub/pages/journals/items/cjm/_home/_main/
+
+- Journal of computational mathematics
+
+- Journal of mathematics
+
+--> Discrete & Computational Geometry
+Impact factor 0.969. Q2 in Mathematics
+https://www.springer.com/journal/454
+covering a broad range of topics in which geometry plays a fundamental role
+tiling covering geometric probability
+From looking at some published papers, it seems like the subject of our paper could suit the journal, although the published papers seem more advanced
+
+-> Advances in geometry
+Impact factor 0.718. Q3 in mathematics.
+https://www.degruyter.com/journal/key/advg/html
+"publication of original research articles of excellent quality in the area of geometry"
+"Discrete geometry" (which includes Packings, coverings and tilings)
+
+- Journal of geometric analysis
+Impact factor 1.183. Q2
+"interface of analysis, geometry, and partial differential equations"
+https://www.springer.com/journal/12220
+Subject not very suited, it seems
+
+- COMMUNICATIONS IN ANALYSIS AND GEOMETRY
+Impact factor 0.736. Q3 in mathematics
+https://www.intlpress.com/site/pub/pages/journals/items/cag/_home/_main/index.php
+"classical analysis, partial differential equations, algebraic geometry, differential geometry, and topology"
+Perhaps not very suited
+
+- Open mathematics
+
+- Discrete mathematics
+Impact factor 0.87. Q3 in mathematics
+https://www.journals.elsevier.com/discrete-mathematics
+"...Discrete geometry... Papers focused primarily on applied problems or experimental results fall outside our scope"
+Lines are very long
+Could be
+
+- Mathematika
+https://londmathsoc.onlinelibrary.wiley.com/journal/20417942
+
+- MANUSCRIPTA MATHEMATICA
+
+- Documenta Mathematica
+
+- Contributions to Discrete Mathematics
+https://cdm.ucalgary.ca/
+Impact factor 0.743. Q3 in mathematics.
+"discrete and computational geometry"
+Paper titles seem a bit far from ours
+
+- Mathematical research letters
+
+- Fundamenta mathematicae
+
+- INTERNATIONAL JOURNAL OF MATHEMATICS
+
+- QUARTERLY JOURNAL OF MATHEMATICS
+
+- Discrete Mathematics and Applications
+Q4. Emerging
+No
+
