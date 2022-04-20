@@ -1,12 +1,31 @@
 # Journals about mathematics of applied mathematics, Q2 and Q3 impact factor:
 
 - SIAM Journal of Applied Mathematics
+https://www.siam.org/publications/journals/siam-journal-on-applied-mathematics-siap
+"treat scientific problems using methods that are of mathematical interest"
+"Examples are problems in fluid mechanics"
+Impact factor 1.551 (WoS)
+Not very suited
 
 - Journal of Applied Mathematics and Computing
+"broad-based journal covering all branches of computational or applied mathematics with special encouragement to researchers in theoretical computer science and mathematical computing"
+"Features research papers in all branches of mathematics that have some bearing on the application to scientific problems. Ideal for to researchers in theoretical computer science and mathematical computing"
+6 days Submission to first decision (Median)
+1.686 (2020) Impact factor
 
 - Revista Matematica Complutense
+https://www.springer.com/journal/13163
+https://matematicas.ucm.es/revista-matematica-complutense
+Impact Factor (2020): 1.227
+26 days Submission to first decision (median)
+It seems to publish more advanced papers
 
 - Computational Methods in Applied Mathematics
+https://www.degruyter.com/journal/key/cmam/html
+Impact factor: 1.375
+"mathematical contributions to computational methods and numerical analysis with applications mainly related to PDEs"
+"interdisciplinary while retaining the common thread of numerical analysis"
+Not very suited, it seems
 
 - EUROPEAN JOURNAL OF APPLIED MATHEMATICS
 
@@ -15,7 +34,12 @@ https://www.journals.elsevier.com/discrete-optimization
 "integer programming and combinatorial optimization"
 Not suited, in principle
 
-- Results in Mathematics
+--> Results in Mathematics
+https://www.springer.com/journal/25
+1.199 impact factor. Q2
+"research papers in all fields of pure and applied mathematics"
+60 days first decision, median
+https://link.springer.com/content/pdf/10.1007/s00025-022-01652-1.pdf
 
 - JOURNAL OF COMBINATORIAL OPTIMIZATION
 
@@ -45,7 +69,7 @@ https://intlpress.com/site/pub/pages/journals/items/cjm/_home/_main/
 
 - Journal of mathematics
 
---> Discrete & Computational Geometry
+| - Discrete & Computational Geometry
 Impact factor 0.969. Q2 in Mathematics
 https://www.springer.com/journal/454
 covering a broad range of topics in which geometry plays a fundamental role
