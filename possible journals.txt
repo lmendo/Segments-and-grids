@@ -34,7 +34,7 @@ https://www.journals.elsevier.com/discrete-optimization
 "integer programming and combinatorial optimization"
 Not suited, in principle
 
---> Results in Mathematics
+| - Results in Mathematics
 https://www.springer.com/journal/25
 1.199 impact factor. Q2
 "research papers in all fields of pure and applied mathematics"
@@ -76,7 +76,7 @@ covering a broad range of topics in which geometry plays a fundamental role
 tiling covering geometric probability
 From looking at some published papers, it seems like the subject of our paper could suit the journal, although the published papers seem more advanced
 
--> Advances in geometry
+| - Advances in geometry
 Impact factor 0.718. Q3 in mathematics.
 https://www.degruyter.com/journal/key/advg/html
 "publication of original research articles of excellent quality in the area of geometry"
@@ -103,7 +103,8 @@ https://www.journals.elsevier.com/discrete-mathematics
 Lines are very long
 Could be
 
-- Mathematika
+| - Mathematika
+0.762
 https://londmathsoc.onlinelibrary.wiley.com/journal/20417942
 
 - MANUSCRIPTA MATHEMATICA
