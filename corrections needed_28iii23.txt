@@ -1,0 +1,9 @@
+Un revisor ha encontrado un fallo. Tiene razón. Se puede arreglar, creo:
+
+Teorema 7: se puede corregir. Número arbitrario de sumandos. Para t impar habrá un sumando y 2*una suma con k desde 1 hasta algo, sólo para términos cuya hipotenusa sea menor que l. Esa suma puede estar vacía. Cada sumando es una g(). Para t par: parecido. Ahora el sumando fijo va también por 2.
+
+Esto se parece más a hacer lo que decía el párrafo de después del teorema para t<tau(l): hay más subintervalos para la longitud. Lo que pasa es que con t<tau(l) habría cuadrados en los que los cortes con theta estarían en los lados izq y aba (no arr y der como ahora), o incluso cuadrados que estarían siempre llenos (rectángulo gris igual a todo el cuadrado): ésa es la dificultad añadida.
+
+Proposición 5: la primera igualdad se mantiene. La segunda y tercera tienen ahora posibles términos adicionales. La cuarta sería consecuencia de la segunda y da tercera. A ver la segunda: cada término tiene el mismo límite, según parece numéricamente. El número de términos es como mucho proporcional a t. Eso no nos vale para establecer la segunda igualdad. Lo mismo pasa con la tercera. Habría que caracterizar el crecimiento del número de términos de la suma con t. Si no, la Proposicón 5 desaparece.
+
+Creo que el número de términos aumenta con la raíz de l, o de t. Según eso, la segunda y tercera igualdad de la proposición se mantendrían cambiando t por sqrt(t): la probabilidad máxima disminuye no con 1/t, sino con 1/sqrt(t). Creo que el número de términos es, para l grande, sqrt(l)*2^(1/4) = sqrt(t). Entonces el límite en la segunda y tercera igualdad, con sqrt(t) en vez de t, sería igual para par y para impar: 4/3*pi.

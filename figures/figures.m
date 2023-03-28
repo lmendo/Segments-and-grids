@@ -1965,3 +1965,52 @@ result_computed(ind_even2) = 2*g(L_fine(ind_even2)/a, funt_fine(ind_even2)-4, fu
 plot(L_fine.*(ind_odd|ind_odd2)./(ind_odd|ind_odd2), result_computed.*(ind_odd|ind_odd2)./(ind_odd|ind_odd2), '-', 'linewidth', .7), hold on, grid on
 plot(L_fine.*(ind_even|ind_even2)./(ind_even|ind_even2), result_computed.*(ind_even|ind_even2)./(ind_even|ind_even2), '-', 'linewidth', .7), hold on, grid on
 legend({'Simulated' 'Computed, odd max number of squares' 'Computed, even max number of squares'})
+
+
+%% #75. 27iii23: a reviewer finds a mistake in the probability of visiting the maximum number of tiles
+
+% From #65
+
+% Simulation
+clear, clc
+a = 1;
+L = 6.35; %3.8:.1:4.2;%3:.1:3.5;
+N = 2e7;
+ii = ceil(L/sqrt(2)) + 1;
+jj = ceil(sqrt(L.^2 - (ii-2).^2 )) + 1;
+funt = ii+jj-1 % formula valid for real-valued lengths
+z0 = rand(N, numel(L)) + 1j*rand(N, numel(L));
+z1 = z0 + L.*exp(1j*2*pi*rand(N, numel(L)));
+ii = ceil(abs(real(z1))) + (real(z1)<0); % add 1 for negative
+jj = ceil(abs(imag(z1))) + (imag(z1)<0); % add 1 for negative
+result = mean(ii+jj-1 == funt , 1)
+
+% Theoretical
+g = @(r,u,v) ((acos(u/2./r)-asin(v/2./r)).*u.*v + 2*r.^2 + u.^2/2 + v.^2/2 - u.*sqrt(4*r.^2-v.^2) - v.*sqrt(4*r.^2-u.^2))/2/pi;
+L_fine = L;
+ii_theo = ceil(L_fine/sqrt(2)) + 1;
+jj_theo = ceil(sqrt(L_fine.^2 - (ii_theo-2).^2 )) + 1;
+funt_fine = ii_theo+jj_theo-1; % formula valid for real-valued lengths
+result_computed = NaN(size(funt_fine));
+ind_odd = (mod(funt_fine,2)==1) & (L_fine > (funt_fine-3)/sqrt(2)) & (L_fine <= sqrt((funt_fine-5).^2+(funt_fine-1).^2)/2);
+result_computed(ind_odd) = g(L_fine(ind_odd)/a, funt_fine(ind_odd)-3, funt_fine(ind_odd)-3);
+ind_odd2 = (mod(funt_fine,2)==1) & (L_fine > sqrt((funt_fine-5).^2+(funt_fine-1).^2)/2) & (L_fine <= sqrt((funt_fine-3).^2+(funt_fine-1).^2)/2);
+result_computed(ind_odd2) = g(L_fine(ind_odd2)/a, funt_fine(ind_odd2)-3, funt_fine(ind_odd2)-3) + 2*g(L_fine(ind_odd2)/a, funt_fine(ind_odd2)-5, funt_fine(ind_odd2)-1);
+ind_even = (mod(funt_fine,2)==0) & (L_fine > sqrt((funt_fine-4).^2+(funt_fine-2).^2)/2) & (L_fine <= sqrt((funt_fine-6).^2+funt_fine.^2)/2);
+result_computed(ind_even) = 2*g(L_fine(ind_even)/a, funt_fine(ind_even)-4, funt_fine(ind_even)-2);
+ind_even2 = (mod(funt_fine,2)==0) & (L_fine > sqrt((funt_fine-6).^2+funt_fine.^2)/2) & (L_fine <= (funt_fine-2)/sqrt(2));
+result_computed(ind_even2) = 2*g(L_fine(ind_even2)/a, funt_fine(ind_even2)-4, funt_fine(ind_even2)-2) + 2*g(L_fine(ind_even2)/a, funt_fine(ind_even2)-6, funt_fine(ind_even2));
+result_computed
+
+% Histogram of ii, jj from simulation
+figure
+ind = ii+jj-1==11 & real(z1)>0 & imag(z1)>0; % ii, jj that produce the maximum number of visited tiles (11).
+% And only positive coordinates for simplicity
+mean(ind)
+histogram2(ii(ind), jj(ind), 'binmethod', 'integer', 'DisplayStyle' ,'tile', 'ShowEmptyBins', 'off')
+
+% : there are values with abs(ii-jj) greater than 2, for example ii=4, jj=8, and ii=8, ii=4. Their probability is so
+% small (but non-zero) that the simulated values seem to match with the theorerical computations.
+% That's why I didn't catch this mistake with the simulations.
+
+
