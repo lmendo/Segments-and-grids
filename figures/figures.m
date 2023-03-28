@@ -2014,3 +2014,113 @@ histogram2(ii(ind), jj(ind), 'binmethod', 'integer', 'DisplayStyle' ,'tile', 'Sh
 % That's why I didn't catch this mistake with the simulations.
 
 
+%% # 76. Like #65 but correcting the mistake by including more terms
+
+% The computations here seem to be correct. For L around 10 the difference between the old (wrong) and new
+% computation is already noticeable, and the simulation results match the new, not the old.
+%  Computing for L_fine large enough (around 1000, with fine enough sampling) and using log-log
+% scale the 1/sqrt(L) asymptotic variation of the probability maxima is clearly visible.
+
+clear, clc
+L = .1:.1:10; %3.8:.1:4.2;%3:.1:3.5;
+N = 3e5;
+ii = ceil(L/sqrt(2)) + 1;
+jj = ceil(sqrt(L.^2 - (ii-2).^2 )) + 1;
+funt = ii+jj-1 % formula valid for real-valued lengths
+z0 = rand(N, numel(L)) + 1j*rand(N, numel(L));
+z1 = z0 + L.*exp(1j*2*pi*rand(N, numel(L)));
+ii = ceil(abs(real(z1))) + (real(z1)<0); % add 1 for negative
+jj = ceil(abs(imag(z1))) + (imag(z1)<0); % add 1 for negative
+result = mean(ii+jj-1 == funt , 1);
+plot(L, result, 'o', 'markersize', 4), hold on, grid on
+
+g = @(r,u,v) ((acos(u/2./r)-asin(v/2./r)).*u.*v + 2*r.^2 + u.^2/2 + v.^2/2 - u.*sqrt(4*r.^2-v.^2) - v.*sqrt(4*r.^2-u.^2))/2/pi;
+L_fine = linspace(.01,10,1e4);
+ii = ceil(L_fine/sqrt(2)) + 1;
+jj = ceil(sqrt(L_fine.^2 - (ii-2).^2 )) + 1;
+funt_fine = ii+jj-1; % formula valid for real-valued lengths
+result_computed = NaN(size(funt_fine));
+num_k =  NaN(size(funt_fine));
+for ind_fine = 1:numel(funt_fine)
+    t = funt_fine(ind_fine);
+    L = L_fine(ind_fine);
+    if mod(t,2) % odd
+        res = g(L, t-3, t-3); % this term is always present
+        potential_k = 1:(t-3)/2;
+        %%potential_k = 1; % old (wrong), that is, #65
+        ind_actual_k = ((t-3)/2-potential_k).^2 + ((t-3)/2+potential_k).^2 < L^2;
+        actual_k = potential_k(ind_actual_k);
+        for k = actual_k
+            res = res + 2*g(L, t-3-2*k, t-3+2*k);
+        end
+    else % even
+        res = 2*g(L, t-4, t-2); % this term is always present
+        potential_k = 1:(t-4)/2;
+        %%potential_k = 1; % old (wrong), that is, #65
+        ind_actual_k = ((t-4)/2-potential_k).^2 + ((t-2)/2+potential_k).^2 < L^2;
+        actual_k = potential_k(ind_actual_k);
+        for k = actual_k
+            res = res + 2*g(L, t-4-2*k, t-2+2*k);
+        end
+    end
+    result_computed(ind_fine) = res;
+    num_k(ind_fine) = numel(actual_k);
+end
+ind_odd = mod(funt_fine,2)==1; % for plotting
+ind_even = ~ind_odd;
+plot(L_fine.*ind_odd./ind_odd, result_computed.*ind_odd./ind_odd, '-', 'linewidth', .7), hold on, grid on
+plot(L_fine.*ind_even./ind_even, result_computed.*ind_even./ind_even, '-', 'linewidth', .7), hold on, grid on
+xlabel length, ylabel probability
+legend({'Simulated' 'Computed, odd max number of squares' 'Computed, even max number of squares'})
+
+
+%% # 77. Like #76 but looking into the asymptotic behaviour
+
+g = @(r,u,v) ((acos(u/2./r)-asin(v/2./r)).*u.*v + 2*r.^2 + u.^2/2 + v.^2/2 - u.*sqrt(4*r.^2-v.^2) - v.*sqrt(4*r.^2-u.^2))/2/pi;
+L_fine = linspace(990,1000,1e6);
+ii = ceil(L_fine/sqrt(2)) + 1;
+jj = ceil(sqrt(L_fine.^2 - (ii-2).^2 )) + 1;
+funt_fine = ii+jj-1; % formula valid for real-valued lengths
+result_computed = NaN(size(funt_fine));
+num_k =  NaN(size(funt_fine));
+for ind_fine = 1:numel(funt_fine)
+    t = funt_fine(ind_fine);
+    L = L_fine(ind_fine);
+    if mod(t,2) % odd
+        res = g(L, t-3, t-3); % this term is always present
+        potential_k = 1:(t-3)/2;
+        %%potential_k = 1; % old (wrong), that is, #65
+        ind_actual_k = ((t-3)/2-potential_k).^2 + ((t-3)/2+potential_k).^2 < L^2;
+        actual_k = potential_k(ind_actual_k);
+        for k = actual_k
+            res = res + 2*g(L, t-3-2*k, t-3+2*k);
+        end
+    else % even
+        res = 2*g(L, t-4, t-2); % this term is always present
+        potential_k = 1:(t-4)/2;
+        %%potential_k = 1; % old (wrong), that is, #65
+        ind_actual_k = ((t-4)/2-potential_k).^2 + ((t-2)/2+potential_k).^2 < L^2;
+        actual_k = potential_k(ind_actual_k);
+        for k = actual_k
+            res = res + 2*g(L, t-4-2*k, t-2+2*k);
+        end
+    end
+    result_computed(ind_fine) = res;
+    num_k(ind_fine) = numel(actual_k);
+end
+ind_odd = mod(funt_fine,2)==1; % for plotting
+ind_even = ~ind_odd;
+plot(L_fine.*ind_odd./ind_odd, result_computed.*ind_odd./ind_odd, '-', 'linewidth', .7), hold on, grid on
+plot(L_fine.*ind_even./ind_even, result_computed.*ind_even./ind_even, '-', 'linewidth', .7), hold on, grid on
+xlabel length, ylabel probability
+
+ind = 984891; % manually choose: near a maximum, with even t for example
+t = funt_fine(ind);
+L = L_fine(ind);
+potential_k = 1:(t-4)/2;
+ind_actual_k = ((t-4)/2-potential_k).^2 + ((t-2)/2+potential_k).^2 < L^2;
+actual_k = potential_k(ind_actual_k);
+numel(actual_k), sqrt(t/2), sqrt(L)/2^.25 % checked: similar
+k = 0; g(L, t-4, t-2)*t, 2/3/pi % checked: similar
+k = 4; g(L, t-4, t-2)*t, 2/3/pi % checked: similar
+result_computed(ind), sqrt(2)/3/pi/sqrt(t), 2^.25/3/pi/sqrt(L) % checked: similar
