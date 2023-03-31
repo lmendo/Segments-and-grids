@@ -1046,15 +1046,15 @@ For a random segment with length $\len \in \mathbb R^+$ on a unit square grid, l
 For $u, v \in \mathbb N$, $\genvar \in \mathbb R^+$, let
 \begin{equation}
 \label{eq: g def}
-g(\genvar, u, v) = \frac 2 \pi \int_{\arcsin \frac u {2\genvar}}^{\arccos \frac v {2\genvar}} \left( \genvar \sin \theta - \frac u 2 \right) \left( \genvar \cos \theta - \frac v 2 \right) \diff \theta.
+g(\genvar, u, v) = \frac 2 \pi \int_{\arcsin \frac u {\genvar}}^{\arccos \frac v {\genvar}} \left( \genvar \sin \theta - u \right) \left( \genvar \cos \theta - v \right) \diff \theta.
 \end{equation}
 Computing this integral and using the identities $\cos^2 \alpha = 1-\sin^2 \alpha$ and $\cos(2\alpha) = 2\cos^2\alpha-1 = 1 - 2\sin^2\alpha$,
 \begin{equation}
 \label{eq: g fin}
 \begin{split}
-g(\genvar, u, v) &= \frac 1 {2\pi} \biggl(
-\left(\arccos\frac{v}{2\genvar}-\arcsin\frac{u}{2\genvar}\right) u v + 2\genvar^2 + \frac{u^2} 2 + \frac{v^2} 2 \\
-& \quad  - u \sqrt{4\genvar^2-v^2} - v \sqrt{4\genvar^2-u^2} \biggr).
+g(\genvar, u, v) &= \frac 1 {\pi} \biggl(
+2\left(\arccos\frac{v}{\genvar}-\arcsin\frac{u}{\genvar}\right) u v + \genvar^2 + u^2 + v^2 \\
+& \quad - 2 u \sqrt{\genvar^2-v^2} - 2 v \sqrt{\genvar^2-u^2} \biggr).
 \end{split}
 \end{equation}
 Taking into account that $\arcsin x = \pi/2 - \arccos x$, it follows from \eqref{eq: g fin} that $g(\genvar, u, v) = g(\genvar, v, u)$.
@@ -1066,11 +1066,11 @@ Given $\len \in \mathbb R^+$, consider a unit square grid and a uniformly random
 \label{eq: probmax}
 \begin{split}
 \probmax(\len) & = g\left(\len, 
-\tiles-3, \tiles-3 \right) \quad\ \text{for } \tiles \text{ odd, } \textstyle \len \in \left( \frac{\tiles-3}{\sqrt{2}}, \frac{\sqrt{(\tiles-5)^2+(\tiles-1)^2}} 2 \right] \\
-\probmax(\len) & = g\left(\len, \tiles-3, \tiles-3 \right) + 2 g\left(\len, \tiles-5, \tiles-1 \right) \\
+\frac{\tiles-3} 2, \frac{\tiles-3}2  \right) \quad\ \text{for } \tiles \text{ odd, } \textstyle \len \in \left( \frac{\tiles-3}{\sqrt{2}}, \frac{\sqrt{(\tiles-5)^2+(\tiles-1)^2}} 2 \right] \\
+\probmax(\len) & = g\left(\len, \frac{\tiles-3} 2, \frac{\tiles-3} 2 \right) + 2 g\left(\len, \frac{\tiles-5} 2, \frac{\tiles-1} 2 \right) \\
 & \text{for } \tiles \text{ odd, } \textstyle \len \in \left (\frac{\sqrt{(\tiles-5)^2+(\tiles-1)^2}} 2,  \frac{\sqrt{(\tiles-3)^2+(\tiles-1)^2}} 2 \right] \\
-\probmax(\len) & = 2 g\left(\len, \tiles-4, \tiles-2 \right) \quad \text{for } \tiles \text{ even, } \textstyle \len \in \left( \frac{\sqrt{(\tiles-4)^2+(\tiles-2)^2}} 2, \frac{\sqrt{(\tiles-6)^2+\tiles^2}} 2 \right] \\
-\probmax(\len) & = 2 g\left(\len, \tiles-4, \tiles-2 \right) + 2 g\left(\len, \tiles-6, \tiles \right) \\
+\probmax(\len) & = 2 g\left(\len, \frac{\tiles-4} 2, \frac{\tiles-2} 2 \right) \quad \text{for } \tiles \text{ even, } \textstyle \len \in \left( \frac{\sqrt{(\tiles-4)^2+(\tiles-2)^2}} 2, \frac{\sqrt{(\tiles-6)^2+\tiles^2}} 2 \right] \\
+\probmax(\len) & = 2 g\left(\len, \frac{\tiles-4} 2, \frac{\tiles-2} 2 \right) + 2 g\left(\len, \frac{\tiles-6} 2, \frac \tiles 2 \right) \\
 & \text{for } \tiles \text{ even, } \textstyle \len \in \left( \frac{\sqrt{(\tiles-6)^2+\tiles^2}} 2, \frac{\tiles-2}{\sqrt{2}} \right].
 \end{split}
 \end{equation}
@@ -1144,7 +1144,7 @@ For $\theta$ outside of this range the conditional probability $\probmax_{(\tile
 \begin{split}
 \probmax(\len) & = 4 \int_{\theta_0}^{\theta_1} \frac{\probmax_{(\tiles-1)/2, (\tiles-1)/2}(\len, \theta)}{2\pi} \diff \theta \\
 & = \frac 2 \pi \int_{\arcsin\frac{\tiles-3}{2\len}}^{\arccos\frac{\tiles-3}{2\len}} \left( \len\sin\theta - \frac{\tiles-3} 2 \right)  \left( \len\cos\theta - \frac{\tiles-3} 2 \right) \diff \theta \\
-& = g\left( \len, \tiles-3, \tiles-3 \right ),
+& = g\left( \len, \frac{\tiles-3} 2, \frac{\tiles-3} 2 \right ),
 \end{split}
 \end{equation}
 in accordance with the first expression in \eqref{eq: probmax}.
@@ -1164,7 +1164,7 @@ The additional contribution to $\probmax(\len)$ is thus
 8 \int_{\theta_0}^{\theta_1} \frac{\probmax_{(\tiles-3)/2, (\tiles+1)/2}(\len, \theta)}{2\pi} \diff \theta \\
 = \frac 4 \pi \int_{\arcsin\frac{\tiles-5}{2\len}}^{\arccos\frac{\tiles-1}{2\len}} \left( \len\sin\theta - \frac{\tiles-5} 2 \right)  \left( \len\cos\theta - \frac{\tiles-1} 2 \right) \diff \theta,
 \end{multline}
-which is $2 g(\len, \tiles-5, \tiles-1)$. This proves the second equality in \eqref{eq: probmax}.
+which is $2 g(\len, (\tiles-5)/2, (\tiles-1)/2)$. This proves the second equality in \eqref{eq: probmax}.
 
 The expressions for the third and fourth cases in \eqref{eq: probmax}, corresponding to $\tiles$ even, are established analogously.
 \end{proof}
@@ -1214,8 +1214,8 @@ For \eqref{eq: probmax lim odd} it suffices to note that
 \begin{equation}
 \begin{split}
 \label{eq: tedious limit, odd}
-&\lim_{\tiles \rightarrow \infty}\, \tiles g\left(\frac{\sqrt{(\tiles-3)^2+(\tiles-1)^2}} 2, \tiles-3, \tiles-3 \right) \\
-&\quad = \lim_{\tiles \rightarrow \infty}\, \tiles g\left(\frac{\sqrt{(\tiles-3)^2+(\tiles-1)^2}} 2, \tiles-5, \tiles-1 \right) = \frac 2 {3\pi},
+&\lim_{\tiles \rightarrow \infty}\, \tiles g\left(\frac{\sqrt{(\tiles-3)^2+(\tiles-1)^2}} 2, \frac{\tiles-3} 2, \frac{\tiles-3} 2 \right) \\
+&\quad = \lim_{\tiles \rightarrow \infty}\, \tiles g\left(\frac{\sqrt{(\tiles-3)^2+(\tiles-1)^2}} 2, \frac{\tiles-5} 2, \frac{\tiles-1} 2 \right) = \frac 2 {3\pi},
 \end{split}
 \end{equation}
 as can be (somewhat tediously) checked using L'H\^opital's rule \cite[section~5.3]{Abbott15}.
@@ -1225,8 +1225,8 @@ Combining these expressions with the second equality in \eqref{eq: probmax} yiel
 Similarly,
 \begin{equation}
 \label{eq: tedious limit, even}
-\lim_{\tiles \rightarrow \infty}\, \tiles g\left(\frac{\tiles-2}{\sqrt 2}, \tiles-4, \tiles-2 \right) =
-\lim_{\tiles \rightarrow \infty}\, \tiles g\left(\frac{\tiles-2}{\sqrt 2}, \tiles-6, \tiles \right)
+\lim_{\tiles \rightarrow \infty}\, \tiles g\left(\frac{\tiles-2}{\sqrt 2}, \frac{\tiles-4} 2, \frac{\tiles-2} 2 \right) =
+\lim_{\tiles \rightarrow \infty}\, \tiles g\left(\frac{\tiles-2}{\sqrt 2}, \frac{\tiles-6} 2, \frac \tiles 2 \right)
 = \frac 2 {3\pi},
 \end{equation}
 and combining with the fourth equality in \eqref{eq: probmax} gives \eqref{eq: probmax lim even}.
