@@ -2442,7 +2442,6 @@ plot(L_fine.*ind_even./ind_even, result_computed.*ind_even./ind_even, '-', 'line
 xlabel length, ylabel probability
 
 % New:
-g = @(r,u,v) ((acos(u/2./r)-asin(v/2./r)).*u.*v + 2*r.^2 + u.^2/2 + v.^2/2 - u.*sqrt(4*r.^2-v.^2) - v.*sqrt(4*r.^2-u.^2))/2/pi;
 ind_odd = mod(funt_fine,2)==1;
 ind_even = ~ind_odd;
 num_k2 = ceil( sqrt(L_fine.^2/2-(funt_fine-3).^2/4) - (1+ind_even/2) );
@@ -2467,7 +2466,6 @@ plot(L_fine.*ind_even./ind_even, result_computed2.*ind_even./ind_even, 'k--', 'l
 % checked
 
 % New, with number of terms not explicit
-g = @(r,u,v) ((acos(u/2./r)-asin(v/2./r)).*u.*v + 2*r.^2 + u.^2/2 + v.^2/2 - u.*sqrt(4*r.^2-v.^2) - v.*sqrt(4*r.^2-u.^2))/2/pi;
 ind_odd = mod(funt_fine,2)==1;
 ind_even = ~ind_odd;
 result_computed3 = NaN(size(funt_fine));
@@ -2504,52 +2502,28 @@ jj = ceil(abs(imag(z1))) + (imag(z1)<0); % add 1 for negative
 result = mean(ii+jj-1 == funt , 1);
 plot(L, result, 'o', 'markersize', 4), hold on, grid on
 
-% New, like _computed2 but redefining g: I redefined u, v so that input (t-3) now becomes (t-3)/2, etc
+% New, like_ _computed2 but redefining g: I redefined u, v so that input (t-3) now becomes (t-1)/3
 g = @(r,u,v) (2*(acos(u./r)-asin(v./r)).*u.*v + r.^2 + u.^2 + v.^2 - 2*u.*sqrt(r.^2-v.^2) - 2*v.*sqrt(r.^2-u.^2))/pi;
 ind_odd = mod(funt_fine,2)==1;
 ind_even = ~ind_odd;
 num_k2 = ceil( sqrt(L_fine.^2/2-(funt_fine-3).^2/4) - (1+ind_even/2) );
-result_computed4 = NaN(size(funt_fine));
+result_computed2 = NaN(size(funt_fine));
 for ind_fine = 1:numel(funt_fine)
     t = funt_fine(ind_fine);
     L = L_fine(ind_fine);
     if ind_odd(ind_fine)
-        result_computed4(ind_fine) = g(L, (t-3)/2, (t-3)/2); % this term is always present
+        result_computed2(ind_fine) = g(L, (t-3)/2, (t-3)/2); % this term is always present
         for k = 1:num_k2(ind_fine) % extra terms
-            result_computed4(ind_fine) = result_computed4(ind_fine) + 2*g(L, (t-3)/2-k, (t-3)/2+k);
+            result_computed2(ind_fine) = result_computed2(ind_fine) + 2*g(L, (t-3-2*k, t-3+2*k);
         end
     else
-        result_computed4(ind_fine) = 2*g(L, (t-4)/2, (t-2)/2); % this term is always present
+        result_computed2(ind_fine) = 2*g(L, t-4, t-2); % this term is always present
         for k = 1:num_k2(ind_fine) % extra terms
-            result_computed4(ind_fine) = result_computed4(ind_fine) + 2*g(L, (t-4)/2-k, (t-2)/2+k);
+            result_computed2(ind_fine) = result_computed2(ind_fine) + 2*g(L, t-4-2*k, t-2+2*k);
         end
     end
 end
-plot(L_fine.*ind_odd./ind_odd, result_computed4.*ind_odd./ind_odd, 'k--', 'linewidth', .7), hold on
-plot(L_fine.*ind_even./ind_even, result_computed4.*ind_even./ind_even, 'k--', 'linewidth', .7)
-% checked
+plot(L_fine.*ind_odd./ind_odd, result_computed2.*ind_odd./ind_odd, 'k--', 'linewidth', .7)
+plot(L_fine.*ind_even./ind_even, result_computed2.*ind_even./ind_even, 'k--', 'linewidth', .7)
 
-% New, like _computed3 but redefining g: I redefined u, v so that input (t-3) now becomes (t-3)/2, etc
-g = @(r,u,v) (2*(acos(u./r)-asin(v./r)).*u.*v + r.^2 + u.^2 + v.^2 - 2*u.*sqrt(r.^2-v.^2) - 2*v.*sqrt(r.^2-u.^2))/pi;
-ind_odd = mod(funt_fine,2)==1;
-ind_even = ~ind_odd;
-result_computed3 = NaN(size(funt_fine));
-for ind_fine = 1:numel(funt_fine)
-    t = funt_fine(ind_fine);
-    L = L_fine(ind_fine);
-    potential_i = 0:t-3;
-    potential_j = t-1-potential_i;
-    ind_actual_ij = (potential_i-1).^2 + (potential_j-1).^2 < L^2;
-    actual_i = potential_i(ind_actual_ij);
-    actual_j = potential_j(ind_actual_ij);
-    res = 0;
-    for ind_ij = 1:numel(actual_i)
-        ii = actual_i(ind_ij);
-        jj = actual_j(ind_ij);
-        res = res + g(L, ii-1, jj-1);
-    end
-    result_computed3(ind_fine) = res;
-end
-plot(L_fine.*ind_odd./ind_odd, result_computed4.*ind_odd./ind_odd, 'k--', 'linewidth', .7), hold on
-plot(L_fine.*ind_even./ind_even, result_computed4.*ind_even./ind_even, 'k--', 'linewidth', .7)
-% checked
+
