@@ -7,3 +7,6 @@ Esto se parece más a hacer lo que decía el párrafo de después del teorema pa
 Proposición 5: la primera igualdad se mantiene. La segunda y tercera tienen ahora posibles términos adicionales. La cuarta sería consecuencia de la segunda y da tercera. A ver la segunda: cada término tiene el mismo límite, según parece numéricamente. El número de términos es como mucho proporcional a t. Eso no nos vale para establecer la segunda igualdad. Lo mismo pasa con la tercera. Habría que caracterizar el crecimiento del número de términos de la suma con t. Si no, la Proposicón 5 desaparece.
 
 Creo que el número de términos aumenta con la raíz de l, o de t. Según eso, la segunda y tercera igualdad de la proposición se mantendrían cambiando t por sqrt(t): la probabilidad máxima disminuye no con 1/t, sino con 1/sqrt(t). Creo que el número de términos es, para l grande, sqrt(l)*2^(1/4) = sqrt(t). Entonces el límite en la segunda y tercera igualdad, con sqrt(t) en vez de t, sería igual para par y para impar: 4/3*pi.
+
+
+Veo luego que, aunque el número de términos sea aproximadamente sqrt(t), la probabilidad aumenta menos que eso. Es porque no todos los términos están en el mismo "estado" de covergencia: unos van antes, otros después. No "llegan" todos a la vez. Es más difícil, pero lo he podido hacer.

@@ -1627,6 +1627,7 @@ for k = [0 1+3j 2+2j 3+1j 1-3j 2-2j 3-1j -3+1j -2+2j -1+3j -3-1j -2-2j -1-3j]
         plot(real(k)+[0 1 1 0 0], imag(k)+[0 0 1 1 0], 'k--', 'linewidth', 1.4)
     end
 end
+set(gcf, 'Position', [680 558 560 400])
 
 
 %% #63. Figure for proof of probmax: funt odd, diagonal
@@ -2398,7 +2399,7 @@ plot(num_k2, '--')
 all(num_k==num_k2) % checked
 
 
-%% #84. Computing probability non-asymptotically using the number of terms from #83
+%% #85. Computing probability non-asymptotically using the number of terms from #84
 
 clear, close all
 L_fine = linspace(10,1000,1e5);
@@ -2533,7 +2534,7 @@ plot(L_fine.*ind_even./ind_even, result_computed4.*ind_even./ind_even, 'k--', 'l
 g = @(r,u,v) (2*(acos(u./r)-asin(v./r)).*u.*v + r.^2 + u.^2 + v.^2 - 2*u.*sqrt(r.^2-v.^2) - 2*v.*sqrt(r.^2-u.^2))/pi;
 ind_odd = mod(funt_fine,2)==1;
 ind_even = ~ind_odd;
-result_computed3 = NaN(size(funt_fine));
+result_computed5 = NaN(size(funt_fine));
 for ind_fine = 1:numel(funt_fine)
     t = funt_fine(ind_fine);
     L = L_fine(ind_fine);
@@ -2548,8 +2549,521 @@ for ind_fine = 1:numel(funt_fine)
         jj = actual_j(ind_ij);
         res = res + g(L, ii-1, jj-1);
     end
-    result_computed3(ind_fine) = res;
+    result_computed5(ind_fine) = res;
 end
-plot(L_fine.*ind_odd./ind_odd, result_computed4.*ind_odd./ind_odd, 'k--', 'linewidth', .7), hold on
-plot(L_fine.*ind_even./ind_even, result_computed4.*ind_even./ind_even, 'k--', 'linewidth', .7)
+plot(L_fine.*ind_odd./ind_odd, result_computed5.*ind_odd./ind_odd, 'k--', 'linewidth', .7), hold on
+plot(L_fine.*ind_even./ind_even, result_computed5.*ind_even./ind_even, 'k--', 'linewidth', .7)
 % checked
+
+
+%% #86: like #64 but changing the segment shift, and with minor improvements. Figure for proof of probmax: funt odd
+clf
+hold on
+set(gca, 'layer', 'top')
+axis equal
+grid on
+plot([-.4 5], [0 0], 'k')
+plot([-.4j 5j], 'k')
+set(gca, 'GridAlpha', .4)
+xticks(-1:5), yticks(-1:5)
+xticklabels({'' '0' '1' ['i' char(hex2dec('2212')) '1'] '' '' ''})
+yticklabels({'' '0' '1' '' '' ['j' char(hex2dec('2212')) '1'] ''})
+xlabel x 
+ylabel y
+axis([-1 5 -1 5])
+L = 3.52;
+theta_0 = asin(3/L);
+theta_1 = acos(1/L);
+theta = theta_0 + linspace(-10*pi/180,0,50);
+plot(1+1j + L*exp(1j*theta), ':', 'linewidth', .75)
+theta = theta_1 + linspace(0,10*pi/180,50);
+set(gca, 'colororderindex', 1)
+plot(1+1j + L*exp(1j*theta), ':', 'linewidth', .75)
+theta = linspace(theta_0,theta_1,50);
+set(gca, 'colororderindex', 1)
+plot(1+1j + L*exp(1j*theta), '-', 'linewidth', .75)
+theta_example = theta_0 + (theta_1-theta_0)*.55;
+endpoint = 1+1j + L*exp(1j*(theta_example));
+patch([real(endpoint) 2 2 real(endpoint) real(endpoint)], [imag(endpoint) imag(endpoint) 4 4 imag(endpoint)], .88*[1 1 1], 'edgecolor', 'none')
+plot([endpoint real(endpoint)+4j], 'k:')
+plot([endpoint 2+1j*imag(endpoint)], 'k:')
+plot([1+1j endpoint], 'k')
+for k = [0 2+4j]
+    if k==0
+        plot(real(k)+[0 1 1 0 0], imag(k)+[0 0 1 1 0], 'k-', 'linewidth', 1)
+    else
+        plot(real(k)+[0 1 1 0 0], imag(k)+[0 0 1 1 0], 'k-', 'linewidth', 1)
+    end
+end
+plot([1+1j], 'k.', 'markersize', 7)
+plot(endpoint, 'k.', 'markersize', 7)
+text(1.35, 2.65, char(hex2dec('2113')))
+plot([1+1j 1.55+1j], 'k:')
+theta = linspace(0,theta_example);
+plot(1+1j + .3*exp(1j*theta), 'k-')
+text(1.37, 1.26, char(hex2dec('03B8')))
+
+
+%% #87: Figure for number of terms in the sum of probmax
+clf
+ms1 = 14;
+ms2 = 10;
+hold on
+set(gca, 'layer', 'top')
+axis equal
+grid on
+set(gca, 'GridAlpha', .4)
+xticks(0:8), yticks(0:8)
+%xticks(1:10), yticks(1:10)
+xlabel x 
+ylabel y
+axis([min(xticks) max(xticks) min(yticks) max(yticks)])
+plot([0 1 1 0 0], [0 0 1 1 0], 'k-', 'linewidth', 1) % reference tile
+%plot([1+1j], 'k.', 'markersize', ms2) % dot at the corner of reference tile
+t = floor(sqrt(2*ceil(L^2)-2))+3;
+for L = [4.48 4.98 5.54 7.94 8.32 8.6 8.89 9.183]-2*sqrt(2) %[7.9 8.24 8.59 8.85 9.12]-sqrt(2)
+    set(gca, 'colororderindex', 1)
+    t = floor(sqrt(2*ceil(L^2)-2))+3;
+    ii = 1:t; % corners are at (i-1,j-1)
+    jj = t+1-ii;
+    ind = (ii-2).^2+(jj-2).^2<L^2;
+    ii = ii(ind);
+    jj = jj(ind);
+    ind_extra = abs(ii-jj)>1;
+    theta_aux = acos((t-3)/2*sqrt(2)/L);
+    theta_0 = pi/4 - theta_aux;
+    theta_1 = pi/4 + theta_aux;
+    theta = linspace(theta_0, theta_1, 100);
+    plot(1+1j + L*exp(1j*theta), '-', 'linewidth', .5)
+    plot([(t-1)*1j t-1], '--', 'Color', 0*[1 1 1])
+    plot(ii(~ind_extra)-1+1j*(jj(~ind_extra)-1), 'k.', 'markersize', 14) % dot at the corner of other tile
+    plot(ii(ind_extra)-1+1j*(jj(ind_extra)-1), 'ko', 'markersize', 4) % dot at the corner of other, extra tile
+end
+text(8.162, 1.04, 't = 10')
+text(8.162, 2.04, 't = 11')
+text(4.8, .5, 't = 6')
+text(2.66, .5, 't = 5')
+
+
+%% #88: Figure for computing the number of terms in the sum of probmax; t even
+clf
+ms1 = 14;
+ms2 = 10;
+hold on
+set(gca, 'layer', 'top')
+axis equal
+grid on
+set(gca, 'GridAlpha', .4)
+xticks(0:8), yticks(0:8)
+%xticks(1:10), yticks(1:10)
+xlabel x 
+ylabel y
+axis([min(xticks) max(xticks) min(yticks) max(yticks)])
+plot([0 1 1 0 0], [0 0 1 1 0], 'k-', 'linewidth', 1) % reference tile
+%plot([1+1j], 'k.', 'markersize', ms2) % dot at the corner of reference tile
+for L = 8.32-2*sqrt(2) %[7.9 8.24 8.59 8.85 9.12]-sqrt(2)
+    set(gca, 'colororderindex', 1)
+    t = floor(sqrt(2*ceil(L^2)-2))+3;
+    ii = 1:t; % corners are at (i-1,j-1)
+    jj = t+1-ii;
+    ind = (ii-2).^2+(jj-2).^2<L^2;
+    ii = ii(ind);
+    jj = jj(ind);
+    ind_extra = abs(ii-jj)>1;
+    for n = 1:numel(ii)
+        plot(ii(n)-1 + [0 1], jj(n)-1 + [0 0], 'k-', 'linewidth', 1) % horizontal sides of tiles
+        plot(ii(n)-1 + [0 0], jj(n)-1 + [0 1], 'k-', 'linewidth', 1) % vertical sides of tiles
+    end
+    theta_aux = acos((t-3)/2*sqrt(2)/L);
+    theta_0 = pi/4 - theta_aux;
+    theta_1 = pi/4 + theta_aux;
+    theta = linspace(theta_0, theta_1, 100);
+    plot(1+1j + L*exp(1j*theta), '-', 'linewidth', .75) % arc
+    plot([(t-1)*1j t-1], '--', 'Color', 0*[1 1 1]) % diagonal line, -45º slope
+    plot(ii(~ind_extra)-1+1j*(jj(~ind_extra)-1), 'k.', 'markersize', 14) % dot at the corner of other tile
+    plot(ii(ind_extra)-1+1j*(jj(ind_extra)-1), 'ko', 'markersize', 4) % dot at the corner of other, extra tile
+    plot([1+1j 1+1j+L*exp(1j*theta_0)], 'k-') % radius labelled "l"
+    plot([1+1j (t-1)/2*(1+1j)], 'k-') % line with 45º slope
+    plot([(t-1)/2*(1+1j) 1+1j+L*exp(1j*theta_0)], 'k-', 'linewidth', 1.25) % segment labelled "w"
+end
+text(8.162, 1.04, 't = 10')
+text(3.47, 1.7, char(hex2dec('2113')))
+text(5.06, 3.54, 'w')
+text(2, 4.54, ['((t' char(hex2dec('2212')) '1)/2,(t' char(hex2dec('2212')) '1)/2)'])
+set(gcf, 'Position', [680 558 560 400])
+
+
+%% #89: Figure for computing the number of terms in the sum of probmax; t odd
+clf
+ms1 = 14;
+ms2 = 10;
+hold on
+set(gca, 'layer', 'top')
+axis equal
+grid on
+set(gca, 'GridAlpha', .4)
+xticks(0:8), yticks(0:8)
+%xticks(1:10), yticks(1:10)
+xlabel x 
+ylabel y
+axis([min(xticks) max(xticks) min(yticks) max(yticks)])
+plot([0 1 1 0 0], [0 0 1 1 0], 'k-', 'linewidth', 1) % reference tile
+%plot([1+1j], 'k.', 'markersize', ms2) % dot at the corner of reference tile
+for L = 8.88-2*sqrt(2) %[7.9 8.24 8.59 8.85 9.12]-sqrt(2)
+    set(gca, 'colororderindex', 1)
+    t = floor(sqrt(2*ceil(L^2)-2))+3;
+    ii = 1:t; % corners are at (i-1,j-1)
+    jj = t+1-ii;
+    ind = (ii-2).^2+(jj-2).^2<L^2+4; % añado 4 para que haya otro par de puntos
+    ii = ii(ind);
+    jj = jj(ind);
+    ind_extra = abs(ii-jj)>1;
+    for n = 1:numel(ii)
+        plot(ii(n)-1 + [0 1], jj(n)-1 + [0 0], 'k-', 'linewidth', 1) % horizontal sides of tiles
+        plot(ii(n)-1 + [0 0], jj(n)-1 + [0 1], 'k-', 'linewidth', 1) % vertical sides of tiles
+    end
+    theta_aux = acos((t-3)/2*sqrt(2)/L);
+    theta_0 = pi/4 - theta_aux;
+    theta_1 = pi/4 + theta_aux;
+    theta = linspace(theta_0, theta_1, 100);
+    plot(1+1j + L*exp(1j*theta), '-', 'linewidth', .75) % arc
+    plot([(t-1)*1j t-1], '--', 'Color', 0*[1 1 1]) % diagonal line, -45º slope
+    plot(ii(~ind_extra)-1+1j*(jj(~ind_extra)-1), 'k.', 'markersize', 14) % dot at the corner of other tile
+    plot(ii(ind_extra)-1+1j*(jj(ind_extra)-1), 'ko', 'markersize', 4) % dot at the corner of other, extra tile
+    plot([1+1j 1+1j+L*exp(1j*theta_0)], 'k-') % radius labelled "l"
+    plot([1+1j (t-1)/2*(1+1j)], 'k-') % line with 45º slope
+    plot([(t-1)/2*(1+1j) 1+1j+L*exp(1j*theta_0)], 'k-', 'linewidth', 1.25) % segment labelled "w"
+end
+text(8.162, 2.04, 't = 11')
+text(3.6, 1.96, char(hex2dec('2113')))
+text(5.25, 4.31, 'w')
+text(2.47, 5.03, ['((t' char(hex2dec('2212')) '1)/2,(t' char(hex2dec('2212')) '1)/2)'])
+set(gcf, 'Position', [680 558 560 400])
+
+
+%% #90. Figure: probmax, incorporating the correction from #85
+% I usee #85 computed4, additionally changing the order of second and third inputs of g
+
+clear, clc
+L_fine = .001:.001:16; % spacing should be small because curves are almost vertical at some points
+ii = ceil(L_fine/sqrt(2)) + 1;
+jj = ceil(sqrt(L_fine.^2 - (ii-2).^2 )) + 1;
+funt_fine = ii+jj-1; % formula valid for real-valued lengths
+
+g = @(r,u,v) (2*(acos(v./r)-asin(u./r)).*u.*v + r.^2 + u.^2 + v.^2 - 2*u.*sqrt(r.^2-v.^2) - 2*v.*sqrt(r.^2-u.^2))/pi;
+ind_odd = mod(funt_fine,2)==1;
+ind_even = ~ind_odd;
+num_k2 = ceil( sqrt(L_fine.^2/2-(funt_fine-3).^2/4) - (1+ind_even/2) );
+result_computed = NaN(size(funt_fine));
+for ind_fine = 1:numel(funt_fine)
+    t = funt_fine(ind_fine);
+    L = L_fine(ind_fine);
+    if ind_odd(ind_fine)
+        result_computed(ind_fine) = g(L, (t-3)/2, (t-3)/2); % this term is always present
+        for k = 1:num_k2(ind_fine) % extra terms
+            result_computed(ind_fine) = result_computed(ind_fine) + 2*g(L, (t-3)/2-k, (t-3)/2+k);
+        end
+    else
+        result_computed(ind_fine) = 2*g(L, (t-4)/2, (t-2)/2); % this term is always present
+        for k = 1:num_k2(ind_fine) % extra terms
+            result_computed(ind_fine) = result_computed(ind_fine) + 2*g(L, (t-4)/2-k, (t-2)/2+k);
+        end
+    end
+end
+
+hold on, grid on, box on, set(gca, 'colororderindex', 2)
+plot(L_fine.*ind_odd./ind_odd, result_computed.*ind_odd./ind_odd, '-')
+set(gca, 'colororderindex', 1)
+plot(L_fine.*ind_even./ind_even, result_computed.*ind_even./ind_even, '-')
+%plot(L_fine, result_computed, '-')
+legend({'Odd maximum number of tiles' 'Even maximum number of tiles'})
+xlabel(char(hex2dec('2113'))), ylabel([char(hex2dec('03C1')) '(' char(hex2dec('2113')) ')'])
+set(gcf, 'Position', [680 558 560 380])
+
+
+%% #91. sqrt(t)*probmax(l_t)
+
+clear, clf
+t_all = 3:200;
+ind = mod(t_all,2)==1;
+L_all(ind) = hypot(t_all(ind)-3,t_all(ind)-1)/2;
+ind = mod(t_all,2)==0;
+L_all(ind) = (t_all(ind)-2)/sqrt(2);
+L_all = L_all - 1e-6;
+ii = ceil(L_all/sqrt(2)) + 1;
+jj = ceil(sqrt(L_all.^2 - (ii-2).^2 )) + 1;
+funt_fine = ii+jj-1; % formula valid for real-valued lengths
+
+g = @(r,u,v) (2*(acos(v./r)-asin(u./r)).*u.*v + r.^2 + u.^2 + v.^2 - 2*u.*sqrt(r.^2-v.^2) - 2*v.*sqrt(r.^2-u.^2))/pi;
+ind_odd = mod(funt_fine,2)==1;
+ind_even = ~ind_odd;
+num_k2 = ceil( sqrt(L_all.^2/2-(funt_fine-3).^2/4) - (1+ind_even/2) );
+result_computed = NaN(size(funt_fine));
+for ind_fine = 1:numel(funt_fine)
+    t = funt_fine(ind_fine);
+    L = L_all(ind_fine);
+    if ind_odd(ind_fine)
+        result_computed(ind_fine) = g(L, (t-3)/2, (t-3)/2); % this term is always present
+        for k = 1:num_k2(ind_fine) % extra terms
+            result_computed(ind_fine) = result_computed(ind_fine) + 2*g(L, (t-3)/2-k, (t-3)/2+k);
+        end
+    else
+        result_computed(ind_fine) = 2*g(L, (t-4)/2, (t-2)/2); % this term is always present
+        for k = 1:num_k2(ind_fine) % extra terms
+            result_computed(ind_fine) = result_computed(ind_fine) + 2*g(L, (t-4)/2-k, (t-2)/2+k);
+        end
+    end
+end
+
+marker = '.'; ms = 6;
+hold on, grid on, box on, set(gca, 'colororderindex', 2)
+plot(t_all.*ind_odd./ind_odd, result_computed.*sqrt(t_all).*ind_odd./ind_odd, marker, 'markersize', ms)
+set(gca, 'colororderindex', 1)
+plot(t_all.*ind_even./ind_even, result_computed.*sqrt(t_all).*ind_even./ind_even, marker, 'markersize', ms)
+legend({'Odd t' 'Even t'})
+xlabel('t')
+ylabel(['t^{1/2}' char(hex2dec('03C1')) '(' char(hex2dec('2113')) '_t)'])
+set(gcf, 'Position', [680 558 560 380])
+%set(gca, 'XScale', 'log', 'YScale', 'log')
+set(gca, 'colororderindex', 3)
+%plot(t_all, 32*sqrt(2)/105/pi)
+set(gcf, 'Position', [680 558 560 380])
+
+
+%% #92. Figure for proof of asymptotic probmax
+
+clear, clf, clc
+t = 9; % 10
+if mod(t,2)==1
+    L = hypot(t-3,t-1)/2;
+else
+    L = (t-2)/sqrt(2);
+end
+y_aux = (t-3)/sqrt(2);
+y0 = L-y_aux;
+x0 = sqrt(L^2-y_aux^2);
+theta_aux = acos(y_aux/L);
+theta = linspace(pi/2-theta_aux, pi/2+theta_aux, 200);
+plot(-y_aux*1j+L*exp(1j*theta), 'linewidth', 0.5)
+hold on, axis equal
+x_dots = (-t+(1-mod(t,2))/2:t)*sqrt(2);
+x_dots = x_dots(abs(x_dots)<=x0);
+xlim([-3.2 3.2]), ylim([-4.6 1.09])
+plot(xlim, [0 0], 'k--')
+plot([0 0], ylim, 'k--')
+plot([0-1j*y_aux x0+0j], 'k-')
+text(1.03, -1.96, [char(hex2dec('2113')) '_t'])
+%xt = x_dots;
+%xt = [xt x0]; [xt, ind] = sort(xt);
+%xtl = cellfun(@(s) [s char(hex2dec('221A')) '2'], {[char(hex2dec('2212')) '1.5'], [char(hex2dec('2212')) '0.5'], '0.5', '1.5'}, 'UniformOutput', false);
+%xtl = [xtl 'x_0']; %xrl = xtl(ind);
+xt = [-x0 -sqrt(2) 0 sqrt(2) x0]; xticks(xt)
+xtl = {[ hex2dec('2212') 'w_t'] 'x_{t,n}' '0' '' 'w_t'};
+xticks(xt)
+xticklabels(xtl)
+%yt = [-y_aux y0]; ytl = {['h' hex2dec('2212') hex2dec('2113')], 'h'};
+yt = [-y_aux 0 y0];
+ytl = {[hex2dec('2212') '(t-3)/' char(hex2dec('221A')) '2'] '0' 'h_t'};
+yticks(yt)
+yticklabels(ytl)
+ind_dot = 1; % select a tile
+theta = 1.815; % pi/2*1.06; % choose manually, within the selected tile
+z0 = -1j*y_aux+L*exp(1j*theta);
+m = (x_dots(ind_dot)+z0)/2;
+d = (x_dots(ind_dot)-z0)/2;
+z1 = exp(-2j*(angle(d)-5/4*pi))*d+m;
+z2 = -exp(-2j*(angle(d)-5/4*pi))*d+m;
+patch(real([z0 z1 x_dots(ind_dot) z2 z0]), imag([z0 z1 x_dots(ind_dot) z2 z0]), .88*[1 1 1], 'edgecolor', 'none')
+plot([z0 z1], 'k:')
+plot([z0 z2], 'k:')
+for x_dots_each = x_dots
+    if abs(x_dots_each)<.8
+        plot(x_dots_each, 0, 'k.', 'markersize', 14)
+    else
+        plot(x_dots_each, 0, 'ko', 'markersize', 4)
+    end
+    
+end
+%text(-1,-5, ['h' hex2dec('2212') hex2dec('2113')])
+set(gca, 'colororderindex', 1)
+%theta = linspace(pi/2, pi/2+.2264, 20); % manually
+theta = linspace(1.7127, 1.9447, 50); % manually
+plot(-y_aux*1j+L*exp(1j*theta), 'linewidth', 1)
+for ind = 1:3
+    plot(x_dots(ind)+[-sqrt(.5) 0], [sqrt(.5) 0], 'k-', 'linewidth', .5)
+    plot(x_dots(ind)+[sqrt(.5) 0], [sqrt(.5) 0], 'k-', 'linewidth', .5)
+end
+set(gca, 'colororderindex', 1)
+plot([-1j*y_aux z0], '-', 'linewidth', .5)
+theta = linspace(0,angle(z0+1j*y_aux), 80);
+plot(-1j*y_aux + .35*exp(1j*theta), 'k-')
+text(-.35, -3.88, char(hex2dec('03B8')))
+text(-1.86, .77, 'c_{t,n}')
+plot(-1j*y_aux+[0 .55], 'k:')
+s = .5825; plot(x_dots(ind_dot)+[-sqrt(.5) 0]*s, [sqrt(.5) 0]*s, 'k-', 'linewidth', 1) % s manually
+s = 1; plot(x_dots(ind_dot)+[sqrt(.5) 0], [sqrt(.5) 0], 'k-', 'linewidth', 1) % s manually
+grid on
+xlabel x, ylabel y
+box off
+set(gcf, 'Position', [680 558 560 390]) % smaller figure, so font is larger in document
+%figure(gcf)
+
+
+%% #93. Detail of #92, single term
+
+clear, clf, clc
+t = 9; % 10
+if mod(t,2)==1
+    L = hypot(t-3,t-1)/2;
+else
+    L = (t-2)/sqrt(2);
+end
+y_aux = (t-3)/sqrt(2);
+y0 = L-y_aux;
+x0 = sqrt(L^2-y_aux^2);
+hold on, axis equal
+x_dots = (-t+(1-mod(t,2))/2:t)*sqrt(2);
+x_dots = x_dots(abs(x_dots)<=x0);
+ind_dot = 1; % select a tile
+xlim([-2.29 -.285])
+ylim([0 .77])
+%plot(xlim, min(ylim)*[1 1], 'color', 'w', 'linewidth', 1.5)
+%plot(min(xlim)*[1 1], ylim, 'color', 'w', 'linewidth', 1.5)
+%plot(xlim, [0 0], 'k--')
+theta = 1.815; % pi/2*1.06; % choose manually, within the selected tile
+z0 = -1j*y_aux+L*exp(1j*theta);
+z0 = real(z0) + 1j*.5747; % manually
+m = (x_dots(ind_dot)+z0)/2;
+d = (x_dots(ind_dot)-z0)/2;
+z1 = exp(-2j*(angle(d)-5/4*pi))*d+m;
+z2 = -exp(-2j*(angle(d)-5/4*pi))*d+m;
+patch(real([z0 z1 x_dots(ind_dot) z2 z0]), imag([z0 z1 x_dots(ind_dot) z2 z0]), .88*[1 1 1], 'edgecolor', 'none')
+if abs(x_dots(ind_dot))<.8
+    plot(x_dots(ind_dot), 0, 'k.', 'markersize', 14)
+else
+    plot(x_dots(ind_dot), 0, 'ko', 'markersize', 4)
+end
+set(gca, 'colororderindex', 1)
+%theta = linspace(pi/2, pi/2+.2264, 20); % manually
+theta = linspace(1.7127, 1.9447, 40); % manually
+plot(-y_aux*1j+L*exp(1j*theta), 'linewidth', 1)
+theta_1 = linspace(theta(1)-.055, theta(1), 20); % manually
+set(gca, 'colororderindex', 1)
+plot(-y_aux*1j+L*exp(1j*theta_1), 'linewidth', .5)
+theta_2 = linspace(theta(end), theta(end)+.065, 20); % manually
+set(gca, 'colororderindex', 1)
+plot(-y_aux*1j+L*exp(1j*theta_2), 'linewidth', .5)
+plot(x_dots(ind_dot)+[-sqrt(.5) 0], [sqrt(.5) 0], 'k-', 'linewidth', .5)
+plot(x_dots(ind_dot)+[sqrt(.5) 0], [sqrt(.5) 0], 'k-', 'linewidth', .5)
+s1 = .5825; plot(x_dots(ind_dot)+[-sqrt(.5) 0]*s1, [sqrt(.5) 0]*s1, 'k-', 'linewidth', 1) % s manually
+s2 = 1; plot(x_dots(ind_dot)+[sqrt(.5) 0]*s2, [sqrt(.5) 0]*s2, 'k-', 'linewidth', 1) % s manually
+set(gca, 'colororderindex', 1)
+plot([x_dots(ind_dot)-sqrt(.5)*s1 x_dots(ind_dot)+sqrt(.5)*s2], [sqrt(.5)*s1 sqrt(.5)*s2], 'linewidth', 1)
+set(gca, 'colororderindex', 1)
+plot([x_dots(ind_dot) x_dots(ind_dot)+1j*.520557], '-', 'linewidth', .5) % manually
+plot([z0 z1], 'k:')
+plot([z0 z2], 'k:')
+%grid on
+xticks([-1.5 -1 -.5]*sqrt(2))
+xticklabels({['x_{t,n}' hex2dec('2212') hex2dec('221A') '2/2'] 'x_{t,n}' ['x_{t,n}' '+' hex2dec('221A') '2/2']})
+yticks([0 .5*sqrt(2)])
+yticklabels({'0' [hex2dec('221A') '2/2']})
+%yticks([])
+%xlabel x, ylabel y
+%set(gca, 'XColor', 'none', 'Ycolor', 'none')
+%figure(gcf)
+text(-1.79,.24,'a_{t,n}')
+text(-.945,.4,'b_{t,n}')
+text(-1.39,.665,'c_{t,n}')
+text(-1.533,.437,'y_{t,n}')
+set(gcf, 'Position', [680 558 500 300]) % smaller figure, so font is larger in document
+%grid on
+
+
+%% #94. Scaled versions of the circle
+
+clf, hold on
+for t = 4:2:16
+    if mod(t,2)==1
+        L = hypot(t-3,t-1)/2;
+    else
+        L = (t-2)/sqrt(2);
+    end
+    w = sqrt(L^2-(t-3)^2/2);
+    y_aux = (t-3)/sqrt(2);
+    y0 = L-y_aux;
+    %z = linspace(-w,w,300)/sqrt(t); plot(z, y0-L+sqrt(L^2-t*z.^2))
+    z = linspace(-w,w,300)/w; plot(z, y0-L+sqrt(L^2-w^2*z.^2))
+end
+
+
+%% #95. Check of derivative of Omega normalized with respect to t, for t odd
+
+clear, clc, close all
+t = 11;
+lt = hypot(t-3, t-1)/2;
+wt = sqrt(t-2);
+z = linspace(-1,1,200);
+Omega = -(t-3)/sqrt(2) + sqrt( ((t-2).^2+1)/2 - (t-2)*z.^2 );
+%plot(z, Omega), hold on
+
+y = -(t-3)/sqrt(2) + sqrt(lt^2-wt^2*z.^2);
+%plot(z, y, '--') % checked
+
+tp = t-2;
+Omega2 = -(tp-1)/sqrt(2) + sqrt( (tp.^2+1)/2 - tp.*z.^2 );
+%plot(z, Omega2, '--'), % checked
+
+clear
+t = linspace(11,21,1000);
+z = .008;
+tp = t-2;
+clear t
+Omega2 = -(tp-1)/sqrt(2) + sqrt( (tp.^2+1)/2 - tp.*z.^2 );
+%plot(tp(1:end-1), diff(Omega2)./diff(tp)), hold on
+%plot(tp, -1/sqrt(2) + (tp-z.^2)/2./sqrt( (tp.^2+1)/2 - tp.*z.^2 ), '--') % checked
+
+%plot(tp-z.^2), hold on
+%plot(sqrt(tp.^2+1-sqrt(2)+z.^2))
+
+clear
+tp = 7;
+z = linspace(0,1,200);
+%plot(z, (tp-z.^2)/2./sqrt( (tp.^2+1)/2 - tp.*z.^2))
+y = (tp-z.^2)/2./sqrt( (tp.^2+1)/2 - tp.*z.^2);
+%y = (tp-z.^2)/2./sqrt( (tp.^2+z)/2 - tp.*z.^2);
+plot(z(1:end-1), diff(y)./diff(z))
+
+
+
+%% #96: like #62 but only one tile and its symmetric tiles
+clf
+hold on
+set(gca, 'layer', 'bottom')
+axis equal
+grid on
+plot([-3.7 4.7], [0 0], 'k--', 'linewidth', .75) % horizontal axis
+plot([-3.7j 4.7j], 'k--', 'linewidth', .75) % vertical axis
+set(gca, 'GridAlpha', .4)
+xticks(-3:4), yticks(-3:4)
+%xticklabels([arrayfun(@(n)[num2str(n) char(8201) 'a'], -3:-1, 'UniformOutput', false) {'0'}  arrayfun(@(n)[num2str(n) char(8201) 'a'], 1:4, 'UniformOutput', false)]) % thin space
+%yticklabels([arrayfun(@(n)[num2str(n) char(8201) 'a'], -3:-1, 'UniformOutput', false) {'0'}  arrayfun(@(n)[num2str(n) char(8201) 'a'], 1:4, 'UniformOutput', false)]) % thin space
+xlabel x 
+ylabel y
+axis([-4 5 -4 5])
+for k = [0 2+3j 2-3j -2+3j -2-3j] % [0 3+2j 3-2j -3+2j -3-2j]
+    if k==0
+        plot(real(k)+[0 1 1 0 0], imag(k)+[0 0 1 1 0], 'k-', 'linewidth', 1.25)
+    else
+        patch(real([k k+1 k+1 k k]), imag([k k k+1j k+1j k]), .88*[1 1 1])
+        plot(real(k)+[0 1 1 0 0], imag(k)+[0 0 1 1 0], 'k--', 'linewidth', 1.5)
+        plot(k, 'k.', 'markersize', 12)
+    end
+end
+set(gcf, 'Position', [680 558 560 400])
+h = 1.23; v = 2.7;
+text(h,   v,   ['(i' hex2dec('2212') '1,j' hex2dec('2212') '1)'])
+text(h-4, v,   ['(1' hex2dec('2212') 'i,j' hex2dec('2212') '1)'])
+text(h,   v-6, ['(i' hex2dec('2212') '1,1' hex2dec('2212') 'j)'])
+text(h-4, v-6, ['(1' hex2dec('2212') 'i,1' hex2dec('2212') 'j)'])
+
