@@ -303,7 +303,7 @@ j = \frac{i a^2}{b^2} - \frac{5a^2}{2b^2} + \frac 3 2.
 \end{proposition}
 
 \begin{proof}
-For each $\tiles \geq 3$, the pair $(i_\tiles,j_\tiles)$ should be chosen as that on the line $i+j-1=\tiles$ which minimizes $(i-2)^2 a^2 + (j-2)^2 b^2$. This allows maximizing the sum $i+j-1$, and thus the number of visited tiles, for a given length restriction; or visiting a specified number of files with lengths as small as possible.
+For each $\tiles \geq 3$, the pair $(i_\tiles,j_\tiles)$ should be chosen as that on the line $i+j-1=\tiles$ which minimizes $(i-2)^2 a^2 + (j-2)^2 b^2$. This allows maximizing the sum $i+j-1$, and thus the number of visited tiles, for a given length restriction; or visiting a specified number of tiles with lengths as small as possible.
 
 Consider, for the moment, $i$, $j$ as if they were real-valued variables, and denote $x=ia$, $y=jb$. The line $i+j-1 = \tiles$ then becomes
 \begin{equation}
@@ -542,7 +542,7 @@ The $(i_\tiles,j_\tiles)$ pair in set $\mss$ defined in Proposition~\ref{prop: m
 % -- *!*
 coincide with $i_\tiles$, $j_\tiles$ as given by \eqref{eq: min suff set, form, i} and \eqref{eq: min suff set, form, j}, and therefore \eqref{eq: theo: funl, form; funl} gives the correct result. For $\tiles \in \{1, 2\}$ both \eqref{eq: theo: funl, form; isoli} and \eqref{eq: theo: funl, form; jsoli} equal $2$, and \eqref{eq: theo: funl, form; funl} gives $0$, which is again the correct result.
 
-For $\tiles \geq 3$, the term $\sqrt{(i_\tiles-2)^2a^2 + (j_\tiles-2)^2b^2}$ can be interpreted geometrically as the distance between $(i_\tiles, j_\tiles)$ and $(2a, 2b)$. As can be seen with the help of Figure~\ref{fig: min suff set, form}, this distance is the hypotenuse of a right triangle whose other two sides extend from $(2a, 2b)$ to $(\isolr a, \jsolr b)$ and from $(\isolr a, \jsolr b)$ to $(i_\tiles, j_\tiles)$ respectively. Therefore,
+For $\tiles \geq 3$, the term $\sqrt{(i_\tiles-2)^2a^2 + (j_\tiles-2)^2b^2}$ can be interpreted geometrically as the distance between $(i_\tiles a, j_\tiles a)$ and $(2a, 2b)$. As can be seen with the help of Figure~\ref{fig: min suff set, form}, this distance is the hypotenuse of a right triangle whose other two sides extend from $(2a, 2b)$ to $(\isolr a, \jsolr b)$ and from $(\isolr a, \jsolr b)$ to $(i_\tiles a, j_\tiles a)$ respectively. Therefore,
 \begin{equation}
 \label{eq: distance as hypotenuse}
 \begin{split}
@@ -784,12 +784,14 @@ In order to prove that $\funti(\leni+1)-\funti(\leni) \in \{1,2\}$, consider the
 \begin{equation}
 \genfun'(\genvar) = \frac {\sqrt{2} \, \genvar} {\sqrt{\genvar^2-1}},
 \end{equation}
-and its second derivative is easily seen to be negative. Therefore $\genfun'(\genvar)$ can be bounded for $\genvar \geq 3$ as
+and its second derivative is easily seen to be negative. Therefore $\genfun'(\genvar)$ can be bounded for $\genvar > 3$ as
 \begin{equation}
 \label{eq: der bounds}
 \lim_{\genvar \rightarrow \infty} \genfun'(\genvar) = \sqrt{2} < \genfun'(\genvar) < \genfun'(3) = 3/2.
 \end{equation}
-For $\leni \geq 2$, by the mean value theorem \cite[section~5.3]{Abbott15}, when $\leni$ is increased to $\leni+1$ the term $\sqrt{2\leni^2-2}$ in \eqref{eq: funti leni} has an increment that equals $\genfun'(\genvar)$ for some $\leni < \genvar < \leni+1$. Therefore
+For $\leni \geq 3$,
+% I think the above this could be done for $\leni > 2$, replacing $3/2$ in \eqref{eq: der bounds} by $s\sqrt{2/3}$, which is also less than $2$. Then, only the case  $\funti(2)-\funti(1) = 2$ would have to be checked separately.
+by the mean value theorem \cite[section~5.3]{Abbott15}, when $\leni$ is increased to $\leni+1$ the term $\sqrt{2\leni^2-2}$ in \eqref{eq: funti leni} has an increment that equals $\genfun'(\genvar)$ for some $\leni < \genvar < \leni+1$. Therefore
 \begin{equation}
 \label{eq: der bounds 2}
 \sqrt{2} < \sqrt{2(\leni+1)^2-2} - \sqrt{2\leni^2-2} < 3/2.
@@ -997,7 +999,7 @@ The third case obviously gives $\Pr[i \geq n] = 0$, as in \eqref{eq: Pr i geq n}
 The above arguments can be applied to $\Pr[j \geq n]$ if the $x$ and $y$ axes are interchanged. Thus the formulas are the same with $a$ replaced by $b$.
 \end{proof}
 
-The results in Theorem~\ref{theo: funta, form} and Proposition~\ref{prop: Pr i} make clear the relationship between the problem considered here and Buffon's needle experiment, which considers a random segment of fixed length in a regular structure of parallel strips \cite[section~1.1]{Mathai99}. Firstly, since the number $\pi$ is involved in \eqref{eq: funta, form}, it is possible to design a simple probabilistic experiment to estimate the value of $\pi$, as in Buffon's original problem. For example, choosing $a=b=\len=1$ gives $\funta(\len) = 1/\pi+1$.
+The results in Theorem~\ref{theo: funta, form} and Proposition~\ref{prop: Pr i} make clear the relationship between the problem considered here and Buffon's needle experiment, which considers a random segment of fixed length in a regular structure of parallel strips \cite[section~1.1]{Mathai99}. Firstly, since the number $\pi$ is involved in \eqref{eq: funta, form}, it is possible to design a simple probabilistic experiment to estimate the value of $\pi$, as in Buffon's original problem. For example, choosing $a=b=\len=1$ gives $\funta(\len) = 4/\pi+1$.
 
 Secondly, a grid with $b \rightarrow \infty$ corresponds to Buffon's arrangement of parallel strips with spacing $a$. Thus
 \begin{equation}
