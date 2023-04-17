@@ -2793,7 +2793,7 @@ set(gcf, 'Position', [680 558 560 380])
 %% #91. sqrt(t)*probmax(l_t)
 
 clear, clf
-t_all = 3:200;
+t_all = 10:1000;
 ind = mod(t_all,2)==1;
 L_all(ind) = hypot(t_all(ind)-3,t_all(ind)-1)/2;
 ind = mod(t_all,2)==0;
@@ -2824,7 +2824,7 @@ for ind_fine = 1:numel(funt_fine)
     end
 end
 
-marker = '.'; ms = 6;
+marker = '.'; ms = 5;
 hold on, grid on, box on, set(gca, 'colororderindex', 2)
 plot(t_all.*ind_odd./ind_odd, result_computed.*sqrt(t_all).*ind_odd./ind_odd, marker, 'markersize', ms)
 set(gca, 'colororderindex', 1)
