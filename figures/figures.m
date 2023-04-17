@@ -2197,9 +2197,8 @@ set(gca, 'XScale', 'log', 'YScale', 'log') % a gap is visible
 % are far from convergence
 %   Yes. The sum of terms divided by the estimated number of terms sqrt(t/2) gives around 0.4571,
 % which multiplied by 2 is 0.914. There was a factor of 2 or almost 2 missing, because the terms for
-% k>0 should appear twice in the sum; and that for k=0 too for t even. So the estimated number of
+% k>0 should appear twice in the sum, as should that for k=0 too for t even. So the estimated number of
 % terms should be sqrt(2*t), not sqrt(t/2).
-%   So the problem is that sum(g_actual_k/sqrt(2*t))
 
 clear, close all
 g = @(r,u,v) ((acos(u/2./r)-asin(v/2./r)).*u.*v + 2*r.^2 + u.^2/2 + v.^2/2 - u.*sqrt(4*r.^2-v.^2) - v.*sqrt(4*r.^2-u.^2))/2/pi;
@@ -2671,8 +2670,12 @@ for L = 8.32-2*sqrt(2) %[7.9 8.24 8.59 8.85 9.12]-sqrt(2)
     jj = jj(ind);
     ind_extra = abs(ii-jj)>1;
     for n = 1:numel(ii)
-        plot(ii(n)-1 + [0 1], jj(n)-1 + [0 0], 'k-', 'linewidth', 1) % horizontal sides of tiles
-        plot(ii(n)-1 + [0 0], jj(n)-1 + [0 1], 'k-', 'linewidth', 1) % vertical sides of tiles
+        patch(ii(n)-1+[0 1 1 0 0], jj(n)-1+[0 0 1 1 0], .88*[1 1 1], 'edgecolor', 'none')
+        lw = .5;
+        plot(ii(n)-1 + [0 1], jj(n)-1 + [0 0], 'k-', 'linewidth', lw) % horizontal sides of tiles
+        plot(ii(n)-1 + [0 0], jj(n)-1 + [0 1], 'k-', 'linewidth', lw) % vertical sides of tiles
+        plot(ii(n)-1 + [0 1], jj(n)   + [0 0], 'k-', 'linewidth', lw) % farther horizontal sides
+        plot(ii(n)   + [0 0], jj(n)-1 + [0 1], 'k-', 'linewidth', lw) % farther vertical sides
     end
     theta_aux = acos((t-3)/2*sqrt(2)/L);
     theta_0 = pi/4 - theta_aux;
@@ -2719,8 +2722,14 @@ for L = 8.88-2*sqrt(2) %[7.9 8.24 8.59 8.85 9.12]-sqrt(2)
     jj = jj(ind);
     ind_extra = abs(ii-jj)>1;
     for n = 1:numel(ii)
-        plot(ii(n)-1 + [0 1], jj(n)-1 + [0 0], 'k-', 'linewidth', 1) % horizontal sides of tiles
-        plot(ii(n)-1 + [0 0], jj(n)-1 + [0 1], 'k-', 'linewidth', 1) % vertical sides of tiles
+        if (ii(n)-2).^2+(jj(n)-2).^2<L^2 % only plot tiles that not covered
+            patch(ii(n)-1+[0 1 1 0 0], jj(n)-1+[0 0 1 1 0], .88*[1 1 1], 'edgecolor', 'none')
+            lw = .5;
+            plot(ii(n)-1 + [0 1], jj(n)-1 + [0 0], 'k-', 'linewidth', lw) % horizontal sides of tiles
+            plot(ii(n)-1 + [0 0], jj(n)-1 + [0 1], 'k-', 'linewidth', lw) % vertical sides of tiles
+            plot(ii(n)-1 + [0 1], jj(n)   + [0 0], 'k-', 'linewidth', lw) % farther horizontal sides
+            plot(ii(n)   + [0 0], jj(n)-1 + [0 1], 'k-', 'linewidth', lw) % farther vertical sides
+        end
     end
     theta_aux = acos((t-3)/2*sqrt(2)/L);
     theta_0 = pi/4 - theta_aux;
@@ -2858,12 +2867,13 @@ text(1.03, -1.96, [char(hex2dec('2113')) '_t'])
 %xtl = cellfun(@(s) [s char(hex2dec('221A')) '2'], {[char(hex2dec('2212')) '1.5'], [char(hex2dec('2212')) '0.5'], '0.5', '1.5'}, 'UniformOutput', false);
 %xtl = [xtl 'x_0']; %xrl = xtl(ind);
 xt = [-x0 -sqrt(2) 0 sqrt(2) x0]; xticks(xt)
-xtl = {[ hex2dec('2212') 'w_t'] 'x_{t,n}' '0' '' 'w_t'};
+%xtl = {[ hex2dec('2212') 'w_t'] 'x_{t,n}' '0' '' 'w_t'};
+xtl = {[ hex2dec('2212') 'w_t'] 'x_{t,n}' '0' [hex2dec('221A') '2/2'] 'w_t'};
 xticks(xt)
 xticklabels(xtl)
 %yt = [-y_aux y0]; ytl = {['h' hex2dec('2212') hex2dec('2113')], 'h'};
 yt = [-y_aux 0 y0];
-ytl = {[hex2dec('2212') '(t-3)/' char(hex2dec('221A')) '2'] '0' 'h_t'};
+ytl = {[hex2dec('2212') '(t' hex2dec('2212') '3)/' char(hex2dec('221A')) '2'] '0' 'h_t'};
 yticks(yt)
 yticklabels(ytl)
 ind_dot = 1; % select a tile
@@ -2888,13 +2898,13 @@ end
 set(gca, 'colororderindex', 1)
 %theta = linspace(pi/2, pi/2+.2264, 20); % manually
 theta = linspace(1.7127, 1.9447, 50); % manually
-plot(-y_aux*1j+L*exp(1j*theta), 'linewidth', 1)
+plot(-y_aux*1j+L*exp(1j*theta), 'linewidth', 1.25)
 for ind = 1:3
     plot(x_dots(ind)+[-sqrt(.5) 0], [sqrt(.5) 0], 'k-', 'linewidth', .5)
     plot(x_dots(ind)+[sqrt(.5) 0], [sqrt(.5) 0], 'k-', 'linewidth', .5)
 end
 set(gca, 'colororderindex', 1)
-plot([-1j*y_aux z0], '-', 'linewidth', .5)
+plot([-1j*y_aux z0], 'k-', 'linewidth', .5)
 theta = linspace(0,angle(z0+1j*y_aux), 80);
 plot(-1j*y_aux + .35*exp(1j*theta), 'k-')
 text(-.35, -3.88, char(hex2dec('03B8')))
@@ -2947,10 +2957,10 @@ set(gca, 'colororderindex', 1)
 %theta = linspace(pi/2, pi/2+.2264, 20); % manually
 theta = linspace(1.7127, 1.9447, 40); % manually
 plot(-y_aux*1j+L*exp(1j*theta), 'linewidth', 1)
-theta_1 = linspace(theta(1)-.055, theta(1), 20); % manually
+theta_1 = linspace(theta(1)-.043, theta(1), 20); % manually
 set(gca, 'colororderindex', 1)
 plot(-y_aux*1j+L*exp(1j*theta_1), 'linewidth', .5)
-theta_2 = linspace(theta(end), theta(end)+.065, 20); % manually
+theta_2 = linspace(theta(end), theta(end)+.050, 20); % manually
 set(gca, 'colororderindex', 1)
 plot(-y_aux*1j+L*exp(1j*theta_2), 'linewidth', .5)
 plot(x_dots(ind_dot)+[-sqrt(.5) 0], [sqrt(.5) 0], 'k-', 'linewidth', .5)
@@ -2980,10 +2990,162 @@ set(gcf, 'Position', [680 558 500 300]) % smaller figure, so font is larger in d
 %grid on
 
 
+%% #93bis. Like #93 but including tangent and some other changes
+
+clear, clf, clc
+t = 9; % 10
+if mod(t,2)==1
+    L = hypot(t-3,t-1)/2;
+else
+    L = (t-2)/sqrt(2);
+end
+y_aux = (t-3)/sqrt(2);
+y0 = L-y_aux;
+x0 = sqrt(L^2-y_aux^2);
+hold on, axis equal
+x_dots = (-t+(1-mod(t,2))/2:t)*sqrt(2);
+x_dots = x_dots(abs(x_dots)<=x0);
+ind_dot = 1; % select a tile
+xlim([-2.29 -.285])
+ylim([0 .77])
+%plot(xlim, min(ylim)*[1 1], 'color', 'w', 'linewidth', 1.5)
+%plot(min(xlim)*[1 1], ylim, 'color', 'w', 'linewidth', 1.5)
+%plot(xlim, [0 0], 'k--')
+theta = 1.815; % pi/2*1.06; % choose manually, within the selected tile
+z0 = -1j*y_aux+L*exp(1j*theta);
+z0 = real(z0) + 1j*.5747; % manually
+m = (x_dots(ind_dot)+z0)/2;
+d = (x_dots(ind_dot)-z0)/2;
+z1 = exp(-2j*(angle(d)-5/4*pi))*d+m;
+z2 = -exp(-2j*(angle(d)-5/4*pi))*d+m;
+patch(real([z0 z1 x_dots(ind_dot) z2 z0]), imag([z0 z1 x_dots(ind_dot) z2 z0]), .88*[1 1 1], 'edgecolor', 'none')
+if abs(x_dots(ind_dot))<.8
+    plot(x_dots(ind_dot), 0, 'k.', 'markersize', 14)
+else
+    plot(x_dots(ind_dot), 0, 'ko', 'markersize', 4)
+end
+set(gca, 'colororderindex', 1)
+%theta = linspace(pi/2, pi/2+.2264, 20); % manually
+theta = linspace(1.7127, 1.9447, 100); % manually
+plot(-y_aux*1j+L*exp(1j*theta), 'linewidth', 1)
+theta_1 = linspace(theta(1)-.043, theta(1), 20); % manually
+set(gca, 'colororderindex', 1)
+plot(-y_aux*1j+L*exp(1j*theta_1), 'linewidth', .5)
+theta_2 = linspace(theta(end), theta(end)+.050, 20); % manually
+set(gca, 'colororderindex', 1)
+plot(-y_aux*1j+L*exp(1j*theta_2), 'linewidth', .5)
+plot(-y_aux*1j+L*( exp(1j*theta(end)) + 35*[0 exp(1j*theta_2(1))-exp(1j*theta_2(2))] ), 'k--', 'linewidth', .5) % tangent. Length manually
+plot(x_dots(ind_dot)+[-sqrt(.5) 0], [sqrt(.5) 0], 'k-', 'linewidth', .5)
+plot(x_dots(ind_dot)+[sqrt(.5) 0], [sqrt(.5) 0], 'k-', 'linewidth', .5)
+s1 = .5825; plot(x_dots(ind_dot)+[-sqrt(.5) 0]*s1, [sqrt(.5) 0]*s1, 'k-', 'linewidth', 1) % s manually
+s2 = 1; plot(x_dots(ind_dot)+[sqrt(.5) 0]*s2, [sqrt(.5) 0]*s2, 'k-', 'linewidth', 1) % s manually
+set(gca, 'colororderindex', 1)
+plot([x_dots(ind_dot)-sqrt(.5)*s1 x_dots(ind_dot)+sqrt(.5)*s2], [sqrt(.5)*s1 sqrt(.5)*s2], 'linewidth', 1)
+set(gca, 'colororderindex', 1)
+plot([x_dots(ind_dot) x_dots(ind_dot)+1j*.520557], '-', 'linewidth', .5) % manually
+plot([z0 z1], 'k:')
+plot([z0 z2], 'k:')
+%grid on
+xticks([-1.5 -1 -.5]*sqrt(2))
+xticklabels({['x_{t,n}' hex2dec('2212') hex2dec('221A') '2/2'] 'x_{t,n}' ['x_{t,n}' '+' hex2dec('221A') '2/2']})
+yticks([0 .5*sqrt(2)])
+yticklabels({'0' [hex2dec('221A') '2/2']})
+%yticks([])
+xlabel x, ylabel y
+%set(gca, 'XColor', 'none', 'Ycolor', 'none')
+%figure(gcf)
+text(-1.79,.24,'a_{t,n}')
+text(-.945,.4,'b_{t,n}')
+text(-1.17,.715,'c_{t,n}')
+%text(-1.533,.437,'y_{t,n}')
+%text(-1.533,.436,[hex2dec('1EF9') '_{t,n}']) % "y" with tilde
+text(-1.532,.436,['y_{t,n}']), text(-1.532,.4682,'~','fontsize',8)
+set(gcf, 'Position', [680 558 500 300]) % smaller figure, so font is larger in document
+text(-1.053,.5658,'c_{t,n}'), text(-1.053,.598,'~','fontsize',8) % there is no "c" with tilde
+%grid on
+
+
+%% #93ter. Like #93bis but including some changes
+
+clear, clf, clc
+t = 9; % 10
+if mod(t,2)==1
+    L = hypot(t-3,t-1)/2;
+else
+    L = (t-2)/sqrt(2);
+end
+y_aux = (t-3)/sqrt(2);
+y0 = L-y_aux;
+x0 = sqrt(L^2-y_aux^2);
+hold on, axis equal
+x_dots = (-t+(1-mod(t,2))/2:t)*sqrt(2);
+x_dots = x_dots(abs(x_dots)<=x0);
+ind_dot = 1; % select a tile
+xlim([-2.29 -.295])
+ylim([0 .77])
+%plot(xlim, min(ylim)*[1 1], 'color', 'w', 'linewidth', 1.5)
+%plot(min(xlim)*[1 1], ylim, 'color', 'w', 'linewidth', 1.5)
+%plot(xlim, [0 0], 'k--')
+theta = 1.815; % pi/2*1.06; % choose manually, within the selected tile
+z0 = -1j*y_aux+L*exp(1j*theta);
+z0 = real(z0) + 1j*.5747; % manually
+m = (x_dots(ind_dot)+z0)/2;
+d = (x_dots(ind_dot)-z0)/2;
+z1 = exp(-2j*(angle(d)-5/4*pi))*d+m;
+z2 = -exp(-2j*(angle(d)-5/4*pi))*d+m;
+patch(real([z0 z1 x_dots(ind_dot) z2 z0]), imag([z0 z1 x_dots(ind_dot) z2 z0]), .88*[1 1 1], 'edgecolor', 'none')
+if abs(x_dots(ind_dot))<.8
+    plot(x_dots(ind_dot), 0, 'k.', 'markersize', 14)
+else
+    plot(x_dots(ind_dot), 0, 'ko', 'markersize', 4)
+end
+set(gca, 'colororderindex', 1)
+%theta = linspace(pi/2, pi/2+.2264, 20); % manually
+theta = linspace(1.7127, 1.9447, 100); % manually
+plot(-y_aux*1j+L*exp(1j*theta), 'linewidth', 1)
+theta_1 = linspace(theta(1)-.043, theta(1), 20); % manually
+set(gca, 'colororderindex', 1)
+plot(-y_aux*1j+L*exp(1j*theta_1), 'linewidth', .5)
+theta_2 = linspace(theta(end), theta(end)+.050, 20); % manually
+set(gca, 'colororderindex', 1)
+plot(-y_aux*1j+L*exp(1j*theta_2), 'linewidth', .5)
+plot(-y_aux*1j+L*( exp(1j*theta(end)) + 38*[0 exp(1j*theta_2(1))-exp(1j*theta_2(2))] ), 'k--', 'linewidth', .5) % tangent. Length manually
+plot(x_dots(ind_dot)+[-sqrt(.5) 0], [sqrt(.5) 0], 'k-', 'linewidth', .5)
+plot(x_dots(ind_dot)+[sqrt(.5) 0], [sqrt(.5) 0], 'k-', 'linewidth', .5)
+s1 = .5825; plot(x_dots(ind_dot)+[-sqrt(.5) 0]*s1, [sqrt(.5) 0]*s1, 'k-', 'linewidth', 1) % s manually
+s2 = 1; plot(x_dots(ind_dot)+[sqrt(.5) 0]*s2, [sqrt(.5) 0]*s2, 'k-', 'linewidth', 1) % s manually
+set(gca, 'colororderindex', 1)
+plot([x_dots(ind_dot)-sqrt(.5)*s1 x_dots(ind_dot)+sqrt(.5)*s2], [sqrt(.5)*s1 sqrt(.5)*s2], 'linewidth', 1)
+set(gca, 'colororderindex', 1)
+plot([x_dots(ind_dot) x_dots(ind_dot)+1j*.520557], 'k-', 'linewidth', .5) % manually
+plot([z0 z1], 'k:')
+plot([z0 z2], 'k:')
+%grid on
+xticks([-1.5 -1 -.5]*sqrt(2))
+xticklabels({['x_{t,n}' hex2dec('2212') hex2dec('221A') '2/2'] 'x_{t,n}' ['x_{t,n}' '+' hex2dec('221A') '2/2']})
+yticks([0 .520557 .553 .5*sqrt(2)])
+yticklabels({'0' '' '' [hex2dec('221A') '2/2']})
+%yticks([])
+xlabel x, ylabel y
+%set(gca, 'XColor', 'none', 'Ycolor', 'none')
+%figure(gcf)
+text(-1.79,.254,'a_{t,n}')
+text(-.945,.41,'b_{t,n}')
+text(-1.16,.705,'c_{t,n}')
+%text(-1.533,.437,'y_{t,n}')
+%text(-1.533,.436,[hex2dec('1EF9') '_{t,n}']) % "y" with tilde
+x = -2.41; y = .495; text(x,y,['y_{t,n}']), text(x+.002,y+.0322,'~','fontsize',8)
+x = -2.41; y = .595; text(x,y,['y_{t,n}'])
+set(gcf, 'Position', [680 558 550 330]) % smaller figure, so font is larger in document
+x = -1.053; y = .5658; text(x,y,'c_{t,n}'), text(x+.002,y+.0322,'~','fontsize',8) % there is no "c" with tilde
+grid on
+
+
+
 %% #94. Scaled versions of the circle
 
 clf, hold on
-for t = 4:2:16
+for t = 4:2:16 %5:2:17
     if mod(t,2)==1
         L = hypot(t-3,t-1)/2;
     else
@@ -3053,10 +3215,11 @@ ylabel y
 axis([-4 5 -4 5])
 for k = [0 2+3j 2-3j -2+3j -2-3j] % [0 3+2j 3-2j -3+2j -3-2j]
     if k==0
-        plot(real(k)+[0 1 1 0 0], imag(k)+[0 0 1 1 0], 'k-', 'linewidth', 1.25)
+        patch(real([k k+1 k+1 k k]), imag([k k k+1j k+1j k]), .88*[1 1 1])
+        plot(real(k)+[0 1 1 0 0], imag(k)+[0 0 1 1 0], 'k-', 'linewidth', 1)
     else
         patch(real([k k+1 k+1 k k]), imag([k k k+1j k+1j k]), .88*[1 1 1])
-        plot(real(k)+[0 1 1 0 0], imag(k)+[0 0 1 1 0], 'k--', 'linewidth', 1.5)
+        plot(real(k)+[0 1 1 0 0], imag(k)+[0 0 1 1 0], 'k--', 'linewidth', 1)
         plot(k, 'k.', 'markersize', 12)
     end
 end
@@ -3066,4 +3229,27 @@ text(h,   v,   ['(i' hex2dec('2212') '1,j' hex2dec('2212') '1)'])
 text(h-4, v,   ['(1' hex2dec('2212') 'i,j' hex2dec('2212') '1)'])
 text(h,   v-6, ['(i' hex2dec('2212') '1,1' hex2dec('2212') 'j)'])
 text(h-4, v-6, ['(1' hex2dec('2212') 'i,1' hex2dec('2212') 'j)'])
+
+
+%% #97: Check for N_t
+
+clear, close all
+t_all = 3:1000;
+num_terms = NaN(size(t_all));
+num_terms2 = NaN(size(t_all));
+for c = 1:numel(t_all)
+    t = t_all(c);
+    potential_k = -t:t; % more than enough
+    if mod(t,2) % odd
+        L = hypot(t-3,t-1)/2;
+        ind_actual_k = ((t-3)/2-potential_k).^2 + ((t-3)/2+potential_k).^2 < L^2;
+        num_terms2(c) = 2*ceil(sqrt((t-2)/2))-1;
+    else % even
+        L = (t-2)/sqrt(2);
+        ind_actual_k = ((t-4)/2-potential_k).^2 + ((t-2)/2+potential_k).^2 < L^2;
+        num_terms2(c) = 2*ceil(sqrt((t-2.5)/2)-0.5);
+    end
+    num_terms(c) = sum(ind_actual_k);
+end
+isequal(num_terms, num_terms2) % check
 
