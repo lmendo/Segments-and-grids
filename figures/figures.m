@@ -2904,9 +2904,9 @@ for ind = 1:3
     plot(x_dots(ind)+[sqrt(.5) 0], [sqrt(.5) 0], 'k-', 'linewidth', .5)
 end
 set(gca, 'colororderindex', 1)
-plot([-1j*y_aux z0], 'k-', 'linewidth', .5)
+plot([-1j*y_aux z0], '-', 'linewidth', .5)
 theta = linspace(0,angle(z0+1j*y_aux), 80);
-plot(-1j*y_aux + .35*exp(1j*theta), 'k-')
+plot(-1j*y_aux + .35*exp(1j*theta), '-')
 text(-.35, -3.88, char(hex2dec('03B8')))
 text(-1.86, .77, 'c_{t,n}')
 plot(-1j*y_aux+[0 .55], 'k:')
@@ -3129,15 +3129,17 @@ yticklabels({'0' '' '' [hex2dec('221A') '2/2']})
 xlabel x, ylabel y
 %set(gca, 'XColor', 'none', 'Ycolor', 'none')
 %figure(gcf)
-text(-1.79,.254,'a_{t,n}')
-text(-.945,.41,'b_{t,n}')
+%text(-1.79,.254,'a_{t,n}')
+text(-1.787,.254,[hex2dec('03B1') '_{t,n}'])
+%text(-.945,.41,'b_{t,n}')
+text(-.945,.41,[hex2dec('03B2') '_{t,n}'])
 text(-1.16,.705,'c_{t,n}')
 %text(-1.533,.437,'y_{t,n}')
 %text(-1.533,.436,[hex2dec('1EF9') '_{t,n}']) % "y" with tilde
-x = -2.41; y = .495; text(x,y,['y_{t,n}']), text(x+.002,y+.0322,'~','fontsize',8)
+x = -2.41; y = .495; text(x,y,['y_{t,n}']), text(x+.001,y+.0322,'~','fontsize',8)
 x = -2.41; y = .595; text(x,y,['y_{t,n}'])
-set(gcf, 'Position', [680 558 550 330]) % smaller figure, so font is larger in document
-x = -1.053; y = .5658; text(x,y,'c_{t,n}'), text(x+.002,y+.0322,'~','fontsize',8) % there is no "c" with tilde
+set(gcf, 'Position', [280 258 550 330]) % smaller figure, so font is larger in document
+x = -1.053; y = .5658; text(x,y,'c_{t,n}'), text(x+.001,y+.0322,'~','fontsize',8) % there is no "c" with tilde
 grid on
 
 

@@ -50,6 +50,8 @@
 \newcommand{\funcirc}{\Omega}
 \newcommand{\funcircesc}{\bar \Omega}
 \newcommand{\fdp}{p}
+\newcommand{\lra}{\alpha}
+\newcommand{\lrb}{\beta}
 
 
 \newtheorem{proposition}{Proposition}%[section]
@@ -421,7 +423,7 @@ with
 \label{eq: theo: funt, form; j}
 \jsoli &= \left\lceil 1 + \frac{\sqrt{\len^2-(\isoli-2)^2a^2}}{b} \right\rceil.
 \end{align}
-The function $\funt$ is piecewise constant and left-continuous, with unit-height jumps. A jump occurs at $\len$ if and only if $\len = \funl(\tiles)$ for some $\tiles \in \mathbb N$, $\tiles \geq 4$; and then $\funt(\len) = \tiles-1$, $\lim_{h \rightarrow 0+} \funt(\len+h) = \tiles$.
+The function $\funt$ is piecewise constant and left-continuous, with unit-height jumps. A jump occurs at $\len$ if and only if $\len = \funl(\tiles)$ for some $\tiles \in \mathbb N$, $\tiles \geq 4$; and then $\funt(\len) = \tiles-1$, $\lim_{\delta \rightarrow 0+} \funt(\len+\delta) = \tiles$.
 \end{theorem}
 
 \begin{proof}
@@ -491,10 +493,10 @@ To see that $\funt$ has a jump at $\len$, assume for the sake of contradiction t
 \label{eq: theo funt, form: prop 2}
 \funt(\len) < \tiles
 \end{equation}
-and there exists $\epsilon > 0$ such that $\funt(\len+h) = \tiles$ for $0 < h < \epsilon$. This implies that
+and there exists $\epsilon > 0$ such that $\funt(\len+\delta) = \tiles$ for $0 < \delta < \epsilon$. This implies that
 \begin{equation}
 \label{eq: theo funt, form: prop 3}
-\lim_{h \rightarrow 0+} \funt(\len+h) = \tiles,
+\lim_{\delta \rightarrow 0+} \funt(\len+\delta) = \tiles,
 \end{equation}
 that is, $\funt$ has a jump at $\len$. In addition, since the jump has unit height, it stems from \eqref{eq: theo funt, form: prop 2} and \eqref{eq: theo funt, form: prop 3}  that $\funt(\len) = \tiles-1$.
 
@@ -918,7 +920,7 @@ In spite of the dependence between the random variables $i$ and $j$, their margi
 For $0 \leq \genvar \leq 1$, let
 \begin{equation}
 \label{eq: f}
-f(\genvar) = \int_0^\genvar \arccos z \, \diff z = \genvar \arccos \genvar - \sqrt{1-\genvar^2} + 1.
+f(\genvar) = \int_0^\genvar \arccos x \, \diff x = \genvar \arccos \genvar - \sqrt{1-\genvar^2} + 1.
 \end{equation}
 
 \begin{proposition}
@@ -1039,7 +1041,7 @@ This function is represented in Figure~\ref{fig: ratio asympt slopes}. It satisf
 \label{fig: ratio asympt slopes}%
 \end{figure}%
 
-The probability of visiting the maximum number of tiles for a rectangular grid is difficult to compute. The source of the difficulty is the irregularity of the optimal $(i,j)$ pairs discussed in \S\ref{part: fund results}. In a square grid, however, the problem is more tractable.
+The probability of visiting the maximum number of tiles for a rectangular grid is difficult to compute. The reason is the irregularity of the relevant $(i,j)$ pairs for general $a$, $b$, analogous to that observed in \S\ref{part: fund results} for the pairs $(i,j)$ that maximize the number of visited tiles. In a square grid, however, the problem is more tractable.
 
 
 \subsection{Unit square grid with real-valued lengths}
@@ -1054,7 +1056,7 @@ For $u, v \in \mathbb N$, $\genvar \in \mathbb R^+$, let
 \label{eq: g def}
 g(\genvar, u, v) = \frac 2 \pi \int_{\arcsin \frac v {\genvar}}^{\arccos \frac u {\genvar}} \left( \genvar \cos \theta - u \right) \left( \genvar \sin \theta - v \right) \, \diff \theta.
 \end{equation}
-Computing this integral and using the identities $\cos^2 \alpha = 1-\sin^2 \alpha$ and $\cos(2\alpha) = 2\cos^2\alpha-1 = 1 - 2\sin^2\alpha$,
+Computing this integral and using the identities $\cos^2 z = 1-\sin^2 z$ and $\cos(2z) = 2\cos^2z-1 = 1 - 2\sin^2z$,
 \begin{equation}
 \label{eq: g fin}
 \begin{split}
@@ -1421,19 +1423,19 @@ P_{\tiles,n} = \frac{2\sqrt{2} \tilde A_{\tiles,n} \tilde c_{\tiles,n}}{\pi} + E
 \end{equation}
 with $|E_{\tiles, n}| < e(\tiles)$, where the function $e$ depends only on $\tiles$ and tends to $0$ as $\tiles \rightarrow 0$.
 
-Let $\tilde y_{\tiles,n}$ denote the $y$ coordinate of the chord for $x = x_{\tiles,n}$, as shown in Figure~\ref{fig: probmax_asint_detail}. By construction $|m_{\tiles,n}|<1$. Consider $a_{\tiles,n}$ and $b_{\tiles,n}$ as defined in the figure. It can be seen that
+Let $\tilde y_{\tiles,n}$ denote the $y$ coordinate of the chord for $x = x_{\tiles,n}$, as shown in Figure~\ref{fig: probmax_asint_detail}. By construction $|m_{\tiles,n}|<1$. Consider the lengths $\lra_{\tiles,n}$ and $\lrb_{\tiles,n}$ defined in the figure. Then
 \begin{equation}
-\frac{\tilde y_{\tiles,n}-a_{\tiles,n}/\sqrt{2}}{a_{\tiles,n}/\sqrt{2}} = m_{\tiles,n},
+\frac{\tilde y_{\tiles,n}-\lra_{\tiles,n}/\sqrt{2}}{\lra_{\tiles,n}/\sqrt{2}} = m_{\tiles,n},
 \end{equation}
-which gives $a_{\tiles,n} = \sqrt{2}\tilde y_{\tiles,n}/(1+m_{\tiles,n})$. Likewise, $b_{\tiles,n} = \sqrt{2}\tilde y_{\tiles,n}/(1-m_{\tiles,n})$. With the upper corner of the shaded rectangle uniformly distributed along the chord, its average area $\tilde A_{\tiles,n}$ is easily computed in terms of $a_{\tiles,n}$ and $b_{\tiles,n}$, and therefore of $\tilde y_{\tiles,n}$ and $m_{\tiles,n}$:
+which gives $\lra_{\tiles,n} = \sqrt{2}\tilde y_{\tiles,n}/(1+m_{\tiles,n})$. Likewise, $\lrb_{\tiles,n} = \sqrt{2}\tilde y_{\tiles,n}/(1-m_{\tiles,n})$. With the upper corner of the shaded rectangle uniformly distributed along the chord, its average area $\tilde A_{\tiles,n}$ is easily computed in terms of $\lra_{\tiles,n}$ and $\lrb_{\tiles,n}$, and therefore of $\tilde y_{\tiles,n}$ and $m_{\tiles,n}$:
 \begin{equation}
 \label{eq: tilde A y}
-\tilde A_{\tiles,n} = a_{\tiles,n}b_{\tiles,n} \int_0^1 \eta(1-\eta)\, \diff \eta = \frac{a_{\tiles,n}b_{\tiles,n}} 6 = \frac{\tilde y_{\tiles,n}^2}{3(1-m_{\tiles,n}^2)}.
+\tilde A_{\tiles,n} = \lra_{\tiles,n}\lrb_{\tiles,n} \int_0^1 \eta(1-\eta)\, \diff \eta = \frac{\lra_{\tiles,n}\lrb_{\tiles,n}} 6 = \frac{\tilde y_{\tiles,n}^2}{3(1-m_{\tiles,n}^2)}.
 \end{equation}
 Similarly,
 \begin{equation}
 \label{eq: tilde c y}
-\tilde c_{\tiles,n} = \sqrt{a_{\tiles,n}^2+b_{\tiles,n}^2} = \frac {2 \tilde y_{\tiles,n} \sqrt{1+m_{\tiles,n}^2}} {1-m_{\tiles,n}^2}.
+\tilde c_{\tiles,n} = \sqrt{\lra_{\tiles,n}^2+\lrb_{\tiles,n}^2} = \frac {2 \tilde y_{\tiles,n} \sqrt{1+m_{\tiles,n}^2}} {1-m_{\tiles,n}^2}.
 \end{equation}
 Substituting \eqref{eq: tilde A y} and \eqref{eq: tilde c y} into \eqref{eq: P i j asympt 3 bis},
 \begin{equation}
