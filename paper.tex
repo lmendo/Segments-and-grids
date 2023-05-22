@@ -78,13 +78,13 @@ line segment on a rectangular grid
 }
 
 % Authors with different affiliations: from https://tex.stackexchange.com/a/370813/90222
-\author[1]{Luis Mendo}
-\author[2]{Alex Arkhipov}
+\author[1]{Alex Arkhipov}
+\author[2]{Luis Mendo}
 
-\affil[1]{\small Universidad Polit\'ecnica de Madrid. E-mail:  \texttt{luis.mendo@upm.es}}
+\affil[1]{\small E-mail: \texttt{arkhipov@alum.mit.edu}}
+\affil[2]{\small Universidad Polit\'ecnica de Madrid. E-mail:  \texttt{luis.mendo@upm.es}}
 %Information Processing and Telecommunications Center, Universidad Polit\'ecnica de Madrid\\
 %Avenida Complutense, 30. 28040 Madrid, Spain.\\
-\affil[2]{\small E-mail: \texttt{arkhipov@alum.mit.edu}}
 
 
 %ORCID: Luis Mendo: 0000-0001-5691-714X
@@ -1144,7 +1144,7 @@ The range of allowed values for $\theta$, as can also be deduced from the figure
 \label{eq: odd theta 1}
 \theta_1 & = \arccos\frac{i-2}{\len}.
 \end{align}
-For $\theta$ outside of this range the conditional probability $\probmax_{i, j}(\len, \theta)$ is $0$. Averaging $\probmax_{i, j}(\len, \theta)$ over $\theta$ gives the probability that the segment visits this tile, and then multiplying by $4$ yields $\probmax_{i.j}(\len)$:
+For $\theta$ outside of this range, the conditional probability $\probmax_{i, j}(\len, \theta)$ is $0$. Averaging $\probmax_{i, j}(\len, \theta)$ over $\theta$ gives the probability that the segment visits this tile, and then multiplying by $4$ yields $\probmax_{i,j}(\len)$:
 \begin{equation}
 \begin{split}
 \label{eq: probmax: cond on theta}
@@ -1156,7 +1156,7 @@ For $\theta$ outside of this range the conditional probability $\probmax_{i, j}(
 
 The above arguments show that $\probmax_{i,j}(\len)$ is given by \eqref{eq: probmax: cond on theta} if the condition \eqref{eq: i-2 j-2 len} holds, and equals $0$ otherwise. Using this into \eqref{eq: probmax len probmax i,j len} yields \eqref{eq: probmax impl}.
 
-Given $\tiles$, the range of lengths $\len$ such that $\tiles = \funt(\len)$ is either \eqref{eq: square, odd max tiles, lengths} or \eqref{eq: square, even max tiles, lengths}. For $\len$ in this range, the number of reachable tiles with lower-left corners $(i-1,j-1)$, $i,j \geq 2$, $i+j-1=\tiles$, i.e.~the number of terms in \eqref{eq: probmax impl}, depends on $\len$. If $\tiles$ is odd the minimum number is $1$, corresponding to a tile with its lower-left corner on the line $x=y$, which gives the first term in the first expression in \eqref{eq: probmax expl}. For $\tiles$ even the minimum number is $2$, corresponding to two symmetrical tiles whose lower-left $x$ and $y$ coordinates differ by $1$, which give the first term in the second expression. Either for $\tiles$ odd or even, additional tiles may become reachable as $\len$ grows (within the range allowed by $\tiles$), and these always occur in symmetrical pairs. These tiles (if any) correspond to the terms in the (possibly empty) sum indexed by $k$ in either expression in \eqref{eq: probmax expl}. 
+Given $\tiles$, the range of lengths $\len$ such that $\tiles = \funt(\len)$ is either \eqref{eq: square, odd max tiles, lengths} or \eqref{eq: square, even max tiles, lengths}. For $\len$ in this range, the number of reachable tiles with lower-left corners $(i-1,j-1)$, $i,j \geq 2$, $i+j-1=\tiles$, i.e.~the number of terms in \eqref{eq: probmax impl}, depends on $\len$. If $\tiles$ is odd, the minimum number is $1$, corresponding to a tile with its lower-left corner on the line $x=y$, which gives the first term in the first expression in \eqref{eq: probmax expl}. For $\tiles$ even, the minimum number is $2$, corresponding to two symmetrical tiles whose lower-left $x$ and $y$ coordinates differ by $1$, which give the first term in the second expression. Either for $\tiles$ odd or even, additional tiles may become reachable as $\len$ grows (within the range allowed by $\tiles$), and these always occur in symmetrical pairs. These tiles (if any) correspond to the terms in the (possibly empty) sum indexed by $k$ in either expression in \eqref{eq: probmax expl}. 
 
 Figure~\ref{fig: probmax_terms} contains examples for several values of $\tiles$, with a few values of $\len$ for each $\tiles$. Each length is represented by an arc with radius $\len$ centered at $(1,1)$. For a given $\tiles$, the filled circular markers are the lower-left corners of the tiles that are always reachable, whereas the empty circles correspond to tiles whose reachability depends on $\len$.
 % For example, with $\tiles=11$ and the greatest $\len$ shown in the figure the sum over $k$ in \eqref{eq: probmax expl} has $2$ terms, corresponding to the $2$ pairs of empty markers on the diagonal line that are enclosed by the arc.
@@ -1211,7 +1211,7 @@ Clearly, $\funt(\len_\tiles) = \tiles$ and $\lim_{\len \rightarrow \len_\tiles^-
 The first continuous section seen in Figure~\ref{fig: probmax_len} corresponds to a maximum number of visited tiles $\tiles=3$, for lengths in the interval $(0, \len_3]$, where $\len_3= 1$. The second corresponds to $\tiles=4$, for lengths in $(\len_3, \len_4]$, where $\len_4= \sqrt{2}$. Within each continuous section the probability monotonically increases from $0$ to a maximum value. The heights of the maxima are asymptotically proportional to $1/\sqrt{\len_\tiles}$, as established by the next result.
 
 \begin{proposition}
-The function $\probmax$ has the following asymptotic behaviour:
+The probability $\probmax(\len)$ of visiting the maximum number of tiles on a unit square grid has the following asymptotic behaviour:
 \begin{align}
 \label{eq: probmax liminf}
 \liminf_{\len \rightarrow \infty}\, \probmax(\len) & = 0, \\ 

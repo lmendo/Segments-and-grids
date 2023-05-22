@@ -2751,7 +2751,7 @@ set(gcf, 'Position', [680 558 560 400])
 
 
 %% #90. Figure: probmax, incorporating the correction from #85
-% I usee #85 computed4, additionally changing the order of second and third inputs of g
+% I use #85 computed4, additionally changing the order of second and third inputs of g
 
 clear, clc
 L_fine = .001:.001:16; % spacing should be small because curves are almost vertical at some points
@@ -3255,3 +3255,114 @@ for c = 1:numel(t_all)
 end
 isequal(num_terms, num_terms2) % check
 
+
+%% #98. Based on #85: figure for comparing computed and simulated probability
+
+clear, close all
+L_fine = 15:.001:20;
+
+% From #77
+g = @(r,u,v) ((acos(u/2./r)-asin(v/2./r)).*u.*v + 2*r.^2 + u.^2/2 + v.^2/2 - u.*sqrt(4*r.^2-v.^2) - v.*sqrt(4*r.^2-u.^2))/2/pi;
+ii = ceil(L_fine/sqrt(2)) + 1;
+jj = ceil(sqrt(L_fine.^2 - (ii-2).^2 )) + 1;
+funt_fine = ii+jj-1; % formula valid for real-valued lengths
+result_computed = NaN(size(funt_fine));
+num_k =  NaN(size(funt_fine));
+for ind_fine = 1:numel(funt_fine)
+    t = funt_fine(ind_fine);
+    L = L_fine(ind_fine);
+    if mod(t,2) % odd
+        res = g(L, t-3, t-3); % this term is always present
+        potential_k = 1:(t-3)/2;
+        %%potential_k = 1; % old (wrong), that is, #65
+        ind_actual_k = ((t-3)/2-potential_k).^2 + ((t-3)/2+potential_k).^2 < L^2;
+        actual_k = potential_k(ind_actual_k);
+        for k = actual_k
+            res = res + 2*g(L, t-3-2*k, t-3+2*k);
+        end
+    else % even
+        res = 2*g(L, t-4, t-2); % this term is always present
+        potential_k = 1:(t-4)/2;
+        %%potential_k = 1; % old (wrong), that is, #65
+        ind_actual_k = ((t-4)/2-potential_k).^2 + ((t-2)/2+potential_k).^2 < L^2;
+        actual_k = potential_k(ind_actual_k);
+        for k = actual_k
+            res = res + 2*g(L, t-4-2*k, t-2+2*k);
+        end
+    end
+    result_computed(ind_fine) = res;
+    num_k(ind_fine) = numel(actual_k);
+end
+ind_odd = mod(funt_fine,2)==1; % for plotting
+ind_even = ~ind_odd;
+hold on
+set(gca,'ColorOrderIndex',2)
+plot(L_fine.*ind_odd./ind_odd, result_computed.*ind_odd./ind_odd, '-', 'linewidth', .7), hold on, grid on
+set(gca,'ColorOrderIndex',1)
+plot(L_fine.*ind_even./ind_even, result_computed.*ind_even./ind_even, '-', 'linewidth', .7), hold on, grid on
+
+% From #77
+g = @(r,u,v) ((acos(u/2./r)-asin(v/2./r)).*u.*v + 2*r.^2 + u.^2/2 + v.^2/2 - u.*sqrt(4*r.^2-v.^2) - v.*sqrt(4*r.^2-u.^2))/2/pi;
+ii = ceil(L_fine/sqrt(2)) + 1;
+jj = ceil(sqrt(L_fine.^2 - (ii-2).^2 )) + 1;
+funt_fine = ii+jj-1; % formula valid for real-valued lengths
+result_computed = NaN(size(funt_fine));
+num_k =  NaN(size(funt_fine));
+for ind_fine = 1:numel(funt_fine)
+    t = funt_fine(ind_fine);
+    L = L_fine(ind_fine);
+    if mod(t,2) % odd
+        res = g(L, t-3, t-3); % this term is always present
+        %potential_k = 1:(t-3)/2;
+        potential_k = 1; % old (wrong), that is, #65
+        ind_actual_k = ((t-3)/2-potential_k).^2 + ((t-3)/2+potential_k).^2 < L^2;
+        actual_k = potential_k(ind_actual_k);
+        for k = actual_k
+            res = res + 2*g(L, t-3-2*k, t-3+2*k);
+        end
+    else % even
+        res = 2*g(L, t-4, t-2); % this term is always present
+        %potential_k = 1:(t-4)/2;
+        potential_k = 1; % old (wrong), that is, #65
+        ind_actual_k = ((t-4)/2-potential_k).^2 + ((t-2)/2+potential_k).^2 < L^2;
+        actual_k = potential_k(ind_actual_k);
+        for k = actual_k
+            res = res + 2*g(L, t-4-2*k, t-2+2*k);
+        end
+    end
+    result_computed(ind_fine) = res;
+    num_k(ind_fine) = numel(actual_k);
+end
+ind_odd = mod(funt_fine,2)==1; % for plotting
+ind_even = ~ind_odd;
+hold on
+set(gca,'ColorOrderIndex',2)
+plot(L_fine.*ind_odd./ind_odd, result_computed.*ind_odd./ind_odd, '--', 'linewidth', .7), hold on, grid on
+set(gca,'ColorOrderIndex',1)
+plot(L_fine.*ind_even./ind_even, result_computed.*ind_even./ind_even, '--', 'linewidth', .7), hold on, grid on
+
+% Simulation, from #76
+% I see the above computations match the simulation results
+clear, clc
+L = 15:.01:20; %3.8:.1:4.2;%3:.1:3.5;
+N = 1e5; % elegir con cuidado: memoria. Mejor NN grande que N grande
+NN = 100;
+ii = ceil(L/sqrt(2)) + 1;
+jj = ceil(sqrt(L.^2 - (ii-2).^2 )) + 1;
+funt = ii+jj-1; % formula valid for real-valued lengths
+result = 0;
+for nn = 1:NN
+    disp(nn)
+    z0 = rand(N, numel(L)) + 1j*rand(N, numel(L));
+    z1 = z0 + L.*exp(1j*2*pi*rand(N, numel(L)));
+    ii = ceil(abs(real(z1))) + (real(z1)<0); % add 1 for negative
+    jj = ceil(abs(imag(z1))) + (imag(z1)<0); % add 1 for negative
+    result = result + mean(ii+jj-1 == funt , 1);
+end
+result = result/NN;
+plot(L, result, '.', 'color', .5*[1 1 1], 'markersize', 7)
+
+legend({'Odd maximum number of tiles', 'Even maximum number of tiles', 'Odd maximum number of tiles, incorrect', 'Even maximum number of tiles, incorrect', 'Simulated'})
+xlabel(char(hex2dec('2113'))), ylabel([char(hex2dec('03C1')) '(' char(hex2dec('2113')) ')'])
+set(gcf, 'Position', [360 175 560 445])
+ylim([0 .04])
