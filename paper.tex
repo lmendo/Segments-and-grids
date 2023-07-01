@@ -1105,7 +1105,7 @@ Consider $\len \in \mathbb R^+$, and let $\tiles = \funt(\len)$. By Proposition~
 \probmax(\len) =  \sum_{i,j \geq 2,\ i+j-1=\tiles} \probmax_{i,j}(\len).
 \end{equation}
 
-For any $i, j \geq 2$ with $i+j-1=\tiles$, the segment has a discrete bounding rectangle with dimensions $i, j$ if and only if its second endpoint is in the tile with lower-left corner $(i-1,j-1)$ or in one of the other three symmetrical tiles with respect to the lines $x=1/2$ and $y=1/2$, i.e.~those with lower-left corners $(i-1,1-j)$, $(1-i,1-j)$ and $(1-i,1-j)$. An example is shown in Figure~\ref{fig: probmax_symmetric_tiles}. Consequently, $\probmax_{i,j}(\len)$ can be obtained by computing the probability that the second endpoint is in the tile with lower-left corner $(i-1,j-1)$ and multiplying by $4$.
+For any $i, j \geq 2$ with $i+j-1=\tiles$, the segment has a discrete bounding rectangle with dimensions $i, j$ if and only if its second endpoint is in the tile with lower-left corner $(i-1,j-1)$ or in one of the other three symmetrical tiles with respect to the lines $x=1/2$ and $y=1/2$, i.e.~those with lower-left corners $(i-1,1-j)$, $(1-i,j-1)$ and $(1-i,1-j)$. An example is shown in Figure~\ref{fig: probmax_symmetric_tiles}. Consequently, $\probmax_{i,j}(\len)$ can be obtained by computing the probability that the second endpoint is in the tile with lower-left corner $(i-1,j-1)$ and multiplying by $4$.
 
 \begin{figure}
 \centering%
@@ -1118,7 +1118,7 @@ For any $i, j \geq 2$ with $i+j-1=\tiles$, the segment has a discrete bounding r
 By Proposition~\ref{prop: len ineq i j}, the tile with lower-left corner $(i-1,j-1)$ can be visited only if
 \begin{equation}
 \label{eq: i-2 j-2 len}
-(i-2)^2+(j-2)<\len^2.
+(i-2)^2+(j-2)^2<\len^2.
 \end{equation}
 Thus $\probmax_{i,j}(\len)=0$ if this restriction does not hold. In the following it will be assumed that it does.
 
@@ -1280,7 +1280,7 @@ w_\tiles = \sqrt{\len_\tiles^2-\frac{(\tiles-3)^2}{2}} =
 The inequality
 \begin{equation}
 \label{eq: sqrt asympt}
-\sqrt{1+\genvar} < 1 + \frac \genvar 2 \quad\text{for } s \in \mathbb R, s \neq 0
+\sqrt{1+\genvar} < 1 + \frac \genvar 2 \quad\text{for } s \geq -1, \ s \neq 0
 \end{equation}
 implies that
 \begin{equation}
@@ -1367,10 +1367,14 @@ Along this arc, with $x \in [-w_\tiles, w_\tiles]$, the minimum of $|\sin \theta
 \label{eq: sin theta bound}
 1 \geq |\sin \theta| \geq \frac{\tiles-3}{\sqrt{2}\len_\tiles} > \frac{\tiles-3}{\tiles-3/2}.
 \end{equation}
-The uniform distribution of the corner of the shaded rectangle on the chord is equivalent to a uniform distribution of its $x$ coordinate on the projection of the chord onto the horizontal axis. Denoting the slope of the chord by $m_{\tiles,n}$, the projection has length $\tilde c_{\tiles,n} / |m_{\tiles,n}|$, and $\tilde\fdp(\theta)$ is obtained, using the transformation theorem for continuous random variables \cite[section~5.2]{Papoulis91}, as
+The uniform distribution of the corner of the shaded rectangle on the chord is equivalent to a uniform distribution of its $x$ coordinate on the projection of the chord onto the horizontal axis. Denoting the slope of the chord by $m_{\tiles,n}$, the projection has length
+\[
+\frac{\tilde c_{\tiles,n}} {\sqrt{1 + m_{\tiles,n}^2}},
+\]
+and $\tilde\fdp(\theta)$ is obtained, using the transformation theorem for continuous random variables \cite[section~5.2]{Papoulis91}, as
 \begin{equation}
 \label{eq: tilde fdp theta}
-\tilde \fdp(\theta) = \frac {|m_{\tiles,n}|} {\tilde c_{\tiles,n} |\diff \theta / \diff x|}
+\tilde \fdp(\theta) = \frac {\sqrt{1 + m_{\tiles,n}^2}} {\tilde c_{\tiles,n} |\diff \theta / \diff x|}
 \end{equation}
 for the range of $\theta$ corresponding to the arc with thick line in Figure~\ref{fig: probmax_asint_turned}. It follows from \eqref{eq: d theta d x}--\eqref{eq: tilde fdp theta} that
 % *!*
@@ -1383,7 +1387,7 @@ Since $\fdp(\theta)$ and $\tilde\fdp(\theta)$ are probability density functions,
 \label{eq: tilde pdf pdf bound >}
 \frac {\tilde \fdp(\theta)} {\fdp(\theta)} &> \left(\frac{\tiles-3}{\tiles-3/2}\right)^2 = \left(1-\frac{3/2}{\tiles-3/2}\right)^2 > 1 - \frac 3 {\tiles-3/2}, \\
 \label{eq: tilde pdf pdf bound <}
-\frac {\tilde \fdp(\theta)} {\fdp(\theta)} &< \left(\frac{\tiles-3/2}{\tiles-3}\right)^2 = \left(1+\frac{3/2}{\tiles-3}\right)^2 < 1 + \frac {21/4} {\tiles-3}.
+\frac {\tilde \fdp(\theta)} {\fdp(\theta)} &< \left(\frac{\tiles-3/2}{\tiles-3}\right)^2 = \left(1+\frac{3/2}{\tiles-3}\right)^2 \leq 1 + \frac {21/4} {\tiles-3}.
 \end{align}
 Thus, changing the distribution of $\theta$ from $\fdp(\theta)$ to $\tilde \fdp(\theta)$ results in $A_{\tiles,n}$ being multiplied by a factor greater than the rightmost side of \eqref{eq: tilde pdf pdf bound >} and smaller than that of \eqref{eq: tilde pdf pdf bound <}.
 
@@ -1398,7 +1402,7 @@ The second type of error in the approximation of $A_{\tiles,n}$ arises because, 
 and thus
 \begin{equation}
 \label{eq: y: arc - chord}
-0 < y - \tilde y < \frac 3 {\sqrt{\tiles-3}}.
+0 \leq y - \tilde y < \frac 3 {\sqrt{\tiles-3}}.
 \end{equation}
 This reduction from $y$ to $\tilde y$ translates into a difference smaller than $3 / \sqrt{2(\tiles-3)}$ in each dimension of the shaded rectangle; or, since those dimensions are at most $1$, a difference in area smaller than twice that value. Considering \eqref{eq: A tiles n bound}, this introduces a (second) error in $A_{\tiles,n}$ by a factor between $1-3\sqrt{2}/\sqrt{\tiles-3}$ and $1$. Combining with the factor from the previous paragraph, $\tilde A_{\tiles,n} / A_{\tiles,n}$ is bounded for $\tiles \geq 4$ as
 \begin{equation}
@@ -1497,15 +1501,13 @@ This implies that the subsequence $\funcircesc_\tiles$ with $\tiles$ odd is mono
 %\end{equation}
 Therefore, the full sequence $\funcircesc_\tiles$ converges to $\funcircesc$ uniformly on $[-1,1]$.
 
-%***Releer
-
 The inequality \eqref{eq: y: arc - chord} applies, for $\tiles \geq 4$, to $y_{\tiles,n} = \funcircesc_\tiles(x_{\tiles,n}/w_\tiles)$ and $\tilde y_{\tiles,n}$. Together with \eqref{eq: P i j asympt 4 ter}, and making use of the uniform convergence of $\funcircesc_\tiles$ to $\funcircesc$, 
 this implies that
 \begin{equation}
 \label{eq: funcircest tiles 5}
 \tilde y_{\tiles,n}^3 = \funcircesc^3\left( \frac{x_{\tiles,n}} {w_\tiles} \right) + E''_{\tiles,n}
 \end{equation}
-where $e''(\tiles)$ tends to $0$ as $\tiles \rightarrow \infty$.
+with $|E''_{\tiles,n}| < e''(t)$, where $e''(\tiles)$ tends to $0$ as $\tiles \rightarrow \infty$.
 
 From \eqref{eq: sum p t n}, \eqref{eq: P i j asympt 5} and \eqref{eq: funcircest tiles 5},
 \begin{equation}
@@ -1523,11 +1525,11 @@ It is clear from Figure~\ref{fig: probmax_asint_turned} that
 -w_\tiles &< x_{\tiles,1} && \leq -w_\tiles + \sqrt{2}, \\
 w_\tiles - \sqrt{2} &\leq x_{\tiles,N_\tiles} && < w_\tiles.
 \end{alignat}
-Thus the values $x_{\tiles,n}/w_\tiles$, $n=1,\ldots,N_\tiles$ are equispaced with step $\sqrt{2}/w_\tiles$. In addition, $x_{\tiles,1}$ and $x_{\tiles,N_\tiles}$ tend to $-1$ and $1$  respectively as $\tiles \rightarrow \infty$. In consequence, the term
+Thus the values $x_{\tiles,n}/w_\tiles$, $n=1,\ldots,N_\tiles$ are equispaced with step $\sqrt{2}/w_\tiles$. In addition, $x_{\tiles,1} / w_\tiles$ and $x_{\tiles,N_\tiles} / w_\tiles$ tend to $-1$ and $1$  respectively as $\tiles \rightarrow \infty$. In consequence, the term
 \[
 \frac{\sqrt{2}}{w_\tiles} \sum_{n=1}^{N_\tiles} \funcircesc^3 \left( \frac{x_{\tiles,n}}{w_\tiles} \right)
 \]
-in \eqref{eq: sum p t n aprox 2} can be interpreted as a Riemmann sum that approximates the integral of $\funcircesc^3(\zeta)$ over $[-1,1]$. Since this function is continuous the sum indeed converges to the integral \cite[section~7.2]{Abbott15}. On the other hand,
+in \eqref{eq: sum p t n aprox 2} can be interpreted as a Riemann sum that approximates the integral of $\funcircesc^3(\zeta)$ over $[-1,1]$. Since this function is continuous the sum indeed converges to the integral \cite[section~7.2]{Abbott15}. On the other hand,
 \begin{equation}
 \left| \frac 1 {N_\tiles} \sum_{n=1}^{N_\tiles} \left(E_{\tiles,n} + E'_{\tiles,n} + \frac{4 \sqrt{2}} {3\pi} E''_{\tiles,n} \right) \right| < e(\tiles)+e'(\tiles) + \frac{4 \sqrt{2}} {3\pi} e''(\tiles)
 \end{equation}
