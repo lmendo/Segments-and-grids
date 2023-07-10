@@ -3116,6 +3116,8 @@ s1 = .5825; plot(x_dots(ind_dot)+[-sqrt(.5) 0]*s1, [sqrt(.5) 0]*s1, 'k-', 'linew
 s2 = 1; plot(x_dots(ind_dot)+[sqrt(.5) 0]*s2, [sqrt(.5) 0]*s2, 'k-', 'linewidth', 1) % s manually
 set(gca, 'colororderindex', 1)
 plot([x_dots(ind_dot)-sqrt(.5)*s1 x_dots(ind_dot)+sqrt(.5)*s2], [sqrt(.5)*s1 sqrt(.5)*s2], 'linewidth', 1)
+plot([x_dots(ind_dot)-sqrt(.5)*s1 x_dots(ind_dot)+sqrt(.5)*s2], [0 0], 'k--', 'linewidth', 1.2) % projection
+text(-1.205, .068 , 'I_{t,n}') % its text
 set(gca, 'colororderindex', 1)
 plot([x_dots(ind_dot) x_dots(ind_dot)+1j*.520557], 'k-', 'linewidth', .5) % manually
 plot([z0 z1], 'k:')

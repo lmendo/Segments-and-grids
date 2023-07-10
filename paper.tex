@@ -10,6 +10,7 @@
 \usepackage{graphicx}
 \usepackage[tight]{subfigure}
 \usepackage{authblk}
+\usepackage{bigints}
 
 \addtolength{\textheight}{38mm}
 \addtolength{\voffset}{-22mm}
@@ -52,6 +53,7 @@
 \newcommand{\fdp}{p}
 \newcommand{\lra}{\alpha}
 \newcommand{\lrb}{\beta}
+\newcommand{\intervx}{I}
 
 
 \newtheorem{proposition}{Proposition}%[section]
@@ -1336,18 +1338,14 @@ P_{\tiles,n}
 &\geq \left(1 + \frac {3/2} {\tiles-3/2} \right) \frac{2 \sqrt{2} A_{\tiles,n} c_{\tiles,n}}{\pi} > \frac{2 \sqrt{2} A_{\tiles,n} c_{\tiles,n}}{\pi}.
 \end{align}
 
-Instead of calculating  $A_{\tiles,n}$ and $c_{\tiles,n}$ directly, it is easier to compute approximate versions of these, based on replacing the arc by its chord, as depicted in Figure~\ref{fig: probmax_asint_detail}. The ratio between the approximate and exact values in each case will be bounded from below and from above by functions of $\tiles$ that approach $1$ as $\tiles \rightarrow \infty$. Regarding $c_{\tiles,n}$, the chord length, denoted as $\tilde c_{\tiles,n}$, is obtained from Figure~\ref{fig: probmax_asint_turned} as
+Instead of calculating  $A_{\tiles,n}$ and $c_{\tiles,n}$ directly, it is easier to compute approximate versions of these, based on replacing the arc by its chord, as depicted in Figure~\ref{fig: probmax_asint_detail}. The difference between the approximate and exact values for each variable will be bounded from below and from above by functions of $\tiles$ that tend to $0$ as $\tiles \rightarrow \infty$. Regarding $c_{\tiles,n}$, the chord length, denoted as $\tilde c_{\tiles,n}$, is obtained from Figure~\ref{fig: probmax_asint_turned} as
 \begin{equation}
 \tilde c_{\tiles,n} =  2\len_\tiles \sin\frac{c_{\tiles,n}}{2\len_\tiles}. 
 \end{equation}
-Taking into account that $\sin\genvar > \genvar - {\genvar^3}/6$ for $s > 0$ and using of \eqref{eq: asympt len tiles} and \eqref{eq: c tiles n bound},
+Taking into account that $\sin\genvar > \genvar - {\genvar^3}/6$ for $s > 0$ and using \eqref{eq: asympt len tiles},
 \begin{equation}
-\tilde c_{\tiles,n}> c_{\tiles,n} -\frac{c_{\tiles,n}^3}{24\len_\tiles^2} \geq c_{\tiles,n} -\frac{\pi^3}{192\len_\tiles^2} \geq c_{\tiles,n} - \frac {\pi^3} {96(\tiles-2)^2},
-\end{equation}
-and thus
-\begin{equation}
-\label{eq: tilde c bound}
-1 - \frac {\pi^3} {96(\tiles-2)^2} < \frac{\tilde c_{\tiles,n}}{c_{\tiles,n}} < 1.
+\label{eq: tilde c bound diff}
+0 > \tilde c_{\tiles,n} - c_{\tiles,n} > -\frac{c_{\tiles,n}^3}{24\len_\tiles^2} \geq -\frac{\pi^3}{192\len_\tiles^2} \geq -\frac {\pi^3} {96(\tiles-2)^2}.
 \end{equation}
 
 \begin{figure}
@@ -1357,41 +1355,44 @@ and thus
 \label{fig: probmax_asint_detail}%
 \end{figure}%
 
-As for $A_{\tiles,n}$, let $\tilde A_{\tiles,n}$ denote its approximate version where the upper corner of the shaded rectangle in Figure~\ref{fig: probmax_asint_detail} is uniformly distributed on the chord rather than on the arc. This approximation entails two types of errors: the distribution of the angle $\theta$ is no longer uniform; and the shaded rectangle becomes smaller because its corner is on the chord, not on the arc. To analyze the first type of error, let $\fdp(\theta)$ denote the probability density function for the original, uniform distribution of the angle $\theta$ on the arc depicted with thick line in Figure~\ref{fig: probmax_asint_turned}. In the approximate version, the uniform distribution on the chord translates into a non-uniform distribution of $\theta$, with probability density function $\tilde\fdp(\theta)$. In the following it will be assumed that $\tiles \geq 4$. It stems from Figure~\ref{fig: probmax_asint_turned} that any point $(x,y)$ on the circular arc defined by \eqref{eq: funcirc} satisfies the equality $\cot \theta = \sqrt{2} x /(\tiles-3)$. Therefore
+As for $A_{\tiles,n}$, let $\tilde A_{\tiles,n}$ denote its approximate version where the upper corner of the shaded rectangle in Figure~\ref{fig: probmax_asint_detail} is uniformly distributed on the chord rather than on the arc. This approximation entails two types of errors: the distribution of the angle $\theta$ is no longer uniform; and the shaded rectangle becomes smaller because its corner is on the chord, not on the arc. It is convenient to describe the two sources of error in terms of, respectively, the horizontal and vertical coordinates of the upper corner of the shaded rectangle. More specifically, let $x$ and $y$ denote the coordinates of the corner along the arc, and let $\intervx_{\tiles,n}$ denote the interval of values of $x$ corresponding to the projection of the arc (or of the chord) onto the horizontal axis. This interval is shown in Figure~\ref{fig: probmax_asint_detail} with dashed, thick line. Firstly, in the exact case the distribution of $x$ is non-uniform on $\intervx_{\tiles,n}$ (corresponding to a uniform distribution of $\theta$), whereas the approximation implies that $x$ is uniformly distributed on $\intervx_{\tiles,n}$. The corresponding probability density functions will be respectively denoted as $\fdp_{\tiles,n}(x)$ and $\tilde \fdp_{\tiles,n}(x)$. Secondly, for a given $x$, the vertical coordinate in the exact case, $y$ (determined by the arc), is replaced by a smaller value $\tilde y$ in the approximation (chord). Let $R_{\tiles,n}(x)$ and $\tilde R_{\tiles,n}(x)$ denote the area of the shaded rectangle that has its upper corner on the arc and on the chord respectively, as a function of $x$. Then
+\begin{align}
+\label{eq: A int R fdp x}
+A_{\tiles,n} &= \int_{\intervx_{\tiles,n}} R_{\tiles,n}(x) \fdp_{\tiles,n}(x) \, \diff x, \\
+\label{eq: tilde A int R fdp x}
+\tilde A_{\tiles,n} &= \int_{\intervx_{\tiles,n}} \tilde R_{\tiles,n}(x) \tilde \fdp_{\tiles,n}(x) \, \diff x.
+\end{align}
+
+Consider the first type of error in the approximation of $A_{\tiles,n}$, which arises from using $\tilde \fdp_{\tiles,n}(x)$ instead of $\fdp_{\tiles,n}(x)$. In the following it will be assumed that $\tiles \geq 4$. It stems from Figure~\ref{fig: probmax_asint_turned} that any point $(x,y)$ on the full arc defined by \eqref{eq: funcirc} satisfies the equality $\cot \theta = \sqrt{2} x /(\tiles-3)$. Therefore
 \begin{equation}
-\label{eq: d theta d x}
-\frac{\diff \theta}{\diff x} = -\frac{\sqrt{2}}{\tiles-3} \sin^2 \theta.
+\label{eq: d x d theta}
+\frac{\diff x}{\diff \theta} = -\frac{\tiles-3}{\sqrt{2} \sin^2 \theta}.
 \end{equation}
 Along this arc, with $x \in [-w_\tiles, w_\tiles]$, the minimum of $|\sin \theta|$ is attained when $x$ equals $w_\tiles$ or $-w_\tiles$. Thus, using \eqref{eq: asympt len tiles},
 \begin{equation}
 \label{eq: sin theta bound}
 1 \geq |\sin \theta| \geq \frac{\tiles-3}{\sqrt{2}\len_\tiles} > \frac{\tiles-3}{\tiles-3/2}.
 \end{equation}
-The uniform distribution of the corner of the shaded rectangle on the chord is equivalent to a uniform distribution of its $x$ coordinate on the projection of the chord onto the horizontal axis. Denoting the slope of the chord by $m_{\tiles,n}$, the projection has length
-\[
-\frac{\tilde c_{\tiles,n}} {\sqrt{1 + m_{\tiles,n}^2}},
-\]
-and $\tilde\fdp(\theta)$ is obtained, using the transformation theorem for continuous random variables \cite[section~5.2]{Papoulis91}, as
+In the exact case $\theta$ is uniformly distributed along the arc shown with thick line in Figure~\ref{fig: probmax_asint_turned}, and the probability density function of $x$ can be obtained using the transformation theorem for continuous random variables \cite[section~5.2]{Papoulis91}:
 \begin{equation}
-\label{eq: tilde fdp theta}
-\tilde \fdp(\theta) = \frac {\sqrt{1 + m_{\tiles,n}^2}} {\tilde c_{\tiles,n} |\diff \theta / \diff x|}
+\label{eq: fdp x}
+\fdp_{\tiles,n}(x) = \frac {\len_\tiles} {c_{\tiles,n} |\diff x / \diff \theta|} \quad\text{for } x \in \intervx_{\tiles,n}.
 \end{equation}
-for the range of $\theta$ corresponding to the arc with thick line in Figure~\ref{fig: probmax_asint_turned}. It follows from \eqref{eq: d theta d x}--\eqref{eq: tilde fdp theta} that
+It follows from \eqref{eq: d x d theta}--\eqref{eq: fdp x} that
 % *!*
 \begin{equation}
 \label{eq: max min tilde pdf}
-\frac {\max_\theta \tilde \fdp(\theta)} {\min_\theta \tilde \fdp(\theta)} < \left(\frac{\tiles-3/2}{\tiles-3}\right)^2.
+\frac {\max_{x \in \intervx_{\tiles,n}} \fdp_{\tiles,n}(x)} {\min_{x \in \intervx_{\tiles,n}} \fdp_{\tiles,n}(x)} < \left(\frac{\tiles-3/2}{\tiles-3}\right)^2.
 \end{equation}
-Since $\fdp(\theta)$ and $\tilde\fdp(\theta)$ are probability density functions, it cannot be the case that one of them is greater than the other for all values of $\theta$. In addition, both functions have the same support, on which $\fdp(\theta)$ is constant. Taking into account that $\tiles \geq 4$, this implies that
+Since $\fdp_{\tiles,n}(x)$ and $\tilde\fdp_{\tiles,n}(x)$ are probability density functions, it cannot be the case that one of them is greater than the other for all values of $x$. In addition, both functions have the same support, namely $\intervx_{\tiles,n}$, on which $\tilde \fdp_{\tiles,n}(x)$ is constant. This implies that, for $x \in \intervx_{\tiles,n}$ and $\tiles \geq 4$,
 \begin{align}
 \label{eq: tilde pdf pdf bound >}
-\frac {\tilde \fdp(\theta)} {\fdp(\theta)} &> \left(\frac{\tiles-3}{\tiles-3/2}\right)^2 = \left(1-\frac{3/2}{\tiles-3/2}\right)^2 > 1 - \frac 3 {\tiles-3/2}, \\
+\frac {\tilde \fdp_{\tiles,n}(x)} {\fdp_{\tiles,n}(x)} &> \left(\frac{\tiles-3}{\tiles-3/2}\right)^2 = \left(1-\frac{3/2}{\tiles-3/2}\right)^2 > 1 - \frac 3 {\tiles-3/2}, \\
 \label{eq: tilde pdf pdf bound <}
-\frac {\tilde \fdp(\theta)} {\fdp(\theta)} &< \left(\frac{\tiles-3/2}{\tiles-3}\right)^2 = \left(1+\frac{3/2}{\tiles-3}\right)^2 \leq 1 + \frac {21/4} {\tiles-3}.
+\frac {\tilde \fdp_{\tiles,n}(x)} {\fdp_{\tiles,n}(x)} &< \left(\frac{\tiles-3/2}{\tiles-3}\right)^2 = \left(1+\frac{3/2}{\tiles-3}\right)^2 \leq 1 + \frac {21/4} {\tiles-3}.
 \end{align}
-Thus, changing the distribution of $\theta$ from $\fdp(\theta)$ to $\tilde \fdp(\theta)$ results in $A_{\tiles,n}$ being multiplied by a factor greater than the rightmost side of \eqref{eq: tilde pdf pdf bound >} and smaller than that of \eqref{eq: tilde pdf pdf bound <}.
 
-The second type of error in the approximation of $A_{\tiles,n}$ arises because, given the $x$ coordinate of the upper corner of the shaded rectangle in Figure~\ref{fig: probmax_asint_detail}, its $y$ coordinate is reduced from that of the arc to that of the chord. Considering the tangent line displayed in the figure (dashed line), it is easy to see that the difference between the vertical coordinate of the arc, $y$, and that of the chord, $\tilde y$, is less than the chord length, $\tilde c_{\tiles,n}$, multiplied by the maximum of the absolute value of the arc slope. The former is at most $\sqrt{2}$. The latter is upper-bounded by the value of $|\diff \funcirc(x)/\diff x|$ at $x=w_\tiles$ or $x=-w_\tiles$. From \eqref{eq: funcirc}, \eqref{eq: w} and \eqref{eq: sqrt asympt}, making use of the assumption that $\tiles \geq 4$,
+To analyze the second type of error in the approximation of $A_{\tiles,n}$, caused by using $\tilde R_{\tiles,n}(x)$ instead of $R_{\tiles,n}(x)$, consider the tangent line displayed in Figure~\ref{fig: probmax_asint_detail} (dashed line). This makes it easy to see that for a given $x$ the difference between the vertical coordinate of the arc, $y$, and that of the chord, $\tilde y$, is less than the chord length, $\tilde c_{\tiles,n}$, multiplied by the maximum of the absolute value of the arc slope. The former is at most $\sqrt{2}$. The latter is upper-bounded by the value of $|\diff \funcirc(x)/\diff x|$ at $x=w_\tiles$ or $x=-w_\tiles$. From \eqref{eq: funcirc}, \eqref{eq: w} and \eqref{eq: sqrt asympt}, making use of the assumption that $\tiles \geq 4$,
 \begin{equation}
 \label{eq: asympt slope bound}
 \begin{split}
@@ -1404,23 +1405,47 @@ and thus
 \label{eq: y: arc - chord}
 0 \leq y - \tilde y < \frac 3 {\sqrt{\tiles-3}}.
 \end{equation}
-This reduction from $y$ to $\tilde y$ translates into a difference smaller than $3 / \sqrt{2(\tiles-3)}$ in each dimension of the shaded rectangle; or, since those dimensions are at most $1$, a difference in area smaller than twice that value. Considering \eqref{eq: A tiles n bound}, this introduces a (second) error in $A_{\tiles,n}$ by a factor between $1-3\sqrt{2}/\sqrt{\tiles-3}$ and $1$. Combining with the factor from the previous paragraph, $\tilde A_{\tiles,n} / A_{\tiles,n}$ is bounded for $\tiles \geq 4$ as
+This reduction from $y$ to $\tilde y$ translates into a difference smaller than $3 / \sqrt{2(\tiles-3)}$ in each dimension of the shaded rectangle; or, since those dimensions are at most $1$, a difference in area smaller than twice that value:.
 \begin{equation}
-\label{eq: tilde A bound}
-1 - \frac {3} {\tiles-3/2} - \frac{3\sqrt{2}} {\sqrt{\tiles-3}} < \frac{\tilde A_{\tiles,n}}{A_{\tiles,n}} < 1+\frac {21/4} {\tiles-3}.
+\label{eq: R: arc - chord}
+0 \leq R_{\tiles,n}(x) - \tilde R_{\tiles,n}(x) < \frac{3\sqrt{2}} {\sqrt{\tiles-3}}.
 \end{equation}
 
-Multiplying \eqref{eq: tilde c bound} and \eqref{eq: tilde A bound} yields, for $\tiles \geq 4$,
+Combining \eqref{eq: tilde pdf pdf bound >} and \eqref{eq: R: arc - chord} with \eqref{eq: tilde A int R fdp x}, and using \eqref{eq: A tiles n bound} and \eqref{eq: A int R fdp x}, $\tilde A_{\tiles,n} - A_{\tiles,n}$ can be bounded for $\tiles \geq 4$ as
 \begin{equation}
-\label{eq: tilde A c bound rel}
-1 - \frac {3} {\tiles-3/2} - \frac{3\sqrt{2}}  {\sqrt{\tiles-3}} - \frac {\pi^3} {96(\tiles-2)^2} < \frac{\tilde A_{\tiles,n} \tilde c_{\tiles,n}}{A_{\tiles,n} c_{\tiles,n}} < 1+\frac {21/4} {\tiles-3},
+\label{eq: tilde A bound diff 1}
+\begin{split}
+\tilde A_{\tiles,n} - A_{\tiles,n} &= \int_{\intervx_{\tiles,n}} \tilde R_{\tiles,n}(x) \tilde \fdp_{\tiles,n}(x) \, \diff x - A_{\tiles,n} \\
+&> \left( 1 - \frac 3 {\tiles-3/2} \right) \bigintssss_{\intervx_{\tiles,n}} \biggl( R_{\tiles,n}(x) - \frac{3\sqrt{2}} {\sqrt{\tiles-3}} \biggr) \fdp_{\tiles,n}(x) \, \diff x - A_{\tiles,n} \\
+&> \left( 1 - \frac 3 {\tiles-3/2} \right) \biggl( A_{\tiles,n} - \frac{3\sqrt{2}}{\sqrt{\tiles-3}} \biggr) - A_{\tiles,n} > -\frac 3 {\tiles-3/2} - \frac{3\sqrt{2}}{\sqrt{\tiles-3}}.
+\end{split}
 \end{equation}
-which, using \eqref{eq: A tiles n bound} and \eqref{eq: c tiles n bound}, is transformed into 
+Likewise, with \eqref{eq: tilde pdf pdf bound <} instead of \eqref{eq: tilde pdf pdf bound >},
 \begin{equation}
-\label{eq: tilde A c bound diff}
-- \frac {3\pi/2} {\tiles-3/2} - \frac{3\pi/\sqrt{2}}  {\sqrt{\tiles-3}} - \frac {\pi^4} {192(\tiles-2)^2} < \tilde A_{\tiles,n} \tilde c_{\tiles,n}- A_{\tiles,n} c_{\tiles,n} < \frac {21\pi/2} {\tiles-3}.
+\label{eq: tilde A bound diff 2}
+\tilde A_{\tiles,n} - A_{\tiles,n} \leq \left( 1 + \frac {21/4} {\tiles-3} \right) \int_{\intervx_{\tiles,n}} R_{\tiles,n}(x) \fdp_{\tiles,n}(x) \, \diff x - A_{\tiles,n} = \frac {21/4} {\tiles-3}\, A_{\tiles,n} < \frac {21/4} {\tiles-3}.
 \end{equation}
-Combining \eqref{eq: tilde A c bound diff} with \eqref{eq: P i j asympt 2 1} and \eqref{eq: P i j asympt 2 2} gives
+
+The difference between $\tilde A_{\tiles,n} \tilde c_{\tiles,n}$ and $A_{\tiles,n} c_{\tiles,n}$ is bounded as follows:
+\begin{equation}
+\begin{split}
+\label{eq: tilde A c bound diff 1}
+|\tilde A_{\tiles,n} \tilde c_{\tiles,n} - A_{\tiles,n} c_{\tiles,n}|
+&= |A_{\tiles,n} (\tilde c_{\tiles,n} - c_{\tiles,n}) + (\tilde A_{\tiles,n} - A_{\tiles,n}) \tilde c_{\tiles,n})| \\
+&\leq A_{\tiles,n} \left|\tilde c_{\tiles,n} - c_{\tiles,n} \right| + \tilde c_{\tiles,n} |\tilde A_{\tiles,n} - A_{\tiles,n})|.
+\end{split}
+\end{equation}
+Using \eqref{eq: A tiles n bound}, \eqref{eq: c tiles n bound}, \eqref{eq: tilde c bound diff}, \eqref{eq: tilde A bound diff 1} and \eqref{eq: tilde A bound diff 2} into \eqref{eq: tilde A c bound diff 1},
+\begin{equation}
+\begin{split}
+\label{eq: tilde A c bound diff 2}
+|\tilde A_{\tiles,n} \tilde c_{\tiles,n} - A_{\tiles,n} c_{\tiles,n}|
+&< \frac {\pi^3} {96(\tiles-2)^2} + \frac{\pi}{2} \max\left\{
+\frac 3 {\tiles-3/2} + \frac{3\sqrt{2}}{\sqrt{\tiles-3}}, \frac {21/4} {\tiles-3}
+\right\}.
+\end{split}
+\end{equation}
+From \eqref{eq: P i j asympt 2 1}, \eqref{eq: P i j asympt 2 2} and \eqref{eq: tilde A c bound diff 2} it stems that
 \begin{equation}
 \label{eq: P i j asympt 3 bis}
 P_{\tiles,n} = \frac{2\sqrt{2} \tilde A_{\tiles,n} \tilde c_{\tiles,n}}{\pi} + E_{\tiles, n}
@@ -1457,7 +1482,7 @@ From \eqref{eq: h bound},
 \label{eq: P i j asympt 4 ter}
 \tilde y_{\tiles,n} < y_{\tiles,n} \leq h_\tiles \leq \frac{3\sqrt{2}} 4.
 \end{equation}
-Substituting \eqref{eq: P i j asympt 4 bis} into \eqref{eq: P i j asympt 4} and taking into account \eqref{eq: P i j asympt 4 ter},
+Using \eqref{eq: P i j asympt 4 bis} into \eqref{eq: P i j asympt 4} and taking into account \eqref{eq: P i j asympt 4 ter},
 \begin{equation}
 \label{eq: P i j asympt 5}
 P_{\tiles,n} = \frac{4\sqrt{2}} {3\pi} \tilde y_{\tiles,n}^3 + E_{\tiles,n} + E'_{\tiles,n}
